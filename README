@@ -46,7 +46,7 @@ Git branching model based on: [a successful git branching model](http://nvie.com
 ### Developing
 Most development will be done on feature branches branched off `develop`, the following instructions should be used to create features:
 
-		git clone https://github.com/KainosSoftwareLtd/Aviva-etl-raas.git
+		git clone https://enstargroup.visualstudio.com/_git/GlobalDataHub
 		git checkout -b feature/{your feature name} develop
 		git commit -am "Implemented {feature name}"
 		git push origin feature/{your feature name}
