@@ -21,7 +21,8 @@ Directory Setup
   - **deployment**
     - **scripts** :  Deployment scripts 
   - **environent**
-    - **avro** : Avro schema files
+    - **avro**
+        - **schemas** : Avro schema files
     - **hive**
         - **schemas** : hive table schemas
         - **queries** : transformation queries
