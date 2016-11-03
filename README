@@ -13,13 +13,15 @@ What technologies?
     3. Changes in the replicated source are conformed to the Enstar Schema
     4. The changes are added to the Global Data hub for users to query.
 
-Stages 2 -4 are implemented in SparkSQL; These are wrapped in Oozie workflows and co-ordinators to assist scheduling.
+Stages 2 - 4 are implemented in SparkSQL; These are wrapped in Oozie workflows and co-ordinators to assist scheduling.
 
 
 Directory Setup 
 ----------------
   - **deployment**
     - **scripts** :  Deployment scripts 
+  - **development** : scripts for setting up development environment
+  	-  **docker** : docker files and their dependencies
   - **environent**
     - **avro**
         - **schemas** : Avro schema files
@@ -36,7 +38,8 @@ Directory Setup
     - **GlobalDatahub** : Spark job sources
     - **UDFs** : Hive user defined functions sources.
 
-### Branching model
+Branching model
+----------------
 Git branching model based on: [a successful git branching model](http://nvie.com/posts/a-successful-git-branching-model/)
 
 - `master` contains production code only. Should only be merged into when hotfixes or releases are complete
@@ -44,7 +47,11 @@ Git branching model based on: [a successful git branching model](http://nvie.com
 - `develop` to be used in development, always branch from the develop branch to create features
     - `feature/{featurename}` development of features. Should be merged into `develop`upon completion 
 
-### Developing
+Developing
+----------------
+
+#### Branching strategy
+
 Most development will be done on feature branches branched off `develop`, the following instructions should be used to create features:
 
 		git clone https://enstargroup.visualstudio.com/_git/GlobalDataHub
@@ -57,3 +64,45 @@ Note:
 > When development of a new release or project begins you should make sure to update all maven release numbers relating to the new release.  
 
 >Coding styles are enforced during maven builds, so you may notice minor changes to formating after running a build.
+
+
+#### Local Development Environment
+
+Run the createContainers.sh script under `development/docker`  this will create and launch two docker containers for local development.  The containers should restart with your machine so this will only need to be completed once.
+
+you can open a terminal session on either container using:
+```docker attach <containername>``` where containername either **attunity** or **quickstart.cloudera**. Exit containers using `ctrl+p` and `ctrl+q`, any other method will stop the container.
+
+The two containers created are: 
+
+- **attunity**: a local attunity server this can be accessed from:
+[https://localhost:3552/attunityreplicate/5.0.2.25/#/tasks](), to start the attunity server run the following commands
+
+```
+	docker attach attunity
+	/opt/attunity/replicate/bin/arep.ctl start
+	press <ctrl+p> and <ctrl+q>
+```
+- **quickstart.cloudera**: a local cloudera instance.  The following ports are exposed on your local machine:
+	- **80**: cloudera tutorials
+	- **7180**: Cloudera manager
+	- **8020**: HDFS
+	- **8088**: Resource manager
+	- **8888**: Hue
+	- **10000**: Hive
+	- **50111**: WebHcat
+	- **21050**: Impala
+
+Webhcat is disabled by default.  If you require this, please run the following commands:
+
+```
+	docker attach quickstart.cloudera
+	python /root/servicesetup.py
+	press <ctrl+p> and <ctrl+q>
+```
+
+
+	
+		
+
+	   
