@@ -6,10 +6,10 @@ Welcome to the Global Data hub repository.
 What technologies?
 ------------------
 
-'Global Data hub' makes use of a few different technologies to detect changes in the source systems and apply those changes to the 'Enstar Conformed Schema'. There are a few distinct stages in the process:
+'Global Data Hub' makes use of a few different technologies to detect changes in the source systems and apply those changes to the 'Enstar Conformed Schema'. There are a few distinct stages in the process:
 
     1. Changes to the source systems are detected by Attunity Replicate and ingested into HDFS.
-    2. Changes are appiied to a 'Replicated sources' copy of the source system.
+    2. Changes are applied to a 'Replicated sources' copy of the source system.
     3. Changes in the replicated source are conformed to the Enstar Schema
     4. The changes are added to the Global Data hub for users to query.
 
