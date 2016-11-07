@@ -19,7 +19,7 @@ deleteDirectory=$2
 
 metadataDirectory="metadata/"
 navigatorDirectoryMetadataFilename=".navigator"
-umaskDefault="0022" 
+umaskDefault="022" 
 
 hdfsDfsCmd="hdfs dfs -D fs.permissions.umask-mode=$umaskDefault "
 createDirectoryCmd=$hdfsDfsCmd"-mkdir -p "
