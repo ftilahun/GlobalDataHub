@@ -25,6 +25,8 @@ Directory Setup
   - **environent**
     - **avro**
         - **schemas** : Avro schema files
+    - **hdfs** : HDFS directory creation scripts.
+        - metadata : Cloudera navigator files. 
     - **hive**
         - **schemas** : hive table schemas
         - **queries** : transformation queries

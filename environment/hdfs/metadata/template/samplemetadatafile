@@ -1,0 +1,4 @@
+{"name" : "name value", "description" : "description value",
+"properties" : {"prop1" : "value1", "prop2" : "value2"},
+"tags" : [ "tag1" ]
+}
