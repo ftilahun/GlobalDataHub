@@ -1,0 +1,28 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "branch",
+    "doc": "The company branch through which the business has been placed",
+ 	"fields": [
+    	{
+    		"name": "branchcode", 
+    		"type": "string",
+    		"doc": "The code associated with the company branch through which the business has been placed"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code of the branch"
+    	},
+    	{
+    		"name": "branchdescription", 
+    		"type": ["string", "null"],
+    		"doc": "The description associated with the company branch through which the business has been placed"
+    	},
+    	{
+    		"name": "branchlocationcode", 
+    		"type": ["string", "null"],
+    		"doc": "FK to geography"
+    	}
+ 	]
+}

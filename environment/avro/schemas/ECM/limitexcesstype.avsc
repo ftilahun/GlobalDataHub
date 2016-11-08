@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "limitexcesstype",
+    "doc": "LimitExcessType table with all the possible limits/excess/attachments that the framework currently accepts.",
+ 	"fields": [
+    	{
+    		"name": "limitexcesstypecode", 
+    		"type": "string",
+    		"doc": "The code of the limit excess type"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system associated with the limit excess type"
+    	},
+    	{
+    		"name": "limitexcesstypedescription", 
+    		"type": ["string", "null"],
+    		"doc": "The description of the limit excess type"
+    	}
+ 	]
+}

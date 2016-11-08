@@ -1,0 +1,89 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "policytransaction",
+    "doc": "Transaction table will contain all forms of transactions at policy / section level. These will be at the atomic level and may differ in type from source to source. However the conformed TransactionType values should be used to group them appropriately and allow them to be used correctly in measure calculations. The signage of the amount must be consistently mapped across all the source systems transactions loaded into here",
+ 	"fields": [
+    	{
+    		"name": "transactionreference", 
+    		"type": "string",
+    		"doc": "Unique transaction reference, part of the PK"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "FK to Source system and part of PK"
+    	},
+    	{
+    		"name": "policynumber", 
+    		"type": ["string", "null"],
+    		"doc": "FK to Policy"
+    	},
+    	{
+    		"name": "sectionreference",  
+    		"type": ["string", "null"],
+    		"doc": "FK to Policy"
+    	},
+    	{
+    		"name": "coveragereference", 
+    		"type": ["string", "null"],
+    		"doc": "FK to Policy"
+    	},
+    	{
+    		"name": "transactiontypecode", 
+    		"type": ["string", "null"],
+    		"doc": "FK to Transaction type"
+    	},
+    	{
+    		"name": "originalcurrencycode", 
+    		"type": ["string", "null"],
+    		"doc": "FK to Currency"
+    	},
+        {
+            "name": "settlementcurrencycode",  
+            "type": ["string", "null"],
+            "doc": "FK to Currency"
+        },
+        {
+            "name": "accountingcurrencycode",  
+            "type": ["string", "null"],
+            "doc": "FK to Currency"
+        },
+        {
+            "name": "settlementrateofexchange",  
+            "type": ["double", "null"],
+            "doc": "ROE for conversion from original to settlement if present"
+        },
+        {
+            "name": "accountingrateofexchange",  
+            "type": ["double", "null"],
+            "doc": "ROE for conversion from original to accounting if present"
+        },
+        {
+            "name": "originalamount",  
+            "type": ["double", "null"],
+            "doc": "Transaction original amount"
+        },
+        {
+            "name": "settlementamount",  
+            "type": ["double", "null"],
+            "doc": "Transaction settlement amount"
+        },
+        {
+            "name": "accountingamount",  
+            "type": ["double", "null"],
+            "doc": "Transaction accounting amount"
+        },
+        {
+            "name": "accountingperiod",  
+            "type": ["int", "null"],
+            "doc": "The period the transaction will be recognized in the general ledger"
+        },
+        {
+            "name": "transactiondate",  
+            "type": ["string", "null"],
+            "doc": "Date of the transaction, usually provided by the source system"
+        }
+ 	]
+}
+

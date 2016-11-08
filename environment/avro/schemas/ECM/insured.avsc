@@ -1,0 +1,28 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "insured",
+    "doc": "The organisation/person/persons who is the subject of the insurance policy",
+ 	"fields": [
+    	{
+    		"name": "insuredcode", 
+    		"type": "string",
+    		"doc": "The code used to identify an organisation/person/persons who is the subject of the direct insurance policy"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the insured"
+    	},
+    	{
+    		"name": "insuredlegalname", 
+    		"type": ["string", "null"],
+    		"doc": "The name under which the insured is incorporated or chartered"
+    	},
+        {
+            "name": "insuredname", 
+            "type": ["string", "null"],
+            "doc": "The name used to identify an organisation/person/persons who is the subject of the direct insurance policy"
+        }
+ 	]
+}

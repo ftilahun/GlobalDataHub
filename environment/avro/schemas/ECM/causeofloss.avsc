@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "causeofloss",
+    "doc": "E.g. - Fire or hail (driven by claim)",
+ 	"fields": [
+    	{
+    		"name": "causeoflosscode", 
+    		"type": "string",
+    		"doc": "The code associated with the cause of loss for a claim"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the cause of loss"
+    	},
+    	{
+    		"name": "causeoflossdescription", 
+    		"type": ["string", "null"],
+    		"doc": "The description associated with the cause of loss"
+    	}
+ 	]
+}

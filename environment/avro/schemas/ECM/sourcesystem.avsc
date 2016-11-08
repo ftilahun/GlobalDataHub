@@ -1,0 +1,18 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "sourcesystem",
+    "doc": "Identifies the source system that data comes from / is loaded into this model",
+ 	"fields": [
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The code associated with the source system"
+    	},
+    	{
+    		"name": "sourcesystemdescription", 
+    		"type": ["string", "null"],
+    		"doc": "The description associated with the source system"
+    	}
+ 	]
+}

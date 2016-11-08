@@ -1,0 +1,38 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "geography",
+    "doc": "Geography table for storing the unique lowest level of the Geography hierarchy. This table will contain codes and descriptions for the country level of the hierarchy.",
+ 	"fields": [
+    	{
+    		"name": "geographycode", 
+    		"type": "string",
+    		"doc": "Unique ISO region code or custom MDM code"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier"
+    	},
+    	{
+    		"name": "geographytypecode", 
+    		"type": ["string", "null"],
+    		"doc": "Description of the level of Geography"
+    	},
+    	{
+    		"name": "parentgeographycode",  
+    		"type": ["string", "null"],
+    		"doc": "FK lookup to Geography table - Pointer to the Parent record for building regional hierarchy"
+    	},
+    	{
+    		"name": "parentsourcesystemcode", 
+    		"type": ["string", "null"],
+    		"doc": "FK lookup to Geography table - Pointer to the Parent record for building regional hierarchy"
+    	},
+    	{
+    		"name": "geographydescription", 
+    		"type": ["string", "null"],
+    		"doc": "Full Description of the geography item."
+    	}
+ 	]
+}

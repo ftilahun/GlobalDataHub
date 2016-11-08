@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "policyeventtype",
+    "doc": "New Business, Renewal, Cancellation, Reinstatement  NB Endorsement & Audit are not part of this classification",
+ 	"fields": [
+    	{
+    		"name": "policyeventtypecode", 
+    		"type": "string",
+    		"doc": "The code associated with the Policy Event Type such as 'NEW' for new policy or 'REN' for renewal policy"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system associated with the Policy Event Type record"
+    	},
+    	{
+    		"name": "policyeventtypedescription", 
+    		"type": ["string", "null"],
+    		"doc": "The description associated with the Policy Event Type such as 'New' for new policy or 'Renewal' for renewal policy"
+    	}
+ 	]
+}

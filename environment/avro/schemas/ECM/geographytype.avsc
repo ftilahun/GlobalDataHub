@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "geographytype",
+    "doc": "Describing the level of the Geography Code i.e. State, Country, Region",
+ 	"fields": [
+    	{
+    		"name": "geographytypecode", 
+    		"type": "string",
+    		"doc": "Unique code for the Geography Type"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier"
+    	},
+    	{
+    		"name": "geographytypedescription", 
+    		"type": ["string", "null"],
+    		"doc": "Full Description of the Geography Type"
+    	}
+ 	]
+}

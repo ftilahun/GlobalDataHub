@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "losstype",
+    "doc": "Describes the type of loss incurred (e.g. Material Damage, Goods in Transit, Injury). This can be further split out into Loss Causes.",
+ 	"fields": [
+    	{
+    		"name": "losstypecode", 
+    		"type": "string",
+    		"doc": "Code associated with the type of loss incurred (e.g. Material Damage, Goods in Transit, Injury). This can be further split out into Loss Causes."
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier"
+    	},
+    	{
+    		"name": "losstypedescription", 
+    		"type": ["string", "null"],
+    		"doc": "Describes the type of loss incurred (e.g. Material Damage, Goods in Transit, Injury). This can be further split out into Loss Causes."
+    	}
+ 	]
+}

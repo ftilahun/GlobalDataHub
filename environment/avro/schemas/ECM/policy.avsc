@@ -1,0 +1,196 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "policy",
+    "doc": "Policy contains policy attributes and may contain section or coverage level attributes too.  Some sources may implement multiple sections and coverages per policy",
+ 	"fields": [
+    	{
+    		"name": "coveragereference", 
+    		"type": "string",
+    		"doc": "Coverage reference identifies unique coverages on a policy section, a section may contain multiple coverages"
+    	},
+    	{
+    		"name": "sectionreference",  
+    		"type": "string",
+    		"doc": "Section reference identifies a unique section on a policy, a policy may contain multiple sections"
+    	},
+    	{
+    		"name": "sourcesystemcode", 
+    		"type": "string",
+    		"doc": "FK to Source System"
+    	},
+    	{
+    		"name": "policynumber", 
+    		"type": "string",
+    		"doc": "Unique policy number, also known Policy Reference or Underwriting Reference"
+    	},
+    	{
+    		"name": "branchcode", 
+    		"type": ["string", "null"],
+    		"doc": "FK to Branch"
+    	},
+    	{
+    		"name": "brokercode", 
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "insuredcode", 
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "insureddomicilecode", 
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "legalentitycode", 
+    		"type": ["string", "null"],
+    		"doc": "FK to Legal entity"
+    	},
+    	{
+    		"name": "lineofbusinesscode", 
+    		"type": ["string", "null"],
+    		"doc": "FK to line of business"
+    	},
+    	{
+    		"name": "methodofplacementcode", 
+    		"type": ["string", "null"],
+            "doc": "FK to method of placement"
+    	},
+    	{
+    		"name": "policystatuscode", 
+    		"type": ["string", "null"],
+    		"doc": "FK to policy status code"
+    	},
+    	{
+    		"name": "policyeventtypecode", 
+    		"type": ["string", "null"],
+    		"doc": "FK to policy type code"
+    	},
+    	{
+    		"name": "risklocationcode", 
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "underwritercode", 
+    		"type": ["string", "null"]
+    	},
+        {
+            "name": "billingduedate", 
+            "type": ["string", "null"],
+            "doc": "Due date of policy billings"
+        },
+        {
+            "name": "billingterms", 
+            "type": ["string", "null"]
+        },
+        {
+            "name": "cancellationdate", 
+            "type": ["string", "null"],
+            "doc": "The date the policy was canceled"
+        },
+        {
+            "name": "commutationindicator", 
+            "type": ["boolean", "null"],
+            "doc": "Indicates whether commuted or not 1=Commuted  0=Not Commuted  The commutation status on a policy contract. Commutation is the termination of a reinsurance contract by agreement of the parties, on the basis of one or more lump sum payments by the reinsurer, which extinguish its liability under the contract. The payment made by the reinsurer commonly relates to incurred losses under the contract."
+        },
+        {
+            "name": "coveragedescription", 
+            "type": ["string", "null"],
+            "doc": "Associated description of the type of coverage of a policy"
+        },
+        {
+            "name": "coverageeffectivefromdate", 
+            "type": ["string", "null"],
+            "doc": "This would usually be the same as the policy inception date but may differ, for example when an auto coverage is added to a policy 6 months into the policy.  This date will be needed for earnings."
+        },
+        {
+            "name": "coverageeffectivetodate", 
+            "type": ["string", "null"],
+            "doc": "This would usually be the same as the policy expiry date but may differ, for example when an auto coverage is added mid term but only covers a couple of months. This date will be needed for earnings."
+        },
+        {
+            "name": "directbilloragencybill", 
+            "type": ["string", "null"],
+            "doc": "For Direct Bill business, G/L carries balance due from Insured and separate Commission A/P due to producer.  For Agency Bill business, G/L carries single A/R number (Balance due from Insured less Commission A/P to agent)"
+        },
+        {
+            "name": "directorreinsurance", 
+            "type": ["string", "null"],
+            "doc": "Direct or Reinsurance indicator ('Direct' or 'Reinsurance')"
+        },
+        {
+            "name": "estimatedsignedpercent", 
+            "type": ["double", "null"],
+            "doc": "The estimated signed line percentage based on expected signing down of the requested written line percentage. Also known as Estimated Signed Down (ESD)"
+        },
+        {
+            "name": "expirydate", 
+            "type": ["string", "null"],
+            "doc": "The expiry date of the risk/policy"
+        },
+        {
+            "name": "inceptiondate", 
+            "type": ["string", "null"],
+            "doc": "The date that cover commences"
+        },
+        {
+            "name": "liveorlegacy", 
+            "type": ["string", "null"],
+            "doc": "Determines whether the Policy is Live or Legacy"
+        },
+        {
+            "name": "programidentifier", 
+            "type": ["double", "null"],
+            "doc": "e.g. - Wellington, London Aviation, etc."
+        },
+        {
+            "name": "reservingsegment", 
+            "type": ["string", "null"]
+        },
+        {
+            "name": "shareofwholepercent", 
+            "type": ["double", "null"],
+            "doc": "Our indicative percentage share of whole risk using (in order, depending on availability) signed, estimated or written line percent. E.g. where order = 50% and signed line = 10%, Share of Whole Percentage is 5%. (Also known as Reporting Line %)  This will be calculated using order and line percentages stored on this policy table."
+        },
+        {
+            "name": "signedorderpercent", 
+            "type": ["double", "null"],
+            "doc": "The total signed order on the slip as a percentage of the 100% whole risk. This super-cedes the written order and it is determined by the broker"
+        },
+        {
+            "name": "segmentidentifier", 
+            "type": ["string", "null"],
+            "doc": "Codes that allow for segregation for analysis by functional areas (e.g. - healthcare vs MPL, etc)"
+        },
+        {
+            "name": "signedlinepercent", 
+            "type": ["double", "null"],
+            "doc": "Final actual committed share %. It may be the same as the underwriter’s written line and will reflect the Estimated Signing or, if/when there is signing down, a lower amount"
+        },
+        {
+            "name": "uniquemarketreference", 
+            "type": ["string", "null"],
+            "doc": "Also known as UMR"
+        },
+    	{
+    		"name": "writtendate", 
+    		"type": ["string", "null"],
+    		"doc": "Written Date is the date that the policy was written, not to be confused with the Inception date, which is the date that insurance cover commences."
+    	},
+    	{
+    		"name": "writtenlinepercent", 
+    		"type": ["double", "null"],
+    		"doc": "The amount of a risk that an underwriter is willing to accept on behalf of the members of the syndicate or company for which he underwrites. This is commonly expressed as a percentage of the sum insured which is written on the broker’s placing slip. Can also be shown as an Amount (with associated currency)"
+    	},
+        {
+            "name": "writtenorderpercent", 
+            "type": ["double", "null"],
+            "doc": "The percentage written order of the slip"
+        },
+        {
+            "name": "yearofaccount", 
+            "type": ["int", "null"],
+            "doc": "The calendar year in which the policy incepts. For syndicate business, if a policy incepts in January 2014, and a declaration is received in January 2015 for that policy, its underwriting year will still be 2014. Also known as Underwriting Year"
+        }
+ 	]
+}

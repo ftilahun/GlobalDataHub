@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "claimant",
+    "doc": "The claimant associated with the claim",
+ 	"fields": [
+    	{
+    		"name": "claimantreference", 
+    		"type": "string",
+    		"doc": "The unique reference identifying the claimant in a source system"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the claimant"
+    	},
+    	{
+    		"name": "claimantname", 
+    		"type": ["string", "null"],
+    		"doc": "The name of the claimant party"
+    	}
+ 	]
+}

@@ -1,0 +1,29 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "transactiontype",
+    "doc": "TransactionType includes   - Premium  - Additional Premium  - Return Premium  - RI Premium  - RI Return Premium etc",
+ 	"fields": [
+    	{
+    		"name": "transactiontypecode", 
+    		"type": "string"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string"
+    	},
+    	{
+    		"name": "description", 
+    		"type": ["string", "null"]
+    	},
+        {
+            "name": "group",  
+            "type": ["string", "null"],
+            "doc": "Allows for basic grouping of transactions, such as "USM" or "SCM""
+        },
+        {
+            "name": "iscashtransactiontype", 
+            "type": ["boolean", "null"]
+        }
+ 	]
+}

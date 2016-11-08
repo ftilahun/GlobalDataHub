@@ -1,0 +1,30 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "legalentity",
+ 	"fields": [
+    	{
+    		"name": "legalentitycode", 
+    		"type": "string",
+    		"doc": "The code associated with the Legal Entity stored on the policy"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the Legal Entity record from the policy admin system"
+    	},
+    	{
+    		"name": "legalentitydescription", 
+    		"type": ["string", "null"],
+    		"doc": "The description associated with the Legal Entity stored on the policy"
+    	},
+    	{
+    		"name": "parentlegalentitycode",  
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "parentlegalentitysourcesystemcode", 
+    		"type": ["string", "null"]
+    	}
+ 	]
+}

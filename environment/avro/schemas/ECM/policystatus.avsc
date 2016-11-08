@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "policystatus",
+    "doc": "Defines the status of the policy.  Could be ''In Force'', ''Bound'', ''Cancelled'' etc",
+ 	"fields": [
+    	{
+    		"name": "policystatuscode", 
+    		"type": "string",
+    		"doc": "The code associated with the Policy Status, such as 'CAN' for cancelled"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the policy status record loaded from source"
+    	},
+    	{
+    		"name": "policystatusdescription", 
+    		"type": ["string", "null"],
+    		"doc": "The description associated with the Policy Status, such as 'Cancelled'"
+    	}
+ 	]
+}

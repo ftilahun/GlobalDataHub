@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "lineofbusiness",
+    "doc": "Defines how the business is classified in the source system for the policy. This is the same as Lloyd''s Block Code but different to Reserving Class.",
+ 	"fields": [
+    	{
+    		"name": "lineofbusinesscode", 
+    		"type": "string",
+    		"doc": "Code associated with how the business is classified in the source policy administration system for the policy"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source system code that defines which source system the line of business came from"
+    	},
+    	{
+    		"name": "lineofbusinessdescription", 
+    		"type": ["string", "null"],
+    		"doc": "Description associated with how the business is classified in the source policy administration system for the policy"
+    	}
+ 	]
+}

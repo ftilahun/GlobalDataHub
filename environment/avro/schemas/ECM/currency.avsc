@@ -1,0 +1,20 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "currency",
+    "doc": "The source system currency code, e.g. GBP or USD.  This will hold conformed and unconformed currency",
+ 	"fields": [
+    	{
+    		"name": "currencycode", 
+    		"type": "string"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string"
+    	},
+    	{
+    		"name": "description", 
+    		"type": ["string", "null"]
+    	}
+ 	]
+}

@@ -1,0 +1,23 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "claimstatus",
+    "doc": "The status of the claim (e.g. open, closed, re-opened, re-closed).",
+ 	"fields": [
+    	{
+    		"name": "claimstatuscode", 
+    		"type": "string",
+    		"doc": "The unique identifier for claim status"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier for the Claim Status record"
+    	},
+    	{
+    		"name": "claimstatusdescription", 
+    		"type": ["string", "null"],
+    		"doc": "The full description of the Claim Status"
+    	}
+ 	]
+}

@@ -1,0 +1,44 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "limitexcess",
+    "doc": "Associates Limits/Excess/Deductibles with a policy. The type is determined by the LimitExcessType value.",
+ 	"fields": [
+    	{
+    		"name": "limitexcessreference", 
+    		"type": "string",
+    		"doc": "Unique reference for a limit excess record"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system associated with a limit excess"
+    	},
+    	{
+    		"name": "currencycode", 
+    		"type": ["string", "null"],
+    		"doc": "The currency of the limit excess"
+    	},
+    	{
+    		"name": "amount",  
+    		"type": ["double", "null"],
+    		"doc": "The amount of the limit excess"
+    	},
+    	{
+    		"name": "limitexcesstypecode", 
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "policynumber", 
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "sectionreference", 
+    		"type": ["string", "null"]
+    	},
+        {
+            "name": "coveragereference", 
+            "type": ["string", "null"]
+        }
+ 	]
+}

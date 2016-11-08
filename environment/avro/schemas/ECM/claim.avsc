@@ -1,0 +1,92 @@
+{
+	"namespace": "com.kainos.enstar",
+ 	"type": "record",
+ 	"name": "claim",
+    "doc": "Claim table represents the claim header information related to a claim. This is mainly high level information that is common to any claim detail records.",
+ 	"fields": [
+    	{
+    		"name": "claimreference", 
+    		"type": "string",
+    		"doc": "Unique source system reference for Claim"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier for the Claim record"
+    	},
+    	{
+    		"name": "causeoflosscode", 
+    		"type": ["string", "null"],
+    		"doc": "The code associated with the cause of loss for a claim"
+    	},
+    	{
+    		"name": "claimstatuscode", 
+    		"type": ["string", "null"],
+    		"doc": "The status of the claim (e.g. open, closed, re-opened, re-closed)."
+    	},
+    	{
+    		"name": "coveragereference", 
+    		"type": ["string", "null"],
+    		"doc": "Unique source system reference for the Coverage - This might be a 1:1 with the section and in this case will be the same as the SectionReference"
+    	},
+    	{
+    		"name": "losslocationcode", 
+    		"type": ["string", "null"],
+    		"doc": "FK lookup to Geography table"
+    	},
+    	{
+    		"name": "losstypecode", 
+    		"type": ["string", "null"],
+    		"doc": "Code associated with the type of loss incurred (e.g. Material Damage, Goods in Transit, Injury). This can be further split out into Loss Causes."
+    	},
+    	{
+    		"name": "sectionreference", 
+    		"type": ["string", "null"],
+    		"doc": "Unique source system reference for the Section"
+    	},
+    	{
+    		"name": "policynumber", 
+    		"type": ["string", "null"],
+    		"doc": "The policy number as the underwriters sees it on the source system"
+    	},
+    	{
+    		"name": "accidentyear", 
+    		"type": ["int", "null"],
+    		"doc": "The year in which the accident took place."
+    	},
+    	{
+    		"name": "commutationindicator", 
+    		"type": ["boolean", "null"]
+    	},
+    	{
+    		"name": "liveorlegacy", 
+    		"type": ["string", "null"],
+    		"doc": "Determines whether the Claim is Live or Legacy"
+    	},
+    	{
+    		"name": "lossdatefrom", 
+    		"type": ["string", "null"],
+    		"doc": "Date from when the Loss occurred"
+    	},
+    	{
+    		"name": "lossdateto", 
+    		"type": ["string", "null"],
+    		"doc": "Date up to when the Loss occurred"
+    	},
+    	{
+    		"name": "originalclaimreference", 
+    		"type": ["string", "null"],
+    		"doc": "Original System driven Claim Reference"
+    	},
+    	{
+    		"name": "reporteddate", 
+    		"type": ["string", "null"],
+    		"doc": "Date the claim was reported"
+    	},
+    	{
+    		"name": "reportyear", 
+    		"type": ["int", "null"],
+    		"doc": "Year the claim was reported"
+    	}
+ 	]
+}
