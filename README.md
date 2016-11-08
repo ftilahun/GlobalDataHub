@@ -101,8 +101,34 @@ Webhcat is disabled by default.  If you require this, please run the following c
 	press <ctrl+p> and <ctrl+q>
 ```
 
+Hosts
+-----
+```
+UKGS2ATU01: Attunity.
+UKGS2ATU02: Attunity.
+UKGS2JENK01: Jenkins.
 
-	
+LSGNPDHGN01: Gateway Node.
+LSGNPDHMN01: Master Node
+LSGNPDHMN02: Master Node
+LSGNPHDN01: Data node.
+LSGNPHDN02: Data node.
+LSGNPHDN03: Data node.
+LSGNPHDN04: Data node.
+```
+#### Non Prod
+```
+UKNPDATU01: Attunity.
+UKNPDJENK01: Jenkins.
+UKNPDNEX01: Nexus.
+UKNPDCNAV01: Cloudera Navigator.
+```
+ 
+
+Service Accounts
+----------------
+- **gdhcdcprocessor**: Runs the job to apply change data capture change table entries to source table copies
+- **gdhtransformprocessor**: Runs the job to transform source table copies to conformed data model.
+- **gdhetlprocessor**: Runs other ETL process jobs.
+- **gdhpublishprocessor**: Runs the job to load the transformed data into the conformed data model
 		
-
-	   
