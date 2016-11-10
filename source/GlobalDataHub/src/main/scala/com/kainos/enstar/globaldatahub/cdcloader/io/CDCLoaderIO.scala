@@ -26,7 +26,7 @@ class CDCLoaderIO( dataframeIO : DataframeIO ) {
     sqlContext : SQLContext,
     path : String,
     dataFrame : DataFrame,
-    storageLevel : StorageLevel ) = {
+    storageLevel : StorageLevel ) : Long = {
     try {
       dataFrame.persist( storageLevel )
       dataframeIO.write( sqlContext, path, dataFrame, Some( storageLevel ) )
@@ -36,9 +36,7 @@ class CDCLoaderIO( dataframeIO : DataframeIO ) {
     }
   }
 
-  def getData( sqlContext : SQLContext, sqlStatement : String, dataFrame : DataFrame ) = {}
-
-  def registerTempTable( dataFrame : DataFrame, tableName : String ) = {
+  def registerTempTable( dataFrame : DataFrame, tableName : String ) : Unit = {
     dataFrame.registerTempTable( tableName )
 
   }

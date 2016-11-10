@@ -6,12 +6,9 @@ import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.SparkContext
 
-/**
- * Created by ciaranke on 09/11/2016.
- */
 class CDCSQLReaderIO( sqlReaderIO : SQLReaderIO ) {
 
-  def getSQLString( sparkContext : SparkContext, path : String ) = {
+  def getSQLString( sparkContext : SparkContext, path : String ) : String = {
     try {
       val sql = sqlReaderIO.getStringFromFile( sparkContext, path )
       if ( !sql.matches( "^(?i)SELECT.+from.+" ) ) {
@@ -22,7 +19,7 @@ class CDCSQLReaderIO( sqlReaderIO : SQLReaderIO ) {
       }
     } catch {
       case e : InvalidInputException => throw new PathNotFoundException( path )
-      case e : SQLException => throw e
+      case e : SQLException          => throw e
     }
   }
 }
