@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "deduction",
     "doc": "Allows the policy record to be associated with many different types of Deductions. These might include:   - Broker Fee - Commission - Charges - Interest.   These can be specified  as a percentage value or an amount and can also be a positive or negative deduction",
@@ -14,6 +14,11 @@
     		"type": "string",
     		"doc": "Unique policy number, also known Policy Reference or Underwriting Reference"
     	},
+        {
+            "name": "sectionreference", 
+            "type": "string",
+            "doc": "Section reference identifies a unique section on a policy, a policy may contain multiple sections"
+        },
     	{
     		"name": "coveragereference", 
     		"type": "string",

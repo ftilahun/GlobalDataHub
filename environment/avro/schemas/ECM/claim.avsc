@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "claim",
     "doc": "Claim table represents the claim header information related to a claim. This is mainly high level information that is common to any claim detail records.",

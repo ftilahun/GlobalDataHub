@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "geography",
     "doc": "Geography table for storing the unique lowest level of the Geography hierarchy. This table will contain codes and descriptions for the country level of the hierarchy.",

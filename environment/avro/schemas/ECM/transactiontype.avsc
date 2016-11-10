@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "transactiontype",
     "doc": "TransactionType includes   - Premium  - Additional Premium  - Return Premium  - RI Premium  - RI Return Premium etc",

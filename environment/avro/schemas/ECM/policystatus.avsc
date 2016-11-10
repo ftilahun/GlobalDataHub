@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "policystatus",
     "doc": "Defines the status of the policy.  Could be ''In Force'', ''Bound'', ''Cancelled'' etc",

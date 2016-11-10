@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "lineofbusiness",
     "doc": "Defines how the business is classified in the source system for the policy. This is the same as Lloyd''s Block Code but different to Reserving Class.",

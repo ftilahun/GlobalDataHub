@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "limitexcesstype",
     "doc": "LimitExcessType table with all the possible limits/excess/attachments that the framework currently accepts.",

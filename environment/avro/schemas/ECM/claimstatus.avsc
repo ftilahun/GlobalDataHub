@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "claimstatus",
     "doc": "The status of the claim (e.g. open, closed, re-opened, re-closed).",

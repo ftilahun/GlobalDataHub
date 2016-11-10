@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "policy",
     "doc": "Policy contains policy attributes and may contain section or coverage level attributes too.  Some sources may implement multiple sections and coverages per policy",

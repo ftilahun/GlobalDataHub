@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "limitexcess",
     "doc": "Associates Limits/Excess/Deductibles with a policy. The type is determined by the LimitExcessType value.",

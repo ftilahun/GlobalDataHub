@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "policytransaction",
     "doc": "Transaction table will contain all forms of transactions at policy / section level. These will be at the atomic level and may differ in type from source to source. However the conformed TransactionType values should be used to group them appropriately and allow them to be used correctly in measure calculations. The signage of the amount must be consistently mapped across all the source systems transactions loaded into here",

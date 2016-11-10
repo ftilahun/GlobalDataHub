@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "methodofplacement",
     "doc": "The description of how the business was placed  1. Declaration  2. Open Market Direct  3. Facultative RI  4. MGA  5. Lineslip Master  6. Cat  7. Treaty X/L  8. Master Policy  9. Stop Loss  10. Proportional Treaty  11. LineSlip Declaration  12. Binding Master  13. Service Company",

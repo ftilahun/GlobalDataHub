@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "geographytype",
     "doc": "Describing the level of the Geography Code i.e. State, Country, Region",

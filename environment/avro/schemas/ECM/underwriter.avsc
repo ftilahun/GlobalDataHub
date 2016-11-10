@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
  	"type": "record",
  	"name": "underwriter",
     "doc": "The underwriter that originally underwrote the risk (or is responsible for the risk)",
