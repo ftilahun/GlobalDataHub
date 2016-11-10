@@ -134,121 +134,201 @@ STORED AS AVRO
 LOCATION '/datahub/ecm/underwriter'
 TBLPROPERTIES ('avro.schema.url'='/metadata/datahub/ecm/underwriter/underwriter.avsc');
 
+/* Create indexes */
+/* Note: The index needs to be rebuilt/statistics recomputed with each new partition */
 
-CREATE INDEX IDX_branchlocationcode_sourcesystemcode ON TABLE branch(branchlocationcode, sourcesystemcode)
+CREATE INDEX IDX_Branch ON TABLE ecm.branch(branchcode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_causeoflosscode_sourcesystemcode ON TABLE claim(causeoflosscode, sourcesystemcode)
+CREATE INDEX IDX_Branch_Geography ON TABLE ecm.branch(branchlocationcode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_claimstatuscode_sourcesystemcode ON TABLE claim(claimstatuscode, sourcesystemcode)
+CREATE INDEX IDX_Broker ON TABLE ecm.broker(brokercode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_losslocationcode_sourcesystemcode ON TABLE claim(losslocationcode, sourcesystemcode)
+CREATE INDEX IDX_CauseOfLoss ON TABLE ecm.causeofloss(causeoflosscode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_losstypecode_sourcesystemcode ON TABLE claim(losstypecode, sourcesystemcode)
+CREATE INDEX IDX_Claim ON TABLE ecm.claim(claimreference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policynumber_sectionreference_coveragereference_sourcesystemcode ON TABLE claim(policynumber, sectionreference, coveragereference, sourcesystemcode)
+CREATE INDEX IDX_Claim_CauseOfLoss ON TABLE ecm.claim(causeoflosscode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_claimreference_sourcesystemcode ON TABLE claimtransaction(claimreference, sourcesystemcode)
+CREATE INDEX IDX_Claim_ClaimStatus ON TABLE ecm.claim(claimstatuscode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_claimantreference_sourcesystemcode ON TABLE claimtransaction(claimantreference, sourcesystemcode)
+CREATE INDEX IDX_Claim_Geography ON TABLE ecm.claim(losslocationcode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_transactiontypecode_sourcesystemcode ON TABLE claimtransaction(transactiontypecode, sourcesystemcode)
+CREATE INDEX IDX_Claim_LossType ON TABLE ecm.claim(losstypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_deductiontypecode ON TABLE deduction(deductiontypecode)
+CREATE INDEX IDX_Claim_Policy ON TABLE ecm.claim(policynumber, sectionreference, coveragereference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_deductiontypecode_sourcesystemcode ON TABLE deduction(deductiontypecode, sourcesystemcode)
+CREATE INDEX IDX_Claimant ON TABLE ecm.claimant(claimantreference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policynumber_sectionreference_sourcesystemcode ON TABLE deduction(policynumber, sectionreference, sourcesystemcode)
+CREATE INDEX IDX_ClaimStatus ON TABLE ecm.claimstatus(claimstatuscode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policynumber_sectionreference_coveragereference_sourcesystemcode ON TABLE deduction(policynumber, sectionreference,, coveragereference, sourcesystemcode)
+CREATE INDEX IDX_ClaimTransaction ON TABLE ecm.claimtransaction(transactionreference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_geographytypecode_sourcesystemcode ON TABLE geography(geographytypecode, sourcesystemcode)
+CREATE INDEX IDX_ClaimTransaction_Claim ON TABLE ecm.claimtransaction(claimreference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_parentlegalentitycode_parentlegalentitysourcesystemcode ON TABLE legalentity(parentlegalentitycode, parentlegalentitysourcesystemcode)
+CREATE INDEX IDX_ClaimTransaction_Claimant ON TABLE ecm.claimtransaction(claimantreference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_limitexcesstypecode_sourcesystemcode ON TABLE limitexcess(limitexcesstypecode, sourcesystemcode)
+CREATE INDEX IDX_ClaimTransaction_TransactionType ON TABLE ecm.claimtransaction(transactiontypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policynumber_sectionreference_coveragereference_sourcesystemcode ON TABLE limitexcess(policynumber, sectionreference, coveragereference, sourcesystemcode)
+CREATE INDEX IDX_Currency ON TABLE ecm.currency(currencycode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_sourcesystemcode_branchcode ON TABLE policy(sourcesystemcode, branchcode)
+CREATE INDEX IDX_Deduction ON TABLE ecm.deduction(deductionreference)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_brokercode_sourcesystemcode ON TABLE policy(brokercode, sourcesystemcode)
+CREATE INDEX IDX_Deduction_DeductionType ON TABLE ecm.deduction(deductiontypecode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_risklocationcode_sourcesystemcode ON TABLE policy(risklocationcode, sourcesystemcode)
+CREATE INDEX IDX_Deduction_DeductionType_02 ON TABLE ecm.deduction(deductiontypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_insureddomicilecode_sourcesystemcode ON TABLE policy(insureddomicilecode, sourcesystemcode)
+CREATE INDEX IDX_Deduction_Policy ON TABLE ecm.deduction(policynumber, sectionreference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_insuredcode_sourcesystemcode ON TABLE policy(insuredcode, sourcesystemcode)
+CREATE INDEX IDX_Deduction_Policy_02 ON TABLE ecm.deduction(policynumber, sectionreference,, coveragereference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_legalentitycode ON TABLE policy(legalentitycode)
+CREATE INDEX IDX_DeductionType ON TABLE ecm.deductiontype(deductiontypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_legalentitycode_sourcesystemcode ON TABLE policy(legalentitycode, sourcesystemcode)
+CREATE INDEX IDX_Geography ON TABLE ecm.geography(geographycode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_lineofbusinesscode ON TABLE policy(lineofbusinesscode)
+CREATE INDEX IDX_Geography_GeographyType ON TABLE ecm.geography(geographytypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_lineofbusinesscode_sourcesystemcode ON TABLE policy(lineofbusinesscode, sourcesystemcode)
+CREATE INDEX IDX_GeographyType ON TABLE ecm.geographytype(geographytypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_methodofplacementcode ON TABLE policy(methodofplacementcode)
+CREATE INDEX IDX_Insured ON TABLE ecm.insured(insuredcode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_methodofplacementcode_sourcesystemcode ON TABLE policy(methodofplacementcode, sourcesystemcode)
+CREATE INDEX IDX_LegalEntity ON TABLE ecm.legalentity(legalentitycode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policystatuscode ON TABLE policy(policystatuscode)
+CREATE INDEX IDX_LegalEntity_LegalEntity ON TABLE ecm.legalentity(parentlegalentitycode, parentlegalentitysourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policystatuscode_sourcesystemcode ON TABLE policy(policystatuscode, sourcesystemcode)
+CREATE INDEX IDX_LimitExcess ON TABLE ecm.limitexcess(limitexcessreference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policyeventtypecode ON TABLE policy(policyeventtypecode)
+CREATE INDEX IDX_LimitExcess_LimitExcessType ON TABLE ecm.limitexcess(limitexcesstypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policyeventtypecode_sourcesystemcode ON TABLE policy(policyeventtypecode, sourcesystemcode)
+CREATE INDEX IDX_LimitExcess_Policy ON TABLE ecm.limitexcess(policynumber, sectionreference, coveragereference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_sourcesystemcode ON TABLE policy(sourcesystemcode)
+CREATE INDEX IDX_LimitExcessType ON TABLE ecm.limitexcesstype(limitexcesstypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_underwritercode_sourcesystemcode ON TABLE policy(underwritercode, sourcesystemcode)
+CREATE INDEX IDX_LineOfBusiness ON TABLE ecm.lineofbusiness(lineofbusinesscode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_accountingcurrencycode_sourcesystemcode ON TABLE policytransaction(accountingcurrencycode, sourcesystemcode)
+CREATE INDEX IDX_LossType ON TABLE ecm.losstype(losstypecode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_originalcurrencycode_sourcesystemcode ON TABLE policytransaction(originalcurrencycode, sourcesystemcode)
+CREATE INDEX IDX_MethodOfPlacement ON TABLE ecm.methodofplacement(methodofplacementcode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_settlementcurrencycode_sourcesystemcode ON TABLE policytransaction(settlementcurrencycode, sourcesystemcode)
+CREATE INDEX IDX_Policy ON TABLE ecm.policy(policynumber, sectionreference, coveragereference, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_policynumber_sectionreference_coveragereference_sourcesystemcode ON TABLE policytransaction(policynumber, sectionreference, coveragereference, sourcesystemcode)
+CREATE INDEX IDX_Policy_Branch ON TABLE ecm.policy(sourcesystemcode, branchcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
-CREATE INDEX IDX_transactiontypecode_sourcesystemcode ON TABLE policytransaction(transactiontypecode, sourcesystemcode)
+CREATE INDEX IDX_Policy_Broker ON TABLE ecm.policy(brokercode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_Geography ON TABLE ecm.policy(risklocationcode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_Geography_02 ON TABLE ecm.policy(insureddomicilecode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_Insured ON TABLE ecm.policy(insuredcode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_LegalEntity ON TABLE ecm.policy(legalentitycode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_LegalEntity_02 ON TABLE ecm.policy(legalentitycode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_LineOfBusiness ON TABLE ecm.policy(lineofbusinesscode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_LineOfBusiness_02 ON TABLE ecm.policy(lineofbusinesscode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_MethodOfPlacement ON TABLE ecm.policy(methodofplacementcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_MethodOfPlacement_02 ON TABLE ecm.policy(methodofplacementcode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_PolicyStatus ON TABLE ecm.policy(policystatuscode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_PolicyStatus_02 ON TABLE ecm.policy(policystatuscode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_PolicyType ON TABLE ecm.policy(policyeventtypecode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_PolicyType_02 ON TABLE ecm.policy(policyeventtypecode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_SourceSystem ON TABLE ecm.policy(sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Policy_Underwriter ON TABLE ecm.policy(underwritercode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_PolicyEventType ON TABLE ecm.policyeventtype(policyeventtypecode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_PolicyStatus ON TABLE ecm.policystatus(policystatuscode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_PolicyTransaction ON TABLE ecm.policytransaction(transactionreference, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Transaction_Currency_Accounting ON TABLE ecm.policytransaction(accountingcurrencycode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Transaction_Currency_Original ON TABLE ecm.policytransaction(originalcurrencycode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Transaction_Currency_Settlement ON TABLE ecm.policytransaction(settlementcurrencycode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Transaction_Policy ON TABLE ecm.policytransaction(policynumber, sectionreference, coveragereference, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Transaction_TransactionType ON TABLE ecm.policytransaction(transactiontypecode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_SourceSystem ON TABLE ecm.sourcesystem(sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_TransactionType ON TABLE ecm.transactiontype(transactiontypecode, sourcesystemcode)
+AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
+
+CREATE INDEX IDX_Underwriter ON TABLE ecm.underwriter(underwritercode, sourcesystemcode)
 AS 'COMPACT' WITH DEFERRED REBUILD STORED AS Avro;
 
