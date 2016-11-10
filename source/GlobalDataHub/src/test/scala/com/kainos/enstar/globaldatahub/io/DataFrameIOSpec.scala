@@ -1,14 +1,10 @@
 package com.kainos.enstar.globaldatahub.io
 
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
-import org.apache.spark.sql.{ DataFrame, DataFrameWriter, SQLContext }
-import org.mockito.Mockito
-import com.databricks.spark.avro._
-import com.kainos.enstar.globaldatahub.TestContexts$
 
 /**
- * Created by ciaranke on 09/11/2016.
- */
+  * Unit tests for CDCSQLReaderIO
+  */
 class DataFrameIOSpec
     extends FlatSpec
     with GivenWhenThen
@@ -20,7 +16,7 @@ class DataFrameIOSpec
     /*I'm unable to mock this, should we:
       - delete then tests
       - use files
-      - leave a comment to that effect?
+      - leave this comment to that effect?
       */
   }
 
@@ -28,7 +24,7 @@ class DataFrameIOSpec
     /*I'm unable to mock this, should we:
       - delete then tests
       - use files
-      - leave a comment to that effect?
+      - leave this comment to that effect?
       */
   }
 

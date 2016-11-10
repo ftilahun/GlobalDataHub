@@ -3,11 +3,14 @@ package com.kainos.enstar.globaldatahub.cdcloader.io
 import com.kainos.enstar.globaldatahub.TestContexts
 import com.kainos.enstar.globaldatahub.exceptions.SQLException
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 import com.kainos.enstar.globaldatahub.io.SQLReaderIO
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 
+/**
+  * Unit tests for CDCSQLReaderIO
+  */
 class CDCSQLReaderIOSpec extends FlatSpec
     with GivenWhenThen
     with Matchers {

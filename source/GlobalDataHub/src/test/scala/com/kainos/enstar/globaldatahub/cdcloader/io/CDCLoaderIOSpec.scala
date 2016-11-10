@@ -9,6 +9,9 @@ import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
+/**
+  * Unit tests for CDCLoaderIO
+  */
 class CDCLoaderIOSpec extends FlatSpec
     with GivenWhenThen
     with Matchers {
