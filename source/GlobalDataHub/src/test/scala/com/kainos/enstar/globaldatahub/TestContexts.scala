@@ -38,7 +38,7 @@ object TestContexts {
   def generateControlTable( numItems : Int ) : DataFrame = {
     val list = ( 1 to numItems ).map{ number =>
       Control(
-        DateTimeFormat.forPattern( "YYYYMMDDHHmmSShh" ).print( new DateTime() ) + numItems.toString.reverse.padTo(19,"0").mkString("").reverse,
+        DateTimeFormat.forPattern( "YYYYMMDDHHmmSShh" ).print( new DateTime() ) + numItems.toString.reverse.padTo( 19, "0" ).mkString( "" ).reverse,
         DateTimeFormat.forPattern( "YYYY-MM-dd HH:mm:ss.SSS" ).print( new DateTime().minus( Duration.standardMinutes( 10 ) ) ),
         DateTimeFormat.forPattern( "YYYY-MM-dd HH:mm:ss.SSS" ).print( new DateTime() ),
         number,

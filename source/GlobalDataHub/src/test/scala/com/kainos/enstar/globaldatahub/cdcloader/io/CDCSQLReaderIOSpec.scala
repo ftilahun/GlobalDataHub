@@ -9,11 +9,9 @@ import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 
 /**
-  * Unit tests for CDCSQLReaderIO
-  */
-class CDCSQLReaderIOSpec extends FlatSpec
-    with GivenWhenThen
-    with Matchers {
+ * Unit tests for CDCSQLReaderIO
+ */
+class CDCSQLReaderIOSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCSQLReaderIO" should "Retrieve a SQL query from HDFS" in {
     val sqlReaderIO = Mockito.mock( classOf[SQLReaderIO] )
@@ -22,26 +20,39 @@ class CDCSQLReaderIOSpec extends FlatSpec
     val invalidQuery = "Not a SQL statement"
     Given( "The input /some/path/file.sql" )
     When( "The path is valid" )
-    Mockito.when( sqlReaderIO.getStringFromFile( TestContexts.sparkContext, "/some/path/file.sql" ) )
+    Mockito
+      .when(
+        sqlReaderIO.getStringFromFile( TestContexts.sparkContext,
+          "/some/path/file.sql" ) )
       .thenReturn( validQuery )
     Then( "A SQL query should be returned" )
-    cdcSQLReaderIO.getSQLString( TestContexts.sparkContext, "/some/path/file.sql" ) should be ( validQuery )
+    cdcSQLReaderIO.getSQLString( TestContexts.sparkContext,
+      "/some/path/file.sql" ) should be( validQuery )
 
     Given( "The input /some/invalid/path" )
     When( "The path is invalid" )
-    Mockito.when( sqlReaderIO.getStringFromFile( TestContexts.sparkContext, "/some/invalid/path" ) ).thenThrow( classOf[InvalidInputException] )
+    Mockito
+      .when(
+        sqlReaderIO.getStringFromFile( TestContexts.sparkContext,
+          "/some/invalid/path" ) )
+      .thenThrow( classOf[InvalidInputException] )
     Then( "An exception should be raised" )
     an[PathNotFoundException] should be thrownBy {
-      cdcSQLReaderIO.getSQLString( TestContexts.sparkContext, "/some/invalid/path" )
+      cdcSQLReaderIO.getSQLString( TestContexts.sparkContext,
+        "/some/invalid/path" )
     }
 
     Given( "The input /some/path/invalidfile.sql" )
     When( "The path is valid, but the file does not contain a SQL query" )
-    Mockito.when( sqlReaderIO.getStringFromFile( TestContexts.sparkContext, "/some/path/invalidfile.sql" ) )
+    Mockito
+      .when(
+        sqlReaderIO.getStringFromFile( TestContexts.sparkContext,
+          "/some/path/invalidfile.sql" ) )
       .thenReturn( invalidQuery )
     Then( "An exception should be raised" )
     an[SQLException] should be thrownBy {
-      cdcSQLReaderIO.getSQLString( TestContexts.sparkContext, "/some/path/invalidfile.sql" )
+      cdcSQLReaderIO.getSQLString( TestContexts.sparkContext,
+        "/some/path/invalidfile.sql" )
     }
   }
 

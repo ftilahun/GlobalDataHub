@@ -4,8 +4,8 @@ import org.apache.spark.{ SparkConf, SparkContext }
 import org.apache.spark.sql.SQLContext
 
 /**
-  * Singleton for accessing spark/sql context.
-  */
+ * Singleton for accessing spark/sql context.
+ */
 object Contexts {
   private val _sc : SparkContext = new SparkContext( new SparkConf() )
   private val _sqlC : SQLContext = new SQLContext( _sc )

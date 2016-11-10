@@ -4,8 +4,8 @@ import org.apache.spark.{ Logging, SparkContext }
 import org.apache.hadoop.fs.Path
 
 /**
-  * Helper class for reading SQL statements from HDFS
-  */
+ * Helper class for reading SQL statements from HDFS
+ */
 class SQLReaderIO extends Logging {
 
   /**

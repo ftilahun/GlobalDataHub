@@ -7,7 +7,5 @@ import org.apache.spark.Logging
  */
 object CDCLoaderJob extends Logging {
 
-  def main( args : Array[String] ) : Unit = {
-
-  }
+  def main( args : Array[String] ) : Unit = {}
 }
