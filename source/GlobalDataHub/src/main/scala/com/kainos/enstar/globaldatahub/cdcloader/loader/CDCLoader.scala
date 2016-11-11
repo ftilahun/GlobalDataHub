@@ -1,26 +1,24 @@
 package com.kainos.enstar.globaldatahub.cdcloader.loader
 
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.io.{
-  CDCLoaderIO,
-  CDCSQLReaderIO
-}
-import com.kainos.enstar.globaldatahub.cdcloader.properties.CDCProperties
+import com.kainos.enstar.globaldatahub.cdcloader.io.{ DataFrameReader, SQLFileReader }
+import com.kainos.enstar.globaldatahub.properties.GDHProperties
 import org.apache.spark.Logging
 import org.apache.spark.sql.SQLContext
 
-/**
- * Created by ciaranke on 10/11/2016.
- */
-class CDCLoader( controlProcessor : ControlProcessor, properties : CDCProperties )
+class CDCLoader( controlProcessor : ControlProcessor,
+                 properties : GDHProperties,
+                 sqlContext : SQLContext,
+                 loaderIO : DataFrameReader,
+                 sqlReaderIO : SQLFileReader )
     extends Logging {
 
   def load = {
-    //create the control table
     controlProcessor.registerControlTable
-    //process the input
-    //properties.tableList.map(processTable)
-    //drop the control table
+    properties.getArrayProperty( "inputTables" ).
+      foreach{ tableName =>
+        //tableProcessor.processTable(tableName,sqlContext,controlProcessor,loaderIO)
+      }
     controlProcessor.deregisterControlTable
   }
 }

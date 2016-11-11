@@ -1,8 +1,8 @@
 package com.kainos.enstar.globaldatahub.cdcloader.properties
 
-import com.kainos.enstar.globaldatahub.properties.DatahubProperties
+import com.kainos.enstar.globaldatahub.properties.GDHProperties
 
-class CDCProperties extends DatahubProperties {
+class CDCProperties extends GDHProperties {
 
   override def getBoolenProperty( s : String ) : Boolean = ???
 

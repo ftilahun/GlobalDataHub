@@ -2,10 +2,11 @@ package com.kainos.enstar.globaldatahub.cdcloader.control
 
 import com.kainos.enstar.globaldatahub.TestContexts
 import com.kainos.enstar.globaldatahub.cdcloader.io.{
-  CDCLoaderIO,
-  CDCSQLReaderIO
+  CDCTableOperations,
+  DataFrameReader,
+  SQLFileReader
 }
-import com.kainos.enstar.globaldatahub.cdcloader.properties.CDCProperties
+import com.kainos.enstar.globaldatahub.properties.GDHProperties
 import org.apache.spark.sql.DataFrame
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.{ DateTime, DateTimeUtils }
@@ -18,14 +19,17 @@ import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "Controlprocessor" should "Register the control table" in {
-    val loaderIO : CDCLoaderIO = Mockito.mock( classOf[CDCLoaderIO] )
-    val sqlReaderIO : CDCSQLReaderIO = Mockito.mock( classOf[CDCSQLReaderIO] )
-    val properties : CDCProperties = Mockito.mock( classOf[CDCProperties] )
-    val controlProcessor : ControlProcessor =
-      new ControlProcessor( TestContexts.sqlContext,
-        loaderIO,
+    val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
+    val sqlReaderIO : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
+    val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
+    val tableOperations : CDCTableOperations =
+      Mockito.mock( classOf[CDCTableOperations] )
+    val controlProcessor : CDCControlProcessor =
+      new CDCControlProcessor( TestContexts.sqlContext,
+        reader,
         sqlReaderIO,
-        properties )
+        properties,
+        tableOperations )
 
     Given( "The input /control/dir/" )
     Mockito
@@ -37,18 +41,18 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     When( "The input is valid" )
     Mockito
       .when(
-        loaderIO.read( TestContexts.sqlContext,
+        reader.read( TestContexts.sqlContext,
           properties.getStringProperty( "controlTablePath" ),
           None ) )
       .thenReturn( TestContexts.generateControlTable( 10 ) )
     Mockito
       .when(
-        loaderIO.registerTempTable(
+        tableOperations.registerTempTable(
           org.mockito.Matchers.any( classOf[DataFrame] ),
           org.mockito.Matchers.anyString() ) )
       .thenCallRealMethod()
     Then( "The control table should be created" )
-    controlProcessor.registerControlTable
+    controlProcessor.registerControlTable()
     TestContexts.sqlContext
       .sql( "SELECT * FROM " + properties.getStringProperty( "controlTableName" ) )
       .count should be( 10 )
@@ -57,11 +61,11 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     When( "The control table is de-registered" )
     Mockito
       .when(
-        loaderIO.deRegisterTempTable(
+        tableOperations.deRegisterTempTable(
           TestContexts.sqlContext,
           properties.getStringProperty( "controlTableName" ) ) )
       .thenCallRealMethod()
-    controlProcessor.deregisterControlTable
+    controlProcessor.deregisterControlTable()
     Then( "an exception should be thrown" )
     an[RuntimeException] should be thrownBy {
       TestContexts.sqlContext.sql(
@@ -70,14 +74,17 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
   }
 
   "Controlprocessor" should "Retrieve the last sequence processed" in {
-    val loaderIO : CDCLoaderIO = Mockito.mock( classOf[CDCLoaderIO] )
-    val sqlReaderIO : CDCSQLReaderIO = Mockito.mock( classOf[CDCSQLReaderIO] )
-    val properties : CDCProperties = Mockito.mock( classOf[CDCProperties] )
-    val controlProcessor : ControlProcessor =
-      new ControlProcessor( TestContexts.sqlContext,
-        loaderIO,
+    val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
+    val sqlReaderIO : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
+    val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
+    val tableOperations : CDCTableOperations =
+      Mockito.mock( classOf[CDCTableOperations] )
+    val controlProcessor : CDCControlProcessor =
+      new CDCControlProcessor( TestContexts.sqlContext,
+        reader,
         sqlReaderIO,
-        properties )
+        properties,
+        tableOperations )
 
     val date = new DateTime()
     DateTimeUtils.setCurrentMillisFixed( date.getMillis )
@@ -94,17 +101,17 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       .thenReturn( "YYYYMMDDHHmmSShh" )
     Mockito
       .when(
-        loaderIO.read( TestContexts.sqlContext,
+        reader.read( TestContexts.sqlContext,
           properties.getStringProperty( "controlTablePath" ),
           None ) )
       .thenReturn( TestContexts.generateControlTable( 10 ) )
     Mockito
       .when(
-        loaderIO.registerTempTable(
+        tableOperations.registerTempTable(
           org.mockito.Matchers.any( classOf[DataFrame] ),
           org.mockito.Matchers.anyString() ) )
       .thenCallRealMethod()
-    controlProcessor.registerControlTable
+    controlProcessor.registerControlTable()
     When( "The control table has 10 rows" )
     Mockito
       .when( properties.getStringProperty( "controlTableSQLPath" ) )
@@ -129,15 +136,18 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
   }
 
   "Controlprocessor" should "Generate a sequence number" in {
-
-    val loaderIO : CDCLoaderIO = Mockito.mock( classOf[CDCLoaderIO] )
-    val sqlReaderIO : CDCSQLReaderIO = Mockito.mock( classOf[CDCSQLReaderIO] )
-    val properties : CDCProperties = Mockito.mock( classOf[CDCProperties] )
-    val controlProcessor : ControlProcessor =
-      new ControlProcessor( TestContexts.sqlContext,
-        loaderIO,
+    val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
+    val sqlReaderIO : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
+    val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
+    val tableOperations : CDCTableOperations =
+      Mockito.mock( classOf[CDCTableOperations] )
+    val controlProcessor : CDCControlProcessor =
+      new CDCControlProcessor( TestContexts.sqlContext,
+        reader,
         sqlReaderIO,
-        properties )
+        properties,
+        tableOperations )
+
     val date = new DateTime()
     Given( "No inputs" )
     DateTimeUtils.setCurrentMillisFixed( date.getMillis )
@@ -154,5 +164,54 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
         "0000000000000000000"
     )
     DateTimeUtils.setCurrentMillisSystem()
+  }
+
+  "ControlProcessor" should "Identify whether a table is being loaded for the first time" in {
+    val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
+    val sqlReaderIO : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
+    val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
+    val tableOperations : CDCTableOperations =
+      Mockito.mock( classOf[CDCTableOperations] )
+    val controlProcessor : CDCControlProcessor =
+      new CDCControlProcessor( TestContexts.sqlContext,
+        reader,
+        sqlReaderIO,
+        properties,
+        tableOperations )
+
+    Given( "A control table" )
+    Mockito
+      .when( properties.getStringProperty( "controlTablePath" ) )
+      .thenReturn( "/control/dir/" )
+    Mockito
+      .when( properties.getStringProperty( "controlTableName" ) )
+      .thenReturn( "control" )
+    Mockito
+      .when( properties.getStringProperty( "attunitytablenameColumn" ) )
+      .thenReturn( "attunitytablename" )
+    Mockito
+      .when(
+        reader.read( TestContexts.sqlContext,
+          properties.getStringProperty( "controlTablePath" ),
+          None ) )
+      .thenReturn( TestContexts.generateControlTable( 10 ) )
+    Mockito
+      .when(
+        tableOperations.registerTempTable(
+          org.mockito.Matchers.any( classOf[DataFrame] ),
+          org.mockito.Matchers.anyString() ) )
+      .thenCallRealMethod()
+    controlProcessor.registerControlTable()
+    When( "The control table has rows for a source table" )
+    Then( "isInitialLoad should be false" )
+    controlProcessor
+      .isInitialLoad( TestContexts.sqlContext, "'policy'" ) should be( false )
+
+    When( "The control table has no rows for a source table" )
+    Then( "isInitialLoad should be true" )
+    controlProcessor
+      .isInitialLoad( TestContexts.sqlContext, "'transaction'" ) should be( true )
+
+    controlProcessor.deregisterControlTable()
   }
 }

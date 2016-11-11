@@ -3,7 +3,7 @@ package com.kainos.enstar.globaldatahub.properties
 /**
  * Trait for reading property values.
  */
-trait DatahubProperties {
+trait GDHProperties {
 
   def getBoolenProperty( s : String ) : Boolean = ???
 

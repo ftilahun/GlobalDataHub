@@ -6,7 +6,7 @@ import org.apache.hadoop.fs.Path
 /**
  * Helper class for reading SQL statements from HDFS
  */
-class SQLReaderIO extends Logging {
+class GDHTextFileReader extends Logging with TextFileReder {
 
   /**
    * Read a text file from the specified location and return the contents as a string
@@ -14,7 +14,7 @@ class SQLReaderIO extends Logging {
    * @param path the path to read from.
    * @return
    */
-  def getStringFromFile( sparkContext : SparkContext, path : String ) = {
+  def getStringFromFile( sparkContext : SparkContext, path : String ) : String = {
     logInfo( "reading from path: " + path )
     sparkContext.textFile( new Path( path ).toString ).collect().mkString( " " )
   }

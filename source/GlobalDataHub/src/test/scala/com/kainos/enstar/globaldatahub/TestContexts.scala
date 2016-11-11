@@ -15,38 +15,52 @@ object TestContexts {
     new SparkConf()
       .setMaster( "local[1]" )
       .setAppName( this.getClass.getSimpleName ) )
-  _sc.setLogLevel( "OFF" )
+  _sc.setLogLevel( "INFO" )
   private val _sqlC : SQLContext = new SQLContext( _sc )
 
   case class Data( id : Int, value : String )
-  case class Control(
-    lastattunitychangeseq : String,
-    starttime : String,
-    endtime : String,
-    attunityrecordcount : Long,
-    attunitytablename : String,
-    directoryname : String )
+  case class Control( lastattunitychangeseq : String,
+                      starttime : String,
+                      endtime : String,
+                      attunityrecordcount : Long,
+                      attunitytablename : String,
+                      directoryname : String )
 
   def sparkContext = _sc
   def sqlContext = _sqlC
 
   def dummyData( numItems : Int ) : DataFrame = {
-    val list = ( 1 to numItems ).map{ number => Data( number, "value" + number ) }
-    TestContexts.sqlContext.createDataFrame( TestContexts.sparkContext.parallelize( list ) )
+    val list = ( 1 to numItems ).map { number =>
+      Data( number, "value" + number )
+    }
+    TestContexts.sqlContext.createDataFrame(
+      TestContexts.sparkContext.parallelize( list ) )
   }
 
   def generateControlTable( numItems : Int ) : DataFrame = {
-    val list = ( 1 to numItems ).map{ number =>
+    val list = ( 1 to numItems ).map { number =>
       Control(
-        DateTimeFormat.forPattern( "YYYYMMDDHHmmSShh" ).print( new DateTime() ) + numItems.toString.reverse.padTo( 19, "0" ).mkString( "" ).reverse,
-        DateTimeFormat.forPattern( "YYYY-MM-dd HH:mm:ss.SSS" ).print( new DateTime().minus( Duration.standardMinutes( 10 ) ) ),
-        DateTimeFormat.forPattern( "YYYY-MM-dd HH:mm:ss.SSS" ).print( new DateTime() ),
+        DateTimeFormat
+          .forPattern( "YYYYMMDDHHmmSShh" )
+          .print( new DateTime() ) + numItems.toString.reverse
+          .padTo( 19, "0" )
+          .mkString( "" )
+          .reverse,
+        DateTimeFormat
+          .forPattern( "YYYY-MM-dd HH:mm:ss.SSS" )
+          .print( new DateTime().minus( Duration.standardMinutes( 10 ) ) ),
+        DateTimeFormat
+          .forPattern( "YYYY-MM-dd HH:mm:ss.SSS" )
+          .print( new DateTime() ),
         number,
         "policy",
-        "/some/dir/" + DateTimeFormat.forPattern( "YYYYMMddHHmmssSSS" ).print( new DateTime() )
+        "/some/dir/" + DateTimeFormat
+          .forPattern( "YYYYMMddHHmmssSSS" )
+          .print( new DateTime() )
       )
     }
-    TestContexts.sqlContext.createDataFrame( TestContexts.sparkContext.parallelize( list ) )
+    TestContexts.sqlContext.createDataFrame(
+      TestContexts.sparkContext.parallelize( list ) )
   }
 
 }
