@@ -69,8 +69,7 @@ Note:
 
 
 #### Local Development Environment
-
-Run the createContainers.sh script under `development/docker`  this will create and launch two docker containers for local development.  The containers should restart with your machine so this will only need to be completed once.
+Download and install Docker for Mac from https://docs.docker.com/docker-for-mac/. Run the createContainers.sh script under `development/docker`  this will create and launch two docker containers for local development.  The containers should restart with your machine so this will only need to be completed once.
 
 you can open a terminal session on either container using:
 ```docker attach <containername>``` where containername either **attunity** or **quickstart.cloudera**. Exit containers using `ctrl+p` and `ctrl+q`, any other method will stop the container.
