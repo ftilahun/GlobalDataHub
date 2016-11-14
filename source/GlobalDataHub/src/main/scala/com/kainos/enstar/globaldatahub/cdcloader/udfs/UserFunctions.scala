@@ -42,4 +42,11 @@ trait UserFunctions extends UDFs{
     */
   def isDeleted(changeOperation: String) : Boolean
 
+  /**
+    * Generate an attunity change sequence for a table.
+    * this sequence should be used when processing the initial load table.
+    * @return
+    */
+  def generateSequenceNumber : String
+
 }

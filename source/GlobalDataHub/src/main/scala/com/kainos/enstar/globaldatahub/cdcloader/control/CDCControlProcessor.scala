@@ -73,17 +73,4 @@ class CDCControlProcessor( sqlContext : SQLContext,
     sqlContext.sql( controlTableSQL + tableName ).collect()( 0 ).getString( 0 )
   }
 
-  /**
-   * Generate an attunity change sequence for a table.
-   * this sequence should be used when processing the initial load table.
-   * @return
-   */
-  def generateFirstSequenceNumber : String = {
-    DateTimeFormat
-      .forPattern(
-        properties.getStringProperty( "changeSequenceTimestampFormat" ) )
-      .print( new DateTime() ) +
-      "0000000000000000000"
-  }
-
 }

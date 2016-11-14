@@ -37,11 +37,4 @@ trait ControlProcessor {
    */
   def getLastSequenceNumber( tableName : String ) : String
 
-  /**
-   * Generate an attunity change sequence for a table.
-   * this sequence should be used when processing the initial load table.
-   * @return
-   */
-  def generateFirstSequenceNumber : String
-
 }

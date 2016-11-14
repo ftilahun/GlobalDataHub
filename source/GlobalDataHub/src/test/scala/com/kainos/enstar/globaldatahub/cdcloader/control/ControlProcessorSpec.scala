@@ -135,37 +135,6 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     DateTimeUtils.setCurrentMillisSystem()
   }
 
-  "Controlprocessor" should "Generate a sequence number" in {
-    val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
-    val sqlReaderIO : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
-    val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
-    val tableOperations : CDCTableOperations =
-      Mockito.mock( classOf[CDCTableOperations] )
-    val controlProcessor : CDCControlProcessor =
-      new CDCControlProcessor( TestContexts.sqlContext,
-        reader,
-        sqlReaderIO,
-        properties,
-        tableOperations )
-
-    val date = new DateTime()
-    Given( "No inputs" )
-    DateTimeUtils.setCurrentMillisFixed( date.getMillis )
-    When( "Required" )
-    Then( "The control processor should generate a sequence number" )
-    Mockito
-      .when( properties.getStringProperty( "changeSequenceTimestampFormat" ) )
-      .thenReturn( "YYYYMMDDHHmmSShh" )
-    controlProcessor.generateFirstSequenceNumber should be(
-      DateTimeFormat
-        .forPattern(
-          properties.getStringProperty( "changeSequenceTimestampFormat" ) )
-        .print( date ) +
-        "0000000000000000000"
-    )
-    DateTimeUtils.setCurrentMillisSystem()
-  }
-
   "ControlProcessor" should "Identify whether a table is being loaded for the first time" in {
     val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
     val sqlReaderIO : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )

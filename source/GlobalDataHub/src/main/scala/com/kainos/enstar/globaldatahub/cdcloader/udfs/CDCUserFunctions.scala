@@ -61,4 +61,17 @@ class CDCUserFunctions(properties : GDHProperties) extends UserFunctions {
     }
     false
   }
+
+  /**
+    * Generate an attunity change sequence for a table.
+    * this sequence should be used when processing the initial load table.
+    * @return
+    */
+  def generateSequenceNumber : String = {
+    DateTimeFormat
+      .forPattern(
+        properties.getStringProperty( "changeSequenceTimestampFormat" ) )
+      .print( new DateTime() ) +
+      "0000000000000000000"
+  }
 }
