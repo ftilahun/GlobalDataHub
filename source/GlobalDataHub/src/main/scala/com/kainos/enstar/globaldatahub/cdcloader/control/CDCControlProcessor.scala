@@ -19,7 +19,8 @@ class CDCControlProcessor( sqlContext : SQLContext,
                            reader : DataFrameReader,
                            sqlFileReader : SQLFileReader,
                            properties : GDHProperties,
-                           tableOperation : TableOperations ) {
+                           tableOperation : TableOperations )
+    extends ControlProcessor {
 
   /**
    * Checks if a table has been previously processed
