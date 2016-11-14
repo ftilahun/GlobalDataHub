@@ -23,6 +23,7 @@
     </repositories>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.version>2.10.5</scala.version>
         <scala.major.version>2.10</scala.major.version>
         <spark.version>1.5.0-cdh5.5.4</spark.version>
