@@ -10,17 +10,22 @@ import org.joda.time.format.DateTimeFormat
 /**
  * Created by ciaranke on 14/11/2016.
  */
-class CDCUserFunctions( properties : GDHProperties ) extends UserFunctions {
+class CDCUserFunctions extends UserFunctions with Serializable {
 
   /**
    * Register required UDFs with the SQL context
    *
    * @param sqlContext the sql context
    */
-  override def registerUDFs( sqlContext : SQLContext ) : Unit = {
-    sqlContext.udf.register( "isDeleted", ( changeOperation : String ) => isDeleted( changeOperation ) )
-    sqlContext.udf.register( "checkBitMask", ( bitMask : String, position : Int ) => isBitSet( getBitMask( bitMask ), position ) )
-    sqlContext.udf.register( "getCurrentTime", () => getCurrentTime( properties.getStringProperty( "HiveTimeStampFormat" ) ) )
+  override def registerUDFs( sqlContext : SQLContext,
+                             properties : GDHProperties ) : Unit = {
+    sqlContext.udf.register(
+      "isDeleted",
+      ( changeOperation : String ) => isDeleted( changeOperation, properties ) )
+    sqlContext.udf.register( "checkBitMask",
+      ( bitMask : String, position : Int ) =>
+        isBitSet( getBitMask( bitMask ), position ) )
+    sqlContext.udf.register( "getCurrentTime", () => getCurrentTime( properties ) )
   }
 
   /**
@@ -28,27 +33,33 @@ class CDCUserFunctions( properties : GDHProperties ) extends UserFunctions {
    * @param changeOperation the current change operation.
    * @return true if the chsnge operation is DELETE.
    */
-  override def isDeleted( changeOperation : String ) : Boolean = changeOperation == properties.getStringProperty( "DeletedcolumnValue" )
+  override def isDeleted( changeOperation : String,
+                          properties : GDHProperties ) : java.lang.Boolean =
+    changeOperation.equalsIgnoreCase(
+      properties.getStringProperty( "DeletedcolumnValue" ) )
 
   /**
    * * Provides a string representation of the current time in the specified
    * format
-   * @param format the format for the timestamp
+   * @param properties properties object
    * @return a string representation of the current timestamp
    */
-  def getCurrentTime( format : String ) : String =
-    DateTimeFormat.forPattern( format ).print( new DateTime() )
+  def getCurrentTime( properties : GDHProperties ) : String =
+    DateTimeFormat
+      .forPattern( properties.getStringProperty( "HiveTimeStampFormat" ) )
+      .print( new DateTime() )
 
   /**
    * Converts the attunity change mask from a Hexadecimal string to a binary string
    * @param changeMask the hex string to convert
    * @return a binary string
    */
-  def getBitMask( changeMask : String ) = if ( null != changeMask ) {
-    new BigInteger( changeMask, 16 ).toString( 2 ).reverse
-  } else {
-    "0"
-  }
+  def getBitMask( changeMask : String ) : String =
+    if ( null != changeMask ) {
+      new BigInteger( changeMask, 16 ).toString( 2 ).reverse
+    } else {
+      "0"
+    }
 
   /**
    * checks if a bit has been set in a binary string
@@ -69,7 +80,7 @@ class CDCUserFunctions( properties : GDHProperties ) extends UserFunctions {
    * this sequence should be used when processing the initial load table.
    * @return
    */
-  def generateSequenceNumber : String = {
+  def generateSequenceNumber( properties : GDHProperties ) : String = {
     DateTimeFormat
       .forPattern(
         properties.getStringProperty( "changeSequenceTimestampFormat" ) )

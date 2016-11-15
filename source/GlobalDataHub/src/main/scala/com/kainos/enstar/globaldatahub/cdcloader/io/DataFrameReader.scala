@@ -7,6 +7,7 @@ import org.apache.spark.storage.StorageLevel
  * Expected behaviour for a DataFrameReader
  */
 trait DataFrameReader {
+
   /**
    * Read a DataFrame from the filesystem
    *

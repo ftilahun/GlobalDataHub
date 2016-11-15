@@ -25,7 +25,6 @@ class CDCControlProcessor extends ControlProcessor {
     val sqlString = s" SELECT * FROM ${properties.getStringProperty( "controlTableName" )} " +
       s" where ${properties.getStringProperty( "attunitytablenameColumn" )} = $tableName "
     val rows = sqlContext.sql( sqlString )
-    rows.foreach( println )
     val i = rows.count()
     i == 0
   }

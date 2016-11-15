@@ -10,6 +10,7 @@ import com.databricks.spark.avro._
  * Helper class for writing dataframes to HDFS
  */
 class GDHDataFrameWriter extends Logging with DataFrameWriter {
+
   /**
    * write a dataframe to disk
    *

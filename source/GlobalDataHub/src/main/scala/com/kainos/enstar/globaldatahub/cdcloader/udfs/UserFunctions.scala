@@ -1,28 +1,26 @@
 package com.kainos.enstar.globaldatahub.cdcloader.udfs
 
-import java.math.BigInteger
-
+import com.kainos.enstar.globaldatahub.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
 import com.kainos.enstar.globaldatahub.udfs.{ UserFunctions => UDFs }
 
-trait UserFunctions extends UDFs {
+trait UserFunctions extends UDFs with Serializable {
 
   /**
    * Register required UDFs with the SQL context
    *
    * @param sqlContext the sql context
    */
-  def registerUDFs( sqlContext : SQLContext ) : Unit
+  def registerUDFs( sqlContext : SQLContext, properties : GDHProperties ) : Unit
 
   /**
    * * Provides a string representation of the current time in the specified
    * format
-   * @param format the format for the timestamp
+   * @param properties properties object
    * @return a string representation of the current timestamp
    */
-  def getCurrentTime( format : String ) : String
+  def getCurrentTime( properties : GDHProperties ) : String
+
   /**
    * Converts the attunity change mask from a Hexadecimal string to a binary string
    * @param changeMask the hex string to convert
@@ -44,13 +42,14 @@ trait UserFunctions extends UDFs {
    * @param changeOperation the current change operation.
    * @return true if the chsnge operation is DELETE.
    */
-  def isDeleted( changeOperation : String ) : Boolean
+  def isDeleted( changeOperation : String,
+                 properties : GDHProperties ) : java.lang.Boolean
 
   /**
    * Generate an attunity change sequence for a table.
    * this sequence should be used when processing the initial load table.
    * @return
    */
-  def generateSequenceNumber : String
+  def generateSequenceNumber( properties : GDHProperties ) : String
 
 }

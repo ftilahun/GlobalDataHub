@@ -8,7 +8,7 @@ class CDCTableOperationsSpec
     with GivenWhenThen
     with Matchers {
 
-  "CDCLoaderIO" should "Register and drop a table" in {
+  "CDCTableOperations" should "Register and drop a table" in {
     val tableName = "DummyData"
     val cdcTableOperations = new CDCTableOperations()
     Given( "A query on a table " )

@@ -11,9 +11,9 @@ import org.apache.hadoop.mapred.InvalidInputException
 /**
  * Unit tests for CDCSQLReaderIO
  */
-class CDCSQLReaderIOSpec extends FlatSpec with GivenWhenThen with Matchers {
+class CDCSQLReaderSpec extends FlatSpec with GivenWhenThen with Matchers {
 
-  "CDCSQLReaderIO" should "Retrieve a SQL query from HDFS" in {
+  "CDCSQLReader" should "Retrieve a SQL query from HDFS" in {
     val textReader = Mockito.mock( classOf[GDHTextFileReader] )
     val cdcSQLReader = new CDCSQLFileReader( textReader )
     val validQuery = "SELECT Column1 from table"

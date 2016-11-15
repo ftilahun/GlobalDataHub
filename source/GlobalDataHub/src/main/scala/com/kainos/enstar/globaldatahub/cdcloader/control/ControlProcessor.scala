@@ -1,6 +1,10 @@
 package com.kainos.enstar.globaldatahub.cdcloader.control
 
-import com.kainos.enstar.globaldatahub.cdcloader.io.{ DataFrameReader, SQLFileReader, TableOperations }
+import com.kainos.enstar.globaldatahub.cdcloader.io.{
+  DataFrameReader,
+  SQLFileReader,
+  TableOperations
+}
 import com.kainos.enstar.globaldatahub.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
 

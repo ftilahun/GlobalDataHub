@@ -15,9 +15,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito
       .when( properties.getStringProperty( "HiveTimeStampFormat" ) )
       .thenReturn( "YYYY-MM-DD HH:mm:ss.SSS" )
-    val userFunctions = new CDCUserFunctions( properties )
+    val userFunctions = new CDCUserFunctions
     Then( "UDfs should be registered" )
-    userFunctions.registerUDFs( TestContexts.sqlContext )
+    userFunctions.registerUDFs( TestContexts.sqlContext, properties )
   }
 
   "CDCUserFunctions" should "Return the current time in hive format" in {
@@ -27,12 +27,11 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito
       .when( properties.getStringProperty( "HiveTimeStampFormat" ) )
       .thenReturn( "YYYY-MM-DD HH:mm:ss.SSS" )
-    val userFunctions = new CDCUserFunctions( properties )
+    val userFunctions = new CDCUserFunctions
     val date = new DateTime()
     DateTimeUtils.setCurrentMillisFixed( date.getMillis )
     Then( "The date should me formated to match" )
-    userFunctions.getCurrentTime(
-      properties.getStringProperty( "HiveTimeStampFormat" ) ) should
+    userFunctions.getCurrentTime( properties ) should
       be(
         DateTimeFormat.forPattern( "YYYY-MM-DD HH:mm:ss.SSS" ).print( date )
       )
@@ -42,26 +41,29 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   "CDCUserFunctions" should "Check if a row is deleted" in {
     Given( "a row" )
     val properties = Mockito.mock( classOf[GDHProperties] )
-    val userFunctions = new CDCUserFunctions( properties )
+    val userFunctions = new CDCUserFunctions
     When( "The filter is DELETE" )
     Mockito
       .when( properties.getStringProperty( "DeletedcolumnValue" ) )
       .thenReturn( "DELETE" )
     Then( "DELETE should be true" )
-    userFunctions.isDeleted( "DELETE" ) should be( true )
+    userFunctions.isDeleted( "DELETE", properties ) should be(
+      true.asInstanceOf[java.lang.Boolean] )
     Then( "INSERT should be true" )
-    userFunctions.isDeleted( "INSERT" ) should be( false )
+    userFunctions.isDeleted( "INSERT", properties ) should be(
+      false.asInstanceOf[java.lang.Boolean] )
   }
 
   "CDCUserFunctions" should "covert the change mask to a bit mask correctly" in {
     val properties = Mockito.mock( classOf[GDHProperties] )
-    val userFunctions = new CDCUserFunctions( properties )
+    val userFunctions = new CDCUserFunctions
     userFunctions.getBitMask( "0380" ) should equal( "0000000111" )
+    userFunctions.getBitMask( null ) should equal( "0" )
   }
 
   "CDCUserFunctions" should "identify bits that have been set correctly" in {
     val properties = Mockito.mock( classOf[GDHProperties] )
-    val userFunctions = new CDCUserFunctions( properties )
+    val userFunctions = new CDCUserFunctions
     userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 9 ) should be( true )
     userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 10 ) should be(
       false )
@@ -69,14 +71,14 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCUserFunctions" should "Generate a sequence number" in {
     val properties = Mockito.mock( classOf[GDHProperties] )
-    val userFunctions = new CDCUserFunctions( properties )
+    val userFunctions = new CDCUserFunctions
 
     val date = new DateTime()
     DateTimeUtils.setCurrentMillisFixed( date.getMillis )
     Mockito
       .when( properties.getStringProperty( "changeSequenceTimestampFormat" ) )
       .thenReturn( "YYYYMMDDHHmmSShh" )
-    userFunctions.generateSequenceNumber should be(
+    userFunctions.generateSequenceNumber( properties ) should be(
       DateTimeFormat
         .forPattern(
           properties.getStringProperty( "changeSequenceTimestampFormat" ) )
