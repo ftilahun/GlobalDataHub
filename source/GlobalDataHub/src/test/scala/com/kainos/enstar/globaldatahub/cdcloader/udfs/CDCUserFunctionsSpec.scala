@@ -8,8 +8,8 @@ import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
-  * Unit tests for CDCUserFunctions
-  */
+ * Unit tests for CDCUserFunctions
+ */
 class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCUserFunctions" should "register UDFs" in {

@@ -8,8 +8,8 @@ import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
-  * Unit tests for the CDCDataFrameReader
-  */
+ * Unit tests for the CDCDataFrameReader
+ */
 class CDCDataFrameReaderSpec
     extends FlatSpec
     with GivenWhenThen

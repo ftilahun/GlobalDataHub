@@ -47,20 +47,21 @@ trait UserFunctions extends UDFs with Serializable {
   def isAnyBitSet( changeMask : String,
                    columnPositions : Array[String] ) : java.lang.Boolean
 
-  /** Check if a source row has been deleted.
-    *
-    * @param changeOperation the current change operation.
-    * @param properties the properties object
-    * @return true if the chsnge operation is DELETE.
-    */
+  /**
+   * Check if a source row has been deleted.
+   *
+   * @param changeOperation the current change operation.
+   * @param properties the properties object
+   * @return true if the chsnge operation is DELETE.
+   */
   def isDeleted( changeOperation : String,
                  properties : GDHProperties ) : java.lang.Boolean
 
   /**
-    * Generate an attunity change sequence for a table.
-    * this sequence should be used when processing the initial load table.
-    * @param properties the properties object
-    * @return a string representing a sequence number
-    */
+   * Generate an attunity change sequence for a table.
+   * this sequence should be used when processing the initial load table.
+   * @param properties the properties object
+   * @return a string representing a sequence number
+   */
   def generateSequenceNumber( properties : GDHProperties ) : String
 }

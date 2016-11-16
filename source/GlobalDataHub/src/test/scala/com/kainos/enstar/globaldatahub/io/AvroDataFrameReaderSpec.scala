@@ -1,10 +1,10 @@
 package com.kainos.enstar.globaldatahub.io
 
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
-  * Unit tests for AvroDataFrameReader
-  */
+ * Unit tests for AvroDataFrameReader
+ */
 class AvroDataFrameReaderSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "AvroDataFrameReader" should "read from HDFS" in {

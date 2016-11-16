@@ -15,7 +15,7 @@ object TestContexts {
     new SparkConf()
       .setMaster( "local[1]" )
       .setAppName( this.getClass.getSimpleName ) )
-  _sc.setLogLevel( "INFO" )
+  _sc.setLogLevel( "OFF" )
   private val _sqlC : SQLContext = new SQLContext( _sc )
 
   case class Data( id : Int, value : String )

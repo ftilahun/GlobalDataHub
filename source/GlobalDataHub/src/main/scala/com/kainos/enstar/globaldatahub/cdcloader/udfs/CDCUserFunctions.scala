@@ -28,7 +28,8 @@ class CDCUserFunctions extends UserFunctions with Serializable {
     sqlContext.udf.register( "getCurrentTime", () => getCurrentTime( properties ) )
   }
 
-  /** Check if a source row has been deleted.
+  /**
+   * Check if a source row has been deleted.
    *
    * @param changeOperation the current change operation.
    * @param properties the properties object

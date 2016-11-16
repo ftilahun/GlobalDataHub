@@ -8,11 +8,11 @@ import org.apache.spark.SparkContext
 trait FileReader {
 
   /**
-    * Read a text file from the specified location and return the contents as a string
-    * @param sparkContext the spark context
-    * @param path the path to read from.
-    * @return
-    */
+   * Read a text file from the specified location and return the contents as a string
+   * @param sparkContext the spark context
+   * @param path the path to read from.
+   * @return
+   */
   def getStringFromFile( sparkContext : SparkContext, path : String ) : String
 
 }

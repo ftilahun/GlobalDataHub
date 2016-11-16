@@ -14,8 +14,8 @@ import org.apache.spark.storage.StorageLevel
 import org.apache.spark.sql.functions._
 
 /**
-  * Process a source table
-  */
+ * Process a source table
+ */
 class CDCTableProcessor extends TableProcessor {
 
   /**
