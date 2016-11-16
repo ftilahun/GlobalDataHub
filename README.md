@@ -70,6 +70,8 @@ Note:
 
 Run the createContainers.sh script under `development/docker`  this will create and launch two docker containers for local development.  The containers should restart with your machine so this will only need to be completed once.
 
+The quickstart.cloudera image requires **8GB of RAM** allocated to run (this can be set in docker's preferences). 
+
 you can open a terminal session on either container using:
 ```docker attach <containername>``` where containername either **attunity** or **quickstart.cloudera**. Exit containers using `ctrl+p` and `ctrl+q`, any other method will stop the container.
 
