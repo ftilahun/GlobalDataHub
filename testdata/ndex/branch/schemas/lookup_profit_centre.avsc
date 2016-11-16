@@ -1,0 +1,27 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+ 	"type": "record",
+ 	"name": "lookup_profit_centre",
+    "fields": [
+    	{
+    		"name": "Profit_centre_code", 
+    		"type": "int"
+    	},
+        {
+            "name": "profit_centre_desc", 
+            "type": "string"
+        },
+        {
+            "name": "_isDeleted", 
+            "type": "boolean"
+        },
+        {
+            "name": "_LoadDateTimeStamp", 
+            "type": "string"
+        },
+        {
+            "name": "_LoadIdentifier", 
+            "type": "string"
+        },
+    ]
+}
