@@ -1,19 +1,22 @@
 package com.kainos.enstar.globaldatahub.cdcloader.io
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.io.GDHDataFrameReader
+import com.kainos.enstar.globaldatahub.io.AvroDataFrameReader
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
+/**
+  * Unit tests for the CDCDataFrameReader
+  */
 class CDCDataFrameReaderSpec
     extends FlatSpec
     with GivenWhenThen
     with Matchers {
 
   "CDCDataFrameReader" should "Read input data" in {
-    val dataFrameReader = Mockito.mock( classOf[GDHDataFrameReader] )
+    val dataFrameReader = Mockito.mock( classOf[AvroDataFrameReader] )
     val cdcDataFrameReader = new CDCDataFrameReader( dataFrameReader )
     Mockito
       .when( dataFrameReader.read( TestContexts.sqlContext, "/some/path/", None ) )

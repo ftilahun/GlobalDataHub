@@ -6,7 +6,7 @@ import org.apache.hadoop.fs.Path
 /**
  * Helper class for reading SQL statements from HDFS
  */
-class GDHTextFileReader extends Logging with TextFileReder {
+class TextFileReader extends Logging with FileReader {
 
   /**
    * Read a text file from the specified location and return the contents as a string

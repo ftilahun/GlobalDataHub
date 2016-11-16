@@ -42,19 +42,19 @@ object TestContexts {
     val changeOperation = udf(
       ( num : Int ) => operations( num % operations.length ) )
     val dateTime = udf( () => "2016-07-12 11:12:32.111" )
-    val changeSeq = udf(() => "20160712111232110000000000000000000")
-    val changeMask = udf((num : Int) =>
-      if(num == 9 || num == 10) {
+    val changeSeq = udf( () => "20160712111232110000000000000000000" )
+    val changeMask = udf( ( num : Int ) =>
+      if ( num == 9 || num == 10 ) {
         "380"
       } else {
         "7f"
-      }
-    )
+      } )
     val data = dummyData( numItems )
-    data.withColumn( "_operation", changeOperation( data( "id" ) ) ).
-      withColumn( "_timeStamp", dateTime() ).
-      withColumn( "_changesequence" , changeSeq()).
-      withColumn("_changemask", changeMask(data( "id" )))
+    data
+      .withColumn( "_operation", changeOperation( data( "id" ) ) )
+      .withColumn( "_timeStamp", dateTime() )
+      .withColumn( "_changesequence", changeSeq() )
+      .withColumn( "_changemask", changeMask( data( "id" ) ) )
   }
 
   def generateControlTable( numItems : Int ) : DataFrame = {

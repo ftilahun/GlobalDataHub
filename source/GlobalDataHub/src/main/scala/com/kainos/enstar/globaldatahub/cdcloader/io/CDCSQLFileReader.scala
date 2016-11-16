@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.cdcloader.io
 
 import com.kainos.enstar.globaldatahub.exceptions.SQLException
-import com.kainos.enstar.globaldatahub.io.TextFileReder
+import com.kainos.enstar.globaldatahub.io.FileReader
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.SparkContext
@@ -11,7 +11,7 @@ import org.apache.spark.SparkContext
  *
  * @param textFileReader a TextFileReader
  */
-class CDCSQLFileReader( textFileReader : TextFileReder ) extends SQLFileReader {
+class CDCSQLFileReader( textFileReader : FileReader ) extends SQLFileReader {
 
   /**
    * Returns a SQL statement from the passed in file path.

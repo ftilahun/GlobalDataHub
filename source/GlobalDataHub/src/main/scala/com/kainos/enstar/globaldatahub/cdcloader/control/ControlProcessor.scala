@@ -30,6 +30,7 @@ trait ControlProcessor {
    * @param sqlContext the SQL Context
    * @param reader CDCDataFrameReader, for reading from a filesystem
    * @param properties properties file
+   * @param tableOperation table operations object, for registering tables
    */
   def registerControlTable( sqlContext : SQLContext,
                             reader : DataFrameReader,
@@ -40,6 +41,7 @@ trait ControlProcessor {
    * De-register the control table for a source system
    * @param sqlContext the SQL Context
    * @param properties properties file
+   * @param tableOperation table operations object, for registering tables
    */
   def deregisterControlTable( sqlContext : SQLContext,
                               properties : GDHProperties,

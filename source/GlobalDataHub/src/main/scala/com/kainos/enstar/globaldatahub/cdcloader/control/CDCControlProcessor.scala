@@ -22,8 +22,11 @@ class CDCControlProcessor extends ControlProcessor {
   def isInitialLoad( sqlContext : SQLContext,
                      tableName : String,
                      properties : GDHProperties ) : Boolean = {
-    val sqlString = s" SELECT * FROM ${properties.getStringProperty( "controlTableName" )} " +
-      s" where ${properties.getStringProperty( "attunitytablenameColumn" )} = $tableName "
+    val sqlString = s" SELECT * FROM ${properties.getStringProperty( "spark.cdcloader.tables.control.name" )} " +
+      s" where ${
+        properties.getStringProperty(
+          "spark.cdcloader.columns.attunity.name.tablename" )
+      } = $tableName "
     val rows = sqlContext.sql( sqlString )
     val i = rows.count()
     i == 0
@@ -34,29 +37,33 @@ class CDCControlProcessor extends ControlProcessor {
    * @param sqlContext the SQL Context
    * @param reader CDCDataFrameReader, for reading from a filesystem
    * @param properties properties file
+   * @param tableOperation table operations object, for registering tables
    */
   def registerControlTable( sqlContext : SQLContext,
                             reader : DataFrameReader,
                             properties : GDHProperties,
                             tableOperation : TableOperations ) : Unit = {
-    val controlTableDF = reader
-      .read( sqlContext, properties.getStringProperty( "controlTablePath" ), None )
+    val controlTableDF = reader.read(
+      sqlContext,
+      properties.getStringProperty( "spark.cdcloader.paths.data.controlpath" ),
+      None )
     tableOperation.registerTempTable(
       controlTableDF,
-      properties.getStringProperty( "controlTableName" ) )
+      properties.getStringProperty( "spark.cdcloader.tables.control.name" ) )
   }
 
   /**
    * De-register the control table for a source system
    * @param sqlContext the SQL Context
    * @param properties properties file
+   * @param tableOperation table operations object, for registering tables
    */
   def deregisterControlTable( sqlContext : SQLContext,
                               properties : GDHProperties,
                               tableOperation : TableOperations ) : Unit =
     tableOperation.deRegisterTempTable(
       sqlContext,
-      properties.getStringProperty( "controlTableName" ) )
+      properties.getStringProperty( "spark.cdcloader.tables.control.name" ) )
 
   /**
    * get the last attunity change sequence in the control table the sql expected by this method is
@@ -76,9 +83,10 @@ class CDCControlProcessor extends ControlProcessor {
                              tableName : String ) : String = {
     val controlTableSQL = sqlFileReader.getSQLString(
       sqlContext.sparkContext,
-      properties.getStringProperty( "controlTableSQLPath" ) )
-    val lastSeq = sqlContext.sql( controlTableSQL + tableName ).collect()( 0 ).getString( 0 )
-    if (lastSeq == null) {
+      properties.getStringProperty( "spark.cdcloader.paths.sql.controlpath" ) )
+    val lastSeq =
+      sqlContext.sql( controlTableSQL + tableName ).collect()( 0 ).getString( 0 )
+    if ( lastSeq == null ) {
       "0"
     } else {
       lastSeq

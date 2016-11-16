@@ -3,6 +3,9 @@ package com.kainos.enstar.globaldatahub.cdcloader.io
 import com.kainos.enstar.globaldatahub.TestContexts
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
+/**
+  * unit tests for CDCTableOperations
+  */
 class CDCTableOperationsSpec
     extends FlatSpec
     with GivenWhenThen

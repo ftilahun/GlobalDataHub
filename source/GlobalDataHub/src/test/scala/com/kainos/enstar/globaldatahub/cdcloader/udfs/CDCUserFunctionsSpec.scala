@@ -7,13 +7,17 @@ import org.joda.time.format.DateTimeFormat
 import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
+/**
+  * Unit tests for CDCUserFunctions
+  */
 class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCUserFunctions" should "register UDFs" in {
     Given( "No UDFs are defined" )
     val properties = Mockito.mock( classOf[GDHProperties] )
     Mockito
-      .when( properties.getStringProperty( "HiveTimeStampFormat" ) )
+      .when(
+        properties.getStringProperty( "spark.cdcloader.format.timestamp.hive" ) )
       .thenReturn( "YYYY-MM-DD HH:mm:ss.SSS" )
     val userFunctions = new CDCUserFunctions
     Then( "UDfs should be registered" )
@@ -25,7 +29,8 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     val properties = Mockito.mock( classOf[GDHProperties] )
     When( "The format is YYYY-MM-DD HH:mm:ss.SSS" )
     Mockito
-      .when( properties.getStringProperty( "HiveTimeStampFormat" ) )
+      .when(
+        properties.getStringProperty( "spark.cdcloader.format.timestamp.hive" ) )
       .thenReturn( "YYYY-MM-DD HH:mm:ss.SSS" )
     val userFunctions = new CDCUserFunctions
     val date = new DateTime()
@@ -44,7 +49,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     val userFunctions = new CDCUserFunctions
     When( "The filter is DELETE" )
     Mockito
-      .when( properties.getStringProperty( "DeletedcolumnValue" ) )
+      .when(
+        properties.getStringProperty(
+          "spark.cdcloader.columns.attunity.value.changeoperation" ) )
       .thenReturn( "DELETE" )
     Then( "DELETE should be true" )
     userFunctions.isDeleted( "DELETE", properties ) should be(
@@ -62,17 +69,20 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCUserFunctions" should "identify bits that have been set correctly" in {
     val userFunctions = new CDCUserFunctions
-    userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 9 ) should be( true.asInstanceOf[java.lang.Boolean] )
+    userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 9 ) should be(
+      true.asInstanceOf[java.lang.Boolean] )
     userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 10 ) should be(
       false.asInstanceOf[java.lang.Boolean] )
   }
 
   "CDCUserFunctions" should "identify all items in the change mask that have been set" in {
     val userFunctions = new CDCUserFunctions
-    userFunctions.isAnyBitSet("380",Array[String]()) should be (false.asInstanceOf[java.lang.Boolean])
-    userFunctions.isAnyBitSet("380",Array[String]("1","9","10")) should be (true.asInstanceOf[java.lang.Boolean])
+    userFunctions.isAnyBitSet( "380", Array[String]() ) should be(
+      false.asInstanceOf[java.lang.Boolean] )
+    userFunctions.isAnyBitSet( "380", Array[String]( "1", "9", "10" ) ) should be(
+      true.asInstanceOf[java.lang.Boolean] )
     an[NumberFormatException] should be thrownBy {
-      userFunctions.isAnyBitSet("380", Array[String]("I", "LIKE", "TOAST"))
+      userFunctions.isAnyBitSet( "380", Array[String]( "I", "LIKE", "TOAST" ) )
     }
   }
 
@@ -83,12 +93,14 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     val date = new DateTime()
     DateTimeUtils.setCurrentMillisFixed( date.getMillis )
     Mockito
-      .when( properties.getStringProperty( "changeSequenceTimestampFormat" ) )
+      .when(
+        properties.getStringProperty(
+          "spark.cdcloader.format.timestamp.attunity" ) )
       .thenReturn( "YYYYMMDDHHmmSShh" )
     userFunctions.generateSequenceNumber( properties ) should be(
       DateTimeFormat
-        .forPattern(
-          properties.getStringProperty( "changeSequenceTimestampFormat" ) )
+        .forPattern( properties.getStringProperty(
+          "spark.cdcloader.format.timestamp.attunity" ) )
         .print( date ) +
         "0000000000000000000"
     )

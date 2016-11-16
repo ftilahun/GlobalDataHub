@@ -1,12 +1,13 @@
 package com.kainos.enstar.globaldatahub.cdcloader.io
 
-import com.kainos.enstar.globaldatahub.io.{ GDHDataFrameWriter => DFWriter }
+import com.kainos.enstar.globaldatahub.io.{ DataFrameWriter => DFWriter }
 import org.apache.hadoop.fs.PathExistsException
 import org.apache.spark.sql.{ AnalysisException, DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 
 /**
  * Writes a DataFrame to filesystem.
+ * @param writer filesystem writer
  */
 class CDCDataFrameWriter( writer : DFWriter ) extends DataFrameWriter {
 

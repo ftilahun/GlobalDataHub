@@ -1,20 +1,23 @@
 package com.kainos.enstar.globaldatahub.cdcloader.io
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.io.GDHDataFrameWriter
+import com.kainos.enstar.globaldatahub.io.AvroDataFrameWriter
 import org.apache.hadoop.fs.PathExistsException
 import org.apache.spark.sql.AnalysisException
 import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
+/**
+  * unit tests for the CDCDataFrameWriter
+  */
 class CDCDataFrameWriterSpec
     extends FlatSpec
     with GivenWhenThen
     with Matchers {
 
   "CDCDataFrameWriter" should "Write output data" in {
-    val dataFrameWriter = Mockito.mock( classOf[GDHDataFrameWriter] )
+    val dataFrameWriter = Mockito.mock( classOf[AvroDataFrameWriter] )
     val cdcDataFrameWriter = new CDCDataFrameWriter( dataFrameWriter )
     Given( "The input \"/some/path\"" )
     val data = TestContexts.dummyData( 10 )

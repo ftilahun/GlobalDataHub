@@ -11,5 +11,5 @@ trait GDHProperties extends Serializable {
 
   def getArrayProperty( name : String ) : Array[String]
 
-  def checkPropertiesSet : Unit
+  def checkPropertiesSet() : Unit
 }

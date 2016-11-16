@@ -4,17 +4,17 @@ import com.kainos.enstar.globaldatahub.TestContexts
 import com.kainos.enstar.globaldatahub.exceptions.SQLException
 import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
-import com.kainos.enstar.globaldatahub.io.GDHTextFileReader
+import com.kainos.enstar.globaldatahub.io.TextFileReader
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 
 /**
- * Unit tests for CDCSQLReaderIO
+ * Unit tests for CDCSQLReader
  */
 class CDCSQLReaderSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCSQLReader" should "Retrieve a SQL query from HDFS" in {
-    val textReader = Mockito.mock( classOf[GDHTextFileReader] )
+    val textReader = Mockito.mock( classOf[TextFileReader] )
     val cdcSQLReader = new CDCSQLFileReader( textReader )
     val validQuery = "SELECT Column1 from table"
     val invalidQuery = "Not a SQL statement"
