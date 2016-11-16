@@ -55,18 +55,25 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   }
 
   "CDCUserFunctions" should "covert the change mask to a bit mask correctly" in {
-    val properties = Mockito.mock( classOf[GDHProperties] )
     val userFunctions = new CDCUserFunctions
     userFunctions.getBitMask( "0380" ) should equal( "0000000111" )
     userFunctions.getBitMask( null ) should equal( "0" )
   }
 
   "CDCUserFunctions" should "identify bits that have been set correctly" in {
-    val properties = Mockito.mock( classOf[GDHProperties] )
     val userFunctions = new CDCUserFunctions
     userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 9 ) should be( true )
     userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 10 ) should be(
       false )
+  }
+
+  "CDCUserFunctions" should "identify all items in the change mask that have been set" in {
+    val userFunctions = new CDCUserFunctions
+    userFunctions.isAnyBitSet("380",Array[String]()) should be (false.asInstanceOf[java.lang.Boolean])
+    userFunctions.isAnyBitSet("380",Array[String]("1","9","10")) should be (true.asInstanceOf[java.lang.Boolean])
+    an[NumberFormatException] should be thrownBy {
+      userFunctions.isAnyBitSet("380", Array[String]("I", "LIKE", "TOAST"))
+    }
   }
 
   "CDCUserFunctions" should "Generate a sequence number" in {
