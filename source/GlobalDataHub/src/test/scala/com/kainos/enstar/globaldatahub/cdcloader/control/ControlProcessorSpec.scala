@@ -135,6 +135,63 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     DateTimeUtils.setCurrentMillisSystem()
   }
 
+  "Controlprocessor" should "generate a sequence where none exists" in {
+    val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
+    val sqlReader : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
+    val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
+    val tableOperations : CDCTableOperations =
+      Mockito.mock( classOf[CDCTableOperations] )
+    val controlProcessor : CDCControlProcessor = new CDCControlProcessor
+
+    val date = new DateTime()
+    DateTimeUtils.setCurrentMillisFixed( date.getMillis )
+
+    Given( "A unpopulated control table" )
+    Mockito
+      .when( properties.getStringProperty( "controlTablePath" ) )
+      .thenReturn( "/control/dir/" )
+    Mockito
+      .when( properties.getStringProperty( "controlTableName" ) )
+      .thenReturn( "control" )
+    Mockito
+      .when( properties.getStringProperty( "changeSequenceTimestampFormat" ) )
+      .thenReturn( "YYYYMMDDHHmmSShh" )
+    Mockito
+      .when(
+        reader.read( TestContexts.sqlContext,
+          properties.getStringProperty( "controlTablePath" ),
+          None ) )
+      .thenReturn( TestContexts.generateControlTable( 0 ) )
+    Mockito
+      .when(
+        tableOperations.registerTempTable(
+          org.mockito.Matchers.any( classOf[DataFrame] ),
+          org.mockito.Matchers.anyString() ) )
+      .thenCallRealMethod()
+    controlProcessor.registerControlTable( TestContexts.sqlContext,
+      reader,
+      properties,
+      tableOperations )
+    When( "The control table has 10 rows" )
+    Mockito
+      .when( properties.getStringProperty( "controlTableSQLPath" ) )
+      .thenReturn( "/some/path" )
+    Mockito
+      .when(
+        sqlReader.getSQLString(
+          TestContexts.sparkContext,
+          properties.getStringProperty( "controlTableSQLPath" ) ) )
+      .thenReturn(
+        "SELECT MAX(lastattunitychangeseq) FROM control WHERE attunitytablename = " )
+    Then(
+      "The ControlProcessor should return the seqence number of the 10th row" )
+    controlProcessor.getLastSequenceNumber( TestContexts.sqlContext,
+      sqlReader,
+      properties,
+      "'policy'" ) should be("0")
+    DateTimeUtils.setCurrentMillisSystem()
+  }
+
   "ControlProcessor" should "Identify whether a table is being loaded for the first time" in {
     val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
     val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )

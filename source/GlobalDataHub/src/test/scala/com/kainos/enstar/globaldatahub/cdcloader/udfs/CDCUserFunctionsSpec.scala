@@ -62,9 +62,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCUserFunctions" should "identify bits that have been set correctly" in {
     val userFunctions = new CDCUserFunctions
-    userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 9 ) should be( true )
+    userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 9 ) should be( true.asInstanceOf[java.lang.Boolean] )
     userFunctions.isBitSet( userFunctions.getBitMask( "380" ), 10 ) should be(
-      false )
+      false.asInstanceOf[java.lang.Boolean] )
   }
 
   "CDCUserFunctions" should "identify all items in the change mask that have been set" in {

@@ -2,9 +2,9 @@ package com.kainos.enstar.globaldatahub
 
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.{ SparkConf, SparkContext }
-import org.apache.spark.sql.hive.HiveContext
 import org.joda.time.{ DateTime, Duration }
 import org.joda.time.format.DateTimeFormat
+import org.apache.spark.sql.functions._
 
 /**
  * Provides spark and hive contexts to be shared by all test cases.
@@ -37,8 +37,28 @@ object TestContexts {
       TestContexts.sparkContext.parallelize( list ) )
   }
 
+  def changeDummyData( numItems : Int ) : DataFrame = {
+    val operations = List( "INSERT", "UPDATE", "DELETE", "BEFOREIMAGE" )
+    val changeOperation = udf(
+      ( num : Int ) => operations( num % operations.length ) )
+    val dateTime = udf( () => "2016-07-12 11:12:32.111" )
+    val changeSeq = udf(() => "20160712111232110000000000000000000")
+    val changeMask = udf((num : Int) =>
+      if(num == 9 || num == 10) {
+        "380"
+      } else {
+        "7f"
+      }
+    )
+    val data = dummyData( numItems )
+    data.withColumn( "_operation", changeOperation( data( "id" ) ) ).
+      withColumn( "_timeStamp", dateTime() ).
+      withColumn( "_changesequence" , changeSeq()).
+      withColumn("_changemask", changeMask(data( "id" )))
+  }
+
   def generateControlTable( numItems : Int ) : DataFrame = {
-    val list = ( 1 to numItems ).map { number =>
+    val list = ( 0 until numItems ).map { number =>
       Control(
         DateTimeFormat
           .forPattern( "YYYYMMDDHHmmSShh" )

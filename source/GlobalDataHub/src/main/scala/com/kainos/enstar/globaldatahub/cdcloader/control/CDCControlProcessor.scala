@@ -68,7 +68,7 @@ class CDCControlProcessor extends ControlProcessor {
    * @param sqlFileReader SQL reader for reading SQL files from the filesystem
    * @param properties properties file
    * @param tableName the name of the source table being processed
-   * @return an attunity change sequence
+   * @return an attunity change sequence or "0" if none found
    */
   def getLastSequenceNumber( sqlContext : SQLContext,
                              sqlFileReader : SQLFileReader,
@@ -77,7 +77,12 @@ class CDCControlProcessor extends ControlProcessor {
     val controlTableSQL = sqlFileReader.getSQLString(
       sqlContext.sparkContext,
       properties.getStringProperty( "controlTableSQLPath" ) )
-    sqlContext.sql( controlTableSQL + tableName ).collect()( 0 ).getString( 0 )
+    val lastSeq = sqlContext.sql( controlTableSQL + tableName ).collect()( 0 ).getString( 0 )
+    if (lastSeq == null) {
+      "0"
+    } else {
+      lastSeq
+    }
   }
 
 }

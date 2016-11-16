@@ -22,8 +22,7 @@ class CDCUserFunctions extends UserFunctions with Serializable {
       "isDeleted",
       (changeOperation: String) => isDeleted(changeOperation, properties))
     sqlContext.udf.register("checkBitMask",
-                            (bitMask: String, position: Int) =>
-                              isBitSet(getBitMask(bitMask), position))
+                            (bitMask: String, position: Int) => isBitSet(getBitMask(bitMask), position))
     sqlContext.udf.register("getCurrentTime", () => getCurrentTime(properties))
   }
 
@@ -67,7 +66,7 @@ class CDCUserFunctions extends UserFunctions with Serializable {
     * @param position the position of the bit in the <b>change table</b>
     * @return true if the bit has been set
     */
-  def isBitSet(bitMask: String, position: Int): Boolean = {
+  def isBitSet(bitMask: String, position: Integer): java.lang.Boolean = {
     if (bitMask.length > position) {
       return bitMask.charAt(position) == '1'
     }

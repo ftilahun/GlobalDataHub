@@ -5,7 +5,7 @@ package com.kainos.enstar.globaldatahub.properties
  */
 trait GDHProperties extends Serializable {
 
-  def getBoolenProperty( s : String ) : Boolean
+  def getBooleanProperty( s : String ) : java.lang.Boolean
 
   def getStringProperty( name : String ) : String
 

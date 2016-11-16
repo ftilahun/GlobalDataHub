@@ -35,7 +35,7 @@ trait UserFunctions extends UDFs with Serializable {
     * @param position the position of the bit in the <b>change table</b>
     * @return true if the bit has been set
     */
-  def isBitSet(bitMask: String, position: Int): Boolean
+  def isBitSet(bitMask: String, position: Integer): java.lang.Boolean
 
   /** Checks if any bit has been set in a change mask
     *

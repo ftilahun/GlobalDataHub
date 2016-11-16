@@ -1,10 +1,12 @@
 package com.kainos.enstar.globaldatahub.cdcloader.properties
 
+import java.lang.Boolean
+
 import com.kainos.enstar.globaldatahub.properties.GDHProperties
 
 class CDCProperties extends GDHProperties {
 
-  override def getBoolenProperty( s : String ) : Boolean = ???
+  override def getBooleanProperty(s: String): java.lang.Boolean = ???
 
   override def checkPropertiesSet : Unit = ???
 
