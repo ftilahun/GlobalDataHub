@@ -31,3 +31,4 @@ buildNumber.properties
 .mvn/timing.properties
 
 *.log
+source/GlobalDataHub/metastore_db
