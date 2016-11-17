@@ -4,7 +4,7 @@
     "name": "lookup_profit_centre",
     "fields": [
     	{
-	    "name": "Profit_centre_code", 
+	    "name": "profit_centre_code", 
     	    "type": "int"
     	},
         {
