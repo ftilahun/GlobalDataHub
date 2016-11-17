@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.replicatedsources ",
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
  	"type": "record",
  	"name": "lookup_currency",
  	"fields": [
