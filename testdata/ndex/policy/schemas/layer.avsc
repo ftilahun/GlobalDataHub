@@ -1,0 +1,47 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "submission",
+ 	"fields": [
+        {
+            "name": "layer_id",  
+            "type": "int"
+        },
+        {
+            "name": "submission_id",  
+            "type": "int"
+        },
+    	{
+    		"name": "renewal_status_id",  
+    		"type": ["string", "null"]
+    	},
+        {
+            "name": "expiry_date",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "inception_date",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "unique_market_ref",  
+            "type": ["string", "null"]
+        },
+    	{
+    		"name": "_isdeleted", 
+    		"type": "boolean"
+    	},
+    	{
+    		"name": "_changeoperation", 
+    		"type": "string"
+    	},
+        {
+            "name": "_loaddatetimestamp", 
+            "type": "string"
+        },
+        {
+            "name": "_loadidentifier",
+            "type": "string"
+        }
+ 	]
+}

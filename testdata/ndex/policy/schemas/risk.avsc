@@ -1,0 +1,47 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "risk",
+ 	"fields": [
+        {
+            "name": "risk_id", 
+            "type": "int"
+        },
+    	{
+    		"name": "assured_id", 
+    		"type": "int"
+    	},
+        {
+            "name": "area_code", 
+            "type": ["string", "null"]
+        },
+        {
+            "name": "risk_desc", 
+            "type": ["string", "null"]
+        },
+        {
+            "name": "programme_year", 
+            "type": "int"
+        },
+        {
+            "name": "sequence_no", 
+            "type": "int"
+        },
+    	{
+    		"name": "_isdeleted", 
+    		"type": "boolean"
+    	},
+    	{
+    		"name": "_changeoperation", 
+    		"type": "string"
+    	},
+        {
+            "name": "_loaddatetimestamp", 
+            "type": "string"
+        },
+        {
+            "name": "_loadidentifier", 
+            "type": "string"
+        }
+ 	]
+}
