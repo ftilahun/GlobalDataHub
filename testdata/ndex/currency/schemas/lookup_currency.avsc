@@ -1,0 +1,31 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "lookup_currency",
+ 	"fields": [
+    	{
+    		"name": "currency_code", 
+    		"type": "string"
+    	},
+    	{
+    		"name": "currency_desc",  
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "_isdeleted", 
+    		"type": "boolean"
+    	},
+    	{
+    		"name": "_changeoperation", 
+    		"type": "string"
+    	},
+        {
+            "name": "_loaddatetimestamp", 
+            "type": "string"
+        },
+        {
+            "name": "_loadidentifier", 
+            "type": "string"
+        }
+ 	]
+}
