@@ -12,15 +12,20 @@
             "type": "string"
         },
         {
-            "name": "_isDeleted", 
+            "name": "_isdeleted", 
             "type": "boolean"
         },
         {
-            "name": "_LoadDateTimeStamp", 
+            "name": "_changeoperation", 
+            "type": "string"
+        },
+
+	{
+            "name": "_loaddatetimestamp", 
             "type": "string"
         },
         {
-            "name": "_LoadIdentifier", 
+            "name": "_loadidentifier", 
             "type": "string"
         },
     ]
