@@ -1,11 +1,11 @@
 {
-	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
- 	"type": "record",
- 	"name": "lookup_profit_centre",
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "lookup_profit_centre",
     "fields": [
     	{
-    		"name": "Profit_centre_code", 
-    		"type": "int"
+	    "name": "Profit_centre_code", 
+    	    "type": "int"
     	},
         {
             "name": "profit_centre_desc", 
