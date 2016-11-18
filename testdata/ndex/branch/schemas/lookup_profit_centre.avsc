@@ -10,23 +10,6 @@
         {
             "name": "profit_centre_desc", 
             "type": "string"
-        },
-        {
-            "name": "_isdeleted", 
-            "type": "boolean"
-        },
-        {
-            "name": "_changeoperation", 
-            "type": "string"
-        },
-
-	{
-            "name": "_loaddatetimestamp", 
-            "type": "string"
-        },
-        {
-            "name": "_loadidentifier", 
-            "type": "string"
-        },
+        }
     ]
 }
