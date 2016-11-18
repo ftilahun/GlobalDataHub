@@ -4,16 +4,46 @@
  	"name": "branch",
     "doc": "The company branch through which the business has been placed",
  	"fields": [
-    	{
-    		"name": "branchcode", 
-    		"type": "string",
-    		"doc": "The code associated with the company branch through which the business has been placed"
-    	},
+        {
+            "name": "_sourcesystemtransactiondatetime", 
+            "type": "string",
+            "doc":  "Metadata to identify the date and time that this record was updated on the source system."
+        },
+        {
+            "name": "_cdcchangesequence", 
+            "type": "string",
+            "doc":  "Metadata to record the operation identified by CDC on the source system - one of Update, Insert or Delete."
+        },
+        {
+            "name": "_cdcloaddatetime", 
+            "type": "string",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Source Data layer."
+        },
+        {
+            "name": "_cdcchangeoperation", 
+            "type": "string",
+            "doc":  "Metadata to record the operation identified by CDC on the source system - one of Update, Insert or Delete."
+        },
+        {
+            "name": "_ecmloadidentifier", 
+            "type": "string",
+            "doc":  "Metadata to identify the load event which appended this record into the Enstar Conformed Model."
+        },
+        {
+            "name": "_ecmloaddatetime", 
+            "type": "string",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Enstar Conformed Model."
+        },
     	{
     		"name": "sourcesystemcode",  
     		"type": "string",
     		"doc": "The source system code of the branch"
     	},
+        {
+            "name": "branchcode", 
+            "type": "string",
+            "doc": "The code associated with the company branch through which the business has been placed."
+        },
     	{
     		"name": "branchdescription", 
     		"type": ["string", "null"],
