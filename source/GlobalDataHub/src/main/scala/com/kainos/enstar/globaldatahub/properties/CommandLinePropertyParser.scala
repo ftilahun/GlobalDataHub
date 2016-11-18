@@ -1,9 +1,15 @@
 package com.kainos.enstar.globaldatahub.properties
 
 /**
- * Created by ciaranke on 16/11/2016.
+ * Expected behaviour for a command line parser.
  */
 trait CommandLinePropertyParser {
 
-  def parseProperties( propertyArray : Array[String] )
+  /**
+   * Map an array of strings in k1=v1,k2=v2 format to a Map[String,String]
+   *
+   * @param propertyArray the string array to map
+   * @return a Map of values
+   */
+  def parseProperties( propertyArray : Array[String] ) : Map[String, String]
 }

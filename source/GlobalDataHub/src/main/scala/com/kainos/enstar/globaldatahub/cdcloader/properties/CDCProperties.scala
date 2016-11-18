@@ -1,145 +1,215 @@
 package com.kainos.enstar.globaldatahub.cdcloader.properties
 
-import com.kainos.enstar.globaldatahub.properties.{ CommandLinePropertyParser, GDHProperties }
+import com.kainos.enstar.globaldatahub.exceptions.PropertyNotSetException
+import com.kainos.enstar.globaldatahub.properties.{
+  CommandLinePropertyParser,
+  GDHProperties
+}
 
-class CDCProperties extends GDHProperties with CommandLinePropertyParser {
+/**
+ * Properties object. Provides type checked properties.
+ *
+ * @param propertyMap a map of the property values
+ */
+class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
 
+  //check the properties have been set correctly
+  checkPropertiesSet()
 
-  val propertyMap = new java.util.HashMap[String,Any]
+  /**
+   * Get the string value of a property
+   *
+   * @param name then name of the property
+   * @return the property value in string format.
+   */
+  override def getStringProperty( name : String ) : String = propertyMap( name )
 
-  override def getBooleanProperty( s : String ) : java.lang.Boolean = ???
+  /**
+   * Get the value of a property as a string array.
+   *
+   * @param name the name of the property
+   * @return the property value as an array
+   */
+  override def getArrayProperty( name : String ) : Array[String] =
+    propertyMap( name ).split( "_" )
 
-  override def checkPropertiesSet() : Unit = ???
+  /**
+   * Get the value of a property as a (Java) boolean.
+   *
+   * @param name the name of the property
+   * @return the prperty value as a Java boolean.
+   */
+  override def getBooleanProperty( name : String ) : java.lang.Boolean =
+    propertyMap( name ).toBoolean.asInstanceOf[java.lang.Boolean]
 
-  override def getStringProperty( name : String ) : String = ???
-
-  override def getArrayProperty( name : String ) : Array[String] = ???
-
-  override def parseProperties( propertyArray : Array[String] ) : Unit = {
-      val parser = new scopt.OptionParser("scopt") {
-        opt(
-          "cm",
-          "spark.cdcloader.columns.attunity.name.changemask",
-        "The name of the attunity change mask column",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.columns.attunity.name.changemask",s)
-          })
-        opt(
-          "con",
-          "spark.cdcloader.columns.attunity.name.changeoperation",
-          "The name of the change operation column",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.columns.attunity.name.changeoperation",s)
-          })
-        opt(
-          "csn",
-          "spark.cdcloader.columns.attunity.name.changesequence",
-          "The name of the attunity change sequence column",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.columns.attunity.name.changesequence",s)
-          })
-        opt(
-          "cov",
-          "spark.cdcloader.columns.attunity.value.changeoperation",
-          "The value of the delete operation in the attunity change operation field ",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.columns.attunity.value.changeoperation",s)
-          })
-        opt(
-          "d",
-          "spark.cdcloader.columns.metadata.name.isdeleted",
-          "The name to give the isDeleted attribute in the outputted avro",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.columns.metadata.name.isdeleted",s)
-          })
-        opt(
-          "cst",
-          "spark.cdcloader.control.attunity.changetablesuffix",
-          "the suffix given to attunity change tables (e.g. __ct)",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.control.attunity.changetablesuffix",s)
-          })
-        opt(
-          "ltsn",
-          "spark.cdcloader.columns.metadata.name.loadtimestamp",
-          "The name to give the load timestamp attribute in the outputted avro",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.columns.metadata.name.loadtimestamp",s)
-          })
-        opt(
-          "ats",
-          "spark.cdcloader.format.timestamp.attunity",
-          "The timestamp format for the attunity change sequence",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.format.timestamp.attunity",s)
-          })
-        opt(
-          "hts",
-          "spark.cdcloader.format.timestamp.hive",
-          "The timestamp format to use for hive",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.format.timestamp.hive",s)
-          })
-        opt(
-          "tbls",
-          "spark.cdcloader.input.tablenames",
-          "A comma separated list of tables to process",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.input.tablenames",s)
-          })
-        opt(
-          "i",
-          "spark.cdcloader.paths.data.basedir",
-          "The input base directory (e.g. /etl/cdc/attunity/ndex/policy/)",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.paths.data.basedir",s)
-          })
-        opt(
-          "ic",
-          "spark.cdcloader.paths.data.control",
-          "The path to the control table",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.paths.data.control",s)
-          })
-        opt(
-          "o",
-          "spark.cdcloader.paths.data.output",
-          "The path to the output directory (e.g. /etl/cdc/cdcloader/ndex/policy/processing/)",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.paths.data.output",s)
-          })
-        opt(
-          "sql",
-          "spark.cdcloader.paths.sql.basedir",
-          "The base directory for sql queries (e.g. /metadata/cdcloader/hive/queries/ndex/",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.paths.sql.basedir",s)
-          })
-        opt(
-          "csql",
-          "spark.cdcloader.paths.sql.control",
-          "The path to the control table sql (e.g. /metadata/cdcloader/hive/queries/control/)",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.paths.sql.control",s)
-          })
-        opt(
-          "c",
-          "spark.cdcloader.tables.control.name",
-          "The name of the control table",
-          (s : String) => {
-            propertyMap.put("spark.cdcloader.tables.control.name",s)
-          })
-        booleanOpt(
-          "cme",
-          "spark.cdcloader.control.changemask.enabled",
-          "Should the change mask be enabled?",
-          (b: Boolean) => {
-            propertyMap.put("spark.cdcloader.control.changemask.enabled",b)
-          }
-        )
-      }
-    
-      "spark.cdcloader.columns.attunity.name.tablename"
-      "spark.cdcloader.control.columnpositions"
+  /**
+   * Check that a property has been set correctly.
+   *
+   * @param keyName the property name
+   * @param typeCheck a function to determine the type is correct.
+   */
+  private def checkProperty( keyName : String,
+                             typeCheck : Option[Any] => Unit ) : Unit = {
+    if ( propertyMap.get( keyName ).isEmpty ) {
+      throw new PropertyNotSetException( keyName, None )
     }
+    try {
+      val a = propertyMap.get( keyName )
+      typeCheck( a )
+    } catch {
+      case e : Exception =>
+        throw new PropertyNotSetException( "Wrong type: " + keyName, Some( e ) )
+    }
+  }
+
+  /**
+   * Check all required properties have been set correctly
+   */
+  override def checkPropertiesSet() : Unit = {
+
+    //known properties.
+    checkProperty( "spark.cdcloader.columns.attunity.name.changemask",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.columns.attunity.name.changeoperation",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.columns.attunity.name.changesequence",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.columns.attunity.value.changeoperation",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.columns.control.names.controlcolumnnames",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.columns.metadata.name.isdeleted",
+      _.get.toString.toBoolean == true )
+    checkProperty( "spark.cdcloader.control.attunity.changetablesuffix",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.columns.metadata.name.loadtimestamp",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.format.timestamp.attunity",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.format.timestamp.hive",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.paths.data.basedir",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.paths.data.control",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.paths.data.output",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.paths.sql.basedir",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.paths.sql.control",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.tables.control.name",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.control.changemask.enabled",
+      _.get.asInstanceOf[String] )
+    checkProperty( "spark.cdcloader.input.tablenames",
+      _.get.asInstanceOf[String].split( "," ) )
+    //per table properties, determined at runtime.
+    getArrayProperty( "spark.cdcloader.input.tablenames" ).foreach { tableName =>
+      checkProperty( "spark.cdcloader.control.columnpositions." + tableName,
+        _.get.asInstanceOf[String].split( "," ) )
+      checkProperty(
+        "spark.cdcloader.columns.control.name.tablename." + tableName,
+        _.get.asInstanceOf[String].split( "," ) )
+    }
+
+  }
+}
+
+/**
+ * Companion class for CDCProperties
+ */
+object CDCProperties extends CommandLinePropertyParser {
+
+  /**
+   * configuration object, required by parser
+   * @param kwArgs a property map.
+   */
+  case class Config( kwArgs : Map[String, String] )
+
+  /**
+   * command line parser
+   */
+  private val parser = new scopt.OptionParser[Config]( "scopt" ) {
+    head( "CDCLoader", "0.1" )
+    opt[Map[String, String]]( "cdcOptions" )
+      .valueName(
+        "spark.cdcloader.columns.attunity.name.changemask=v,etc..."
+      )
+      .required()
+      .unbounded()
+      .action { ( x, c ) =>
+        c.copy( kwArgs = x )
+      }
+    note(
+      "The following options are required:" +
+        "\n\n" +
+        "spark.cdcloader.columns.attunity.name.changemask\n" +
+        "\t - The name of the attunity change mask column\n" +
+        "spark.cdcloader.columns.attunity.name.changeoperation\n" +
+        "\t - The name of the change operation column\n" +
+        "spark.cdcloader.columns.attunity.name.changesequence\n" +
+        "\t - The name of the attunity change sequence column\n" +
+        "spark.cdcloader.columns.control.names.controlcolumnnames\n" +
+        "\t - A list of column names in the control table\n" +
+        "spark.cdcloader.columns.attunity.value.changeoperation\n" +
+        "\t - The value of the delete operation in the attunity change operation field\n" +
+        "spark.cdcloader.columns.metadata.name.isdeleted\n" +
+        "\t - The name to give the isDeleted attribute in the outputted avro\n" +
+        "spark.cdcloader.control.attunity.changetablesuffix\n" +
+        "\t - The suffix given to attunity change tables (e.g. __ct)\n" +
+        "spark.cdcloader.columns.metadata.name.loadtimestamp\n" +
+        "\t - The name to give the load timestamp attribute in the outputted avro\n" +
+        "spark.cdcloader.format.timestamp.attunity\n" +
+        "\t - The timestamp format for the attunity change sequence\n" +
+        "spark.cdcloader.format.timestamp.hive\n" +
+        "\t - The timestamp format to use for hive\n" +
+        "spark.cdcloader.paths.data.basedir\n" +
+        "\t - The input base directory (e.g. /etl/cdc/attunity/ndex/)\n" +
+        "spark.cdcloader.paths.data.control\n" +
+        "\t - The path to the control table\n" +
+        "spark.cdcloader.paths.data.output\n" +
+        "\t - The path to the output directory (e.g. /etl/cdc/cdcloader/ndex/)\n" +
+        "spark.cdcloader.paths.sql.basedir\n" +
+        "\t - The base directory for sql queries (e.g. /metadata/cdcloader/hive/queries/ndex/\n" +
+        "spark.cdcloader.paths.sql.control\n" +
+        "\t - \"The path to the control table sql (e.g. /metadata/cdcloader/hive/queries/control/)\n" +
+        "spark.cdcloader.tables.control.name\ns" +
+        "\t - The name of the control table\n" +
+        "spark.cdcloader.control.changemask.enabled\n" +
+        "\t - Should the change mask be enabled(true/false)?\n" +
+        "spark.cdcloader.input.tablenames\n" +
+        "\t - A comma separated list of tables to process\n" +
+        "\n" +
+        "The following properties are required per input table:\n" +
+        "spark.cdcloader.control.columnpositions\n" +
+        "\t - A list of ordinal column positions in the *change table*\n" +
+        "spark.cdcloader.columns.control.name.tablename\n" +
+        "\t - The name of the table name field in the control table\n" +
+        "\n" +
+        "e.g. spark.cdcloader.columns.control.name.tablename.policy" +
+        "\n\n" +
+        "Separate listed values with an underscore.  Ie 1_2_3_4"
+    )
+  }
+
+  /**
+   * Map an array of strings in k1=v1,k2=v2 format to a Map[String,String]
+   *
+   * @param propertyArray the string array to map
+   * @return a Map of values
+   */
+  override def parseProperties(
+    propertyArray : Array[String] ) : Map[String, String] = {
+
+    parser.parse( propertyArray, Config( Map[String, String]() ) ) match {
+      case Some( config ) => {
+        config.kwArgs
+      }
+      case None =>
+        throw new PropertyNotSetException(
+          "Unable to parse command line options",
+          None )
+    }
+  }
 }

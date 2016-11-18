@@ -19,7 +19,7 @@ object TestContexts {
   private val _sqlC : SQLContext = new SQLContext( _sc )
 
   case class Data( id : Int, value : String )
-  case class Control( lastattunitychangeseq : String,
+  case class Control( attunitychangeseq : String,
                       starttime : String,
                       endtime : String,
                       attunityrecordcount : Long,

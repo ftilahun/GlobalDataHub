@@ -8,10 +8,12 @@ import org.apache.spark.Logging
  * @param message the message to display
  * @param exception the original exception
  */
-class PropertyNotSetException( message : String, exception : Exception )
+class PropertyNotSetException( message : String, exception : Option[Exception] )
     extends RuntimeException
     with Logging {
   log.error( message )
-  log.error( "Caused by: " + exception.getClass )
-  log.error( exception.getStackTraceString )
+  if ( exception.isDefined ) {
+    log.error( "Caused by: " + exception.get.getClass )
+    log.error( exception.get.getStackTraceString )
+  }
 }

@@ -18,9 +18,9 @@ class CDCDataFrameReaderSpec
   "CDCDataFrameReader" should "Read input data" in {
     val dataFrameReader = Mockito.mock( classOf[AvroDataFrameReader] )
     val cdcDataFrameReader = new CDCDataFrameReader( dataFrameReader )
-    Mockito
-      .when( dataFrameReader.read( TestContexts.sqlContext, "/some/path/", None ) )
-      .thenReturn( TestContexts.dummyData( 5 ) )
+    Mockito.
+      when( dataFrameReader.read( TestContexts.sqlContext, "/some/path/", None ) ).
+      thenReturn( TestContexts.dummyData( 5 ) )
 
     Given( "The input \"/some/path/\"" )
     val df =

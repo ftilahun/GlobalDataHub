@@ -130,7 +130,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
           properties.getStringProperty(
             "spark.cdcloader.paths.sql.controlpath" ) ) )
       .thenReturn(
-        "SELECT MAX(lastattunitychangeseq) FROM control WHERE attunitytablename = " )
+        "SELECT MAX(attunitychangeseq) FROM control WHERE attunitytablename = " )
     Then(
       "The ControlProcessor should return the seqence number of the 10th row" )
     controlProcessor.getLastSequenceNumber( TestContexts.sqlContext,
@@ -199,7 +199,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
           properties.getStringProperty(
             "spark.cdcloader.paths.sql.controlpath" ) ) )
       .thenReturn(
-        "SELECT MAX(lastattunitychangeseq) FROM control WHERE attunitytablename = " )
+        "SELECT MAX(attunitychangeseq) FROM control WHERE attunitytablename = " )
     Then(
       "The ControlProcessor should return the seqence number of the 10th row" )
     controlProcessor.getLastSequenceNumber( TestContexts.sqlContext,
@@ -217,6 +217,9 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     val controlProcessor : CDCControlProcessor = new CDCControlProcessor
 
     Given( "A control table" )
+    Mockito.when(properties.getArrayProperty("spark.cdcloader.columns.control.names.controlcolumnnames")).
+      thenReturn(Array[String]("attunitychangeseq", "starttime", "endtime", "attunityrecordcount",
+      "attunitytablename", "directoryname"))
     Mockito
       .when(
         properties.getStringProperty( "spark.cdcloader.paths.data.controlpath" ) )
@@ -228,7 +231,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito
       .when(
         properties.getStringProperty(
-          "spark.cdcloader.columns.attunity.name.tablename" ) )
+          "spark.cdcloader.columns.control.name.tablename" ) )
       .thenReturn( "attunitytablename" )
     Mockito
       .when(
