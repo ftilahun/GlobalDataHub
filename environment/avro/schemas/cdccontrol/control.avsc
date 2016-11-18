@@ -1,0 +1,32 @@
+
+{
+   "namespace": "com.kainos.enstar.avro.schemas.control",
+   "type": "record",
+   "name": "control",
+   "fields": [ 
+       { 
+           "name": "attunitychangeseq", 
+           "type": ["string",null]
+       }, 
+       {
+           "name": "starttime", 
+           "type": ["string",null]
+       },
+       {
+           "name": "endtime", 
+           "type": ["string",null]
+       },
+       {
+           "name": "attunitytablename", 
+           "type": ["string",null]
+       },
+       {
+           "name": "recordcount", 
+           "type": ["long",null]
+       },
+       {
+           "name": "directoryname", 
+           "type": ["string",null]
+       } 
+   ]
+}
