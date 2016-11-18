@@ -79,6 +79,7 @@ class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
           "spark.cdcloader.paths.data.basedir=a," +
           "spark.cdcloader.paths.data.control=a," +
           "spark.cdcloader.paths.data.output=a," +
+          "spark.cdcloader.paths.data.outputbasedir=a," +
           "spark.cdcloader.paths.sql.basedir=a," +
           "spark.cdcloader.paths.sql.control=a," +
           "spark.cdcloader.tables.control.name=a," +
@@ -101,6 +102,8 @@ class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
         "spark.cdcloader.columns.metadata.name.isdeleted=true," +
         "spark.cdcloader.control.attunity.changetablesuffix=a," +
         "spark.cdcloader.columns.metadata.name.loadtimestamp=a," +
+        "spark.cdcloader.paths.data.outputbasedir=a," +
+        "spark.cdcloader.paths.data.outdir=a," +
         "spark.cdcloader.format.timestamp.attunity=a," +
         "spark.cdcloader.format.timestamp.hive=a," +
         "spark.cdcloader.paths.data.basedir=a," +

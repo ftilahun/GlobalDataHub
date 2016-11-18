@@ -92,7 +92,7 @@ class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
       _.get.asInstanceOf[String] )
     checkProperty( "spark.cdcloader.paths.data.control",
       _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.paths.data.output",
+    checkProperty( "spark.cdcloader.paths.data.outputbasedir",
       _.get.asInstanceOf[String] )
     checkProperty( "spark.cdcloader.paths.sql.basedir",
       _.get.asInstanceOf[String] )
@@ -104,6 +104,8 @@ class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
       _.get.asInstanceOf[String] )
     checkProperty( "spark.cdcloader.input.tablenames",
       _.get.asInstanceOf[String].split( "," ) )
+    checkProperty("spark.cdcloader.paths.data.outdir",
+      _.get.asInstanceOf[String])
     //per table properties, determined at runtime.
     getArrayProperty( "spark.cdcloader.input.tablenames" ).foreach { tableName =>
       checkProperty( "spark.cdcloader.control.columnpositions." + tableName,
@@ -168,8 +170,10 @@ object CDCProperties extends CommandLinePropertyParser {
         "\t - The input base directory (e.g. /etl/cdc/attunity/ndex/)\n" +
         "spark.cdcloader.paths.data.control\n" +
         "\t - The path to the control table\n" +
-        "spark.cdcloader.paths.data.output\n" +
+        "spark.cdcloader.paths.data.outputbasedir\n" +
         "\t - The path to the output directory (e.g. /etl/cdc/cdcloader/ndex/)\n" +
+        "spark.cdcloader.paths.data.outdir\n" +
+        "\t - the name of the folder to write to (e.g. processing\n" +
         "spark.cdcloader.paths.sql.basedir\n" +
         "\t - The base directory for sql queries (e.g. /metadata/cdcloader/hive/queries/ndex/\n" +
         "spark.cdcloader.paths.sql.control\n" +
