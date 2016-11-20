@@ -1,9 +1,7 @@
 package com.kainos.enstar.TransformationUnitTesting
 
 import com.databricks.spark.avro._
-import org.apache.spark._
 import org.apache.spark.rdd.RDD
-import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.{ DataFrame, Row, SQLContext }
 
 /**
