@@ -1,4 +1,4 @@
-package com.kainos.enstar.testing
+package com.kainos.enstar.TransformationUnitTesting
 
 import org.apache.spark.sql.Row
 
@@ -12,7 +12,11 @@ object BranchUtils {
   }
 
   def branchMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ) )
+    if ( cols.size < 4 ) {
+      Row( cols( 0 ), cols( 1 ), cols( 2 ), "" )
+    } else {
+      Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ) )
+    }
   }
 
 }

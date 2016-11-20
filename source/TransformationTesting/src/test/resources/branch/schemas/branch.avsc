@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+	"namespace": "com.kainos.enstar.avro.schemas.ecm",
  	"type": "record",
  	"name": "branch",
     "doc": "The company branch through which the business has been placed",
