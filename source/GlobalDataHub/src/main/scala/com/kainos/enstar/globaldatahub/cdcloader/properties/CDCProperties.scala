@@ -104,8 +104,8 @@ class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
       _.get.asInstanceOf[String] )
     checkProperty( "spark.cdcloader.input.tablenames",
       _.get.asInstanceOf[String].split( "," ) )
-    checkProperty("spark.cdcloader.paths.data.outdir",
-      _.get.asInstanceOf[String])
+    checkProperty( "spark.cdcloader.paths.data.outdir",
+      _.get.asInstanceOf[String] )
     //per table properties, determined at runtime.
     getArrayProperty( "spark.cdcloader.input.tablenames" ).foreach { tableName =>
       checkProperty( "spark.cdcloader.control.columnpositions." + tableName,

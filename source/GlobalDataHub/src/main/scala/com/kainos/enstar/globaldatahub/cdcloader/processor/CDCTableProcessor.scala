@@ -80,7 +80,8 @@ class CDCTableProcessor extends TableProcessor {
     writer.write( sqlContext,
       properties.getStringProperty(
         "spark.cdcloader.paths.data.outputbasedir" ) + tableName +
-        properties.getArrayProperty("spark.cdcloader.paths.data.outdir"),
+        properties.getArrayProperty(
+          "spark.cdcloader.paths.data.outdir" ),
       dataFrame,
       StorageLevel.MEMORY_AND_DISK_SER )
   }

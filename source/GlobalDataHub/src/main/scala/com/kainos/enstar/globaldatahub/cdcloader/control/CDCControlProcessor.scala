@@ -22,7 +22,7 @@ class CDCControlProcessor extends ControlProcessor {
   def isInitialLoad( sqlContext : SQLContext,
                      tableName : String,
                      properties : GDHProperties ) : Boolean = {
-    val sqlString = s" SELECT ${properties.getArrayProperty("spark.cdcloader.columns.control.names.controlcolumnnames").mkString(",")} " +
+    val sqlString = s" SELECT ${properties.getArrayProperty( "spark.cdcloader.columns.control.names.controlcolumnnames" ).mkString( "," )} " +
       s"FROM ${properties.getStringProperty( "spark.cdcloader.tables.control.name" )} " +
       s" where ${
         properties.getStringProperty(
