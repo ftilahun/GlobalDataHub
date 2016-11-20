@@ -3,6 +3,7 @@ package com.kainos.enstar.globaldatahub.cdcloader.io
 import com.kainos.enstar.globaldatahub.common.io.{ DataFrameReader => DFReader }
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
+import org.apache.spark.Logging
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 
@@ -12,7 +13,9 @@ import org.apache.spark.storage.StorageLevel
  *
  * @param reader filesystem reader
  */
-class CDCDataFrameReader( reader : DFReader ) extends DataFrameReader {
+class CDCDataFrameReader( reader : DFReader )
+    extends DataFrameReader
+    with Logging {
 
   /**
    * Read a DataFrame from the filesystem
@@ -26,6 +29,7 @@ class CDCDataFrameReader( reader : DFReader ) extends DataFrameReader {
             path : String,
             storageLevel : Option[StorageLevel] ) : DataFrame = {
     try {
+      logInfo( "reading from " + path )
       reader.read( sqlContext, path, storageLevel )
     } catch {
       //a more readable exception

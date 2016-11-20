@@ -1,11 +1,14 @@
 package com.kainos.enstar.globaldatahub.cdcloader.io
 
+import org.apache.spark.Logging
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 
 /**
  * Class for handling Operations on temp tables.
  */
-class CDCTableOperations extends TableOperations {
+class CDCTableOperations
+    extends TableOperations
+    with Logging {
 
   /**
    * Register a temp table over a dataframe
@@ -14,6 +17,7 @@ class CDCTableOperations extends TableOperations {
    * @param tableName the tablename
    */
   def registerTempTable( dataFrame : DataFrame, tableName : String ) : Unit = {
+    logInfo( "registering temp table: " + tableName )
     dataFrame.registerTempTable( tableName )
 
   }
@@ -25,6 +29,7 @@ class CDCTableOperations extends TableOperations {
    * @param tableName the temp table name.
    */
   def deRegisterTempTable( sqlContext : SQLContext, tableName : String ) : Unit = {
+    logInfo( "removing temp table: " + tableName )
     sqlContext.dropTempTable( tableName )
   }
 }

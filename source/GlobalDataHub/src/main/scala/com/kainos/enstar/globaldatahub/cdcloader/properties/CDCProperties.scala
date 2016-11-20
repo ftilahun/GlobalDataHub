@@ -1,17 +1,17 @@
 package com.kainos.enstar.globaldatahub.cdcloader.properties
 
 import com.kainos.enstar.globaldatahub.common.exceptions.PropertyNotSetException
-import com.kainos.enstar.globaldatahub.common.properties.{
-  CommandLinePropertyParser,
-  GDHProperties
-}
+import com.kainos.enstar.globaldatahub.common.properties.{ CommandLinePropertyParser, GDHProperties }
+import org.apache.spark.Logging
 
 /**
  * Properties object. Provides type checked properties.
  *
  * @param propertyMap a map of the property values
  */
-class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
+class CDCProperties( propertyMap : Map[String, String] )
+    extends GDHProperties
+    with Logging {
 
   //check the properties have been set correctly
   checkPropertiesSet()
@@ -50,6 +50,7 @@ class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
    */
   private def checkProperty( keyName : String,
                              typeCheck : Option[Any] => Unit ) : Unit = {
+    logDebug( "Checking property: " + keyName )
     if ( propertyMap.get( keyName ).isEmpty ) {
       throw new PropertyNotSetException( keyName, None )
     }
@@ -60,6 +61,7 @@ class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
       case e : Exception =>
         throw new PropertyNotSetException( "Wrong type: " + keyName, Some( e ) )
     }
+    logDebug( "property " + keyName + " is valid" )
   }
 
   /**
@@ -67,7 +69,7 @@ class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
    */
   override def checkPropertiesSet() : Unit = {
 
-    //known properties.
+    logInfo( "Checking standard properties" )
     checkProperty( "spark.cdcloader.columns.attunity.name.changemask",
       _.get.asInstanceOf[String] )
     checkProperty( "spark.cdcloader.columns.attunity.name.changeoperation",
@@ -106,8 +108,11 @@ class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
       _.get.asInstanceOf[String].split( "," ) )
     checkProperty( "spark.cdcloader.paths.data.outdir",
       _.get.asInstanceOf[String] )
-    //per table properties, determined at runtime.
+    logInfo( "Checking per table properties." )
+    logInfo( "EXpecting " + getArrayProperty( "spark.cdcloader.input.tablenames" ).
+      length + " tables" )
     getArrayProperty( "spark.cdcloader.input.tablenames" ).foreach { tableName =>
+      logInfo( "Checking properties for: " + tableName )
       checkProperty( "spark.cdcloader.control.columnpositions." + tableName,
         _.get.asInstanceOf[String].split( "," ) )
       checkProperty(
@@ -121,7 +126,9 @@ class CDCProperties( propertyMap : Map[String, String] ) extends GDHProperties {
 /**
  * Companion class for CDCProperties
  */
-object CDCProperties extends CommandLinePropertyParser {
+object CDCProperties
+    extends CommandLinePropertyParser
+    with Logging {
 
   /**
    * configuration object, required by parser
@@ -205,12 +212,14 @@ object CDCProperties extends CommandLinePropertyParser {
    */
   override def parseProperties(
     propertyArray : Array[String] ) : Map[String, String] = {
-
+    logInfo( "Parsing command line args" )
     parser.parse( propertyArray, Config( Map[String, String]() ) ) match {
       case Some( config ) => {
+        logInfo( "Got valid arguments, continuing" )
         config.kwArgs
       }
       case None =>
+        logError( "could not parse command line arguments" )
         throw new PropertyNotSetException(
           "Unable to parse command line options",
           None )

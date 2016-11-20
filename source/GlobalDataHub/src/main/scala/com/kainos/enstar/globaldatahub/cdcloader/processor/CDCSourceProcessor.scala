@@ -39,13 +39,13 @@ class CDCSourceProcessor extends SourceProcessor with Logging {
                tableProcessor : TableProcessor,
                userFunctions : UserFunctions,
                sqlReader : SQLFileReader ) : Unit = {
-    //register the control table
+    logInfo( "Registering control table" )
     controlProcessor
       .registerControlTable( sqlContext, reader, properties, tableOperations )
     //loop over the tables.
     properties.getArrayProperty( "spark.cdcloader.input.tablenames" ).foreach {
       tableName =>
-        //process each table
+        logInfo( "Processing table: " + tableName )
         val tableData = tableProcessor.process( tableName,
           sqlContext,
           controlProcessor,
@@ -54,11 +54,11 @@ class CDCSourceProcessor extends SourceProcessor with Logging {
           userFunctions,
           tableOperations,
           sqlReader )
-        //save each table
+        logInfo( "Saving table " + tableName )
         tableProcessor
           .save( sqlContext, writer, properties, tableData, tableName )
     }
-    //de-register the control table
+    logInfo( "Removing control table" )
     controlProcessor
       .deregisterControlTable( sqlContext, properties, tableOperations )
   }

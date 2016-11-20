@@ -1,14 +1,10 @@
 package com.kainos.enstar.globaldatahub.cdcloader.processor
 
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.io.{
-  SQLFileReader,
-  DataFrameReader,
-  DataFrameWriter,
-  TableOperations
-}
+import com.kainos.enstar.globaldatahub.cdcloader.io.{ DataFrameReader, DataFrameWriter, SQLFileReader, TableOperations }
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
+import org.apache.spark.Logging
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.sql.functions._
@@ -16,7 +12,7 @@ import org.apache.spark.sql.functions._
 /**
  * Process a source table
  */
-class CDCTableProcessor extends TableProcessor {
+class CDCTableProcessor extends TableProcessor with Logging {
 
   /**
    * Process an source table
@@ -40,24 +36,27 @@ class CDCTableProcessor extends TableProcessor {
                tableOperations : TableOperations,
                sqlReader : SQLFileReader ) : DataFrame = {
 
-    //get the dataframe for source or initital load
+    logInfo( "Loading data for table: " + tableName )
     val data = load( tableName,
       sqlContext,
       controlProcessor,
       reader,
       userFunctiions,
       properties )
-    //get the sql statement to process the dataframe with
+    val path = properties.getStringProperty( "spark.cdcloader.paths.sql.basedir" ) +
+      tableName
+    logInfo( "Getting sql statement for " + tableName + " from " + path )
     val sqlString = sqlReader.getSQLString(
-      sqlContext.sparkContext,
-      properties.getStringProperty( "spark.cdcloader.paths.sql.basedir" ) +
-        tableName )
-    //get the last sequence number from the control table
+      sqlContext.sparkContext, path )
+    logInfo( "Checking last sequence number" )
     val lastSeq = controlProcessor
       .getLastSequenceNumber( sqlContext, sqlReader, properties, tableName )
-    //register a temp table and process
+    logInfo( "last sequence was: " + lastSeq )
+    logInfo( "registering temp table." )
     tableOperations.registerTempTable( data, tableName )
+    logInfo( "processing " + tableName )
     val outputData = sqlContext.sql( sqlString + "'" + lastSeq + "'" )
+    logInfo( "Removing temp table" )
     tableOperations.deRegisterTempTable( sqlContext, tableName )
     outputData
   }
@@ -77,11 +76,13 @@ class CDCTableProcessor extends TableProcessor {
             properties : GDHProperties,
             dataFrame : DataFrame,
             tableName : String ) : Long = {
+    val path = properties.getStringProperty(
+      "spark.cdcloader.paths.data.outputbasedir" ) + tableName +
+      properties.getArrayProperty(
+        "spark.cdcloader.paths.data.outdir" )
+    logInfo( "saving " + tableName + " to " + path )
     writer.write( sqlContext,
-      properties.getStringProperty(
-        "spark.cdcloader.paths.data.outputbasedir" ) + tableName +
-        properties.getArrayProperty(
-          "spark.cdcloader.paths.data.outdir" ),
+      path,
       dataFrame,
       StorageLevel.MEMORY_AND_DISK_SER )
   }
@@ -104,7 +105,7 @@ class CDCTableProcessor extends TableProcessor {
             userFunctions : UserFunctions,
             properties : GDHProperties ) : DataFrame = {
 
-    //create required udfs
+    logInfo( "Generating UDFs for " + tableName )
     val generateSequenceNumber = udf(
       () => userFunctions.generateSequenceNumber( properties ) )
     val operation = udf( () => "INSERT" )
@@ -115,47 +116,58 @@ class CDCTableProcessor extends TableProcessor {
         _ : String,
         properties.getArrayProperty(
           "spark.cdcloader.control.columnpositions" + tableName ) ) )
-
+    logInfo( "Checking if initial load. " )
+    val initialLoad =
+      controlProcessor.isInitialLoad( sqlContext, tableName, properties )
     //load the dataframe
     val output =
-      if ( controlProcessor.isInitialLoad( sqlContext, tableName, properties ) ) {
-        //load initial data
+      if ( initialLoad ) {
+        logInfo( "inital load was" + initialLoad + " loading base data" )
+        val path = properties.getStringProperty(
+          "spark.cdcloader.paths.data.basedir" ) + tableName
+        val chgSeqColName = properties.getStringProperty(
+          "spark.cdcloader.columns.attunity.name.changesequence" )
+        val chgOpColName = properties.getStringProperty(
+          "spark.cdcloader.columns.attunity.name.changeoperation" )
+        logInfo( "loading data from " + path )
+        logInfo( "Appending columns : " + chgSeqColName + ", " + chgOpColName )
         reader
           .read( sqlContext,
-            properties.getStringProperty(
-              "spark.cdcloader.paths.data.basedir" ) + tableName,
+            path,
             //storage level will require tuning based on performance.
             Some( StorageLevel.MEMORY_AND_DISK_SER ) )
           .withColumn(
-            properties.getStringProperty(
-              "spark.cdcloader.columns.attunity.name.changesequence" ),
+            chgSeqColName,
             generateSequenceNumber() )
           .withColumn(
-            properties.getStringProperty(
-              "spark.cdcloader.columns.attunity.name.changeoperation" ),
+            chgOpColName,
             operation() )
       } else {
-        //load change data
+        logInfo( "inital load was" + initialLoad + " loading change data" )
+        val path = properties.getStringProperty(
+          "spark.cdcloader.paths.data.basedir" ) + tableName +
+          properties.getStringProperty(
+            "spark.cdcloader.control.attunity.changetablesuffix" )
+        logInfo( "reading from " + path )
         val data = reader
           .read( sqlContext,
-            properties.getStringProperty(
-              "spark.cdcloader.paths.data.basedir" ) + tableName +
-              properties.getStringProperty(
-                "spark.cdcloader.control.attunity.changetablesuffix" ),
+            path,
             //storage level will require tuning based on performance.
             Some( StorageLevel.MEMORY_AND_DISK_SER ) )
-
         if ( properties.getBooleanProperty(
           "spark.cdcloader.control.changemask.enabled" ) ) {
+          logInfo( "Change mask is ACTIVE, filtering data!" )
           data.filter(
             isAnyBitSet(
               data( properties.getStringProperty(
                 "spark.cdcloader.columns.attunity.name.changemask" ) ) ) )
         } else {
+          logInfo( "Change mask is inactive, not filtering!" )
           data
         }
       }
     //append timestamp and deletedflag
+    logInfo( "Appending metadata columns!" )
     output
       .withColumn( properties.getStringProperty(
         "spark.cdcloader.columns.metadata.name.loadtimestamp" ),

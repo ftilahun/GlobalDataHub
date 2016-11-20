@@ -4,14 +4,16 @@ import com.kainos.enstar.globaldatahub.common.exceptions.SQLException
 import com.kainos.enstar.globaldatahub.common.io.FileReader
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
-import org.apache.spark.SparkContext
+import org.apache.spark.{ Logging, SparkContext }
 
 /**
  * Class to read a SQL statement from the filesystem
  *
  * @param textFileReader a TextFileReader
  */
-class CDCSQLFileReader( textFileReader : FileReader ) extends SQLFileReader {
+class CDCSQLFileReader( textFileReader : FileReader )
+    extends SQLFileReader
+    with Logging {
 
   /**
    * Returns a SQL statement from the passed in file path.
@@ -22,11 +24,14 @@ class CDCSQLFileReader( textFileReader : FileReader ) extends SQLFileReader {
    */
   def getSQLString( sparkContext : SparkContext, path : String ) : String = {
     try {
+      logInfo( "reading from: " + path )
       val sql = textFileReader.getStringFromFile( sparkContext, path )
       if ( !sql.matches( "^(?i)SELECT.+from.+" ) ) {
         //this is not a SQL Statement
+        logError( "Could not find SQL statment in " + path )
         throw new SQLException( "Not an SQL statement", sql )
       } else {
+        logInfo( "Got sql statement: " + sql )
         sql
       }
     } catch {

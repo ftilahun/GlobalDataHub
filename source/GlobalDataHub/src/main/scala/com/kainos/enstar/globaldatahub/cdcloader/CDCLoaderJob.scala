@@ -12,10 +12,12 @@ object CDCLoaderJob extends Logging {
 
   def main( args : Array[String] ) : Unit = {
 
+    logInfo( "CDCLoader starting" )
     val sparkConf = new SparkConf()
     val sparkContext : SparkContext = new SparkContext( sparkConf )
     val sqlContext : SQLContext = new SQLContext( sparkContext )
 
+    logInfo( "Starting processing!" )
     new CDCSourceProcessor().process( CDCLoaderInstanciator.controlProcessor,
       CDCLoaderInstanciator.properties( args ),
       sqlContext,
@@ -25,5 +27,6 @@ object CDCLoaderJob extends Logging {
       CDCLoaderInstanciator.tableProcessor,
       CDCLoaderInstanciator.userFunctions,
       CDCLoaderInstanciator.sqlReader )
+    logInfo( "Completed processing!" )
   }
 }

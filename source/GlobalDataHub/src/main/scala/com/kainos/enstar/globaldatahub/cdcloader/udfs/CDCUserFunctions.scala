@@ -1,7 +1,9 @@
 package com.kainos.enstar.globaldatahub.cdcloader.udfs
 
 import java.math.BigInteger
+
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
+import org.apache.spark.Logging
 import org.apache.spark.sql.SQLContext
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -9,7 +11,10 @@ import org.joda.time.format.DateTimeFormat
 /**
  * Spark User Defined Functions.
  */
-class CDCUserFunctions extends UserFunctions with Serializable {
+class CDCUserFunctions
+    extends UserFunctions
+    with Serializable
+    with Logging {
 
   /**
    * Register required UDFs with the SQL context
@@ -19,6 +24,7 @@ class CDCUserFunctions extends UserFunctions with Serializable {
    */
   override def registerUDFs( sqlContext : SQLContext,
                              properties : GDHProperties ) : Unit = {
+    logInfo( "Registering udfs" )
     sqlContext.udf.register(
       "isDeleted",
       ( changeOperation : String ) => isDeleted( changeOperation, properties ) )
@@ -26,6 +32,7 @@ class CDCUserFunctions extends UserFunctions with Serializable {
       ( bitMask : String, position : Int ) =>
         isBitSet( getBitMask( bitMask ), position ) )
     sqlContext.udf.register( "getCurrentTime", () => getCurrentTime( properties ) )
+    logInfo( "Completed registering udfs" )
   }
 
   /**
