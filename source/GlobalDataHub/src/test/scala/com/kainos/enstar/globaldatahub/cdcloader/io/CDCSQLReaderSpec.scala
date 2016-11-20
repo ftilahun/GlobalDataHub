@@ -7,6 +7,8 @@ import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 import com.kainos.enstar.globaldatahub.io.TextFileReader
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
+import org.apache.spark.SparkContext
+import org.apache.spark.sql.DataFrame
 
 /**
  * Unit tests for CDCSQLReader
@@ -55,6 +57,11 @@ class CDCSQLReaderSpec extends FlatSpec with GivenWhenThen with Matchers {
       cdcSQLReader.getSQLString( TestContexts.sparkContext,
         "/some/path/invalidfile.sql" )
     }
+
+    Mockito
+      .verify( textReader, Mockito.times( 3 ) )
+      .getStringFromFile( org.mockito.Matchers.any( classOf[SparkContext] ),
+        org.mockito.Matchers.anyString() )
   }
 
 }

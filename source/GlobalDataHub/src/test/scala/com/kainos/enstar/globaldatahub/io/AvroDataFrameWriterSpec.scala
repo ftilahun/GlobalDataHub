@@ -5,7 +5,10 @@ import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 /**
  * Unit tests for AvroDataFrameWriter
  */
-class AvroDataFrameWriterSpec extends FlatSpec with GivenWhenThen with Matchers {
+class AvroDataFrameWriterSpec
+    extends FlatSpec
+    with GivenWhenThen
+    with Matchers {
 
   "AvroDataFrameWriter" should "write to HDFS" in {
     /*I'm unable to mock this, should we:

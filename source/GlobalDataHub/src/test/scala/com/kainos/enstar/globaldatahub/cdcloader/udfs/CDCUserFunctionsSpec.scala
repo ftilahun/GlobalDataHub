@@ -22,6 +22,10 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     val userFunctions = new CDCUserFunctions
     Then( "UDfs should be registered" )
     userFunctions.registerUDFs( TestContexts.sqlContext, properties )
+
+    Mockito
+      .verify( properties, Mockito.times( 0 ) )
+      .getStringProperty( org.mockito.Matchers.anyString() )
   }
 
   "CDCUserFunctions" should "Return the current time in hive format" in {
@@ -41,6 +45,10 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         DateTimeFormat.forPattern( "YYYY-MM-DD HH:mm:ss.SSS" ).print( date )
       )
     DateTimeUtils.setCurrentMillisSystem()
+
+    Mockito
+      .verify( properties, Mockito.times( 1 ) )
+      .getStringProperty( org.mockito.Matchers.anyString() )
   }
 
   "CDCUserFunctions" should "Check if a row is deleted" in {
@@ -59,6 +67,10 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Then( "INSERT should be true" )
     userFunctions.isDeleted( "INSERT", properties ) should be(
       false.asInstanceOf[java.lang.Boolean] )
+
+    Mockito
+      .verify( properties, Mockito.times( 2 ) )
+      .getStringProperty( org.mockito.Matchers.anyString() )
   }
 
   "CDCUserFunctions" should "covert the change mask to a bit mask correctly" in {
@@ -105,5 +117,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         "0000000000000000000"
     )
     DateTimeUtils.setCurrentMillisSystem()
+
+    Mockito
+      .verify( properties, Mockito.times( 2 ) )
+      .getStringProperty( org.mockito.Matchers.anyString() )
   }
 }

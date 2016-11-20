@@ -2,7 +2,12 @@ package com.kainos.enstar.globaldatahub.cdcloader.processor
 
 import com.kainos.enstar.globaldatahub.TestContexts
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.io.{ CDCTableOperations, DataFrameReader, DataFrameWriter, SQLFileReader }
+import com.kainos.enstar.globaldatahub.cdcloader.io.{
+  CDCTableOperations,
+  DataFrameReader,
+  DataFrameWriter,
+  SQLFileReader
+}
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.CDCUserFunctions
 import com.kainos.enstar.globaldatahub.properties.GDHProperties
 import org.apache.spark.SparkContext
@@ -24,8 +29,11 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     val cdcTableProcessor = new CDCTableProcessor
     val controlProcessor = Mockito.mock( classOf[ControlProcessor] )
     val reader = Mockito.mock( classOf[DataFrameReader] )
-    val properties = Mockito.mock( classOf[GDHProperties],
-      Mockito.withSettings().serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
+    val properties =
+      Mockito.mock( classOf[GDHProperties],
+        Mockito
+          .withSettings()
+          .serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
     val userFunctions = new CDCUserFunctions
 
     When( "The control table contains 0 rows for this source" )
@@ -94,6 +102,24 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
         row.getString( 3 ) should be( "INSERT" )
         row.getBoolean( 5 ) should be( false )
       }
+
+    Mockito
+      .verify( controlProcessor, Mockito.times( 1 ) )
+      .isInitialLoad(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[GDHProperties] )
+      )
+    Mockito
+      .verify( reader, Mockito.times( 1 ) )
+      .read(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[Option[StorageLevel]] )
+      )
+    Mockito
+      .verify( properties, Mockito.times( 6 ) )
+      .getStringProperty( org.mockito.Matchers.anyString() )
   }
 
   "CDCTableProcessor" should "load the change table data" in {
@@ -103,8 +129,11 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     val cdcTableProcessor = new CDCTableProcessor
     val controlProcessor = Mockito.mock( classOf[ControlProcessor] )
     val reader = Mockito.mock( classOf[DataFrameReader] )
-    val properties = Mockito.mock( classOf[GDHProperties],
-      Mockito.withSettings().serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
+    val properties =
+      Mockito.mock( classOf[GDHProperties],
+        Mockito
+          .withSettings()
+          .serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
     val userFunctions = new CDCUserFunctions
 
     When( "The control table contains 1 or more rows for this source" )
@@ -180,6 +209,31 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
           row.getBoolean( 6 ) should be( false )
         }
       }
+
+    Mockito
+      .verify( controlProcessor, Mockito.times( 1 ) )
+      .isInitialLoad(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[GDHProperties] )
+      )
+    Mockito
+      .verify( reader, Mockito.times( 1 ) )
+      .read(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[Option[StorageLevel]] )
+      )
+    Mockito
+      .verify( properties, Mockito.times( 5 ) )
+      .getStringProperty( org.mockito.Matchers.anyString() )
+    Mockito
+      .verify( controlProcessor, Mockito.times( 1 ) )
+      .isInitialLoad(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[GDHProperties] )
+      )
   }
 
   "CDCTableProcessor" should "Register a temp table and query the data" in {
@@ -192,8 +246,11 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     val controlProcessor = Mockito.mock( classOf[ControlProcessor] )
     val reader = Mockito.mock( classOf[DataFrameReader] )
     val writer = Mockito.mock( classOf[DataFrameWriter] )
-    val properties = Mockito.mock( classOf[GDHProperties],
-      Mockito.withSettings().serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
+    val properties =
+      Mockito.mock( classOf[GDHProperties],
+        Mockito
+          .withSettings()
+          .serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
     val userFunctions = new CDCUserFunctions
     val tableOperations = Mockito.mock( classOf[CDCTableOperations] )
     val sqlReader = Mockito.mock( classOf[SQLFileReader] )
@@ -315,6 +372,52 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       properties,
       data,
       tableName ) should be( 8 )
+
+    Mockito
+      .verify( tableOperations, Mockito.times( 1 ) )
+      .registerTempTable(
+        org.mockito.Matchers.any( classOf[DataFrame] ),
+        org.mockito.Matchers.anyString()
+      )
+    Mockito
+      .verify( tableOperations, Mockito.times( 1 ) )
+      .deRegisterTempTable(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString()
+      )
+    Mockito
+      .verify( controlProcessor, Mockito.times( 1 ) )
+      .isInitialLoad(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[GDHProperties] )
+      )
+    Mockito
+      .verify( reader, Mockito.times( 1 ) )
+      .read(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[Option[StorageLevel]] )
+      )
+    Mockito
+      .verify( properties, Mockito.times( 7 ) )
+      .getStringProperty( org.mockito.Matchers.anyString() )
+
+    Mockito
+      .verify( writer, Mockito.times( 1 ) )
+      .write(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[DataFrame] ),
+        org.mockito.Matchers.any( classOf[StorageLevel] )
+      )
+    Mockito
+      .verify( controlProcessor, Mockito.times( 1 ) )
+      .isInitialLoad(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[GDHProperties] )
+      )
   }
 
   "CDCTableProcessor" should "Filter columns on a change mask" in {
@@ -326,8 +429,11 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     val cdcTableProcessor = new CDCTableProcessor
     val controlProcessor = Mockito.mock( classOf[ControlProcessor] )
     val reader = Mockito.mock( classOf[DataFrameReader] )
-    val properties = Mockito.mock( classOf[GDHProperties],
-      Mockito.withSettings().serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
+    val properties =
+      Mockito.mock( classOf[GDHProperties],
+        Mockito
+          .withSettings()
+          .serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
     val userFunctions = new CDCUserFunctions
     val tableOperations = Mockito.mock( classOf[CDCTableOperations] )
     val sqlReader = Mockito.mock( classOf[SQLFileReader] )
@@ -374,8 +480,9 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
           "spark.cdcloader.control.changemask.enabled" ) )
       .thenReturn( true )
     Mockito
-      .when( properties.getStringProperty(
-        "spark.cdcloader.columns.attunity.name.changemask" ) )
+      .when(
+        properties.getStringProperty(
+          "spark.cdcloader.columns.attunity.name.changemask" ) )
       .thenReturn( "_changemask" )
     Mockito
       .when(
@@ -445,5 +552,42 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       }
       row.getString( 3 ) shouldNot be( "BEFOREIMAGE" )
     }
+
+    Mockito
+      .verify( tableOperations, Mockito.times( 1 ) )
+      .registerTempTable(
+        org.mockito.Matchers.any( classOf[DataFrame] ),
+        org.mockito.Matchers.anyString()
+      )
+    Mockito
+      .verify( tableOperations, Mockito.times( 1 ) )
+      .deRegisterTempTable(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString()
+      )
+    Mockito
+      .verify( properties, Mockito.times( 7 ) )
+      .getStringProperty( org.mockito.Matchers.anyString() )
+
+    Mockito
+      .verify( sqlReader, Mockito.times( 1 ) )
+      .getSQLString(
+        org.mockito.Matchers.any( classOf[SparkContext] ),
+        org.mockito.Matchers.anyString()
+      )
+    Mockito
+      .verify( reader, Mockito.times( 1 ) )
+      .read(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[Option[StorageLevel]] )
+      )
+    Mockito
+      .verify( controlProcessor, Mockito.times( 1 ) )
+      .isInitialLoad(
+        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[GDHProperties] )
+      )
   }
 }

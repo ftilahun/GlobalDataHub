@@ -3,7 +3,7 @@ package com.kainos.enstar.globaldatahub.cdcloader.io
 import com.kainos.enstar.globaldatahub.TestContexts
 import com.kainos.enstar.globaldatahub.io.AvroDataFrameWriter
 import org.apache.hadoop.fs.PathExistsException
-import org.apache.spark.sql.AnalysisException
+import org.apache.spark.sql.{ AnalysisException, DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
@@ -54,6 +54,12 @@ class CDCDataFrameWriterSpec
         StorageLevel.MEMORY_ONLY )
     }
 
+    Mockito
+      .verify( dataFrameWriter, Mockito.times( 2 ) )
+      .write( org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any( classOf[DataFrame] ),
+        org.mockito.Matchers.any( classOf[Option[StorageLevel]] ) )
   }
 
 }
