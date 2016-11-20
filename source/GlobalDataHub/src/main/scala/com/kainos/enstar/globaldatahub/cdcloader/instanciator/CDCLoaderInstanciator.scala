@@ -16,12 +16,12 @@ import com.kainos.enstar.globaldatahub.cdcloader.udfs.{
   CDCUserFunctions,
   UserFunctions
 }
-import com.kainos.enstar.globaldatahub.io.{
+import com.kainos.enstar.globaldatahub.common.io.{
   AvroDataFrameReader,
   AvroDataFrameWriter,
   TextFileReader
 }
-import com.kainos.enstar.globaldatahub.properties.GDHProperties
+import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 
 /**
  * Creates required objects for this job.

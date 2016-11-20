@@ -1,4 +1,4 @@
-package com.kainos.enstar.globaldatahub.io
+package com.kainos.enstar.globaldatahub.common.io
 
 import com.databricks.spark.avro._
 import org.apache.hadoop.fs.Path

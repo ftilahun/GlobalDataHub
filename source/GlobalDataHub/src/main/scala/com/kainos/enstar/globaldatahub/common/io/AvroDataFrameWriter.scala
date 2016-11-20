@@ -1,4 +1,4 @@
-package com.kainos.enstar.globaldatahub.io
+package com.kainos.enstar.globaldatahub.common.io
 
 import org.apache.hadoop.fs.Path
 import org.apache.spark.Logging

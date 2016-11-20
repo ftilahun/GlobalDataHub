@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.cdcloader.io
 
-import com.kainos.enstar.globaldatahub.exceptions.SQLException
-import com.kainos.enstar.globaldatahub.io.FileReader
+import com.kainos.enstar.globaldatahub.common.exceptions.SQLException
+import com.kainos.enstar.globaldatahub.common.io.FileReader
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.SparkContext

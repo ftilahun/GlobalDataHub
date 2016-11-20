@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.cdcloader.udfs
 
 import java.math.BigInteger
-import com.kainos.enstar.globaldatahub.properties.GDHProperties
+import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat

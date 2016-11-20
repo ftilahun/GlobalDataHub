@@ -1,4 +1,4 @@
-package com.kainos.enstar.globaldatahub.exceptions
+package com.kainos.enstar.globaldatahub.common.exceptions
 
 import org.apache.spark.Logging
 

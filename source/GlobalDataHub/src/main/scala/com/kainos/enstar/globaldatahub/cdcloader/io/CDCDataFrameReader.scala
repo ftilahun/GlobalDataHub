@@ -1,6 +1,6 @@
 package com.kainos.enstar.globaldatahub.cdcloader.io
 
-import com.kainos.enstar.globaldatahub.io.{ DataFrameReader => DFReader }
+import com.kainos.enstar.globaldatahub.common.io.{ DataFrameReader => DFReader }
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.sql.{ DataFrame, SQLContext }

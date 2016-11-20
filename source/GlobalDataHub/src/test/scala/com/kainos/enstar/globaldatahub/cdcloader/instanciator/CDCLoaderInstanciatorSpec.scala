@@ -12,7 +12,7 @@ import com.kainos.enstar.globaldatahub.cdcloader.processor.{
   TableProcessor
 }
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import com.kainos.enstar.globaldatahub.properties.GDHProperties
+import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
 import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }

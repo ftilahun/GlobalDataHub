@@ -1,4 +1,4 @@
-package com.kainos.enstar.globaldatahub.properties
+package com.kainos.enstar.globaldatahub.common.properties
 
 /**
  * Expected behaviour for a command line parser.

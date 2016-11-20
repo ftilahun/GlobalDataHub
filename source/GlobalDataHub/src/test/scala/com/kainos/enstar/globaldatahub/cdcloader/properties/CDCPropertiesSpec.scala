@@ -1,6 +1,6 @@
 package com.kainos.enstar.globaldatahub.cdcloader.properties
 
-import com.kainos.enstar.globaldatahub.exceptions.PropertyNotSetException
+import com.kainos.enstar.globaldatahub.common.exceptions.PropertyNotSetException
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**

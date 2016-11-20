@@ -1,6 +1,6 @@
-package com.kainos.enstar.globaldatahub.udfs
+package com.kainos.enstar.globaldatahub.common.udfs
 
-import com.kainos.enstar.globaldatahub.properties.GDHProperties
+import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
 
 trait UserFunctions extends Serializable {

@@ -7,7 +7,7 @@ import com.kainos.enstar.globaldatahub.cdcloader.io.{
   DataFrameWriter,
   TableOperations
 }
-import com.kainos.enstar.globaldatahub.properties.GDHProperties
+import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel

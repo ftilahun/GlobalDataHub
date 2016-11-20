@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.cdcloader.io
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.io.AvroDataFrameReader
+import com.kainos.enstar.globaldatahub.common.io.AvroDataFrameReader
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.sql.SQLContext

@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.cdcloader.udfs
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.properties.GDHProperties
+import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.joda.time.{ DateTime, DateTimeUtils }
 import org.joda.time.format.DateTimeFormat
 import org.mockito.Mockito

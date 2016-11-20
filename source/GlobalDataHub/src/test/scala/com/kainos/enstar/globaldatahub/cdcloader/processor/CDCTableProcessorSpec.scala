@@ -9,7 +9,7 @@ import com.kainos.enstar.globaldatahub.cdcloader.io.{
   SQLFileReader
 }
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.CDCUserFunctions
-import com.kainos.enstar.globaldatahub.properties.GDHProperties
+import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
