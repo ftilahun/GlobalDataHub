@@ -24,7 +24,7 @@
             "type": ["string", "null"]
         },
         {
-            "name": "unique_market_ref",  
+            "name": "unique_market_ref", 
             "type": ["string", "null"]
         },
     	{
