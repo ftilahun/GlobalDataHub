@@ -19,5 +19,5 @@ trait DataFrameWriter {
   def write( sqlContext : SQLContext,
              path : String,
              data : DataFrame,
-             storageLevel : Option[StorageLevel] ) : Boolean
+             storageLevel : Option[StorageLevel] ) : Long
 }

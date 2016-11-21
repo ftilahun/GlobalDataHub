@@ -1,18 +1,15 @@
 package com.kainos.enstar.globaldatahub.cdcloader.control
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.cdcloader.io.{
-  CDCTableOperations,
-  DataFrameReader,
-  SQLFileReader
-}
+import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameTableOperations}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.{ DataFrame, SQLContext }
+import org.apache.spark.sql.{DataFrame, SQLContext}
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.{ DateTime, DateTimeUtils }
+import org.joda.time.{DateTime, DateTimeUtils}
 import org.mockito.Mockito
-import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
+import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
 
 /**
  * Unit tests for the control processor
@@ -22,8 +19,8 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
   "Controlprocessor" should "Register the control table" in {
     val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
     val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
-    val tableOperations : CDCTableOperations =
-      Mockito.mock( classOf[CDCTableOperations] )
+    val tableOperations : DataFrameTableOperations =
+      Mockito.mock( classOf[DataFrameTableOperations] )
     val controlProcessor : CDCControlProcessor = new CDCControlProcessor
 
     Given( "The input /control/dir/" )
@@ -99,8 +96,8 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
     val sqlReader : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
     val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
-    val tableOperations : CDCTableOperations =
-      Mockito.mock( classOf[CDCTableOperations] )
+    val tableOperations : DataFrameTableOperations =
+      Mockito.mock( classOf[DataFrameTableOperations] )
     val controlProcessor : CDCControlProcessor = new CDCControlProcessor
 
     val date = new DateTime()
@@ -182,8 +179,8 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
     val sqlReader : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
     val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
-    val tableOperations : CDCTableOperations =
-      Mockito.mock( classOf[CDCTableOperations] )
+    val tableOperations : DataFrameTableOperations =
+      Mockito.mock( classOf[DataFrameTableOperations] )
     val controlProcessor : CDCControlProcessor = new CDCControlProcessor
 
     val date = new DateTime()
@@ -258,8 +255,8 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
   "ControlProcessor" should "Identify whether a table is being loaded for the first time" in {
     val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
     val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
-    val tableOperations : CDCTableOperations =
-      Mockito.mock( classOf[CDCTableOperations] )
+    val tableOperations : DataFrameTableOperations =
+      Mockito.mock( classOf[DataFrameTableOperations] )
     val controlProcessor : CDCControlProcessor = new CDCControlProcessor
 
     Given( "A control table" )

@@ -1,11 +1,12 @@
 package com.kainos.enstar.globaldatahub.cdcloader.processor
 
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.io.{ DataFrameReader, DataFrameWriter, SQLFileReader, TableOperations }
+import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, TableOperations}
 import org.apache.spark.Logging
-import org.apache.spark.sql.{ DataFrame, SQLContext }
+import org.apache.spark.sql.{DataFrame, SQLContext}
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.sql.functions._
 
@@ -84,7 +85,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
     writer.write( sqlContext,
       path,
       dataFrame,
-      StorageLevel.MEMORY_AND_DISK_SER )
+      Some(StorageLevel.MEMORY_AND_DISK_SER) )
   }
 
   /**

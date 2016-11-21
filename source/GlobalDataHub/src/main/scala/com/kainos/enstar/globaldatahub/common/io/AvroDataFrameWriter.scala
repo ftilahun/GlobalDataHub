@@ -22,7 +22,7 @@ class AvroDataFrameWriter extends Logging with DataFrameWriter {
   def write( sqlContext : SQLContext,
              path : String,
              data : DataFrame,
-             storageLevel : Option[StorageLevel] ) : Boolean = {
+             storageLevel : Option[StorageLevel] ) : Long = {
     if ( storageLevel.isDefined ) {
       logInfo(
         s"Persisting dataframe at storage level ${storageLevel.toString}" )
@@ -30,7 +30,7 @@ class AvroDataFrameWriter extends Logging with DataFrameWriter {
     }
     logInfo( s"Saving to path: $path" )
     data.write.avro( new Path( path ).toString )
-    true
+    data.count
   }
 
 }

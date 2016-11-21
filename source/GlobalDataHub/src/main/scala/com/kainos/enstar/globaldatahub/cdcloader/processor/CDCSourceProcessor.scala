@@ -1,13 +1,9 @@
 package com.kainos.enstar.globaldatahub.cdcloader.processor
 
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.io.{
-  DataFrameReader,
-  DataFrameWriter,
-  SQLFileReader,
-  TableOperations
-}
+import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, TableOperations}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
 import org.apache.spark.sql.SQLContext

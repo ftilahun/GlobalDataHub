@@ -1,19 +1,19 @@
-package com.kainos.enstar.globaldatahub.cdcloader.io
+package com.kainos.enstar.globaldatahub.common.io
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
+import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
 
 /**
  * unit tests for CDCTableOperations
  */
-class CDCTableOperationsSpec
+class DataFrameTableOperationsSpec
     extends FlatSpec
     with GivenWhenThen
     with Matchers {
 
-  "CDCTableOperations" should "Register and drop a table" in {
+  "DataFrameTableOperations" should "Register and drop a table" in {
     val tableName = "DummyData"
-    val cdcTableOperations = new CDCTableOperations()
+    val cdcTableOperations = new DataFrameTableOperations()
     Given( "A query on a table " )
     When( "The table has 10 rows" )
     cdcTableOperations.registerTempTable( TestContexts.dummyData( 10 ), tableName )

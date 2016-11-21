@@ -14,7 +14,7 @@ import org.apache.spark.storage.StorageLevel
  * @param reader filesystem reader
  */
 class CDCDataFrameReader( reader : DFReader )
-    extends DataFrameReader
+    extends DFReader
     with Logging {
 
   /**

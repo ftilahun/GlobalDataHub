@@ -1,17 +1,15 @@
 package com.kainos.enstar.globaldatahub.cdcloader.control
 
-import com.kainos.enstar.globaldatahub.cdcloader.io.{
-  DataFrameReader,
-  SQLFileReader,
-  TableOperations
-}
+import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, TableOperations}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
+import com.kainos.enstar.globaldatahub.common.processor.{ControlProcessor => CommonControlProcessor}
 
 /**
  * Defines expected Behaviour for a control processor.
  */
-trait ControlProcessor {
+trait ControlProcessor extends CommonControlProcessor {
 
   /**
    * Checks if a table has been previously processed

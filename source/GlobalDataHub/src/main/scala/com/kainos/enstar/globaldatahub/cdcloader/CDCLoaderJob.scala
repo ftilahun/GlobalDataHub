@@ -6,7 +6,7 @@ import org.apache.spark.sql.SQLContext
 import org.apache.spark.{ Logging, SparkConf, SparkContext }
 
 /**
- * Created by ciaranke on 10/11/2016.
+ * Main CDCLoader Job
  */
 object CDCLoaderJob extends Logging {
 

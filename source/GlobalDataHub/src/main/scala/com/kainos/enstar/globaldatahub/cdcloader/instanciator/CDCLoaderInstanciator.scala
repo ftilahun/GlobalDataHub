@@ -1,11 +1,11 @@
 package com.kainos.enstar.globaldatahub.cdcloader.instanciator
 
-import com.kainos.enstar.globaldatahub.cdcloader.control.{ CDCControlProcessor, ControlProcessor }
+import com.kainos.enstar.globaldatahub.cdcloader.control.{CDCControlProcessor, ControlProcessor}
 import com.kainos.enstar.globaldatahub.cdcloader.io._
-import com.kainos.enstar.globaldatahub.cdcloader.processor.{ CDCSourceProcessor, CDCTableProcessor, SourceProcessor, TableProcessor }
+import com.kainos.enstar.globaldatahub.cdcloader.processor.{CDCSourceProcessor, CDCTableProcessor, SourceProcessor, TableProcessor}
 import com.kainos.enstar.globaldatahub.cdcloader.properties.CDCProperties
-import com.kainos.enstar.globaldatahub.cdcloader.udfs.{ CDCUserFunctions, UserFunctions }
-import com.kainos.enstar.globaldatahub.common.io.{ AvroDataFrameReader, AvroDataFrameWriter, TextFileReader }
+import com.kainos.enstar.globaldatahub.cdcloader.udfs.{CDCUserFunctions, UserFunctions}
+import com.kainos.enstar.globaldatahub.common.io._
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
 
@@ -21,7 +21,7 @@ object CDCLoaderInstanciator extends Logging {
     new AvroDataFrameReader )
   private val _dataFrameWriter : DataFrameWriter = new CDCDataFrameWriter(
     new AvroDataFrameWriter )
-  private val _tableOperations : TableOperations = new CDCTableOperations
+  private val _tableOperations : TableOperations = new DataFrameTableOperations
   private val _tableProcessor : TableProcessor = new CDCTableProcessor
   private val _userFunctions : UserFunctions = new CDCUserFunctions
   private val _sqlReader : SQLFileReader = new CDCSQLFileReader(

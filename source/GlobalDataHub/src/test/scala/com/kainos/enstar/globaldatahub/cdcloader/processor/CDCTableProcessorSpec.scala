@@ -2,20 +2,16 @@ package com.kainos.enstar.globaldatahub.cdcloader.processor
 
 import com.kainos.enstar.globaldatahub.TestContexts
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.io.{
-  CDCTableOperations,
-  DataFrameReader,
-  DataFrameWriter,
-  SQLFileReader
-}
+import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.CDCUserFunctions
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameTableOperations, DataFrameWriter}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.{ DataFrame, SQLContext }
+import org.apache.spark.sql.{DataFrame, SQLContext}
 import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito
 import org.mockito.mock.SerializableMode
-import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
+import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
 
 /**
  * Unit tests for CDCTableProcessor
@@ -252,7 +248,7 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
           .withSettings()
           .serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
     val userFunctions = new CDCUserFunctions
-    val tableOperations = Mockito.mock( classOf[CDCTableOperations] )
+    val tableOperations = Mockito.mock( classOf[DataFrameTableOperations] )
     val sqlReader = Mockito.mock( classOf[SQLFileReader] )
     Mockito
       .when( properties.getStringProperty( "spark.cdcloader.paths.data.basedir" ) )
@@ -343,7 +339,7 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
         writer.write( org.mockito.Matchers.any( classOf[SQLContext] ),
           org.mockito.Matchers.anyString(),
           org.mockito.Matchers.any( classOf[DataFrame] ),
-          org.mockito.Matchers.any( classOf[StorageLevel] ) )
+          org.mockito.Matchers.any( classOf[Option[StorageLevel]] ) )
       )
       .thenReturn( 8 )
     Given( "A query: " + query + changeSeq )
@@ -409,7 +405,7 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
         org.mockito.Matchers.any( classOf[SQLContext] ),
         org.mockito.Matchers.anyString(),
         org.mockito.Matchers.any( classOf[DataFrame] ),
-        org.mockito.Matchers.any( classOf[StorageLevel] )
+        org.mockito.Matchers.any( classOf[Option[StorageLevel]] )
       )
     Mockito
       .verify( controlProcessor, Mockito.times( 1 ) )
@@ -435,7 +431,7 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
           .withSettings()
           .serializable( SerializableMode.ACROSS_CLASSLOADERS ) )
     val userFunctions = new CDCUserFunctions
-    val tableOperations = Mockito.mock( classOf[CDCTableOperations] )
+    val tableOperations = Mockito.mock( classOf[DataFrameTableOperations] )
     val sqlReader = Mockito.mock( classOf[SQLFileReader] )
     Mockito
       .when( properties.getStringProperty( "spark.cdcloader.paths.data.basedir" ) )
