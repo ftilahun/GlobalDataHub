@@ -33,7 +33,7 @@ class BranchTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hqp statement under test
-    val statement = SQLRunner.loadStatementFromResource( "Branch.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Branch.hql" )
 
     // Act //
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
