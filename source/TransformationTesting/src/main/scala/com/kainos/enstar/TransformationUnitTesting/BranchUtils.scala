@@ -11,12 +11,9 @@ object BranchUtils {
     Row( cols( 0 ).toInt, cols( 1 ) )
   }
 
-  def branchMapping( cols : Array[String] ) : Row = {
-    if ( cols.size < 4 ) {
-      Row( cols( 0 ), cols( 1 ), cols( 2 ), "" )
-    } else {
-      Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ) )
-    }
+  def branchMapping( cols : Array[String] ) : Row = cols match {
+    case cols if cols.length == 3 => Row( cols( 0 ), cols( 1 ), cols( 2 ), null )
+    case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ) )
   }
 
 }

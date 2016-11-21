@@ -7,7 +7,7 @@ import com.kainos.enstar.TransformationUnitTesting.BranchUtils
 /**
  * Created by terences on 20/11/2016.
  */
-class BranchUtils extends FlatSpec {
+class BranchUtilsTests extends FlatSpec {
 
   "lookupProfitCentreMapping" should "generate a Row" in {
 
@@ -40,7 +40,7 @@ class BranchUtils extends FlatSpec {
     assert( row.get( 0 ).equals( column1 ) )
     assert( row.get( 1 ).equals( column2 ) )
     assert( row.get( 2 ).equals( column3 ) )
-    assert( row.get( 3 ).equals( "" ) )
+    assert( row.get( 3 ) == null )
 
   }
 

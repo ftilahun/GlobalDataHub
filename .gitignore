@@ -5,6 +5,8 @@
 # User-specific stuff:
 .idea/*
 .idea
+derby.log
+
 ## File-based project format:
 *.iws
 *.iml
