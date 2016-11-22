@@ -1,13 +1,12 @@
 package com.kainos.enstar.TransformationUnitTesting.test
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import org.scalatest.{ FlatSpec, FunSuite }
-import org.mockito.{ Matchers, Mockito }
-import org.mockito.Matchers.any
 import com.kainos.enstar.TransformationUnitTesting.TransformationUnitTestingUtils
-import org.apache.spark.rdd.RDD
-import org.apache.spark.sql.{ Row, SQLContext }
-import org.apache.spark.sql.types.{ StringType, StructField, StructType }
+import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.{Row, SQLContext}
+import org.mockito.Matchers.any
+import org.mockito.Mockito
+import org.scalatest.FunSuite
 
 /**
  * Created by terences on 21/11/2016.
@@ -16,7 +15,7 @@ class TransformationUnitTestingUtilsTests extends FunSuite with DataFrameSuiteBa
 
   test( "PopulateDataFrame should populate a dataframe" ) {
 
-    // Ararnge
+    // Arrange
     val data = ( "a,b,c" :: "d,e,f" :: Nil )
     val dataRDD = sqlContext.sparkContext.parallelize( data )
 

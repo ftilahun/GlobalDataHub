@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kainos.enstar</groupId>
-    <artifactId>transforamtiontesting</artifactId>
+    <artifactId>transformationtesting</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
 
@@ -37,6 +37,7 @@
         <avro.version>1.7.7</avro.version>
         <spark.avro.version>2.0.1</spark.avro.version>
         <mockito.version>1.10.19</mockito.version>
+        <sparktestingbase.version>1.5.0_0.3.3</sparktestingbase.version>
     </properties>
 
     <dependencies>
@@ -71,7 +72,7 @@
         </dependency>
         <dependency>
             <groupId>com.databricks</groupId>
-            <artifactId>spark-avro_2.10</artifactId>
+            <artifactId>spark-avro_${scala.major.version}</artifactId>
             <version>${spark.avro.version}</version>
             <scope>compile</scope>
         </dependency>
@@ -83,8 +84,8 @@
         </dependency>
         <dependency>
             <groupId>com.holdenkarau</groupId>
-            <artifactId>spark-testing-base_2.10</artifactId>
-            <version>1.6.1_0.3.3</version>
+            <artifactId>spark-testing-base_${scala.major.version}</artifactId>
+            <version>${sparktestingbase.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
