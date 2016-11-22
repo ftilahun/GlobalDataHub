@@ -1,0 +1,54 @@
+{
+	"namespace": "com.kainos.enstar.avro.schemas.replicatedsources",
+	"type": "record",
+	"name": "lookup_currency",
+	"fields": [
+	{
+		"name": "currency_code",
+		"type": "string"
+
+	},
+	{
+		"name": "currency_desc",
+		"type": ["string", "null"]
+
+	},
+    {
+        "name": "_changeoperation",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_loaddatetimestamp",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_loadidentifier",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_cdcloadtimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangesequence",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangemask",
+        "type": "string"
+    },
+    {
+        "name": "_sourcesystemtransactiondatetime",
+        "type": "string"
+    },
+    {
+        "name": "_isdeleted",
+        "type": ["string", "null"]
+    }
+
+	]
+}

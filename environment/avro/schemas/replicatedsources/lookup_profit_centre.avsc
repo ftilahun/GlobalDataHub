@@ -1,0 +1,54 @@
+{
+	"namespace": "com.kainos.enstar.avro.schemas.replicatedsources",
+	"type": "record",
+	"name": "lookup_profit_centre",
+	"fields": [
+	{
+		"name": "profit_centre_code",
+		"type": "int"
+
+	},
+	{
+		"name": "profit_centre_desc",
+		"type": "string"
+
+	},	
+    {
+        "name": "_changeoperation",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_loaddatetimestamp",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_loadidentifier",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_cdcloadtimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangesequence",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangemask",
+        "type": "string"
+    },
+    {
+        "name": "_sourcesystemtransactiondatetime",
+        "type": "string"
+    },
+    {
+        "name": "_isdeleted",
+        "type": ["string", "null"]
+    } 
+
+	]
+}

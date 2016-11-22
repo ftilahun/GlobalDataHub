@@ -1,0 +1,84 @@
+{
+	"namespace": "com.kainos.enstar.avro.schemas.replicatedsources",
+	"type": "record",
+	"name": "layer",
+	"fields": [
+	{
+		"name": "layer_id",
+		"type": "int"
+
+	},
+	{
+		"name": "renewal_status_id",
+		"type": ["string", "null"]
+
+	},	
+	{
+		"name": "expiry_date",
+		"type": ["string", "null"]
+
+	},
+	{
+		"name": "inception_date",
+		"type": ["string", "null"]
+
+	},
+	{
+		"name": "unique_market_ref",
+		"type": ["string", "null"]
+
+	},
+	{
+		"name": "premium_ccy",
+		"type": "string"
+
+	},
+	{
+		"name": "premium_roe",
+		"type": ["double", "null"]
+
+	},
+	{
+		"name": "submission_id",
+		"type": "int"
+
+	},
+    {
+        "name": "_changeoperation",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_loaddatetimestamp",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_loadidentifier",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "_cdcloadtimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangesequence",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangemask",
+        "type": "string"
+    },
+    {
+        "name": "_sourcesystemtransactiondatetime",
+        "type": "string"
+    },
+    {
+        "name": "_isdeleted",
+        "type": ["string", "null"]
+    }
+
+	]
+}
