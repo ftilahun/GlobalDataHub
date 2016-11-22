@@ -1,0 +1,15 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "underwriting_block",
+ 	"fields": [
+        {
+            "name": "block", 
+            "type": "string"
+        },
+    	{
+    		"name": "description", 
+    		"type": ["string", "null"]
+    	}
+ 	]
+}
