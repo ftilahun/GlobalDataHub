@@ -6,27 +6,27 @@
    "fields": [ 
        { 
            "name": "attunitychangeseq", 
-           "type": ["string",null]
+           "type": "string"
        }, 
        {
            "name": "starttime", 
-           "type": ["string",null]
+           "type": "string"
        },
        {
            "name": "endtime", 
-           "type": ["string",null]
+           "type": "string"
        },
        {
            "name": "attunitytablename", 
-           "type": ["string",null]
+           "type": "string"
        },
        {
            "name": "recordcount", 
-           "type": ["long",null]
+           "type": "long"
        },
        {
            "name": "directoryname", 
-           "type": ["string",null]
+           "type": "string"
        } 
    ]
 }
