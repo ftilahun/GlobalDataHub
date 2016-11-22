@@ -16,6 +16,10 @@
             "type": ["string", "null"]
         },
         {
+            "name": "risk_code",  
+            "type": ["string", "null"]
+        },
+        {
             "name": "profit_centre_code",  
             "type": "int"
         },
@@ -24,60 +28,12 @@
             "type": ["string", "null"]
         },
         {
-            "name": "business_type",  
-            "type": ["int", "null"]
+            "name": "subblock",  
+            "type": ["string", "null"]
         },
         {
             "name": "line_status",  
             "type": ["string", "null"]
-        },
-        {
-            "name": "underwriter_initials",  
-            "type": ["string", "null"]
-        },
-        {
-            "name": "est_signing_down_pct",  
-            "type": ["double", "null"]
-        },
-        {
-            "name": "signed_order_pct",  
-            "type": ["double", "null"]
-        },
-        {
-            "name": "signed_line_pct",  
-            "type": ["double", "null"]
-        },
-        {
-            "name": "total_deductions",  
-            "type": ["double", "null"]
-        },
-        {
-            "name": "written_date",  
-            "type": ["string", "null"]
-        },
-        {
-            "name": "written_line_pct",  
-            "type": ["string", "null"]
-        },
-        {
-            "name": "written_order_pct",  
-            "type": ["double", "null"]
-        },
-    	{
-    		"name": "_isdeleted", 
-    		"type": "boolean"
-    	},
-    	{
-    		"name": "_changeoperation", 
-    		"type": "string"
-    	},
-        {
-            "name": "_loaddatetimestamp", 
-            "type": "string"
-        },
-        {
-            "name": "_loadidentifier", 
-            "type": "string"
         }
  	]
 }
