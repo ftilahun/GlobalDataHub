@@ -1,23 +1,21 @@
-package com.kainos.enstar.globaldatahub.cdcloader.io
+package com.kainos.enstar.globaldatahub.common.io
 
 import com.kainos.enstar.globaldatahub.TestContexts
 import com.kainos.enstar.globaldatahub.common.exceptions.SQLException
-import org.mockito.Mockito
-import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
-import com.kainos.enstar.globaldatahub.common.io.TextFileReader
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.DataFrame
+import org.mockito.Mockito
+import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
 
 /**
  * Unit tests for CDCSQLReader
  */
-class CDCSQLReaderSpec extends FlatSpec with GivenWhenThen with Matchers {
+class SQLFileReaderSpec extends FlatSpec with GivenWhenThen with Matchers {
 
-  "CDCSQLReader" should "Retrieve a SQL query from HDFS" in {
+  "SQLFileReader" should "Retrieve a SQL query from HDFS" in {
     val textReader = Mockito.mock( classOf[TextFileReader] )
-    val cdcSQLReader = new CDCSQLFileReader( textReader )
+    val cdcSQLReader = new SQLFileReader( textReader )
     val validQuery = "SELECT Column1 from table"
     val invalidQuery = "Not a SQL statement"
     Given( "The input /some/path/file.sql" )

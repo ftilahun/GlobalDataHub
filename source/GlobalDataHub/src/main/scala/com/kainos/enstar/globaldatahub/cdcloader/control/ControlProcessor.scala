@@ -1,7 +1,6 @@
 package com.kainos.enstar.globaldatahub.cdcloader.control
 
-import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, TableOperations}
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, SQLReader, TableOperations}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
 import com.kainos.enstar.globaldatahub.common.processor.{ControlProcessor => CommonControlProcessor}
@@ -57,8 +56,8 @@ trait ControlProcessor extends CommonControlProcessor {
    * @param tableName the name of the source table being processed
    * @return an attunity change sequence
    */
-  def getLastSequenceNumber( sqlContext : SQLContext,
-                             sqlFileReader : SQLFileReader,
-                             properties : GDHProperties,
-                             tableName : String ) : String
+  def getLastSequenceNumber(sqlContext : SQLContext,
+                            sqlFileReader : SQLReader,
+                            properties : GDHProperties,
+                            tableName : String ) : String
 }

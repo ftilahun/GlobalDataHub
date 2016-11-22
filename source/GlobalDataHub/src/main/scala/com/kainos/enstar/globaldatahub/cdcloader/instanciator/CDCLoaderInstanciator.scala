@@ -24,7 +24,7 @@ object CDCLoaderInstanciator extends Logging {
   private val _tableOperations : TableOperations = new DataFrameTableOperations
   private val _tableProcessor : TableProcessor = new CDCTableProcessor
   private val _userFunctions : UserFunctions = new CDCUserFunctions
-  private val _sqlReader : SQLFileReader = new CDCSQLFileReader(
+  private val _sqlReader : SQLReader = new SQLFileReader(
     new TextFileReader )
   logInfo( "Complete!" )
 
@@ -82,7 +82,7 @@ object CDCLoaderInstanciator extends Logging {
    *
    * @return an SQLFileReader
    */
-  def sqlReader : SQLFileReader = _sqlReader
+  def sqlReader : SQLReader = _sqlReader
 
   /**
    * Get the properties object

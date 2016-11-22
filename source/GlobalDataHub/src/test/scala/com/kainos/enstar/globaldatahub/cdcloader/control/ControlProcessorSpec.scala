@@ -1,8 +1,7 @@
 package com.kainos.enstar.globaldatahub.cdcloader.control
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameTableOperations}
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameTableOperations, SQLReader}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.{DataFrame, SQLContext}
@@ -94,7 +93,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "Controlprocessor" should "Retrieve the last sequence processed" in {
     val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
-    val sqlReader : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
+    val sqlReader : SQLReader = Mockito.mock( classOf[SQLReader] )
     val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
     val tableOperations : DataFrameTableOperations =
       Mockito.mock( classOf[DataFrameTableOperations] )
@@ -177,7 +176,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "Controlprocessor" should "generate a sequence where none exists" in {
     val reader : DataFrameReader = Mockito.mock( classOf[DataFrameReader] )
-    val sqlReader : SQLFileReader = Mockito.mock( classOf[SQLFileReader] )
+    val sqlReader : SQLReader = Mockito.mock( classOf[SQLReader] )
     val properties : GDHProperties = Mockito.mock( classOf[GDHProperties] )
     val tableOperations : DataFrameTableOperations =
       Mockito.mock( classOf[DataFrameTableOperations] )

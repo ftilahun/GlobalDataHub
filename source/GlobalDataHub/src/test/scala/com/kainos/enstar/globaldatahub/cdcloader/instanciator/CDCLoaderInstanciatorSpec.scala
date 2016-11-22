@@ -1,10 +1,9 @@
 package com.kainos.enstar.globaldatahub.cdcloader.instanciator
 
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
 import com.kainos.enstar.globaldatahub.cdcloader.processor.{SourceProcessor, TableProcessor}
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, TableOperations}
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
 import org.mockito.Mockito
@@ -27,7 +26,7 @@ class CDCLoaderInstanciatorSpec
         case _ : TableOperations  => "TableOperations"
         case _ : TableProcessor   => "TableProcessor"
         case _ : UserFunctions    => "UserFunctions"
-        case _ : SQLFileReader    => "SQLFileReader"
+        case _ : SQLReader    => "SQLFileReader"
         case _ : GDHProperties    => "GDHProperties"
       }
 

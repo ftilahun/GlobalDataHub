@@ -1,11 +1,11 @@
-package com.kainos.enstar.globaldatahub.cdcloader.io
+package com.kainos.enstar.globaldatahub.common.io
 
 import org.apache.spark.SparkContext
 
 /**
  * Defines expected behaviour for a SQLFileReader
  */
-trait SQLFileReader {
+trait SQLReader {
 
   /**
    * Returns a SQL statement from the passed in file path.

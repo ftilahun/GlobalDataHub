@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.cdcloader.control
 
 import com.kainos.enstar.globaldatahub.cdcloader.io._
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, TableOperations}
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, SQLReader, TableOperations}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
 import org.apache.spark.sql.SQLContext
@@ -88,10 +88,10 @@ class CDCControlProcessor extends ControlProcessor with Logging {
    * @param tableName the name of the source table being processed
    * @return an attunity change sequence or "0" if none found
    */
-  def getLastSequenceNumber( sqlContext : SQLContext,
-                             sqlFileReader : SQLFileReader,
-                             properties : GDHProperties,
-                             tableName : String ) : String = {
+  def getLastSequenceNumber(sqlContext : SQLContext,
+                            sqlFileReader : SQLReader,
+                            properties : GDHProperties,
+                            tableName : String ) : String = {
     val path = properties.getStringProperty( "spark.cdcloader.paths.sql.controlpath" )
     logInfo( "Getting sql statement from: " + path )
     val controlTableSQL = sqlFileReader.getSQLString(

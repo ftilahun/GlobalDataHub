@@ -2,9 +2,8 @@ package com.kainos.enstar.globaldatahub.cdcloader.processor
 
 import com.kainos.enstar.globaldatahub.TestContexts
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.io.SQLFileReader
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, TableOperations}
+import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.{DataFrame, SQLContext}
 import org.mockito.Mockito
@@ -28,7 +27,7 @@ class CDCSourceProcessorSpec
     val tableOperations = Mockito.mock( classOf[TableOperations] )
     val tableProcessor = Mockito.mock( classOf[TableProcessor] )
     val userFunctions = Mockito.mock( classOf[UserFunctions] )
-    val sqlReader = Mockito.mock( classOf[SQLFileReader] )
+    val sqlReader = Mockito.mock( classOf[SQLReader] )
 
     Given( "Three tables" )
     val tables = Array[String](
