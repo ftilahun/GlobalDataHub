@@ -6,7 +6,7 @@ import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 
 /**
- * Created by ciaranke on 22/11/2016.
+ * Dataframe reader for CDCControl
  */
 class ControlDataFrameReader( reader : DataFrameReader )
     extends DataFrameReader
