@@ -1,8 +1,7 @@
 package com.kainos.enstar.TransformationUnitTesting.test
 
-import org.scalatest.FlatSpec
-import com.kainos.enstar.TransformationUnitTesting
 import com.kainos.enstar.TransformationUnitTesting.BranchUtils
+import org.scalatest.FlatSpec
 
 /**
  * Created by terences on 20/11/2016.

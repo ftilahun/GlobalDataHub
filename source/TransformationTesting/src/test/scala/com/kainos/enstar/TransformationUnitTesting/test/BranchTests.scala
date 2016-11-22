@@ -1,7 +1,7 @@
 package com.kainos.enstar.TransformationUnitTesting.test
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ BranchUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{BranchUtils, SQLRunner, TransformationUnitTestingUtils}
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 /**
@@ -21,7 +21,7 @@ class BranchTests extends FunSuite with DataFrameSuiteBase {
       getClass.getResource( "/branch/input/lookup_profit_centre_test1.csv" ).toString,
       getClass.getResource( "/branch/schemas/lookup_profit_centre.avro" ).toString,
       BranchUtils.lookupProfitCentreMapping,
-      sqlContext
+      sqlc
     )
 
     // Load expected result into dataframe
@@ -29,15 +29,15 @@ class BranchTests extends FunSuite with DataFrameSuiteBase {
       getClass.getResource( "/branch/output/branch_test1.csv" ).toString,
       getClass.getResource( "/branch/schemas/branch.avro" ).toString,
       BranchUtils.branchMapping,
-      sqlContext
+      sqlc
     )
 
-    // Load the hqp statement under test
+    // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Branch.hql" )
 
     // Act //
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
-    val result = SQLRunner.runStatement( statement, sqlContext )
+    val result = SQLRunner.runStatement( statement, sqlc )
 
     // Assert //
     assertDataFrameEquals( expectedBranch, result )
