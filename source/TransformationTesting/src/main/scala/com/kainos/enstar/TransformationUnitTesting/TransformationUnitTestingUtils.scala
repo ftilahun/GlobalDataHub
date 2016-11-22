@@ -12,9 +12,13 @@ import org.apache.spark.sql.{ DataFrame, Row, SQLContext }
  */
 class TransformationUnitTestingUtils {
 
-  def populateDataFrameFromFile( dataResourceLocation : String, avroSchemaResourceLocation : String, fromStringArraytoRow : Array[String] => Row, sqlContext : SQLContext ) : DataFrame = {
+  def populateDataFrameFromFile( dataResourceLocation : String, avroSchemaResourceLocation : String,
+                                 fromInputDataRowToStringArray : String => Array[String],
+                                 fromStringArraytoRow : Array[String] => Row,
+                                 sqlContext : SQLContext ) : DataFrame = {
 
-    val dataRowRDD = loadRDDFromFile( dataResourceLocation, sqlContext ) map splitStringToArray map fromStringArraytoRow
+    val dataRowRDD = loadRDDFromFile( dataResourceLocation, sqlContext ) map
+      fromInputDataRowToStringArray map fromStringArraytoRow
 
     val schema = loadSchemaFromFile( avroSchemaResourceLocation, sqlContext )
 
@@ -23,8 +27,8 @@ class TransformationUnitTestingUtils {
     dataFrame
   }
 
-  def splitStringToArray(stringToSplit: String): Array[String] ={
-    stringToSplit.split(",")
+  def splitStringToArray( stringToSplit : String ) : Array[String] = {
+    stringToSplit.split( "," )
   }
 
   def loadHQLStatementFromResource( filename : String )() : String = {

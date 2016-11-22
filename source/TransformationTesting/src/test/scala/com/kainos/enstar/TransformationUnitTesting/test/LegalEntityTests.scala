@@ -21,6 +21,7 @@ class LegalEntityTests extends FunSuite with DataFrameSuiteBase {
     val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/legalentity/input/lookup_profit_centre_test1.csv" ).toString,
       getClass.getResource( "/legalentity/schemas/lookup_profit_centre.avro" ).toString,
+      _.split( "," ),
       LegalEntityUtils.lookupProfitCentreMapping,
       sqlContext
     )
@@ -29,6 +30,7 @@ class LegalEntityTests extends FunSuite with DataFrameSuiteBase {
     val expectedLegalEntity : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/legalentity/output/legalentity_test1.csv" ).toString,
       getClass.getResource( "/legalentity/schemas/legalentity.avro" ).toString,
+      _.split( "," ),
       LegalEntityUtils.legalEntityMapping,
       sqlContext
     )
