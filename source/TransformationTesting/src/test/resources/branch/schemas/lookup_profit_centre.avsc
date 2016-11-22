@@ -5,7 +5,7 @@
     "fields": [
     	{
 	    "name": "profit_centre_code", 
-    	    "type": "int"
+    	    "type": ["int", "null"]
     	},
         {
             "name": "profit_centre_desc", 

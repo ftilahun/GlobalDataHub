@@ -1,7 +1,7 @@
 SELECT
     "NDEX" AS sourcesystemcode,
-    CAST(profit_centre_code as string) AS branchcode,
+    CAST(profit_centre_code AS STRING) AS branchcode,
     profit_centre_desc AS branchdescription,
-    CAST(NULL as string) AS branchlocationcode
+    CAST(NULL AS STRING) AS branchlocationcode
 FROM
     lookup_profit_centre

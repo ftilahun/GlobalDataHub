@@ -72,7 +72,7 @@
         </dependency>
         <dependency>
             <groupId>com.databricks</groupId>
-            <artifactId>spark-avro_2.10</artifactId>
+            <artifactId>spark-avro_${scala.major.version}</artifactId>
             <version>${spark.avro.version}</version>
             <scope>compile</scope>
         </dependency>
@@ -84,7 +84,7 @@
         </dependency>
         <dependency>
             <groupId>com.holdenkarau</groupId>
-            <artifactId>spark-testing-base_2.10</artifactId>
+            <artifactId>spark-testing-base_${scala.major.version}</artifactId>
             <version>${sparktestingbase.version}</version>
             <scope>test</scope>
         </dependency>
