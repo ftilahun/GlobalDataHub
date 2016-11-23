@@ -37,7 +37,6 @@ class CDCDataFrameWriter( writer : DataFrameWriter )
       //a more readable exception
       case e : AnalysisException =>
         throw new PathExistsException( path )
-        0
     }
   }
 }
