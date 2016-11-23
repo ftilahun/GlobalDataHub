@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.common.io
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * unit tests for CDCTableOperations

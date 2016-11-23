@@ -1,14 +1,14 @@
 package com.kainos.enstar.globaldatahub.cdcloader.control
 
 import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameTableOperations, SQLReader}
+import com.kainos.enstar.globaldatahub.common.io.{ DataFrameReader, DataFrameTableOperations, SQLReader }
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.{DateTime, DateTimeUtils}
+import org.joda.time.{ DateTime, DateTimeUtils }
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for the control processor
@@ -25,7 +25,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Given( "The input /control/dir/" )
     Mockito
       .when(
-        properties.getStringProperty( "spark.cdcloader.paths.data.controlpath" ) )
+        properties.getStringProperty( "spark.cdcloader.path.data.controlpath" ) )
       .thenReturn( "/control/dir/" )
     Mockito
       .when(
@@ -36,7 +36,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       .when(
         reader.read( TestContexts.sqlContext,
           properties.getStringProperty(
-            "spark.cdcloader.paths.data.controlpath" ),
+            "spark.cdcloader.path.data.controlpath" ),
           None ) )
       .thenReturn( TestContexts.generateControlTable( 10 ) )
     Mockito
@@ -105,7 +105,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Given( "A populated control table" )
     Mockito
       .when(
-        properties.getStringProperty( "spark.cdcloader.paths.data.controlpath" ) )
+        properties.getStringProperty( "spark.cdcloader.path.data.controlpath" ) )
       .thenReturn( "/control/dir/" )
     Mockito
       .when(
@@ -120,7 +120,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       .when(
         reader.read( TestContexts.sqlContext,
           properties.getStringProperty(
-            "spark.cdcloader.paths.data.controlpath" ),
+            "spark.cdcloader.path.data.controlpath" ),
           None ) )
       .thenReturn( TestContexts.generateControlTable( 10 ) )
     Mockito
@@ -136,13 +136,13 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     When( "The control table has 10 rows" )
     Mockito
       .when(
-        properties.getStringProperty( "spark.cdcloader.paths.sql.controlpath" ) )
+        properties.getStringProperty( "spark.cdcloader.path.sql.controlpath" ) )
       .thenReturn( "/some/path" )
     Mockito
       .when(
         sqlReader.getSQLString( TestContexts.sparkContext,
           properties.getStringProperty(
-            "spark.cdcloader.paths.sql.controlpath" ) ) )
+            "spark.cdcloader.path.sql.controlpath" ) ) )
       .thenReturn(
         "SELECT MAX(attunitychangeseq) FROM control WHERE attunitytablename = " )
     Then(
@@ -188,7 +188,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Given( "A unpopulated control table" )
     Mockito
       .when(
-        properties.getStringProperty( "spark.cdcloader.paths.data.controlpath" ) )
+        properties.getStringProperty( "spark.cdcloader.path.data.controlpath" ) )
       .thenReturn( "/control/dir/" )
     Mockito
       .when(
@@ -203,7 +203,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       .when(
         reader.read( TestContexts.sqlContext,
           properties.getStringProperty(
-            "spark.cdcloader.paths.data.controlpath" ),
+            "spark.cdcloader.path.data.controlpath" ),
           None ) )
       .thenReturn( TestContexts.generateControlTable( 0 ) )
     Mockito
@@ -219,13 +219,13 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     When( "The control table has 10 rows" )
     Mockito
       .when(
-        properties.getStringProperty( "spark.cdcloader.paths.sql.controlpath" ) )
+        properties.getStringProperty( "spark.cdcloader.path.sql.controlpath" ) )
       .thenReturn( "/some/path" )
     Mockito
       .when(
         sqlReader.getSQLString( TestContexts.sparkContext,
           properties.getStringProperty(
-            "spark.cdcloader.paths.sql.controlpath" ) ) )
+            "spark.cdcloader.path.sql.controlpath" ) ) )
       .thenReturn(
         "SELECT MAX(attunitychangeseq) FROM control WHERE attunitytablename = " )
     Then(
@@ -272,7 +272,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
           "directoryname" ) )
     Mockito
       .when(
-        properties.getStringProperty( "spark.cdcloader.paths.data.controlpath" ) )
+        properties.getStringProperty( "spark.cdcloader.path.data.controlpath" ) )
       .thenReturn( "/control/dir/" )
     Mockito
       .when(
@@ -287,7 +287,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       .when(
         reader.read( TestContexts.sqlContext,
           properties.getStringProperty(
-            "spark.cdcloader.paths.data.controlpath" ),
+            "spark.cdcloader.path.data.controlpath" ),
           None ) )
       .thenReturn( TestContexts.generateControlTable( 10 ) )
     Mockito

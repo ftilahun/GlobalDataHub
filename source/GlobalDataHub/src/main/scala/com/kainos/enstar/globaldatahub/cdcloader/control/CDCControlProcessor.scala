@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.cdcloader.control
 
 import com.kainos.enstar.globaldatahub.cdcloader.io._
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, SQLReader, TableOperations}
+import com.kainos.enstar.globaldatahub.common.io.{ DataFrameReader, SQLReader, TableOperations }
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
 import org.apache.spark.sql.SQLContext
@@ -48,7 +48,7 @@ class CDCControlProcessor extends ControlProcessor with Logging {
                             reader : DataFrameReader,
                             properties : GDHProperties,
                             tableOperation : TableOperations ) : Unit = {
-    val path = properties.getStringProperty( "spark.cdcloader.paths.data.controlpath" )
+    val path = properties.getStringProperty( "spark.cdcloader.path.data.controlpath" )
     val name = properties.getStringProperty( "spark.cdcloader.tables.control.name" )
     logInfo( "Registering control table from " + path + " as " + name )
     val controlTableDF = reader.read(
@@ -88,11 +88,11 @@ class CDCControlProcessor extends ControlProcessor with Logging {
    * @param tableName the name of the source table being processed
    * @return an attunity change sequence or "0" if none found
    */
-  def getLastSequenceNumber(sqlContext : SQLContext,
-                            sqlFileReader : SQLReader,
-                            properties : GDHProperties,
-                            tableName : String ) : String = {
-    val path = properties.getStringProperty( "spark.cdcloader.paths.sql.controlpath" )
+  def getLastSequenceNumber( sqlContext : SQLContext,
+                             sqlFileReader : SQLReader,
+                             properties : GDHProperties,
+                             tableName : String ) : String = {
+    val path = properties.getStringProperty( "spark.cdcloader.path.sql.controlpath" )
     logInfo( "Getting sql statement from: " + path )
     val controlTableSQL = sqlFileReader.getSQLString(
       sqlContext.sparkContext, path

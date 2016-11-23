@@ -34,7 +34,7 @@ class CDCDataFrameWriterSpec
     val outCount = cdcDataFrameWriter.write( TestContexts.sqlContext,
       "/some/path/",
       data,
-      Some(StorageLevel.MEMORY_ONLY) )
+      Some( StorageLevel.MEMORY_ONLY ) )
     outCount should be( 10 )
 
     Given( "The input \"/some/existing/path\"" )
@@ -51,7 +51,7 @@ class CDCDataFrameWriterSpec
       cdcDataFrameWriter.write( TestContexts.sqlContext,
         "/some/existing/path",
         data,
-        Some(StorageLevel.MEMORY_ONLY) )
+        Some( StorageLevel.MEMORY_ONLY ) )
     }
 
     Mockito

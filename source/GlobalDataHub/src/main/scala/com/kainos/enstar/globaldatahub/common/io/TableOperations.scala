@@ -1,6 +1,6 @@
 package com.kainos.enstar.globaldatahub.common.io
 
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 
 /**
  * Defines expectded behaviour for registering SparkSQL tables
