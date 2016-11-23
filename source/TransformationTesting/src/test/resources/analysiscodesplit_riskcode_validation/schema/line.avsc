@@ -13,7 +13,7 @@
         },
         {
             "name": "risk_reference",
-            "type": "string"
+            "type": ["string","null"]
         }
     ]
 }

@@ -13,6 +13,11 @@ object AnalysisCodeSplitRiskCodeUtils {
   }
 
   def lineriskcodeMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ) )
+    Row( cols( 0 ).toInt, cols( 1 ), cols( 2 ) )
+  }
+
+  def analysiscodesplitMapping( cols : Array[String] ) : Row = cols match {
+    case cols if cols.length == 6 => Row( null, cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ), cols( 5 ) )
+    case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ), cols( 5 ), cols( 6 ) )
   }
 }

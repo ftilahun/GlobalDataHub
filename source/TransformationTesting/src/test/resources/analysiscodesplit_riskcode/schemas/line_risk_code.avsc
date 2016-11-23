@@ -4,7 +4,7 @@
  	"name": "line_risk_code",
     "fields": [
     	{
-    		"name": "line_Id",
+    		"name": "line_id",
     		"type": "int"
     	},
         {

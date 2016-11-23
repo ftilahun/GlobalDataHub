@@ -1,4 +1,4 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting.Branch
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ BranchUtils, SQLRunner, TransformationUnitTestingUtils }
@@ -10,6 +10,8 @@ import org.scalatest.FunSuite
 class BranchTests extends FunSuite with DataFrameSuiteBase {
 
   test( "BranchTransformation_test1" ){
+
+    sqlContext.sparkContext.setLogLevel( "WARN" )
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -33,7 +35,7 @@ class BranchTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Branch.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/Branch.hql" )
 
     // Act //
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )

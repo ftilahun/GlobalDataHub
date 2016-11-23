@@ -5,3 +5,5 @@ SELECT
     CAST(NULL AS STRING) AS branchlocationcode
 FROM
     lookup_profit_centre
+
+
