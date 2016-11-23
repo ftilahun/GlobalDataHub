@@ -96,7 +96,7 @@ object CDCLoaderModule extends Logging {
 
   /**
    * Get the properties object
-   * @param args The command line arguments
+   * @param propertyMap a Map of k->v objects
    * @return a properties object
    */
   def properties( propertyMap : Map[String, String] ) : GDHProperties =
