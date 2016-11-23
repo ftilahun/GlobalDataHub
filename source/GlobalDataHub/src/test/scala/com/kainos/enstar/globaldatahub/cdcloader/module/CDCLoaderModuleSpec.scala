@@ -1,4 +1,4 @@
-package com.kainos.enstar.globaldatahub.cdcloader.instanciator
+package com.kainos.enstar.globaldatahub.cdcloader.module
 
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
 import com.kainos.enstar.globaldatahub.cdcloader.processor.{ SourceProcessor, TableProcessor }
@@ -10,14 +10,14 @@ import org.mockito.Mockito
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
- * Unit tests for CDCLoaderInstanciator
+ * Unit tests for CDCLoaderModule
  */
-class CDCLoaderInstanciatorSpec
+class CDCLoaderModuleSpec
     extends FlatSpec
     with GivenWhenThen
     with Matchers {
 
-  "CDCLoaderInstanciatorSpec" should "Return correct tyoes" in {
+  "CDCLoaderModuleSpec" should "Return correct tyoes" in {
       def typeCheck[T]( value : T ) = value match {
         case _ : ControlProcessor => "ControlProcessor"
         case _ : SourceProcessor  => "SourceProcessor"
@@ -58,20 +58,20 @@ class CDCLoaderInstanciatorSpec
         "spark.cdcloader.columns.control.name.tablename.b=b"
     )
 
-    typeCheck( CDCLoaderInstanciator.controlProcessor ) should be(
+    typeCheck( CDCLoaderModule.controlProcessor ) should be(
       "ControlProcessor" )
-    typeCheck( CDCLoaderInstanciator.cdcSourceProcessor ) should be(
+    typeCheck( CDCLoaderModule.cdcSourceProcessor ) should be(
       "SourceProcessor" )
-    typeCheck( CDCLoaderInstanciator.dataFrameReader ) should be(
+    typeCheck( CDCLoaderModule.dataFrameReader ) should be(
       "DataFrameReader" )
-    typeCheck( CDCLoaderInstanciator.dataFrameWriter ) should be(
+    typeCheck( CDCLoaderModule.dataFrameWriter ) should be(
       "DataFrameWriter" )
-    typeCheck( CDCLoaderInstanciator.tableOperations ) should be(
+    typeCheck( CDCLoaderModule.tableOperations ) should be(
       "TableOperations" )
-    typeCheck( CDCLoaderInstanciator.tableProcessor ) should be( "TableProcessor" )
-    typeCheck( CDCLoaderInstanciator.userFunctions ) should be( "UserFunctions" )
-    typeCheck( CDCLoaderInstanciator.sqlReader ) should be( "SQLFileReader" )
-    typeCheck( CDCLoaderInstanciator.properties( args ) ) should be(
+    typeCheck( CDCLoaderModule.tableProcessor ) should be( "TableProcessor" )
+    typeCheck( CDCLoaderModule.userFunctions ) should be( "UserFunctions" )
+    typeCheck( CDCLoaderModule.sqlReader ) should be( "SQLFileReader" )
+    typeCheck( CDCLoaderModule.properties( args ) ) should be(
       "GDHProperties" )
   }
 

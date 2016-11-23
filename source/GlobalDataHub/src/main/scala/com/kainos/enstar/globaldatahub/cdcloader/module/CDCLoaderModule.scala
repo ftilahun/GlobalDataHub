@@ -1,4 +1,4 @@
-package com.kainos.enstar.globaldatahub.cdcloader.instanciator
+package com.kainos.enstar.globaldatahub.cdcloader.module
 
 import com.kainos.enstar.globaldatahub.cdcloader.control.{ CDCControlProcessor, ControlProcessor }
 import com.kainos.enstar.globaldatahub.cdcloader.io._
@@ -12,7 +12,7 @@ import org.apache.spark.Logging
 /**
  * Creates required objects for this job.
  */
-object CDCLoaderInstanciator extends Logging {
+object CDCLoaderModule extends Logging {
 
   logInfo( "Creating required objects" )
   private val _controlProcessor : ControlProcessor = new CDCControlProcessor
@@ -89,7 +89,7 @@ object CDCLoaderInstanciator extends Logging {
    * @param args The command line arguments
    * @return a properties object
    */
-  def properties( args : Array[String] ) : GDHProperties =
-    new CDCProperties( CDCProperties.parseProperties( args ) )
+  def properties( propertyMap : Map[String,String] ) : GDHProperties =
+    new CDCProperties( propertyMap )
 
 }
