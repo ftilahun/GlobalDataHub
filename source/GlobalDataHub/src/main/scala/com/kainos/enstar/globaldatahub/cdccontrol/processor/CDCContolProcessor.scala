@@ -1,10 +1,6 @@
 package com.kainos.enstar.globaldatahub.cdccontrol.processor
-import com.kainos.enstar.globaldatahub.common.io.{
-  DataFrameReader,
-  DataFrameWriter,
-  SQLFileReader,
-  TableOperations
-}
+import com.kainos.enstar.globaldatahub.common.io.{ DataFrameReader, DataFrameWriter, SQLFileReader, TableOperations }
+import com.kainos.enstar.globaldatahub.common.processor.ControlProcessor
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.hadoop.fs.Path
 import org.apache.spark.Logging
