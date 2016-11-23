@@ -12,11 +12,11 @@
             "type": ["string", "null"]
         },
         {
-            "name": "expiry_date",  
+            "name": "inception_date",
             "type": ["string", "null"]
         },
         {
-            "name": "inception_date",  
+            "name": "expiry_date",  
             "type": ["string", "null"]
         },
         {
