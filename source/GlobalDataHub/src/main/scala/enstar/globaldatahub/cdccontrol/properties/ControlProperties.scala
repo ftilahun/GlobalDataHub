@@ -83,7 +83,7 @@ object ControlProperties
   /**
    * command line parser
    */
-  val parser = new scopt.OptionParser[Config]( "scopt" ) {
+  val parser = new scopt.OptionParser[Config]( "ControlJob" ) {
     head( "CDCControl", "0.1" )
     opt[Map[String, String]]( "ctrlOptions" )
       .valueName(
