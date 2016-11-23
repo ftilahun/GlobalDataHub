@@ -1,6 +1,6 @@
 package enstar.globaldatahub.cdccontrol.processor
 
-import enstar.globaldatahub.common.io.{ DataFrameReader, DataFrameWriter, SQLFileReader, TableOperations }
+import enstar.globaldatahub.common.io._
 import enstar.globaldatahub.common.processor.ControlProcessor
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.hadoop.fs.Path
@@ -61,7 +61,7 @@ class CDCContolProcessor extends ControlProcessor with Logging {
     sqlContext : SQLContext,
     reader : DataFrameReader,
     writer : DataFrameWriter,
-    sqlFileReader : SQLFileReader,
+    sqlFileReader : SQLReader,
     tableOperations : TableOperations,
     properties : GDHProperties ) : Long = {
 
