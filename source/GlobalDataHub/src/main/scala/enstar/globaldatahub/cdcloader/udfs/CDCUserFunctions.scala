@@ -11,10 +11,7 @@ import org.joda.time.format.DateTimeFormat
 /**
  * Spark User Defined Functions.
  */
-class CDCUserFunctions
-    extends UserFunctions
-    with Serializable
-    with Logging {
+class CDCUserFunctions extends UserFunctions with Serializable with Logging {
 
   /**
    * Register required UDFs with the SQL context

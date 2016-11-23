@@ -1,26 +1,17 @@
 package enstar.globaldatahub.cdcloader.module
 
-import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.processor.{SourceProcessor, TableProcessor}
-import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import enstar.globaldatahub.cdcloader.control.ControlProcessor
-import enstar.globaldatahub.cdcloader.processor.{SourceProcessor, TableProcessor}
+import enstar.globaldatahub.cdcloader.processor.{ SourceProcessor, TableProcessor }
+import enstar.globaldatahub.cdcloader.properties.CDCProperties
 import enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
+import enstar.globaldatahub.common.io.{ DataFrameReader, DataFrameWriter, SQLReader, TableOperations }
 import enstar.globaldatahub.common.properties.GDHProperties
-import org.apache.spark.sql.SQLContext
-import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CDCLoaderModule
  */
-class CDCLoaderModuleSpec
-    extends FlatSpec
-    with GivenWhenThen
-    with Matchers {
+class CDCLoaderModuleSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCLoaderModuleSpec" should "Return correct tyoes" in {
       def typeCheck[T]( value : T ) = value match {
@@ -35,7 +26,7 @@ class CDCLoaderModuleSpec
         case _ : GDHProperties    => "GDHProperties"
       }
 
-    val args = Array[String](
+    val args = CDCProperties.parseProperties( Array[String](
       "--cdcOptions",
       "spark.cdcloader.columns.attunity.name.changemask=a," +
         "spark.cdcloader.columns.control.names.controlcolumnnames=a," +
@@ -61,23 +52,17 @@ class CDCLoaderModuleSpec
         "spark.cdcloader.columns.control.name.tablename.a=a," +
         "spark.cdcloader.control.columnpositions.b=1_2_3," +
         "spark.cdcloader.columns.control.name.tablename.b=b"
-    )
+    ) )
 
-    typeCheck( CDCLoaderModule.controlProcessor ) should be(
-      "ControlProcessor" )
-    typeCheck( CDCLoaderModule.cdcSourceProcessor ) should be(
-      "SourceProcessor" )
-    typeCheck( CDCLoaderModule.dataFrameReader ) should be(
-      "DataFrameReader" )
-    typeCheck( CDCLoaderModule.dataFrameWriter ) should be(
-      "DataFrameWriter" )
-    typeCheck( CDCLoaderModule.tableOperations ) should be(
-      "TableOperations" )
+    typeCheck( CDCLoaderModule.controlProcessor ) should be( "ControlProcessor" )
+    typeCheck( CDCLoaderModule.cdcSourceProcessor ) should be( "SourceProcessor" )
+    typeCheck( CDCLoaderModule.dataFrameReader ) should be( "DataFrameReader" )
+    typeCheck( CDCLoaderModule.dataFrameWriter ) should be( "DataFrameWriter" )
+    typeCheck( CDCLoaderModule.tableOperations ) should be( "TableOperations" )
     typeCheck( CDCLoaderModule.tableProcessor ) should be( "TableProcessor" )
     typeCheck( CDCLoaderModule.userFunctions ) should be( "UserFunctions" )
     typeCheck( CDCLoaderModule.sqlReader ) should be( "SQLFileReader" )
-    typeCheck( CDCLoaderModule.properties( args ) ) should be(
-      "GDHProperties" )
+    typeCheck( CDCLoaderModule.properties( args ) ) should be( "GDHProperties" )
   }
 
 }

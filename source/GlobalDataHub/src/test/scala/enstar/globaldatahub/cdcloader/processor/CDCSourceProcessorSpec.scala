@@ -1,18 +1,18 @@
 package enstar.globaldatahub.cdcloader.processor
 
-import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import enstar.globaldatahub.TestContexts
 import enstar.globaldatahub.cdcloader.control.ControlProcessor
 import enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
+import enstar.globaldatahub.common.io.{
+  DataFrameReader,
+  DataFrameWriter,
+  SQLReader,
+  TableOperations
+}
 import enstar.globaldatahub.common.properties.GDHProperties
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CDCSourceProcessor

@@ -1,11 +1,10 @@
 package enstar.globaldatahub.cdcloader.udfs
 
 import org.apache.spark.sql.SQLContext
-import com.kainos.enstar.globaldatahub.common.udfs.{UserFunctions => UDFs}
 import enstar.globaldatahub.common.properties.GDHProperties
-import enstar.globaldatahub.common.udfs.UserFunctions
+import enstar.globaldatahub.common.udfs.{ UserFunctions => UDFs }
 
-trait UserFunctions extends UserFunctions with Serializable {
+trait UserFunctions extends UDFs with Serializable {
 
   /**
    * Register required UDFs with the SQL context

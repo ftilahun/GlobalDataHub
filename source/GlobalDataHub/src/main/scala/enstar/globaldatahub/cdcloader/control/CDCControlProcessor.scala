@@ -1,9 +1,10 @@
 package enstar.globaldatahub.cdcloader.control
 
-import com.kainos.enstar.globaldatahub.cdcloader.io._
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, SQLReader, TableOperations}
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
-import enstar.globaldatahub.common.io.{DataFrameReader, SQLReader, TableOperations}
+import enstar.globaldatahub.common.io.{
+  DataFrameReader,
+  SQLReader,
+  TableOperations
+}
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
 import org.apache.spark.sql.SQLContext
@@ -50,15 +51,15 @@ class CDCControlProcessor extends ControlProcessor with Logging {
                             reader : DataFrameReader,
                             properties : GDHProperties,
                             tableOperation : TableOperations ) : Unit = {
-    val path = properties.getStringProperty( "spark.cdcloader.path.data.controlpath" )
-    val name = properties.getStringProperty( "spark.cdcloader.tables.control.name" )
+    val path =
+      properties.getStringProperty( "spark.cdcloader.path.data.controlpath" )
+    val name =
+      properties.getStringProperty( "spark.cdcloader.tables.control.name" )
     logInfo( "Registering control table from " + path + " as " + name )
-    val controlTableDF = reader.read(
-      sqlContext,
-      path,
-      None )
+    val controlTableDF = reader.read( sqlContext, path, None )
     tableOperation.registerTempTable(
-      controlTableDF, name
+      controlTableDF,
+      name
     )
   }
 
@@ -71,10 +72,12 @@ class CDCControlProcessor extends ControlProcessor with Logging {
   def deregisterControlTable( sqlContext : SQLContext,
                               properties : GDHProperties,
                               tableOperation : TableOperations ) : Unit = {
-    val name = properties.getStringProperty( "spark.cdcloader.tables.control.name" )
+    val name =
+      properties.getStringProperty( "spark.cdcloader.tables.control.name" )
     logInfo( "Removing control table:  " + name )
     tableOperation.deRegisterTempTable(
-      sqlContext, name
+      sqlContext,
+      name
     )
   }
 
@@ -94,10 +97,12 @@ class CDCControlProcessor extends ControlProcessor with Logging {
                              sqlFileReader : SQLReader,
                              properties : GDHProperties,
                              tableName : String ) : String = {
-    val path = properties.getStringProperty( "spark.cdcloader.path.sql.controlpath" )
+    val path =
+      properties.getStringProperty( "spark.cdcloader.path.sql.controlpath" )
     logInfo( "Getting sql statement from: " + path )
     val controlTableSQL = sqlFileReader.getSQLString(
-      sqlContext.sparkContext, path
+      sqlContext.sparkContext,
+      path
     )
     logInfo( "Running sql statement: " + controlTableSQL + tableName )
     val lastSeq =

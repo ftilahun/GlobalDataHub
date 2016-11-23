@@ -1,14 +1,12 @@
 package enstar.globaldatahub.cdcloader.io
 
-import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.common.io.AvroDataFrameWriter
 import enstar.globaldatahub.TestContexts
 import enstar.globaldatahub.common.io.AvroDataFrameWriter
 import org.apache.hadoop.fs.PathExistsException
-import org.apache.spark.sql.{AnalysisException, DataFrame, SQLContext}
+import org.apache.spark.sql.{ AnalysisException, DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * unit tests for the CDCDataFrameWriter

@@ -1,8 +1,7 @@
 package enstar.globaldatahub.cdcloader.properties
 
-import com.kainos.enstar.globaldatahub.common.exceptions.PropertyNotSetException
 import enstar.globaldatahub.common.exceptions.PropertyNotSetException
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CDCProperties

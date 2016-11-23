@@ -1,7 +1,10 @@
 package enstar.globaldatahub.cdcloader.properties
 
 import enstar.globaldatahub.common.exceptions.PropertyNotSetException
-import enstar.globaldatahub.common.properties.{CommandLinePropertyParser, GDHProperties}
+import enstar.globaldatahub.common.properties.{
+  CommandLinePropertyParser,
+  GDHProperties
+}
 import org.apache.spark.Logging
 
 /**
@@ -37,7 +40,7 @@ class CDCProperties( propertyMap : Map[String, String] )
    * Get the value of a property as a (Java) boolean.
    *
    * @param name the name of the property
-   * @return the prperty value as a Java boolean.
+   * @return the property value as a Java boolean.
    */
   override def getBooleanProperty( name : String ) : java.lang.Boolean =
     propertyMap( name ).toBoolean.asInstanceOf[java.lang.Boolean]
@@ -109,8 +112,8 @@ class CDCProperties( propertyMap : Map[String, String] )
     checkProperty( "spark.cdcloader.path.data.outdir",
       _.get.asInstanceOf[String] )
     logInfo( "Checking per table properties." )
-    logInfo( "EXpecting " + getArrayProperty( "spark.cdcloader.input.tablenames" ).
-      length + " tables" )
+    logInfo(
+      "EXpecting " + getArrayProperty( "spark.cdcloader.input.tablenames" ).length + " tables" )
     getArrayProperty( "spark.cdcloader.input.tablenames" ).foreach { tableName =>
       logInfo( "Checking properties for: " + tableName )
       checkProperty( "spark.cdcloader.control.columnpositions." + tableName,
@@ -126,8 +129,7 @@ class CDCProperties( propertyMap : Map[String, String] )
 /**
  * Companion class for CDCProperties
  */
-object CDCProperties
-    extends CommandLinePropertyParser {
+object CDCProperties extends CommandLinePropertyParser {
 
   /**
    * command line parser

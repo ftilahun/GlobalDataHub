@@ -1,17 +1,21 @@
 package enstar.globaldatahub.cdcloader.module
 
-import com.kainos.enstar.globaldatahub.cdcloader.control.{CDCControlProcessor, ControlProcessor}
-import com.kainos.enstar.globaldatahub.cdcloader.io._
-import com.kainos.enstar.globaldatahub.cdcloader.processor.{CDCSourceProcessor, CDCTableProcessor, SourceProcessor, TableProcessor}
-import com.kainos.enstar.globaldatahub.cdcloader.properties.CDCProperties
-import com.kainos.enstar.globaldatahub.cdcloader.udfs.{CDCUserFunctions, UserFunctions}
-import com.kainos.enstar.globaldatahub.common.io._
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
-import enstar.globaldatahub.cdcloader.control.{CDCControlProcessor, ControlProcessor}
-import enstar.globaldatahub.cdcloader.io.{CDCDataFrameReader, CDCDataFrameWriter}
-import enstar.globaldatahub.cdcloader.processor.{CDCSourceProcessor, CDCTableProcessor, SourceProcessor, TableProcessor}
+import enstar.globaldatahub.cdcloader.control.{
+  CDCControlProcessor,
+  ControlProcessor
+}
+import enstar.globaldatahub.cdcloader.io.{
+  CDCDataFrameReader,
+  CDCDataFrameWriter
+}
+import enstar.globaldatahub.cdcloader.processor.{
+  CDCSourceProcessor,
+  CDCTableProcessor,
+  SourceProcessor,
+  TableProcessor
+}
 import enstar.globaldatahub.cdcloader.properties.CDCProperties
-import enstar.globaldatahub.cdcloader.udfs.{CDCUserFunctions, UserFunctions}
+import enstar.globaldatahub.cdcloader.udfs.{ CDCUserFunctions, UserFunctions }
 import enstar.globaldatahub.common.io._
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
@@ -31,9 +35,8 @@ object CDCLoaderModule extends Logging {
   private val _tableOperations : TableOperations = new DataFrameTableOperations
   private val _tableProcessor : TableProcessor = new CDCTableProcessor
   private val _userFunctions : UserFunctions = new CDCUserFunctions
-  private val _sqlReader : SQLReader = new SQLFileReader(
-    new TextFileReader )
-  logInfo( "Complete!" )
+  private val _sqlReader : SQLReader = new SQLFileReader( new TextFileReader )
+  logInfo( "Completed required object creation" )
 
   /**
    * Get the ControlProcessor
@@ -96,7 +99,7 @@ object CDCLoaderModule extends Logging {
    * @param args The command line arguments
    * @return a properties object
    */
-  def properties( propertyMap : Map[String,String] ) : GDHProperties =
+  def properties( propertyMap : Map[String, String] ) : GDHProperties =
     new CDCProperties( propertyMap )
 
 }

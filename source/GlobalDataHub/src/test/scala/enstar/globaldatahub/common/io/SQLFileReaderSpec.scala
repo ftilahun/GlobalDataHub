@@ -1,14 +1,12 @@
 package enstar.globaldatahub.common.io
 
-import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.common.exceptions.SQLException
 import enstar.globaldatahub.TestContexts
 import enstar.globaldatahub.common.exceptions.SQLException
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.SparkContext
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CDCSQLReader

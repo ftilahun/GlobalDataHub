@@ -1,15 +1,16 @@
 package enstar.globaldatahub.cdcloader.processor
 
-import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
-import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
 import enstar.globaldatahub.cdcloader.control.ControlProcessor
 import enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
+import enstar.globaldatahub.common.io.{
+  DataFrameReader,
+  DataFrameWriter,
+  SQLReader,
+  TableOperations
+}
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.sql.functions._
 
@@ -50,8 +51,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
     val path = properties.getStringProperty( "spark.cdcloader.path.sql.basedir" ) +
       tableName
     logInfo( "Getting sql statement for " + tableName + " from " + path )
-    val sqlString = sqlReader.getSQLString(
-      sqlContext.sparkContext, path )
+    val sqlString = sqlReader.getSQLString( sqlContext.sparkContext, path )
     logInfo( "Checking last sequence number" )
     val lastSeq = controlProcessor
       .getLastSequenceNumber( sqlContext, sqlReader, properties, tableName )
@@ -82,8 +82,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
             tableName : String ) : Long = {
     val path = properties.getStringProperty(
       "spark.cdcloader.path.data.outputbasedir" ) + tableName +
-      properties.getArrayProperty(
-        "spark.cdcloader.path.data.outdir" )
+      properties.getArrayProperty( "spark.cdcloader.path.data.outdir" )
     logInfo( "saving " + tableName + " to " + path )
     writer.write( sqlContext,
       path,
@@ -140,12 +139,8 @@ class CDCTableProcessor extends TableProcessor with Logging {
             path,
             //storage level will require tuning based on performance.
             Some( StorageLevel.MEMORY_AND_DISK_SER ) )
-          .withColumn(
-            chgSeqColName,
-            generateSequenceNumber() )
-          .withColumn(
-            chgOpColName,
-            operation() )
+          .withColumn( chgSeqColName, generateSequenceNumber() )
+          .withColumn( chgOpColName, operation() )
       } else {
         logInfo( "inital load was" + initialLoad + " loading change data" )
         val path = properties.getStringProperty(
@@ -153,11 +148,10 @@ class CDCTableProcessor extends TableProcessor with Logging {
           properties.getStringProperty(
             "spark.cdcloader.control.attunity.changetablesuffix" )
         logInfo( "reading from " + path )
-        val data = reader
-          .read( sqlContext,
-            path,
-            //storage level will require tuning based on performance.
-            Some( StorageLevel.MEMORY_AND_DISK_SER ) )
+        val data = reader.read( sqlContext,
+          path,
+          //storage level will require tuning based on performance.
+          Some( StorageLevel.MEMORY_AND_DISK_SER ) )
         if ( properties.getBooleanProperty(
           "spark.cdcloader.control.changemask.enabled" ) ) {
           logInfo( "Change mask is ACTIVE, filtering data!" )

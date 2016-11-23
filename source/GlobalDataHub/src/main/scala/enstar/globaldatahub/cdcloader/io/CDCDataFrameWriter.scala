@@ -3,7 +3,7 @@ package enstar.globaldatahub.cdcloader.io
 import enstar.globaldatahub.common.io.DataFrameWriter
 import org.apache.hadoop.fs.PathExistsException
 import org.apache.spark.Logging
-import org.apache.spark.sql.{AnalysisException, DataFrame, SQLContext}
+import org.apache.spark.sql.{ AnalysisException, DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 
 /**

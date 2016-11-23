@@ -1,13 +1,13 @@
 package enstar.globaldatahub.cdcloader.control
 
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, SQLReader, TableOperations}
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
-import org.apache.spark.sql.SQLContext
-import com.kainos.enstar.globaldatahub.common.processor.{ControlProcessor => CommonControlProcessor}
-import enstar.globaldatahub.common.io.{DataFrameReader, SQLReader, TableOperations}
+import enstar.globaldatahub.common.io.{
+  DataFrameReader,
+  SQLReader,
+  TableOperations
+}
 import enstar.globaldatahub.common.processor
-import enstar.globaldatahub.common.processor.ControlProcessor
 import enstar.globaldatahub.common.properties.GDHProperties
+import org.apache.spark.sql.SQLContext
 
 /**
  * Defines expected Behaviour for a control processor.

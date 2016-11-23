@@ -1,10 +1,9 @@
 package enstar.globaldatahub.common.io
 
-import com.kainos.enstar.globaldatahub.common.exceptions.SQLException
 import enstar.globaldatahub.common.exceptions.SQLException
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
-import org.apache.spark.{Logging, SparkContext}
+import org.apache.spark.{ Logging, SparkContext }
 
 /**
  * Class to read a SQL statement from the filesystem

@@ -1,13 +1,11 @@
 package enstar.globaldatahub.cdcloader.udfs
 
-import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import enstar.globaldatahub.TestContexts
 import enstar.globaldatahub.common.properties.GDHProperties
-import org.joda.time.{DateTime, DateTimeUtils}
+import org.joda.time.{ DateTime, DateTimeUtils }
 import org.joda.time.format.DateTimeFormat
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CDCUserFunctions

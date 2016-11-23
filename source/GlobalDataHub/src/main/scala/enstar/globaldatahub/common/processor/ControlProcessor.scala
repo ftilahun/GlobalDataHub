@@ -1,8 +1,6 @@
 package enstar.globaldatahub.common.processor
 
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, TableOperations}
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
-import enstar.globaldatahub.common.io.{DataFrameReader, TableOperations}
+import enstar.globaldatahub.common.io.{ DataFrameReader, TableOperations }
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
 

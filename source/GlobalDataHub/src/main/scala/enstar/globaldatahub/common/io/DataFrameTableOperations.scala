@@ -6,9 +6,7 @@ import org.apache.spark.sql.{ DataFrame, SQLContext }
 /**
  * Class for handling Operations on temp tables.
  */
-class DataFrameTableOperations
-    extends TableOperations
-    with Logging {
+class DataFrameTableOperations extends TableOperations with Logging {
 
   /**
    * Register a temp table over a dataframe

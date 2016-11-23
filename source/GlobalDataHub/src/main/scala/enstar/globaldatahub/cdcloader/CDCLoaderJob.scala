@@ -1,13 +1,10 @@
 package enstar.globaldatahub.cdcloader
 
-import com.kainos.enstar.globaldatahub.cdcloader.module.CDCLoaderModule
-import com.kainos.enstar.globaldatahub.cdcloader.processor.CDCSourceProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.properties.CDCProperties
 import enstar.globaldatahub.cdcloader.module.CDCLoaderModule
 import enstar.globaldatahub.cdcloader.processor.CDCSourceProcessor
 import enstar.globaldatahub.cdcloader.properties.CDCProperties
 import org.apache.spark.sql.SQLContext
-import org.apache.spark.{Logging, SparkConf, SparkContext}
+import org.apache.spark.{ Logging, SparkConf, SparkContext }
 
 /**
  * Main CDCLoader Job
@@ -24,7 +21,8 @@ object CDCLoaderJob extends Logging {
     val parsedProperties = CDCProperties.parseProperties( args )
 
     logInfo( "Starting processing!" )
-    new CDCSourceProcessor().process( CDCLoaderModule.controlProcessor,
+    new CDCSourceProcessor().process(
+      CDCLoaderModule.controlProcessor,
       CDCLoaderModule.properties( parsedProperties ),
       sqlContext,
       CDCLoaderModule.dataFrameReader,

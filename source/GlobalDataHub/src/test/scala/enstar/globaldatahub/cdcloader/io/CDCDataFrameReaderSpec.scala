@@ -1,7 +1,5 @@
 package enstar.globaldatahub.cdcloader.io
 
-import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.common.io.AvroDataFrameReader
 import enstar.globaldatahub.TestContexts
 import enstar.globaldatahub.common.io.AvroDataFrameReader
 import org.apache.hadoop.fs.PathNotFoundException
@@ -9,7 +7,7 @@ import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for the CDCDataFrameReader

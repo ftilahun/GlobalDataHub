@@ -1,17 +1,18 @@
 package enstar.globaldatahub.cdcloader.control
 
-import com.kainos.enstar.globaldatahub.TestContexts
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameTableOperations, SQLReader}
-import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import enstar.globaldatahub.TestContexts
-import enstar.globaldatahub.common.io.{DataFrameReader, DataFrameTableOperations, SQLReader}
+import enstar.globaldatahub.common.io.{
+  DataFrameReader,
+  DataFrameTableOperations,
+  SQLReader
+}
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.{DateTime, DateTimeUtils}
+import org.joda.time.{ DateTime, DateTimeUtils }
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for the control processor
