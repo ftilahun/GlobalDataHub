@@ -3,14 +3,14 @@ package com.kainos.enstar.globaldatahub.common.io
 import com.kainos.enstar.globaldatahub.common.exceptions.SQLException
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
-import org.apache.spark.{Logging, SparkContext}
+import org.apache.spark.{ Logging, SparkContext }
 
 /**
  * Class to read a SQL statement from the filesystem
  *
  * @param textFileReader a TextFileReader
  */
-class SQLFileReader(textFileReader : FileReader )
+class SQLFileReader( textFileReader : FileReader )
     extends SQLReader
     with Logging {
 

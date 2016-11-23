@@ -90,15 +90,15 @@ class CDCProperties( propertyMap : Map[String, String] )
       _.get.asInstanceOf[String] )
     checkProperty( "spark.cdcloader.format.timestamp.hive",
       _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.paths.data.basedir",
+    checkProperty( "spark.cdcloader.path.data.basedir",
       _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.paths.data.control",
+    checkProperty( "spark.cdcloader.path.data.control",
       _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.paths.data.outputbasedir",
+    checkProperty( "spark.cdcloader.path.data.outputbasedir",
       _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.paths.sql.basedir",
+    checkProperty( "spark.cdcloader.path.sql.basedir",
       _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.paths.sql.control",
+    checkProperty( "spark.cdcloader.path.sql.control",
       _.get.asInstanceOf[String] )
     checkProperty( "spark.cdcloader.tables.control.name",
       _.get.asInstanceOf[String] )
@@ -106,7 +106,7 @@ class CDCProperties( propertyMap : Map[String, String] )
       _.get.asInstanceOf[String] )
     checkProperty( "spark.cdcloader.input.tablenames",
       _.get.asInstanceOf[String].split( "," ) )
-    checkProperty( "spark.cdcloader.paths.data.outdir",
+    checkProperty( "spark.cdcloader.path.data.outdir",
       _.get.asInstanceOf[String] )
     logInfo( "Checking per table properties." )
     logInfo( "EXpecting " + getArrayProperty( "spark.cdcloader.input.tablenames" ).
@@ -151,7 +151,7 @@ object CDCProperties
         c.copy( kwArgs = x )
       }
     note(
-      "The following options are required:" +
+      "The following arguments are required:" +
         "\n\n" +
         "spark.cdcloader.columns.attunity.name.changemask\n" +
         "\t - The name of the attunity change mask column\n" +
@@ -173,17 +173,17 @@ object CDCProperties
         "\t - The timestamp format for the attunity change sequence\n" +
         "spark.cdcloader.format.timestamp.hive\n" +
         "\t - The timestamp format to use for hive\n" +
-        "spark.cdcloader.paths.data.basedir\n" +
+        "spark.cdcloader.path.data.basedir\n" +
         "\t - The input base directory (e.g. /etl/cdc/attunity/ndex/)\n" +
-        "spark.cdcloader.paths.data.control\n" +
+        "spark.cdcloader.path.data.control\n" +
         "\t - The path to the control table\n" +
-        "spark.cdcloader.paths.data.outputbasedir\n" +
+        "spark.cdcloader.path.data.outputbasedir\n" +
         "\t - The path to the output directory (e.g. /etl/cdc/cdcloader/ndex/)\n" +
-        "spark.cdcloader.paths.data.outdir\n" +
+        "spark.cdcloader.path.data.outdir\n" +
         "\t - the name of the folder to write to (e.g. processing\n" +
-        "spark.cdcloader.paths.sql.basedir\n" +
+        "spark.cdcloader.path.sql.basedir\n" +
         "\t - The base directory for sql queries (e.g. /metadata/cdcloader/hive/queries/ndex/\n" +
-        "spark.cdcloader.paths.sql.control\n" +
+        "spark.cdcloader.path.sql.control\n" +
         "\t - \"The path to the control table sql (e.g. /metadata/cdcloader/hive/queries/control/)\n" +
         "spark.cdcloader.tables.control.name\ns" +
         "\t - The name of the control table\n" +

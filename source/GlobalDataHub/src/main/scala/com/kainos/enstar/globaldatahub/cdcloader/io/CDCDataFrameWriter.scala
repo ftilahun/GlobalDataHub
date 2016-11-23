@@ -35,8 +35,9 @@ class CDCDataFrameWriter( writer : DataFrameWriter )
       count
     } catch {
       //a more readable exception
-      case e : AnalysisException => throw new PathExistsException( path )
-      0
+      case e : AnalysisException =>
+        throw new PathExistsException( path )
+        0
     }
   }
 }

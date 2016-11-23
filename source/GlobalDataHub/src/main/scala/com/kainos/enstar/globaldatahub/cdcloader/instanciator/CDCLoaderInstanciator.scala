@@ -1,10 +1,10 @@
 package com.kainos.enstar.globaldatahub.cdcloader.instanciator
 
-import com.kainos.enstar.globaldatahub.cdcloader.control.{CDCControlProcessor, ControlProcessor}
+import com.kainos.enstar.globaldatahub.cdcloader.control.{ CDCControlProcessor, ControlProcessor }
 import com.kainos.enstar.globaldatahub.cdcloader.io._
-import com.kainos.enstar.globaldatahub.cdcloader.processor.{CDCSourceProcessor, CDCTableProcessor, SourceProcessor, TableProcessor}
+import com.kainos.enstar.globaldatahub.cdcloader.processor.{ CDCSourceProcessor, CDCTableProcessor, SourceProcessor, TableProcessor }
 import com.kainos.enstar.globaldatahub.cdcloader.properties.CDCProperties
-import com.kainos.enstar.globaldatahub.cdcloader.udfs.{CDCUserFunctions, UserFunctions}
+import com.kainos.enstar.globaldatahub.cdcloader.udfs.{ CDCUserFunctions, UserFunctions }
 import com.kainos.enstar.globaldatahub.common.io._
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging

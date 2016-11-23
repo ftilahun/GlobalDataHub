@@ -3,9 +3,9 @@ package com.kainos.enstar.globaldatahub.cdcloader.processor
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
+import com.kainos.enstar.globaldatahub.common.io.{ DataFrameReader, DataFrameWriter, SQLReader, TableOperations }
 import org.apache.spark.Logging
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.sql.functions._
 
@@ -43,7 +43,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
       reader,
       userFunctiions,
       properties )
-    val path = properties.getStringProperty( "spark.cdcloader.paths.sql.basedir" ) +
+    val path = properties.getStringProperty( "spark.cdcloader.path.sql.basedir" ) +
       tableName
     logInfo( "Getting sql statement for " + tableName + " from " + path )
     val sqlString = sqlReader.getSQLString(
@@ -77,14 +77,14 @@ class CDCTableProcessor extends TableProcessor with Logging {
             dataFrame : DataFrame,
             tableName : String ) : Long = {
     val path = properties.getStringProperty(
-      "spark.cdcloader.paths.data.outputbasedir" ) + tableName +
+      "spark.cdcloader.path.data.outputbasedir" ) + tableName +
       properties.getArrayProperty(
-        "spark.cdcloader.paths.data.outdir" )
+        "spark.cdcloader.path.data.outdir" )
     logInfo( "saving " + tableName + " to " + path )
     writer.write( sqlContext,
       path,
       dataFrame,
-      Some(StorageLevel.MEMORY_AND_DISK_SER) )
+      Some( StorageLevel.MEMORY_AND_DISK_SER ) )
   }
 
   /**
@@ -124,7 +124,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
       if ( initialLoad ) {
         logInfo( "inital load was" + initialLoad + " loading base data" )
         val path = properties.getStringProperty(
-          "spark.cdcloader.paths.data.basedir" ) + tableName
+          "spark.cdcloader.path.data.basedir" ) + tableName
         val chgSeqColName = properties.getStringProperty(
           "spark.cdcloader.columns.attunity.name.changesequence" )
         val chgOpColName = properties.getStringProperty(
@@ -145,7 +145,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
       } else {
         logInfo( "inital load was" + initialLoad + " loading change data" )
         val path = properties.getStringProperty(
-          "spark.cdcloader.paths.data.basedir" ) + tableName +
+          "spark.cdcloader.path.data.basedir" ) + tableName +
           properties.getStringProperty(
             "spark.cdcloader.control.attunity.changetablesuffix" )
         logInfo( "reading from " + path )

@@ -1,7 +1,7 @@
 package com.kainos.enstar.globaldatahub.common.io
 
 import org.apache.spark.Logging
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 
 /**
  * Class for handling Operations on temp tables.

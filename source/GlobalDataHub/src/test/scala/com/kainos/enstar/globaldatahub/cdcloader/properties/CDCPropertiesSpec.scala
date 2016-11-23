@@ -59,7 +59,7 @@ class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
         CDCProperties.parseProperties(
           Array[String](
             "--cdcOptions",
-            "spark.cdcloader.paths.sql.control=a"
+            "spark.cdcloader.path.sql.control=a"
           ) ) )
     }
     Given( "Valid input" )
@@ -80,12 +80,12 @@ class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
               "spark.cdcloader.columns.metadata.name.loadtimestamp=a," +
               "spark.cdcloader.format.timestamp.attunity=a," +
               "spark.cdcloader.format.timestamp.hive=a," +
-              "spark.cdcloader.paths.data.basedir=a," +
-              "spark.cdcloader.paths.data.control=a," +
-              "spark.cdcloader.paths.data.output=a," +
-              "spark.cdcloader.paths.data.outputbasedir=a," +
-              "spark.cdcloader.paths.sql.basedir=a," +
-              "spark.cdcloader.paths.sql.control=a," +
+              "spark.cdcloader.path.data.basedir=a," +
+              "spark.cdcloader.path.data.control=a," +
+              "spark.cdcloader.path.data.output=a," +
+              "spark.cdcloader.path.data.outputbasedir=a," +
+              "spark.cdcloader.path.sql.basedir=a," +
+              "spark.cdcloader.path.sql.control=a," +
               "spark.cdcloader.tables.control.name=a," +
               "spark.cdcloader.control.changemask.enabled=a," +
               "spark.cdcloader.input.tablenames=a," +
@@ -108,15 +108,15 @@ class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
             "spark.cdcloader.columns.metadata.name.isdeleted=true," +
             "spark.cdcloader.control.attunity.changetablesuffix=a," +
             "spark.cdcloader.columns.metadata.name.loadtimestamp=a," +
-            "spark.cdcloader.paths.data.outputbasedir=a," +
-            "spark.cdcloader.paths.data.outdir=a," +
+            "spark.cdcloader.path.data.outputbasedir=a," +
+            "spark.cdcloader.path.data.outdir=a," +
             "spark.cdcloader.format.timestamp.attunity=a," +
             "spark.cdcloader.format.timestamp.hive=a," +
-            "spark.cdcloader.paths.data.basedir=a," +
-            "spark.cdcloader.paths.data.control=a," +
-            "spark.cdcloader.paths.data.output=a," +
-            "spark.cdcloader.paths.sql.basedir=a," +
-            "spark.cdcloader.paths.sql.control=a," +
+            "spark.cdcloader.path.data.basedir=a," +
+            "spark.cdcloader.path.data.control=a," +
+            "spark.cdcloader.path.data.output=a," +
+            "spark.cdcloader.path.sql.basedir=a," +
+            "spark.cdcloader.path.sql.control=a," +
             "spark.cdcloader.tables.control.name=a," +
             "spark.cdcloader.control.changemask.enabled=a," +
             "spark.cdcloader.input.tablenames=a_b," +
@@ -142,13 +142,13 @@ class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
       "a" )
     props.getStringProperty( "spark.cdcloader.format.timestamp.hive" ) should be(
       "a" )
-    props.getStringProperty( "spark.cdcloader.paths.data.basedir" ) should be(
+    props.getStringProperty( "spark.cdcloader.path.data.basedir" ) should be(
       "a" )
-    props.getStringProperty( "spark.cdcloader.paths.data.control" ) should be(
+    props.getStringProperty( "spark.cdcloader.path.data.control" ) should be(
       "a" )
-    props.getStringProperty( "spark.cdcloader.paths.data.output" ) should be( "a" )
-    props.getStringProperty( "spark.cdcloader.paths.sql.basedir" ) should be( "a" )
-    props.getStringProperty( "spark.cdcloader.paths.sql.control" ) should be( "a" )
+    props.getStringProperty( "spark.cdcloader.path.data.output" ) should be( "a" )
+    props.getStringProperty( "spark.cdcloader.path.sql.basedir" ) should be( "a" )
+    props.getStringProperty( "spark.cdcloader.path.sql.control" ) should be( "a" )
     props.getStringProperty( "spark.cdcloader.tables.control.name" ) should be(
       "a" )
     props.getStringProperty( "spark.cdcloader.control.changemask.enabled" ) should be(

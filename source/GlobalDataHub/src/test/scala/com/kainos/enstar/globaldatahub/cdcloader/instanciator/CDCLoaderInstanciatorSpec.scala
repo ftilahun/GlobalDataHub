@@ -1,13 +1,13 @@
 package com.kainos.enstar.globaldatahub.cdcloader.instanciator
 
 import com.kainos.enstar.globaldatahub.cdcloader.control.ControlProcessor
-import com.kainos.enstar.globaldatahub.cdcloader.processor.{SourceProcessor, TableProcessor}
+import com.kainos.enstar.globaldatahub.cdcloader.processor.{ SourceProcessor, TableProcessor }
 import com.kainos.enstar.globaldatahub.cdcloader.udfs.UserFunctions
-import com.kainos.enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
+import com.kainos.enstar.globaldatahub.common.io.{ DataFrameReader, DataFrameWriter, SQLReader, TableOperations }
 import com.kainos.enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.sql.SQLContext
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CDCLoaderInstanciator
@@ -26,7 +26,7 @@ class CDCLoaderInstanciatorSpec
         case _ : TableOperations  => "TableOperations"
         case _ : TableProcessor   => "TableProcessor"
         case _ : UserFunctions    => "UserFunctions"
-        case _ : SQLReader    => "SQLFileReader"
+        case _ : SQLReader        => "SQLFileReader"
         case _ : GDHProperties    => "GDHProperties"
       }
 
@@ -40,15 +40,15 @@ class CDCLoaderInstanciatorSpec
         "spark.cdcloader.columns.metadata.name.isdeleted=true," +
         "spark.cdcloader.control.attunity.changetablesuffix=a," +
         "spark.cdcloader.columns.metadata.name.loadtimestamp=a," +
-        "spark.cdcloader.paths.data.outputbasedir=a," +
-        "spark.cdcloader.paths.data.outdir=a," +
+        "spark.cdcloader.path.data.outputbasedir=a," +
+        "spark.cdcloader.path.data.outdir=a," +
         "spark.cdcloader.format.timestamp.attunity=a," +
         "spark.cdcloader.format.timestamp.hive=a," +
-        "spark.cdcloader.paths.data.basedir=a," +
-        "spark.cdcloader.paths.data.control=a," +
-        "spark.cdcloader.paths.data.output=a," +
-        "spark.cdcloader.paths.sql.basedir=a," +
-        "spark.cdcloader.paths.sql.control=a," +
+        "spark.cdcloader.path.data.basedir=a," +
+        "spark.cdcloader.path.data.control=a," +
+        "spark.cdcloader.path.data.output=a," +
+        "spark.cdcloader.path.sql.basedir=a," +
+        "spark.cdcloader.path.sql.control=a," +
         "spark.cdcloader.tables.control.name=a," +
         "spark.cdcloader.control.changemask.enabled=a," +
         "spark.cdcloader.input.tablenames=a_b," +
