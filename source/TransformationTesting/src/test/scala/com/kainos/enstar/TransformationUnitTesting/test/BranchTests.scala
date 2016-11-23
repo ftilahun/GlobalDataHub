@@ -1,7 +1,7 @@
 package com.kainos.enstar.TransformationUnitTesting.test
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{BranchUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ BranchUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 /**

@@ -2,8 +2,8 @@ package com.kainos.enstar.TransformationUnitTesting.test
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.TransformationUnitTestingUtils
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
-import org.apache.spark.sql.{Row, SQLContext}
+import org.apache.spark.sql.types.{ StringType, StructField, StructType }
+import org.apache.spark.sql.{ Row, SQLContext }
 import org.mockito.Matchers.any
 import org.mockito.Mockito
 import org.scalatest.FunSuite
