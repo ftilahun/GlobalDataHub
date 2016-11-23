@@ -1,7 +1,5 @@
 package enstar.globaldatahub.cdcloader.properties
 
-import com.kainos.enstar.globaldatahub.common.exceptions.PropertyNotSetException
-import com.kainos.enstar.globaldatahub.common.properties.{CommandLinePropertyParser, GDHProperties}
 import enstar.globaldatahub.common.exceptions.PropertyNotSetException
 import enstar.globaldatahub.common.properties.{CommandLinePropertyParser, GDHProperties}
 import org.apache.spark.Logging
@@ -129,19 +127,12 @@ class CDCProperties( propertyMap : Map[String, String] )
  * Companion class for CDCProperties
  */
 object CDCProperties
-    extends CommandLinePropertyParser
-    with Logging {
-
-  /**
-   * configuration object, required by parser
-   * @param kwArgs a property map.
-   */
-  case class Config( kwArgs : Map[String, String] )
+    extends CommandLinePropertyParser {
 
   /**
    * command line parser
    */
-  private val parser = new scopt.OptionParser[Config]( "scopt" ) {
+  override def parser = new scopt.OptionParser[Config]( "CDCLoader" ) {
     head( "CDCLoader", "0.1" )
     opt[Map[String, String]]( "cdcOptions" )
       .valueName(
@@ -204,27 +195,5 @@ object CDCProperties
         "\n\n" +
         "Separate listed values with an underscore.  Ie 1_2_3_4"
     )
-  }
-
-  /**
-   * Map an array of strings in k1=v1,k2=v2 format to a Map[String,String]
-   *
-   * @param propertyArray the string array to map
-   * @return a Map of values
-   */
-  override def parseProperties(
-    propertyArray : Array[String] ) : Map[String, String] = {
-    logInfo( "Parsing command line args" )
-    parser.parse( propertyArray, Config( Map[String, String]() ) ) match {
-      case Some( config ) => {
-        logInfo( "Got valid arguments, continuing" )
-        config.kwArgs
-      }
-      case None =>
-        logError( "could not parse command line arguments" )
-        throw new PropertyNotSetException(
-          "Unable to parse command line options",
-          None )
-    }
   }
 }

@@ -3,7 +3,8 @@ package enstar.globaldatahub.common.properties
 /**
  * Trait for reading property values.
  */
-trait GDHProperties extends Serializable {
+trait GDHProperties
+  extends Serializable {
 
   /**
    * Get the value of a property as a (Java) boolean.
