@@ -151,7 +151,7 @@ object CDCProperties
         c.copy( kwArgs = x )
       }
     note(
-      "The following options are required:" +
+      "The following arguments are required:" +
         "\n\n" +
         "spark.cdcloader.columns.attunity.name.changemask\n" +
         "\t - The name of the attunity change mask column\n" +
