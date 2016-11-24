@@ -17,8 +17,8 @@ class TransformationUnitTestingUtils {
                                  fromStringArraytoRow : Array[String] => Row,
                                  sqlContext : SQLContext ) : DataFrame = {
 
-    val dataRowRDD = loadRDDFromFile( dataResourceLocation, sqlContext ) map
-      fromInputDataRowToStringArray map fromStringArraytoRow
+    val dataRowRDD = loadRDDFromFile( dataResourceLocation, sqlContext )
+        .map(fromInputDataRowToStringArray).map(fromStringArraytoRow)
 
     val schema = loadSchemaFromFile( avroSchemaResourceLocation, sqlContext )
 
