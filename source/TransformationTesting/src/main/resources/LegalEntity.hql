@@ -1,8 +1,8 @@
 SELECT
-    CAST(profit_centre_code as string) as legalentitycode,
-    "NDEX" as sourcesystemcode,
-    profit_centre_desc as legalentitydescription,
-    CAST(NULL as string) as parentlegalentitycode,
-    CAST(NULL as string) as parentlegalentitysourcesystemcode
+    CAST(profit_centre_code AS STRING) AS legalentitycode,
+    "NDEX" AS sourcesystemcode,
+    profit_centre_desc AS legalentitydescription,
+    CAST(NULL AS STRING) AS parentlegalentitycode,
+    CAST(NULL AS STRING) AS parentlegalentitysourcesystemcode
 FROM
     lookup_profit_centre

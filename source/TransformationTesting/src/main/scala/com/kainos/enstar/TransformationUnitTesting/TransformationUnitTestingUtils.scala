@@ -27,10 +27,6 @@ class TransformationUnitTestingUtils {
     dataFrame
   }
 
-  def splitStringToArray( stringToSplit : String ) : Array[String] = {
-    stringToSplit.split( "," )
-  }
-
   def loadHQLStatementFromResource( filename : String )() : String = {
     val stream : InputStream = getClass.getResourceAsStream( "/" + filename )
     val lines = scala.io.Source.fromInputStream( stream ).mkString
