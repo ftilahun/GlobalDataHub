@@ -21,11 +21,11 @@
         },
         {
             "name": "branchcode",  
-            "type": ["string", "null"]
+            "type": "string"
         },
         {
             "name": "branchdescription",  
-            "type": ["string", "null"]
+            "type": "string"
         },
         {
             "name": "cancellationdate",  
@@ -33,11 +33,11 @@
         },
         {
             "name": "coverageeffectivefromdate",  
-            "type": ["string", "null"]
+            "type": "string"
         },
         {
             "name": "coverageeffectivetodate",  
-            "type": ["string", "null"]
+            "type": "string"
         },
         {
             "name": "expirydate",  
@@ -81,15 +81,15 @@
         },
         {
             "name": "sourcesystempolicynumber",  
-            "type": ["string", "null"]
+            "type": "string"
         },
         {
             "name": "sublineofbusinesscode",  
-            "type": ["string", "null"]
+            "type": "string"
         },
         {
             "name": "sublineofbusinessdescription",  
-            "type": ["string", "null"]
+            "type": "string"
         },
         {
             "name": "uniquemarketreference",  
@@ -97,7 +97,7 @@
         },
         {
             "name": "yearofaccount",  
-            "type": ["int", "null"]
+            "type": "int"
         }
  	]
 }
