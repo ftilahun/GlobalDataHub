@@ -1,0 +1,52 @@
+{
+	"namespace": "com.kainos.enstar.avro.schemas.replicatedsources",
+	"type": "record",
+	"name": "underwriter",
+	"fields": [
+	{
+		"name": "underwriter_initials",
+		"type": "string"
+	},
+	{
+		"name": "underwriter_name",
+		"type": "string"
+	},   
+    {
+        "name": "_changeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_loaddatetimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_loadidentifier",
+        "type": "string"
+    },
+    {
+        "name": "_cdcloadtimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangesequence",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangemask",
+        "type": "string"
+    },
+    {
+        "name": "_sourcesystemtransactiondatetime",
+        "type": "string"
+    },
+    {
+        "name": "_isdeleted",
+        "type": "string"
+    }
+
+	]
+}
