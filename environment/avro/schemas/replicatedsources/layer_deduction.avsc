@@ -6,34 +6,33 @@
 	{
 		"name": "deduction_id",
 		"type": "int"
-
 	},
 	{
 		"name": "layer_id",
 		"type": "string"
-
 	},  
     {
         "name": "deduction_code",
         "type": ["string", "null"]
-
     },
     {
         "name": "deduction_pct",
-        "type": "double"
-
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 11,
+        "scale": 7
     }, 
     {
         "name": "_changeoperation",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loaddatetimestamp",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loadidentifier",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_cdcloadtimestamp",
@@ -57,7 +56,7 @@
     },
     {
         "name": "_isdeleted",
-        "type": ["string", "null"]
+        "type": "string"
     }
 
 	]

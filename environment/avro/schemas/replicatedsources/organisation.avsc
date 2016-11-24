@@ -6,29 +6,26 @@
 	{
 		"name": "organisation_id",
 		"type": "int"
-
 	},
 	{
 		"name": "organisation_name",
 		"type": "string"
-
 	},
     {
         "name": "domicile_country_code",
         "type": ["string", "null"]
-
     },    
     {
         "name": "_changeoperation",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loaddatetimestamp",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loadidentifier",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_cdcloadtimestamp",
@@ -52,7 +49,7 @@
     },
     {
         "name": "_isdeleted",
-        "type": ["string", "null"]
+        "type": "string"
     }
 
 	]

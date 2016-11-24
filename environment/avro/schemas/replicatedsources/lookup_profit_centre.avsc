@@ -6,24 +6,22 @@
 	{
 		"name": "profit_centre_code",
 		"type": "int"
-
 	},
 	{
 		"name": "profit_centre_desc",
 		"type": "string"
-
 	},	
     {
         "name": "_changeoperation",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loaddatetimestamp",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loadidentifier",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_cdcloadtimestamp",
@@ -47,7 +45,7 @@
     },
     {
         "name": "_isdeleted",
-        "type": ["string", "null"]
+        "type": "string"
     } 
 
 	]

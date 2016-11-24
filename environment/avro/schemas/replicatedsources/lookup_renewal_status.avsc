@@ -15,15 +15,15 @@
 	},   
     {
         "name": "_changeoperation",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loaddatetimestamp",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loadidentifier",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_cdcloadtimestamp",
@@ -47,7 +47,8 @@
     },
     {
         "name": "_isdeleted",
-        "type": ["string", "null"]
+        "type": "string"
     }
+    
 	]
 }

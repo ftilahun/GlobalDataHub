@@ -6,44 +6,38 @@
 	{
 		"name": "layer_id",
 		"type": "int"
-
 	},
 	{
 		"name": "endorsement_id",
 		"type": "int"
-
 	},
     {
         "name": "row_number",
         "type": "int"
-
     },
     {
         "name": "premium_type_code",
         "type": ["string", "null"]
-
     },
     {
         "name": "amount",
         "type": ["double", "null"]
-
     },
     {
         "name": "settlement_due_date",
         "type": ["string", "null"]
-
     },
     {
         "name": "_changeoperation",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loaddatetimestamp",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_loadidentifier",
-        "type": ["string", "null"]
+        "type": "string"
     },
     {
         "name": "_cdcloadtimestamp",
@@ -67,7 +61,7 @@
     },
     {
         "name": "_isdeleted",
-        "type": ["string", "null"]
+        "type": "string"
     }
 
 	]
