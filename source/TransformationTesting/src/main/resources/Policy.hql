@@ -1,10 +1,10 @@
 SELECT
 
 line.risk_reference AS policynumber, 
-line.line_id AS coveragereference, 
-line.layer_id AS sectionreference,
+CAST(line.line_id AS STRING) AS coveragereference,
+CAST(line.layer_id AS STRING) AS sectionreference,
 "NDEX" AS sourcesystemcode, 
-line.profit_centre_code AS branchcode, 
+CAST(line.profit_centre_code AS STRING) AS branchcode,
 lookup_profit_centre.profit_centre_desc AS branchdescription,
 CASE line.line_status
 	WHEN 'C' THEN layer.expiry_date
@@ -16,7 +16,7 @@ layer.expiry_date AS expirydate,
 layer.fil_code AS filcode, 
 layer.inception_date AS inceptiondate,
 CAST(NULL AS STRING) AS legacypolicynumber,
-line.profit_centre_code AS legalentitycode, 
+CAST(line.profit_centre_code AS STRING) AS legalentitycode,
 line.block AS lineofbusinesscode,
 lookup_block.description AS lineofbusinessdescription,
 line.risk_reference AS linkedmasterreference, 

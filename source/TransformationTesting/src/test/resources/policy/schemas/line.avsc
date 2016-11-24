@@ -21,7 +21,8 @@
         },
         {
             "name": "profit_centre_code",  
-            "type": "int"
+            "type": ["int", "null"],
+            "doc" : "Nullable just for purpose of tests"
         },
         {
             "name": "block",  

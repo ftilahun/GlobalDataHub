@@ -5,11 +5,12 @@
  	"fields": [
         {
             "name": "profit_centre_code", 
-            "type": "int"
+            "type": ["int", "null"]
         },
     	{
     		"name": "profit_centre_desc", 
-    		"type": "string"
+    		"type": ["string", "null"],
+    		"doc": "Nullable just for purpose of tests"
     	}
  	]
 }

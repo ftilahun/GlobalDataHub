@@ -74,7 +74,7 @@ class PolicyTests extends FunSuite with DataFrameSuiteBase {
     val result = SQLRunner.runStatement( statement, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedPolicy, expectedPolicy )
+    assertDataFrameEquals( expectedPolicy, result )
   }
 
 }
