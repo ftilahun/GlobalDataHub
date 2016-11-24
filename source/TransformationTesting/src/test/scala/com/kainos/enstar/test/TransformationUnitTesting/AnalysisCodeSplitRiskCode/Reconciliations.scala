@@ -6,11 +6,11 @@ import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
 /**
- * Created by terences on 23/11/2016.
+ * Created by terences on 24/11/2016.
  */
-class AnalysisCodeSplitRiskCodeTests extends FunSuite with DataFrameSuiteBase {
+class Reconciliations extends FunSuite with DataFrameSuiteBase {
 
-  test( "AnalysisCodeSplitRiskCodeTransformation_test1" ){
+  test( "Reconciliation on test case 1 input test data" ) {
 
     sqlContext.sparkContext.setLogLevel( "WARN" )
 
@@ -21,40 +21,38 @@ class AnalysisCodeSplitRiskCodeTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/analysiscodesplit_riskcode/input/line.csv" ).toString,
+      getClass.getResource( "/analysiscodesplit_riskcode/input/line_test1.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line.avro" ).toString,
       AnalysisCodeSplitRiskCodeUtils.lineMapping,
       sqlc
     )
 
     val line_risk_code : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/analysiscodesplit_riskcode/input/line_risk_code.csv" ).toString,
+      getClass.getResource( "/analysiscodesplit_riskcode/input/line_risk_code_test1.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line_risk_code.avro" ).toString,
       AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping,
       sqlc
     )
 
-    // Load expected result into dataframe
-    val expectedAnalysisCodeSplit : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/analysiscodesplit_riskcode/output/analysiscodesplit.csv" ).toString,
-      getClass.getResource( "/analysiscodesplit_riskcode/schemas/analysiscodesplit.avro" ).toString,
-      AnalysisCodeSplitRiskCodeUtils.analysiscodesplitMapping,
-      sqlc
-    )
-
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/AnalysisCodeSplitRiskCode.hql" )
+    val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitRiskCode/ReconInputTest1.hql" )
+    val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitRiskCode/ReconOutputTest1.hql" )
 
     // Act //
     line.registerTempTable( "line" )
     line_risk_code.registerTempTable( "line_risk_code" )
-    val result = SQLRunner.runStatement( statement, sqlc )
+    val output = SQLRunner.runStatement( statement, sqlc )
+    output.registerTempTable( "analysiscodesplit" )
+
+    val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
+    val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedAnalysisCodeSplit, result )
+    assertDataFrameEquals( reconInput, reconOutput )
   }
 
-  test( "AnalysisCodeSplitRiskCodeTransformation_test2" ){
+  test( "Reconciliation on test case 2 input test data" ) {
 
     sqlContext.sparkContext.setLogLevel( "WARN" )
 
@@ -78,23 +76,21 @@ class AnalysisCodeSplitRiskCodeTests extends FunSuite with DataFrameSuiteBase {
       sqlc
     )
 
-    // Load expected result into dataframe
-    val expectedAnalysisCodeSplit : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/analysiscodesplit_riskcode/output/analysiscodesplit_test2.csv" ).toString,
-      getClass.getResource( "/analysiscodesplit_riskcode/schemas/analysiscodesplit.avro" ).toString,
-      AnalysisCodeSplitRiskCodeUtils.analysiscodesplitMapping,
-      sqlc
-    )
-
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/AnalysisCodeSplitRiskCode.hql" )
+    val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitRiskCode/ReconInputTest1.hql" )
+    val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitRiskCode/ReconOutputTest1.hql" )
 
     // Act //
     line.registerTempTable( "line" )
     line_risk_code.registerTempTable( "line_risk_code" )
-    val result = SQLRunner.runStatement( statement, sqlc )
+    val output = SQLRunner.runStatement( statement, sqlc )
+    output.registerTempTable( "analysiscodesplit" )
+
+    val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
+    val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedAnalysisCodeSplit, result )
+    assertDataFrameEquals( reconInput, reconOutput )
   }
 }

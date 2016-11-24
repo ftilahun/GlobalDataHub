@@ -7,7 +7,7 @@ import org.scalatest.FunSuite
 /**
  * Created by terences on 20/11/2016.
  */
-class BranchTests extends FunSuite with DataFrameSuiteBase {
+class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "BranchTransformation_test1" ){
 

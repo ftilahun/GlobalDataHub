@@ -8,7 +8,7 @@ import org.scalatest.FunSuite
 /**
  * Created by terences on 23/11/2016.
  */
-class AnalysisCodeSplitRiskCodeValidationTests extends FunSuite with DataFrameSuiteBase {
+class ValidationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "Validation: When input contains no null values for risk_reference validation should pass" ) {
 
