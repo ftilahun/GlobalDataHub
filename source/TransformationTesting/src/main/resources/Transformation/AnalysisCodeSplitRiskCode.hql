@@ -6,6 +6,6 @@ SELECT
     "RiskCode" AS analysiscodetype,
     line_risk_code.risk_code AS analysiscode,
     line_risk_code.risk_code_pct AS splitpercent
-FROM line_risk_code
-    JOIN line
-    ON line_risk_code.line_id = line.line_id
+FROM line
+    JOIN line_risk_code
+    ON line.line_id = line_risk_code.line_id
