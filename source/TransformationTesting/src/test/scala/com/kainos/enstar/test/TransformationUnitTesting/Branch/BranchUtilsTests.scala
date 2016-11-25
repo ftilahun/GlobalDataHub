@@ -1,4 +1,4 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting.Branch
 
 import com.kainos.enstar.TransformationUnitTesting.BranchUtils
 import org.scalatest.FlatSpec
