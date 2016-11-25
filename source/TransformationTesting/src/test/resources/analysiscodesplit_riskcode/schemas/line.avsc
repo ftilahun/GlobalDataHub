@@ -3,10 +3,10 @@
  	"type": "record",
  	"name": "line",
     "fields": [
-    	{
+        {
     		"name": "line_id",
     		"type": "int"
-    	},
+   	    },
         {
             "name": "layer_id",
             "type": "int"

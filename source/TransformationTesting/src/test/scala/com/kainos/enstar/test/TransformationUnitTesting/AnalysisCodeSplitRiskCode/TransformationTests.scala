@@ -10,7 +10,7 @@ import org.scalatest.FunSuite
  */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "AnalysisCodeSplitRiskCodeTransformation_test1" ){
+  test( "AnalysisCodeSplitRiskCodeTransformation mapping test one line row to one line_risk_code row" ){
 
     sqlContext.sparkContext.setLogLevel( "WARN" )
 
@@ -54,7 +54,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     assertDataFrameEquals( expectedAnalysisCodeSplit, result )
   }
 
-  test( "AnalysisCodeSplitRiskCodeTransformation_test2" ){
+  test( "AnalysisCodeSplitRiskCodeTransformation mapping test many line_risk_code rows to one line row" ){
 
     sqlContext.sparkContext.setLogLevel( "WARN" )
 
