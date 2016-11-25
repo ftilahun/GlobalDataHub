@@ -1,16 +1,16 @@
 package com.kainos.enstar.TransformationUnitTesting.test
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ BranchUtils, LegalEntityUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ LegalEntityUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
 /**
- * Created by terences on 21/11/2016.
+ * Created by terences on 24/11/2016.
  */
-class LegalEntityTests extends FunSuite with DataFrameSuiteBase {
+class LegalEntityReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "LegalEntityTransformation_test1" ){
+  test( "Reconciliation over test data" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -26,23 +26,20 @@ class LegalEntityTests extends FunSuite with DataFrameSuiteBase {
       sqlContext
     )
 
-    // Load expected result into dataframe
-    val expectedLegalEntity : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/legalentity/output/legalentity_test1.csv" ).toString,
-      getClass.getResource( "/legalentity/schemas/legalentity.avro" ).toString,
-      _.split( "," ),
-      LegalEntityUtils.legalEntityMapping,
-      sqlContext
-    )
-
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "LegalEntity.hql" )
+    val reconStatementInput = utils.loadHQLStatementFromResource("Reconciliation/LegalEntity/ReconInputTest1.hql")
+    val reconStatementOutput = utils.loadHQLStatementFromResource("Reconciliation/LegalEntity/ReconOutputTest1.hql")
 
     // Act //
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
-    val result = SQLRunner.runStatement( statement, sqlc )
-    
+    val output = SQLRunner.runStatement( statement, sqlc )
+    output.registerTempTable( "legalentity" )
+
+    val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
+    val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )
+
     // Assert //
-    assertDataFrameEquals( expectedLegalEntity, result )
+    assertDataFrameEquals( reconInput, reconOutput )
   }
 }
