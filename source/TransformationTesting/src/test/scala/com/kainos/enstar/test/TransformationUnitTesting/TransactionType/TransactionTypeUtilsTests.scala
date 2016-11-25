@@ -1,4 +1,4 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting.TransactionType
 
 import com.kainos.enstar.TransformationUnitTesting.TransactionTypeUtils
 import org.scalatest.FlatSpec
