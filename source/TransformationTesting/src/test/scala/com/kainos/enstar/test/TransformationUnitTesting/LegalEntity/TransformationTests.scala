@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.LegalEntity
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{LegalEntityUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ LegalEntityUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -36,7 +36,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource("Transformation/LegalEntity.hql")
+    val statement = utils.loadHQLStatementFromResource( "Transformation/LegalEntity.hql" )
 
     // Act //
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )

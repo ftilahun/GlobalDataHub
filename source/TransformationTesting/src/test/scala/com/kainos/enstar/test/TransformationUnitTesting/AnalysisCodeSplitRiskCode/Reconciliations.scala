@@ -23,6 +23,7 @@ class Reconciliations extends FunSuite with DataFrameSuiteBase {
     val line : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/input/line_test1.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.lineMapping,
       sqlc
     )
@@ -30,6 +31,7 @@ class Reconciliations extends FunSuite with DataFrameSuiteBase {
     val line_risk_code : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/input/line_risk_code_test1.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line_risk_code.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping,
       sqlc
     )
@@ -65,6 +67,7 @@ class Reconciliations extends FunSuite with DataFrameSuiteBase {
     val line : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/input/line_test2.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.lineMapping,
       sqlc
     )
@@ -72,6 +75,7 @@ class Reconciliations extends FunSuite with DataFrameSuiteBase {
     val line_risk_code : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/input/line_risk_code_test2.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line_risk_code.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping,
       sqlc
     )
