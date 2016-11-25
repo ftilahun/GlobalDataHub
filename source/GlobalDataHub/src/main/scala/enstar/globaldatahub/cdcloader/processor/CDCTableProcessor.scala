@@ -111,6 +111,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
     logInfo( "Generating UDFs for " + tableName )
     val generateSequenceNumber = udf(
       () => userFunctions.generateSequenceNumber( properties ) )
+    val tableNameUdf = udf(() => tableName)
     val operation = udf( () => "INSERT" )
     val timeStamp = udf( () => userFunctions.getCurrentTime( properties ) )
     val isDeleted = udf( userFunctions.isDeleted( _ : String, properties ) )
@@ -174,6 +175,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
         "spark.cdcloader.columns.metadata.name.isdeleted" ),
         isDeleted( output( properties.getStringProperty(
           "spark.cdcloader.columns.attunity.name.changeoperation" ) ) ) )
+        .withColumn("_tablename", tableNameUdf())
   }
 
 }
