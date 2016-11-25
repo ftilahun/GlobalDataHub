@@ -1,9 +1,10 @@
 package com.kainos.enstar.TransformationUnitTesting.test
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{BranchUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ BranchUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
+
 /**
  * Created by terences on 20/11/2016.
  */
@@ -33,7 +34,7 @@ class BranchTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Branch.hql" )
+    val statement = utils.loadHQLStatementFromResource("Transformation/Branch.hql")
 
     // Act //
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )

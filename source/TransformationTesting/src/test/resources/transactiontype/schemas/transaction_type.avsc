@@ -1,0 +1,42 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+ 	"type": "record",
+ 	"name": "transaction_type",
+ 	"fields": [
+    	{
+    		"name": "transactiontypecode",
+    		"type": "string",
+    		"doc": "The code for the transaction type"
+    	},
+    	{
+    	    "name": "transactionsubtypecode",
+            "type": "string",
+            "doc": "The code for the transaction subtype"
+        },
+        {
+            "name": "sourcesystemcode",
+            "type": "string",
+            "doc": "The code for the source system"
+        },
+        {
+            "name": "transactiontypedescription",
+            "type": "string",
+            "doc": "Description of the transaction type"
+        },
+        {
+            "name": "transactionsubtypedescription",
+            "type": ["string", "null"],
+            "doc": "Description of the transaction subtype"
+        },
+        {
+            "name": "group",
+            "type": "string",
+            "doc": "Allows for basic grouping of transactions"
+        },
+        {
+            "name": "iscashtransactiontype",
+            "type": "boolean",
+            "doc": "Indicator which identifies if transaction is a cash transaction"
+        }
+ 	]
+}
