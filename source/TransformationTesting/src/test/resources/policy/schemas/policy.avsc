@@ -69,7 +69,8 @@
         },
         {
             "name": "linkedmasterreference",  
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable in the actual ECM but not in NDEX as it comes from line.risk_reference which must be populated.  For this test we make it not null."
         },
         {
             "name": "majorriskcode",  
