@@ -16,26 +16,27 @@ class PolicyTests extends FunSuite with DataFrameSuiteBase {
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
+    sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
     val layer : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/policy/input/layer_test1.csv" ).toString,
       getClass.getResource( "/policy/schemas/layer.avro" ).toString,
-      PolicyUtils.lookupProfitCentreMapping,
+      PolicyUtils.layerMapping,
       sqlc
     )
 
     val line : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/policy/input/line_test1.csv" ).toString,
       getClass.getResource( "/policy/schemas/line.avro" ).toString,
-      PolicyUtils.lookupProfitCentreMapping,
+      PolicyUtils.lineMapping,
       sqlc
     )
 
     val lookup_block : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
       getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
-      PolicyUtils.lookupProfitCentreMapping,
+      PolicyUtils.lookupBlockMapping,
       sqlc
     )
 
@@ -49,7 +50,7 @@ class PolicyTests extends FunSuite with DataFrameSuiteBase {
     val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
       getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
-      PolicyUtils.lookupProfitCentreMapping,
+      PolicyUtils.underwritingBlockMapping,
       sqlc
     )
 

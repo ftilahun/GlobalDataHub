@@ -13,7 +13,7 @@
     	},
         {
             "name": "risk_reference",  
-            "type": "string"
+            "type": "string",
             "doc": "This is nullable in the NDEX source DB but if it is null this is an unrecoverable error.  Added validation check to ensure it is not null so we can make it not null in this schema."
         },
         {

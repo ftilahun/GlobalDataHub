@@ -121,12 +121,12 @@ class PolicyUtilsTests extends FlatSpec {
     val column9 = "J"
     val column10 = "K"
     val column11 = "L"
-    val column12 = "M"
+    val column12 = ""
     val column13 = "N"
     val column14 = "O"
     val column15 = "P"
     val column16 = "Q"
-    val column17 = "R"
+    val column17 = ""
     val column18 = "S"
     val column19 = "T"
     val column20 = "U"
@@ -155,13 +155,13 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 9 ).equals( column9 ) )
     assert( row.get( 10 ).equals( column10 ) )
     assert( row.get( 11 ).equals( column11 ) )
-    assert( row.get( 12 ).equals( column12 ) )
+    assert( row.get( 12 ) == null )
     assert( row.get( 13 ).equals( column13 ) )
     assert( row.get( 14 ).equals( column14 ) )
     assert( row.get( 15 ).equals( column15 ) )
     assert( row.get( 16 ).equals( column16 ) )
     assert( row.get( 17 ).equals( column17 ) )
-    assert( row.get( 18 ).equals( column18 ) )
+    assert( row.get( 18 ) == null )
     assert( row.get( 19 ).equals( column19 ) )
     assert( row.get( 20 ).equals( column20 ) )
     assert( row.get( 21 ).equals( column21 ) )
@@ -169,5 +169,4 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 23 ) == column23.toInt )
 
   }
-
 }

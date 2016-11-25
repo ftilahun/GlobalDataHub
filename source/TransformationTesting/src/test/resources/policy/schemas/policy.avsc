@@ -21,11 +21,11 @@
         },
         {
             "name": "branchcode",  
-            "type": "string"
+            "type": ["string","null"]
         },
         {
             "name": "branchdescription",  
-            "type": "string"
+            "type": ["string","null"]
         },
         {
             "name": "cancellationdate",  
@@ -33,11 +33,11 @@
         },
         {
             "name": "coverageeffectivefromdate",  
-            "type": "string"
+            "type": ["string","null"]
         },
         {
             "name": "coverageeffectivetodate",  
-            "type": "string"
+            "type": ["string","null"]
         },
         {
             "name": "expirydate",  
@@ -82,15 +82,16 @@
         },
         {
             "name": "sourcesystempolicynumber",  
-            "type": "string"
+            "type": "string",
+            "doc": "This field should be nullable in the actual ECM but not in NDEX as it comes from line.risk_reference which must be populated.  For this test we make it not null."
         },
         {
             "name": "sublineofbusinesscode",  
-            "type": "string"
+            "type": ["string","null"]
         },
         {
             "name": "sublineofbusinessdescription",  
-            "type": "string"
+            "type": ["string","null"]
         },
         {
             "name": "uniquemarketreference",  
@@ -98,7 +99,7 @@
         },
         {
             "name": "yearofaccount",  
-            "type": "int"
+            "type": ["int", "null"]
         }
  	]
 }
