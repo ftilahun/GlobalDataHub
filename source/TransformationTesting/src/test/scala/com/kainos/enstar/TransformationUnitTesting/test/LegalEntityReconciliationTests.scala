@@ -28,8 +28,8 @@ class LegalEntityReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "LegalEntity.hql" )
-    val reconStatementInput = utils.loadHQLStatementFromResource("Reconciliation/LegalEntity/ReconInputTest1.hql")
-    val reconStatementOutput = utils.loadHQLStatementFromResource("Reconciliation/LegalEntity/ReconOutputTest1.hql")
+    val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/LegalEntity/InputRecordCount.hql" )
+    val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/LegalEntity/OutputRecordCount.hql" )
 
     // Act //
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
