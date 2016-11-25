@@ -1,9 +1,9 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.TransformationUnitTestingUtils
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
-import org.apache.spark.sql.{Row, SQLContext}
+import org.apache.spark.sql.types.{ StringType, StructField, StructType }
+import org.apache.spark.sql.{ Row, SQLContext }
 import org.mockito.Matchers.any
 import org.mockito.Mockito
 import org.scalatest.FunSuite
@@ -14,6 +14,8 @@ import org.scalatest.FunSuite
 class TransformationUnitTestingUtilsTests extends FunSuite with DataFrameSuiteBase {
 
   test( "PopulateDataFrame should populate a dataframe" ) {
+
+    sqlContext.sparkContext.setLogLevel( "WARN" )
 
     // Arrange
     val data = ( "a,b,c" :: "d,e,f" :: Nil )

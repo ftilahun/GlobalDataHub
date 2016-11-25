@@ -1,9 +1,9 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.SQLRunner
 import org.apache.spark.sql.Row
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.types.{ StringType, StructField, StructType }
 import org.scalatest.FunSuite
 
 /**
@@ -12,6 +12,8 @@ import org.scalatest.FunSuite
 class SQLRunnerTests extends FunSuite with DataFrameSuiteBase {
 
   test( "RunStatement should run statement and return correct result for simple query" ) {
+
+    sqlContext.sparkContext.setLogLevel( "WARN" )
 
     // Arrange
     val statement = "SELECT field1 from Table"
