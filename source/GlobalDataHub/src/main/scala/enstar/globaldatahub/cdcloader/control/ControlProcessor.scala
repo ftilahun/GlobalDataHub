@@ -49,10 +49,8 @@ trait ControlProcessor extends processor.ControlProcessor {
                               tableOperation : TableOperations ) : Unit
 
   /**
-   * get the last attunity change sequence in the control table the sql expected by this method is
-   * as follows:
+   * get the last attunity change sequence in the control table
    *
-   * SELECT MAX(lastattunitychangeseq) FROM control WHERE attunitytablename =
    *
    * @param sqlContext the SQL Context
    * @param sqlFileReader SQL reader for reading SQL files from the filesystem

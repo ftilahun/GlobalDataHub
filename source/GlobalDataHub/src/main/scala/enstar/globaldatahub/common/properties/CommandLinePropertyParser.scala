@@ -34,7 +34,7 @@ trait CommandLinePropertyParser extends Logging {
         logError( "could not parse command line arguments" )
         throw new PropertyNotSetException(
           "Unable to parse command line options",
-          None )
+          null )
     }
   }
 }

@@ -55,14 +55,14 @@ class CDCProperties( propertyMap : Map[String, String] )
                              typeCheck : Option[Any] => Unit ) : Unit = {
     logDebug( "Checking property: " + keyName )
     if ( propertyMap.get( keyName ).isEmpty ) {
-      throw new PropertyNotSetException( keyName, None )
+      throw new PropertyNotSetException( keyName, null )
     }
     try {
       val a = propertyMap.get( keyName )
       typeCheck( a )
     } catch {
       case e : Exception =>
-        throw new PropertyNotSetException( "Wrong type: " + keyName, Some( e ) )
+        throw new PropertyNotSetException( "Wrong type: " + keyName, e )
     }
     logDebug( "property " + keyName + " is valid" )
   }
