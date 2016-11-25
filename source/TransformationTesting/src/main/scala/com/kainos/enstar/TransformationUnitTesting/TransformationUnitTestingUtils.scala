@@ -12,13 +12,13 @@ import org.apache.spark.sql.{ DataFrame, Row, SQLContext }
  */
 class TransformationUnitTestingUtils {
 
-  def populateDataFrameFromFile( dataResourceLocation : String,
-                                 avroSchemaResourceLocation : String,
-                                 mapping : Array[String] => Row, sqlContext : SQLContext ) : DataFrame = {
+  def populateDataFrameFromFile( dataResourceLocation : String, avroSchemaResourceLocation : String,
+                                 fromInputDataRowToStringArray : String => Array[String],
+                                 fromStringArraytoRow : Array[String] => Row,
+                                 sqlContext : SQLContext ) : DataFrame = {
 
     val dataRowRDD = loadRDDFromFile( dataResourceLocation, sqlContext )
-      .map( _.split( "," ) )
-      .map( col => mapping( col ) )
+      .map( fromInputDataRowToStringArray ).map( fromStringArraytoRow )
 
     val schema = loadSchemaFromFile( avroSchemaResourceLocation, sqlContext )
 

@@ -32,10 +32,10 @@ class TransformationUnitTestingUtilsTests extends FunSuite with DataFrameSuiteBa
     val utils = Mockito.mock( classOf[TransformationUnitTestingUtils] )
     Mockito.when( utils.loadRDDFromFile( "location", sqlContext ) ).thenReturn( dataRDD )
     Mockito.when( utils.loadSchemaFromFile( "avroLocation", sqlContext ) ).thenReturn( schema )
-    Mockito.when( utils.populateDataFrameFromFile( any[String], any[String], any[( Array[String] ) => Row](), any[SQLContext] ) ).thenCallRealMethod()
+    Mockito.when( utils.populateDataFrameFromFile( any[String], any[String], any[( String => Array[String] )](), any[( Array[String] ) => Row](), any[SQLContext] ) ).thenCallRealMethod()
 
     // Act
-    val dataFrame = utils.populateDataFrameFromFile( "location", "avroLocation", col => Row( col( 0 ), col( 1 ), col( 2 ) ), sqlContext )
+    val dataFrame = utils.populateDataFrameFromFile( "location", "avroLocation", _.split(","), col => Row( col( 0 ), col( 1 ), col( 2 ) ), sqlContext )
 
     // Assert
     assertDataFrameEquals( expectedDataFrame, dataFrame )

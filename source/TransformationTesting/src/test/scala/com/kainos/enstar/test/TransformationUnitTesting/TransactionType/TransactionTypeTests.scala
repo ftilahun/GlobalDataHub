@@ -16,6 +16,7 @@ class TransactionTypeTests extends FunSuite with DataFrameSuiteBase {
     val lookup_premium_type : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource("/transactiontype/input/lookup_premium_type.csv").toString,
       getClass.getResource("/transactiontype/schemas/lookup_premium_type.avro").toString,
+      _.split( "," ),
       TransactionTypeUtils.lookupPremiumTypeMapping,
       sqlc
     )
@@ -23,6 +24,7 @@ class TransactionTypeTests extends FunSuite with DataFrameSuiteBase {
     val expectedTransactionType : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource("/transactiontype/output/transaction_type.csv").toString,
       getClass.getResource("/transactiontype/schemas/transaction_type.avro").toString,
+      _.split( "," ),
       TransactionTypeUtils.transactionTypeMapping,
       sqlc
     )

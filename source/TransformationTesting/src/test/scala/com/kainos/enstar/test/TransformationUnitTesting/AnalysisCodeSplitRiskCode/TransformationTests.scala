@@ -23,6 +23,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val line : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/input/line_test1.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.lineMapping,
       sqlc
     )
@@ -30,6 +31,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val line_risk_code : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/input/line_risk_code_test1.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line_risk_code.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping,
       sqlc
     )
@@ -38,6 +40,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedAnalysisCodeSplit : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/output/analysiscodesplit.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/analysiscodesplit.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.analysiscodesplitMapping,
       sqlc
     )
@@ -67,6 +70,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val line : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/input/line_test2.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.lineMapping,
       sqlc
     )
@@ -74,6 +78,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val line_risk_code : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/input/line_risk_code_test2.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/line_risk_code.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping,
       sqlc
     )
@@ -82,6 +87,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedAnalysisCodeSplit : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/analysiscodesplit_riskcode/output/analysiscodesplit_test2.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode/schemas/analysiscodesplit.avro" ).toString,
+      _.split( "," ),
       AnalysisCodeSplitRiskCodeUtils.analysiscodesplitMapping,
       sqlc
     )

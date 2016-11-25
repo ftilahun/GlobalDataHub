@@ -23,6 +23,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/branch/input/lookup_profit_centre_test1.csv" ).toString,
       getClass.getResource( "/branch/schemas/lookup_profit_centre.avro" ).toString,
+      _.split( "," ),
       BranchUtils.lookupProfitCentreMapping,
       sqlc
     )
@@ -31,6 +32,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedBranch : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/branch/output/branch_test1.csv" ).toString,
       getClass.getResource( "/branch/schemas/branch.avro" ).toString,
+      _.split( "," ),
       BranchUtils.branchMapping,
       sqlc
     )
