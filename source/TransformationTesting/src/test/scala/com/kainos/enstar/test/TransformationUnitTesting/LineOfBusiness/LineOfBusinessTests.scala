@@ -21,6 +21,7 @@ class LineOfBusinessTests extends FunSuite with DataFrameSuiteBase {
     val lookup_block : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/lineofbusiness/input/lookup_block_test1.csv" ).toString,
       getClass.getResource( "/lineofbusiness/schemas/lookup_block.avro" ).toString,
+      _.split(","),
       LineOfBusinessUtils.lookupBlockMapping,
       sqlc
     )
@@ -28,6 +29,7 @@ class LineOfBusinessTests extends FunSuite with DataFrameSuiteBase {
     val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/lineofbusiness/input/underwriting_block_test1.csv" ).toString,
       getClass.getResource( "/lineofbusiness/schemas/underwriting_block.avro" ).toString,
+      _.split(","),
       LineOfBusinessUtils.underwritingBlockMapping,
       sqlc
     )
@@ -36,6 +38,7 @@ class LineOfBusinessTests extends FunSuite with DataFrameSuiteBase {
     val expectedLineOfBusiness : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/lineofbusiness/output/line_of_business_test1.csv" ).toString,
       getClass.getResource( "/lineofbusiness/schemas/line_of_business.avro" ).toString,
+      _.split(","),
       LineOfBusinessUtils.lineOfBusinessMapping,
       sqlc
     )
