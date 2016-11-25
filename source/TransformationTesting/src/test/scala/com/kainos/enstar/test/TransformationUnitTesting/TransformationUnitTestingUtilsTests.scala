@@ -1,4 +1,4 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.TransformationUnitTestingUtils
@@ -14,6 +14,8 @@ import org.scalatest.FunSuite
 class TransformationUnitTestingUtilsTests extends FunSuite with DataFrameSuiteBase {
 
   test( "PopulateDataFrame should populate a dataframe" ) {
+
+    sqlContext.sparkContext.setLogLevel( "WARN" )
 
     // Arrange
     val data = ( "a,b,c" :: "d,e,f" :: Nil )
