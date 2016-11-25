@@ -58,6 +58,34 @@ class PolicyUtilsTests extends FlatSpec {
 
   }
 
+  "lineMapping" should "generate a Row if risk_reference column is null" in {
+
+    // Arrange
+    val column0 = "0"
+    val column1 = "1"
+    val column2 = ""
+    val column3 = "D"
+    val column4 = "4"
+    val column5 = "F"
+    val column6 = "G"
+    val column7 = "H"
+
+    // Act
+    val row = PolicyUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: Nil ).toArray )
+
+    // Assert
+    assert( row.size == 8 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ) == column1.toInt )
+    assert( row.get( 2 ) == null )
+    assert( row.get( 3 ).equals( column3 ) )
+    assert( row.get( 4 ) == column4.toInt )
+    assert( row.get( 5 ).equals( column5 ) )
+    assert( row.get( 6 ).equals( column6 ) )
+    assert( row.get( 7 ).equals( column7 ) )
+
+  }
+
   "lookupBlockMapping" should "generate a Row" in {
 
     // Arrange

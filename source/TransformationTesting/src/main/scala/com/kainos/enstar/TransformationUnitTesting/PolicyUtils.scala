@@ -12,7 +12,7 @@ object PolicyUtils {
   }
 
   def lineMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), cols( 3 ), cols( 4 ).toInt, cols( 5 ), cols( 6 ), cols( 7 ) )
+    Row( cols( 0 ).toInt, cols( 1 ).toInt, { if ( cols( 2 ).equals( "" ) ) null else cols( 2 ) }, cols( 3 ), cols( 4 ).toInt, cols( 5 ), cols( 6 ), cols( 7 ) )
   }
 
   def lookupBlockMapping( cols : Array[String] ) : Row = {
