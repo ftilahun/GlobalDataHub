@@ -1,6 +1,7 @@
 package enstar.globaldatahub.cdcloader.io
 
 import enstar.globaldatahub.TestContexts
+import enstar.globaldatahub.common.exceptions.DataFrameWriteException
 import enstar.globaldatahub.common.io.AvroDataFrameWriter
 import org.apache.hadoop.fs.PathExistsException
 import org.apache.spark.sql.{ AnalysisException, DataFrame, SQLContext }
@@ -47,7 +48,7 @@ class CDCDataFrameWriterSpec
           Some( StorageLevel.MEMORY_ONLY ) ) )
       .thenThrow( classOf[AnalysisException] )
     Then( "An exception should be rasied" )
-    an[PathExistsException] should be thrownBy {
+    an[DataFrameWriteException] should be thrownBy {
       cdcDataFrameWriter.write( TestContexts.sqlContext,
         "/some/existing/path",
         data,

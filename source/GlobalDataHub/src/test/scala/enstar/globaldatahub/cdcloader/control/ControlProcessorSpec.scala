@@ -35,7 +35,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       .when(
         properties.getStringProperty( "spark.cdcloader.tables.control.name" ) )
       .thenReturn( "control" )
-    When( "The input is valid" )
+    And( "The input is valid" )
     Mockito
       .when(
         reader.read( TestContexts.sqlContext,
@@ -137,7 +137,7 @@ class ControlProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       reader,
       properties,
       tableOperations )
-    When( "The control table has 10 rows" )
+    And( "The control table has 10 rows" )
     Mockito
       .when(
         properties.getStringProperty( "spark.cdcloader.path.sql.controlpath" ) )

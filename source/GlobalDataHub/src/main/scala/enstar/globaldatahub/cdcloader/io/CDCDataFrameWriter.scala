@@ -1,5 +1,6 @@
 package enstar.globaldatahub.cdcloader.io
 
+import enstar.globaldatahub.common.exceptions.DataFrameWriteException
 import enstar.globaldatahub.common.io.DataFrameWriter
 import org.apache.hadoop.fs.PathExistsException
 import org.apache.spark.Logging
@@ -36,7 +37,7 @@ class CDCDataFrameWriter( writer : DataFrameWriter )
     } catch {
       //a more readable exception
       case e : AnalysisException =>
-        throw new PathExistsException( path )
+        throw new DataFrameWriteException( path, e )
     }
   }
 }
