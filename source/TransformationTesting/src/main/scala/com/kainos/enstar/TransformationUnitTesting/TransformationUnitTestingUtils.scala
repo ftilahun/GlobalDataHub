@@ -14,9 +14,11 @@ class TransformationUnitTestingUtils {
 
   def populateDataFrameFromFile( dataResourceLocation : String, avroSchemaResourceLocation : String, mapping : Array[String] => Row, sqlContext : SQLContext ) : DataFrame = {
 
-    val dataRowRDD = loadRDDFromFile( dataResourceLocation, sqlContext )
-      .map( _.split( "," ) )
-      .map( col => mapping( col ) )
+    val one = loadRDDFromFile( dataResourceLocation, sqlContext )
+
+      val two = one.map( _.split( "," ) )
+      val dataRowRDD = two.map( col => mapping( col ) )
+
 
     val schema = loadSchemaFromFile( avroSchemaResourceLocation, sqlContext )
 

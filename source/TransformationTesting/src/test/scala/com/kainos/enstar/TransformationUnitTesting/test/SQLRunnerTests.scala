@@ -3,7 +3,7 @@ package com.kainos.enstar.TransformationUnitTesting.test
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.SQLRunner
 import org.apache.spark.sql.Row
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.types.{ StringType, StructField, StructType }
 import org.scalatest.FunSuite
 
 /**
