@@ -27,7 +27,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplitRiskCode/Validation1.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplitRiskCode/CheckForNullRiskReference.hql" )
 
     // Act //
     line.registerTempTable( "line" )
@@ -54,7 +54,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplitRiskCode/Validation1.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplitRiskCode/CheckForNullRiskReference.hql" )
 
     // Act //
     line.registerTempTable( "line" )
@@ -88,7 +88,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplitRiskCode/Validation2.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplitRiskCode/CheckForLineWithoutLineRiskCode.hql" )
 
     // Act //
     line.registerTempTable( "line" )
@@ -123,7 +123,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplitRiskCode/Validation2.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplitRiskCode/CheckForLineWithoutLineRiskCode.hql" )
 
     // Act //
     line.registerTempTable( "line" )
