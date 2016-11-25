@@ -1,0 +1,111 @@
+{
+	"namespace": "com.kainos.enstar.avro.schemas.replicatedsources",
+	"type": "record",
+	"name": "line",
+	"fields": [
+	{
+		"name": "line_id",
+		"type": "int"
+	},
+	{
+		"name": "layer_id",
+		"type": "int"
+	},
+	{
+		"name": "risk_reference",
+		"type": ["string", "null"]
+	},	
+	{
+		"name": "profit_centre_code",
+		"type": "int"
+	},
+	{
+		"name": "block",
+		"type": ["string", "null"]
+	},
+	{
+		"name": "business_type",
+		"type": ["int", "null"]
+	},
+	{
+		"name": "line_status",
+		"type": ["string", "null"]
+	},
+	{
+		"name": "underwriter_initials",
+		"type": "string"
+	},
+	{
+		"name": "est_signing_down_pct",
+		"type": ["double", "null"]
+	},
+	{
+		"name": "signed_order_pct",
+		"type": ["double", "null"]
+	},
+	{
+		"name": "signed_line_pct",
+		"type": ["double", "null"]
+	},
+	{
+		"name": "total_deductions",
+		"type": ["double", "null"]
+	},
+	{
+		"name": "written_date",
+		"type": ["string", "null"]
+	},
+	{
+		"name": "written_line_pct",
+		"type": ["int", "null"]
+	},
+	{
+		"name": "written_order_pct",
+		"type": ["bytes", "null"],
+		"logicalType": "decimal",
+		"precision": 11,
+		"scale": 7
+	},
+	{
+		"name": "epi_settlement_ccy",
+		"type": ["string", "null"]
+	},
+    {
+        "name": "_changeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_loaddatetimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_loadidentifier",
+        "type": "string"
+    },
+    {
+        "name": "_cdcloadtimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangesequence",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangemask",
+        "type": "string"
+    },
+    {
+        "name": "_sourcesystemtransactiondatetime",
+        "type": "string"
+    },
+    {
+        "name": "_isdeleted",
+        "type": "string"
+    }
+
+	]
+}
