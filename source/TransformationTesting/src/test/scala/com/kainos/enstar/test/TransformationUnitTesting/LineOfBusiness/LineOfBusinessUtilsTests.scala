@@ -1,6 +1,6 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting.LineOfBusiness
 
-import com.kainos.enstar.TransformationUnitTesting.{LineOfBusinessUtils}
+import com.kainos.enstar.TransformationUnitTesting.LineOfBusinessUtils
 import org.scalatest.FlatSpec
 
 /**

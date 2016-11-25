@@ -1,4 +1,4 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting.LineOfBusiness
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{LineOfBusinessUtils, SQLRunner, TransformationUnitTestingUtils}
