@@ -1,13 +1,13 @@
 package enstar.globaldatahub.cdccontrol.processor
 
 import enstar.globaldatahub.cdccontrol.udfs.UserFunctions
-import enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLFileReader, TableOperations}
+import enstar.globaldatahub.common.io.{ DataFrameReader, DataFrameWriter, SQLFileReader, TableOperations }
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.SparkContext
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CDCControlProcessor
@@ -48,7 +48,7 @@ class CDCControlProcessorSpec
     val writer = Mockito.mock( classOf[DataFrameWriter] )
     val data = Mockito.mock( classOf[DataFrame] )
     val sqlFileReader = Mockito.mock( classOf[SQLFileReader] )
-    val userFunctions = Mockito.mock(classOf[UserFunctions])
+    val userFunctions = Mockito.mock( classOf[UserFunctions] )
 
     Given( "A control processor" )
     val processor = new CDCContolProcessor
@@ -89,10 +89,10 @@ class CDCControlProcessorSpec
       deRegisterTempTable( org.mockito.Matchers.any( classOf[SQLContext] ),
         org.mockito.Matchers.anyString() )
 
-    Then("UDFs should be registered")
-    Mockito.verify(userFunctions, Mockito.times(1)).
-      registerUDFs(org.mockito.Matchers.any(classOf[SQLContext]),
-        org.mockito.Matchers.any(classOf[GDHProperties]))
+    Then( "UDFs should be registered" )
+    Mockito.verify( userFunctions, Mockito.times( 1 ) ).
+      registerUDFs( org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.any( classOf[GDHProperties] ) )
 
     Then( "The output control data should be written" )
     Mockito.verify( writer, Mockito.times( 1 ) ).

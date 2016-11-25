@@ -1,8 +1,8 @@
 package enstar.globaldatahub.cdccontrol.module
 
-import enstar.globaldatahub.cdccontrol.io.{ControlDataFrameReader, ControlDataFrameWriter}
+import enstar.globaldatahub.cdccontrol.io.{ ControlDataFrameReader, ControlDataFrameWriter }
 import enstar.globaldatahub.cdccontrol.properties.ControlProperties
-import enstar.globaldatahub.cdccontrol.udfs.{ControlUserFunctions, UserFunctions}
+import enstar.globaldatahub.cdccontrol.udfs.{ ControlUserFunctions, UserFunctions }
 import enstar.globaldatahub.common.io._
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
@@ -11,7 +11,6 @@ import org.apache.spark.Logging
  * Creates required objects for this job.
  */
 object CDCControlModule extends Logging {
-
 
   logInfo( "Creating required objects" )
   private val _dataFrameReader : DataFrameReader = new ControlDataFrameReader(
@@ -59,10 +58,10 @@ object CDCControlModule extends Logging {
   def dataFrameReader : DataFrameReader = _dataFrameReader
 
   /**
-    * Get the UDFs
-    *
-    * @return a UDF object
-    */
-  def userFunctions: UserFunctions = _userFunctions
+   * Get the UDFs
+   *
+   * @return a UDF object
+   */
+  def userFunctions : UserFunctions = _userFunctions
 
 }

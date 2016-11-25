@@ -1,25 +1,25 @@
 package enstar.globaldatahub.cdccontrol.module
 
 import enstar.globaldatahub.cdccontrol.properties.ControlProperties
-import enstar.globaldatahub.common.io.{DataFrameReader, DataFrameWriter, SQLReader, TableOperations}
+import enstar.globaldatahub.common.io.{ DataFrameReader, DataFrameWriter, SQLReader, TableOperations }
 import enstar.globaldatahub.common.properties.GDHProperties
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
-  * Unit tests for CDCControlModule
-  */
+ * Unit tests for CDCControlModule
+ */
 class CDCControlModuleSpec
-  extends FlatSpec
+    extends FlatSpec
     with GivenWhenThen
     with Matchers {
   "CDCControlModule" should "Return correct types" in {
-    def typeCheck[T]( value : T ) = value match {
-      case _ : DataFrameReader  => "DataFrameReader"
-      case _ : DataFrameWriter  => "DataFrameWriter"
-      case _ : TableOperations  => "TableOperations"
-      case _ : SQLReader        => "SQLFileReader"
-      case _ : GDHProperties    => "GDHProperties"
-    }
+      def typeCheck[T]( value : T ) = value match {
+        case _ : DataFrameReader => "DataFrameReader"
+        case _ : DataFrameWriter => "DataFrameWriter"
+        case _ : TableOperations => "TableOperations"
+        case _ : SQLReader       => "SQLFileReader"
+        case _ : GDHProperties   => "GDHProperties"
+      }
 
     val args = ControlProperties.parseProperties( Array[String](
       "--ctrlOptions",

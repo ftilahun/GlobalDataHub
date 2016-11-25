@@ -3,7 +3,7 @@ package enstar.globaldatahub.cdccontrol
 import enstar.globaldatahub.cdccontrol.module.CDCControlModule
 import enstar.globaldatahub.cdccontrol.properties.ControlProperties
 import enstar.globaldatahub.cdccontrol.processor.CDCContolProcessor
-import org.apache.spark.{Logging, SparkConf, SparkContext}
+import org.apache.spark.{ Logging, SparkConf, SparkContext }
 import org.apache.spark.sql.SQLContext
 
 /**
