@@ -1,14 +1,14 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting.LegalEntity
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ LegalEntityUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{LegalEntityUtils, SQLRunner, TransformationUnitTestingUtils}
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
 /**
  * Created by terences on 24/11/2016.
  */
-class LegalEntityReconciliationTests extends FunSuite with DataFrameSuiteBase {
+class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "Reconciliation over test data" ) {
 
@@ -27,7 +27,7 @@ class LegalEntityReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "LegalEntity.hql" )
+    val statement = utils.loadHQLStatementFromResource("Transformation/LegalEntity.hql")
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/LegalEntity/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/LegalEntity/OutputRecordCount.hql" )
 

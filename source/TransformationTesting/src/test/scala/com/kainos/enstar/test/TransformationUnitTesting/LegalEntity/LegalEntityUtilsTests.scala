@@ -1,6 +1,6 @@
-package com.kainos.enstar.TransformationUnitTesting.test
+package com.kainos.enstar.test.TransformationUnitTesting.LegalEntity
 
-import com.kainos.enstar.TransformationUnitTesting.{ BranchUtils, LegalEntityUtils }
+import com.kainos.enstar.TransformationUnitTesting.LegalEntityUtils
 import org.scalatest.FlatSpec
 
 /**
