@@ -41,7 +41,7 @@ class LegalEntityTests extends FunSuite with DataFrameSuiteBase {
     // Act //
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
     val result = SQLRunner.runStatement( statement, sqlc )
-    
+
     // Assert //
     assertDataFrameEquals( expectedLegalEntity, result )
   }
