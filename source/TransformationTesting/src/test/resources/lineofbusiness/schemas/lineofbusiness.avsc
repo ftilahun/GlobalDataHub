@@ -1,0 +1,27 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+    "type": "record",
+    "name": "lineofbusiness",
+    "fields": [
+    	{
+	        "name": "lineofbusinesscode",
+    	    "type": "string"
+    	},
+        {
+            "name": "sublineofbusinesscode",
+            "type": "string"
+        },
+        {
+            "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "lineofbusinessdescription",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "sublineofbusinessdescription",
+            "type": ["string", "null"]
+        }
+    ]
+}
