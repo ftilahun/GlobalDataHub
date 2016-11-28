@@ -1,0 +1,31 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+ 	"type": "record",
+ 	"name": "line",
+ 	"fields": [
+        {
+            "name": "risk_reference",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "line_id",
+            "type": "int"
+        },
+        {
+            "name": "layer_id",
+            "type": "int"
+        },
+        {
+            "name": "epi_settlement_ccy",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "business_type",
+            "type": ["int", "null"]
+        },
+        {
+            "name": "reporting_line_pct",
+            "type": ["string", "null"]
+        }
+ 	]
+}
