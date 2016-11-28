@@ -1,0 +1,42 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+ 	"type": "record",
+ 	"name": "transactiontype",
+ 	"fields": [
+    	{
+    		"name": "transactiontypecode",
+    		"type": "string",
+    		"doc": "The code for the transaction type"
+    	},
+    	{
+    	    "name": "transactionsubtypecode",
+            "type": "string",
+            "doc": "The code for the transaction subtype"
+        },
+        {
+            "name": "sourcesystemcode",
+            "type": "string",
+            "doc": "The code for the source system"
+        },
+        {
+            "name": "transactiontypedescription",
+            "type": "string",
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
+        },
+        {
+            "name": "transactionsubtypedescription",
+            "type": "string",
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
+        },
+        {
+            "name": "group",
+            "type": "string",
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
+        },
+        {
+            "name": "iscashtransactiontype",
+            "type": "boolean",
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
+        }
+ 	]
+}
