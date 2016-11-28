@@ -38,5 +38,8 @@ class TransactionTypeTests extends FunSuite with DataFrameSuiteBase {
     // Assert
     assertDataFrameEquals(expectedTransactionType, result)
 
+    val expectedRowCount = 5
+    assert(expectedTransactionType.count() == expectedRowCount)
+
   }
 }

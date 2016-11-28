@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
  	"type": "record",
  	"name": "lookup_premium_type",
  	"fields": [
@@ -10,8 +10,8 @@
     	},
     	{
     	    "name": "premium_type_desc",
-            "type": ["string", "null"],
-            "doc": "The description for the transaction type"
+            "type": "string"
+            "doc": "The description for the transaction type. This field is only nullable for test schemas to match."
         }
  	]
 }

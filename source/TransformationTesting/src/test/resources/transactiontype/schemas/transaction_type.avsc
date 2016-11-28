@@ -1,7 +1,7 @@
 {
 	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
  	"type": "record",
- 	"name": "transaction_type",
+ 	"name": "transactiontype",
  	"fields": [
     	{
     		"name": "transactiontypecode",
@@ -21,22 +21,22 @@
         {
             "name": "transactiontypedescription",
             "type": "string",
-            "doc": "Description of the transaction type"
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
         },
         {
             "name": "transactionsubtypedescription",
-            "type": ["string", "null"],
-            "doc": "Description of the transaction subtype"
+            "type": "string",
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
         },
         {
             "name": "group",
             "type": "string",
-            "doc": "Allows for basic grouping of transactions"
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
         },
         {
             "name": "iscashtransactiontype",
             "type": "boolean",
-            "doc": "Indicator which identifies if transaction is a cash transaction"
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
         }
  	]
 }
