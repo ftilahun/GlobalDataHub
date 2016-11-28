@@ -4,6 +4,41 @@
  	"name": "policy",
     "doc": "Policy contains policy attributes and may contain section or coverage level attributes too.  Some sources may implement multiple sections and coverages per policy",
  	"fields": [
+        {
+            "name": "_sourcesystemtransactiondatetime", 
+            "type": "string",
+            "doc":  "Metadata to identify the date and time that this record was updated on the source system. This should formatted as a JDBC-compliant java.sql.Timestamp:'YYYY-MM-DD HH:MM:SS.fffffffff'."
+        },
+        {
+            "name": "_cdcchangesequence", 
+            "type": "string",
+            "doc":  "Metadata to record the operation identified by CDC on the source system - one of Update, Insert or Delete."
+        },
+        {
+            "name": "_cdcloaddatetime", 
+            "type": "string",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Source Data layer."
+        },
+        {
+            "name": "_cdcchangeoperation", 
+            "type": "string",
+            "doc":  "Metadata to record the operation identified by CDC on the source system - one of Update, Insert or Delete."
+        },
+        {
+            "name": "_ecmtransformidentifier", 
+            "type": "string",
+            "doc":  "Metadata to identify the load event which appended this record into the Enstar Conformed Model."
+        },
+        {
+            "name": "_ecmtransformdatetime", 
+            "type": "string",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Enstar Conformed Model."
+        },
+        {
+            "name": "sourcesystemcode",  
+            "type": "string",
+            "doc": "The source system code."
+        },
     	{
     		"name": "coveragereference", 
     		"type": "string",
@@ -13,11 +48,6 @@
     		"name": "sectionreference",  
     		"type": "string",
     		"doc": "Section reference identifies a unique section on a policy, a policy may contain multiple sections"
-    	},
-    	{
-    		"name": "sourcesystemcode", 
-    		"type": "string",
-    		"doc": "FK to Source System"
     	},
     	{
     		"name": "policynumber", 
@@ -191,6 +221,46 @@
             "name": "yearofaccount", 
             "type": ["int", "null"],
             "doc": "The calendar year in which the policy incepts. For syndicate business, if a policy incepts in January 2014, and a declaration is received in January 2015 for that policy, its underwriting year will still be 2014. Also known as Underwriting Year"
+        },
+        {
+            "name": "majorriskcode", 
+            "type": ["string", "null"],
+            "doc": "The code associated with business placed through Lloyd's of London, where the business is classified as per Lloyd's reporting requirements. This classification is usually recorded in the source policy administration system. There may be more than one per policy, however this is the major risk code which will be one code only."
+        },
+        {
+            "name": "majorTrustFundCode", 
+            "type": ["string", "null"],
+            "doc": "The major trust fund for the policy. This is the Premium Trust Fund (PTF), which is a regulatory requirement when placing business through Lloyd's of London. The business of the Lloyd's syndicate is conducted through the PTF under a standard Deed approved by Lloyd's. The trustees of the fund are appointed by managing agents and approved by Lloyd's. The PTF is a fund into which all premiums are paid, and from which all claims and expenses are paid. It is held for the benefit of policyholders until such time as a profit or loss is declared."
+        },
+        {
+            "name": "filcode", 
+            "type": ["string", "null"],
+            "doc": "The full FIL code of the policy, including FIL 2 and FIL 4"
+        },
+        {
+            "name": "legalpolicynumber", 
+            "type": ["string", "null"],
+            "doc": "The original policy reference from the legacy data source <Dictionary ID="122"/>"
+        },
+        {
+            "name": "sourcesystempolicynumber", 
+            "type": ["string", "null"],
+            "doc": "The original policy reference from the legacy data source <Dictionary ID="122"/>"
+        },
+        {
+            "name": "linkedmasterreference", 
+            "type": ["string", "null"],
+            "doc": "The master reference to which multiple policies/line slips/declarations/bordereaux may be associated (e.g. a London Market Programme Policy Reference to which a number of Policies/Layers will be associated) <Dictionary ID="98"/>"
+        },
+        {
+            "name": "sublineofbusinesscode", 
+            "type": ["string", "null"],
+            "doc": "FK to LineOfBusiness"
+        },
+        {
+            "name": "sublineofbusinesscode", 
+            "type": ["string", "null"],
+            "doc": "FK to LineOfBusiness"
         }
  	]
 }
