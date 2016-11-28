@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.deduction
+CREATE TABLE IF NOT EXISTS phinsys.deduction
 (
 	DeductionReference varchar(100) comment "Unique deduction reference from the source system",
 	SourceSystemCode varchar(50) comment "Source System Identifier for the Deduction record",
@@ -13,7 +13,7 @@ CREATE TABLE snap_phinsys.deduction
 	IsPercentage boolean comment "Is the deduction value, expressed as a financial amount or a percentage?",
 	PolicyNumber varchar(100) comment "Unique policy number, also known Policy Reference or Underwriting Reference",
 	SectionReference varchar(100) comment "Section reference identifies a unique section on a policy, a policy may contain multiple sections",
-	SourceSystemDescription] varchar(255) comment "Description of the source system",
+	SourceSystemDescription varchar(255) comment "Description of the source system",
 	Value decimal(18,6) comment "The deduction value, expressed as a financial amount or a percentage",
 	meta_sourcesystemtransactiondatetime timestamp comment "Metadata to identify the date and time that this record was updated on the source system. This should formatted as a JDBC-compliant java.sql.Timestamp:'YYYY-MM-DD HH:MM:SS.fffffffff'.",
 	meta_cdcchangesequence varchar(35) comment "Metadata to record the sequence of the changes occurring on the source system.",

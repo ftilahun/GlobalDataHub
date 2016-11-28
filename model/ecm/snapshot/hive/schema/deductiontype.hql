@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.deductiontype
+CREATE TABLE IF NOT EXISTS phinsys.deductiontype
 (
 	DeductionTypeCode varchar(50) comment "The unique code for the classification of the type of deduction. Deductions can be grouped into various buckets to represent whether it is an acquisition cost or an underwriting credit.",
 	SourceSystemCode varchar(50) comment "Source System Identifier for the Deduction Type record",

@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.lineofbusiness
+CREATE TABLE IF NOT EXISTS phinsys.lineofbusiness
 (
 	LineOfBusinessCode varchar(50) comment "Code associated with how the business is classified in the source policy administration system for the policy <Dictionary ID='108'/>",
 	SubLineOfBusinessCode varchar(50) comment "The code associated with the Company's Sub Line of Business applicable to the risk <Dictionary ID='110'/>",

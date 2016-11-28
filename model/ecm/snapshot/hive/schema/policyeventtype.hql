@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.policyeventtype
+CREATE TABLE IF NOT EXISTS phinsys.policyeventtype
 (
 	PolicyEventTypeCode varchar(50) comment "The code associated with the Policy Event Type such as 'NEW' for new policy or 'REN' for renewal policy",
 	SourceSystemCode varchar(50) comment "The source system associated with the Policy Event Type record",

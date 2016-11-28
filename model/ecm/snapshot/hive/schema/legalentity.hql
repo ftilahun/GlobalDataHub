@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.legalentity
+CREATE TABLE IF NOT EXISTS phinsys.legalentity
 (
 	LegalEntityCode varchar(50) comment "The code associated with the Legal Entity stored on the policy <Dictionary ID='2'/>",
 	SourceSystemCode varchar(50) comment "The source system code associated with the Legal Entity record from the policy admin system",

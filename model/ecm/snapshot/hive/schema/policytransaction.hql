@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.policytransaction
+CREATE TABLE IF NOT EXISTS phinsys.policytransaction
 (
 	TransactionReference varchar(100) comment "Unique transaction reference, part of the PK",
 	SourceSystemCode varchar(50) comment "FK to Source system and part of PK",

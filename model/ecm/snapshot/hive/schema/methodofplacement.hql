@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.methodofplacement
+CREATE TABLE IF NOT EXISTS phinsys.methodofplacement
 (
 	MethodOfPlacementCode varchar(50) comment "The code associated with the Method of Placement",
 	SourceSystemCode varchar(50) comment "The source system code that the method of placement record is loaded from",

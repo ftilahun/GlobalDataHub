@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.transactiontype
+CREATE TABLE IF NOT EXISTS phinsys.transactiontype
 (
 	TransactionTypeCode varchar(50) comment "Code associated with the type of transaction <Dictionary ID='123'/>",
 	TransactionSubTypeCode varchar(50) comment "The code associated with the type of transaction. This is a subset of transaction type <Dictionary ID='125'/>",

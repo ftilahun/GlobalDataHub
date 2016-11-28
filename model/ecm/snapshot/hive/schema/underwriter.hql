@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.underwriter
+CREATE TABLE IF NOT EXISTS phinsys.underwriter
 (
 	UnderwriterCode varchar(50) comment "The code associated with the underwriter that underwrote the risk",
 	SourceSystemCode varchar(50) comment "The source system code associated with the underwriter record",

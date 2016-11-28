@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.policy
+CREATE TABLE IF NOT EXISTS phinsys.policy
 (
 	PolicyNumber varchar(50) comment "Unique policy number, also known Policy Reference or Underwriting Reference (Dictionary ID=7)",
 	CoverageReference varchar(100) comment "Coverage reference identifies unique coverages on a policy section, a section may contain multiple coverages",

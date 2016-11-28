@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.analysiscodesplit
+CREATE TABLE IF NOT EXISTS phinsys.analysiscodesplit
 (
 	PolicyNumber varchar(100) comment "Part of FK to Policy",
 	SectionReference varchar(100) comment "Part of FK to Policy",

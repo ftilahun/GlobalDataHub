@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.limitedexcess
+CREATE TABLE IF NOT EXISTS phinsys.limitedexcess
 (
 	LimitExcessReference varchar(100) comment "Unique reference for a limit excess record",
 	SourceSystemCode varchar(50) comment "The source system associated with a limit excess",

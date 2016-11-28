@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.branch
+CREATE TABLE IF NOT EXISTS phinsys.branch
 (
 	BranchCode varchar(50) comment "The code associated with the company branch through which the business has been placed <Dictionary ID='128'/>",
 	SourceSystemCode varchar(50) comment "The source system code of the branch",

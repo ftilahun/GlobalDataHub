@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.trustfund
+CREATE TABLE IF NOT EXISTS phinsys.trustfund
 (
 	TrustFundCode varchar(2),
 	SourceSystemCode varchar(50),

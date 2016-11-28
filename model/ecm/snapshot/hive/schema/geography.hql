@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.geography
+CREATE TABLE IF NOT EXISTS phinsys.geography
 (
 	GeographyCode varchar(50) comment "Unique ISO region code or custom MDM code",
 	GeographyTypeCode varchar(50) comment "Description of the level of Geography",

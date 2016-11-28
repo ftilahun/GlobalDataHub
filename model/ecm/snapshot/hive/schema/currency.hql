@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.currency
+CREATE TABLE IF NOT EXISTS phinsys.currency
 (
 	CurrencyCode varchar(50),
 	SourceSystemCode varchar(50),

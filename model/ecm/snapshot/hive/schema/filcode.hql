@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.filcode
+CREATE TABLE IF NOT EXISTS phinsys.filcode
 (
 	FILCode varchar(4),
 	SourceSystemCode varchar(50),

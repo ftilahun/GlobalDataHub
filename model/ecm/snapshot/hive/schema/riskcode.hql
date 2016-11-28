@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.riskcode
+CREATE TABLE IF NOT EXISTS phinsys.riskcode
 (
 	RiskCode varchar(2),
 	SourceSystemCode varchar(50),

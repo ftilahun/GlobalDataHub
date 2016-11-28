@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.insured
+CREATE TABLE IF NOT EXISTS phinsys.insured
 (
 	InsuredCode varchar(50) comment "The code used to identify an organisation/person/persons who is the subject of the direct insurance policy",
 	SourceSystemCode varchar(50) comment "The source system code associated with the insured",

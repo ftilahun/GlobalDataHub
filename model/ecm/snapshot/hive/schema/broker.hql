@@ -1,4 +1,4 @@
-CREATE TABLE snap_phinsys.broker
+CREATE TABLE IF NOT EXISTS phinsys.broker
 (
 	BrokerCode varchar(50) comment "The code associated with the broker",
 	SourceSystemCode varchar(50) comment "The source system code associated with the broker record",
