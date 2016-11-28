@@ -1,7 +1,6 @@
 package com.kainos.enstar.TransformationUnitTesting
 
 import org.apache.spark.sql.Row
-import org.apache.spark.sql.Row._
 
 /**
  * Created by sionam on 23/11/2016.

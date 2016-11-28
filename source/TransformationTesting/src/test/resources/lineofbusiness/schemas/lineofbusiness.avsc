@@ -1,7 +1,7 @@
 {
-    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
     "type": "record",
-    "name": "line_of_business",
+    "name": "lineofbusiness",
     "fields": [
     	{
 	        "name": "lineofbusinesscode",
