@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.LineOfBusiness
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{LegalEntityUtils, LineOfBusinessUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{LineOfBusinessUtils, SQLRunner, TransformationUnitTestingUtils}
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 

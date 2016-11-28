@@ -36,7 +36,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load expected result into dataframe
     val expectedLineOfBusiness : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/lineofbusiness/output/line_of_business_test1.csv" ).toString,
+      getClass.getResource("/lineofbusiness/output/lineofbusiness_test1.csv").toString,
       getClass.getResource( "/lineofbusiness/schemas/lineofbusiness.avro" ).toString,
       _.split(","),
       LineOfBusinessUtils.lineOfBusinessMapping,
