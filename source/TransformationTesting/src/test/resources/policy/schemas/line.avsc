@@ -36,6 +36,10 @@
         {
             "name": "line_status",  
             "type": ["string", "null"]
+        },
+        {
+            "name": "business_type",
+            "type": ["int","null"]
         }
  	]
 }

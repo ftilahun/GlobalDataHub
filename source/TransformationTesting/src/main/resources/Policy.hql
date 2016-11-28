@@ -15,14 +15,18 @@ layer.expiry_date AS coverageeffectivetodate,
 layer.expiry_date AS expirydate,
 layer.fil_code AS filcode, 
 layer.inception_date AS inceptiondate,
+organisation.domicile_country_code AS insureddomicilecode,
 CAST(NULL AS STRING) AS legacypolicynumber,
 CAST(line.profit_centre_code AS STRING) AS legalentitycode,
 line.block AS lineofbusinesscode,
 lookup_block.description AS lineofbusinessdescription,
 line.risk_reference AS linkedmasterreference, 
 line.risk_code AS majorriskcode, 
-CAST(NULL AS STRING) AS majortrustfundcode, 
-line.risk_reference AS sourcesystempolicynumber, 
+CAST(NULL AS STRING) AS majortrustfundcode,
+CAST(line.business_type AS STRING) AS methodofplacementcode,
+lookup_business_type.type_description AS methodofplacementdescription,
+risk.area_code AS risklocationcode,
+line.risk_reference AS sourcesystempolicynumber,
 line.subblock AS sublineofbusinesscode, 
 underwriting_block.description AS sublineofbusinessdescription, 
 layer.unique_market_ref AS uniquemarketreference,
@@ -33,9 +37,19 @@ FROM
 line 
 JOIN layer
 ON line.line_id = layer.layer_id
-JOIN lookup_profit_centre 
+JOIN submission
+ON layer.submission_id = submission.submission_id
+LEFT JOIN risk
+ON risk.risk_id = submission.risk_id
+AND risk.programme_year = submission.programme_year
+AND risk.sequence_no = submission.sequence_no
+LEFT JOIN organisation
+ON organisation.organisation_id = risk.assured_id
+LEFT JOIN lookup_profit_centre
 ON line.profit_centre_code = lookup_profit_centre.profit_centre_code
-JOIN lookup_block
+LEFT JOIN lookup_block
 ON line.block = lookup_block.block
-JOIN underwriting_block
-ON lookup_block.block = underwriting_block.block 
+LEFT JOIN underwriting_block
+ON lookup_block.block = underwriting_block.block
+LEFT JOIN lookup_business_type
+ON lookup_business_type.business_type = line.business_type

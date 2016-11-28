@@ -41,12 +41,13 @@ class PolicyUtilsTests extends FlatSpec {
     val column5 = "F"
     val column6 = "G"
     val column7 = "H"
+    val column8 = "2"
 
     // Act
-    val row = PolicyUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: Nil ).toArray )
+    val row = PolicyUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: column8 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 8 )
+    assert( row.size == 9 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ).equals( column2 ) )
@@ -55,6 +56,7 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 5 ).equals( column5 ) )
     assert( row.get( 6 ).equals( column6 ) )
     assert( row.get( 7 ).equals( column7 ) )
+    assert( row.get( 8 ) == column8.toInt )
 
   }
 
@@ -154,8 +156,8 @@ class PolicyUtilsTests extends FlatSpec {
     val column14 = "O"
     val column15 = "P"
     val column16 = "Q"
-    val column17 = ""
-    val column18 = "S"
+    val column17 = "S"
+    val column18 = ""
     val column19 = "T"
     val column20 = "U"
     val column21 = "V"

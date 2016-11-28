@@ -1,0 +1,15 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "organisation",
+ 	"fields": [
+        {
+            "name": "organisation_id",
+            "type": "int"
+        },
+        {
+            "name": "domicile_country_code",
+            "type": ["string","null"]
+        }
+ 	]
+}

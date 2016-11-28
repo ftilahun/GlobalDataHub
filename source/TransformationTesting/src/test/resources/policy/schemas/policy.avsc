@@ -52,6 +52,10 @@
             "type": ["string", "null"]
         },
         {
+            "name": "insureddomicilecode",
+            "type": ["string","null"]
+        },
+        {
             "name": "legacypolicynumber",  
             "type": ["string", "null"]
         },
@@ -79,6 +83,18 @@
         {
             "name": "majortrustfundcode",  
             "type": ["string", "null"]
+        },
+        {
+            "name": "methodofplacementcode",
+            "type": ["string","null"]
+        },
+        {
+            "name": "methodofplacementdescription",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "risklocationcode",
+            "type": ["string","null"]
         },
         {
             "name": "sourcesystempolicynumber",  
