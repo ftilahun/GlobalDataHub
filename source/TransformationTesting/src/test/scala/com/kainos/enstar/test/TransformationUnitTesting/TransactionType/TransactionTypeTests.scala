@@ -22,8 +22,8 @@ class TransactionTypeTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val expectedTransactionType : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource("/transactiontype/output/transaction_type.csv").toString,
-      getClass.getResource("/transactiontype/schemas/transaction_type.avro").toString,
+      getClass.getResource("/transactiontype/output/transactiontype.csv").toString,
+      getClass.getResource("/transactiontype/schemas/transactiontype.avro").toString,
       _.split( "," ),
       TransactionTypeUtils.transactionTypeMapping,
       sqlc
