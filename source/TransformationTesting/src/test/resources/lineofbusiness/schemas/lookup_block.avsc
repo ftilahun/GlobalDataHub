@@ -1,0 +1,15 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "lookup_block",
+    "fields": [
+    	{
+	        "name": "description",
+    	    "type": ["string", "null"]
+    	},
+    	{
+	        "name": "block",
+    	    "type": "string"
+    	}
+    ]
+}
