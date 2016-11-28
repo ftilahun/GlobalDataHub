@@ -8,7 +8,7 @@ import org.scalatest.FunSuite
 /**
  * Created by sionam on 24/11/2016.
  */
-class LineOfBusinessTests extends FunSuite with DataFrameSuiteBase {
+class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "LineOfBusinessTransformationMappingTest" ){
 
