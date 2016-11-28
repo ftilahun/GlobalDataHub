@@ -11,7 +11,7 @@
     	{
     	    "name": "premium_type_desc",
             "type": "string"
-            "doc": "The description for the transaction type. This field is only nullable for test schemas to match."
+            "doc": "The description for the transaction type."
         }
  	]
 }
