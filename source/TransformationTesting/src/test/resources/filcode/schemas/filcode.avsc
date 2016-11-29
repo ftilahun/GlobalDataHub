@@ -1,0 +1,21 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+ 	"type": "record",
+ 	"name": "filcode",
+ 	"fields": [
+    	{
+    		"name": "filcode",
+    		"type": "string"
+    	},
+    	{
+    	    "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "filcodedescription",
+            "type": "string",
+            "doc": "This field should be nullable however NDEX table has a non-nullable field populating this field, therefore it is removed to allow test schemas to match."
+
+        }
+ 	]
+}

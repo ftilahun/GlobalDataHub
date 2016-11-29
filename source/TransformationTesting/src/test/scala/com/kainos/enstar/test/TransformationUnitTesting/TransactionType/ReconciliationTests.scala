@@ -1,11 +1,11 @@
 package com.kainos.enstar.test.TransformationUnitTesting.TransactionType
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{TransactionTypeUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ TransactionTypeUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-class TransactionTypeReconciliationTests extends FunSuite with DataFrameSuiteBase {
+class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "TransactionType reconciliation over test data" ) {
 
