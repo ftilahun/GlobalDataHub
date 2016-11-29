@@ -31,7 +31,6 @@ class LineOfBusinessUtilsTests extends FlatSpec {
     val column2 = "2"
     val column3 = "3"
 
-
     // Act
     val row = LineOfBusinessUtils.underwritingBlockMapping( ( column1 :: column2 :: column3 :: Nil ).toArray )
 

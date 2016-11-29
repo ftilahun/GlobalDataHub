@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.Currency
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{CurrencyUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ CurrencyUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -14,8 +14,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val utils = new TransformationUnitTestingUtils
 
     val lookup_currency : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource("/currency/input/lookup_currency_test1.csv").toString,
-      getClass.getResource("/currency/schemas/lookup_currency.avro").toString,
+      getClass.getResource( "/currency/input/lookup_currency_test1.csv" ).toString,
+      getClass.getResource( "/currency/schemas/lookup_currency.avro" ).toString,
       _.split( "," ),
       CurrencyUtils.lookupCurrencyMapping,
       sqlc
@@ -23,14 +23,14 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load Expected Results into dataframe
     val expectedCurrencyMapping : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource("/currency/output/currency_mapping_test1.csv").toString,
-      getClass.getResource("/currency/schemas/currency_mapping.avro").toString,
+      getClass.getResource( "/currency/output/currency_mapping_test1.csv" ).toString,
+      getClass.getResource( "/currency/schemas/currency_mapping.avro" ).toString,
       _.split( "," ),
       CurrencyUtils.currencyMapping,
       sqlc
     )
 
-    val statement = utils.loadHQLStatementFromResource("Transformation/Currency.hql")
+    val statement = utils.loadHQLStatementFromResource( "Transformation/Currency.hql" )
 
     lookup_currency.registerTempTable( "lookup_currency" )
     val result = SQLRunner.runStatement( statement, sqlc )

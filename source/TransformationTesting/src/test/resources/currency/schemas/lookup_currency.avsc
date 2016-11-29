@@ -4,7 +4,7 @@
     "name": "lookup_currency",
     "fields": [
         {
-        "name" : "currency_code",
+            "name" : "currency_code",
             "type" : "string"
         },
         {

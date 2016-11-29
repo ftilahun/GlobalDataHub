@@ -5,7 +5,7 @@ package com.kainos.enstar.test.TransformationUnitTesting.Currency
  */
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{CurrencyUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ CurrencyUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -18,16 +18,16 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val utils = new TransformationUnitTestingUtils
 
     val lookup_currency : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource("/currency/schemas/lookup_currency.avsc").toString,
-      getClass.getResource("/currency/schemas/lookup_currency.avro").toString,
+      getClass.getResource( "/currency/schemas/lookup_currency.avsc" ).toString,
+      getClass.getResource( "/currency/schemas/lookup_currency.avro" ).toString,
       _.split( "," ),
       CurrencyUtils.lookupCurrencyMapping,
       sqlContext
     )
 
-    val hqlStatement = utils.loadHQLStatementFromResource("Transformation/Currency.hql")
-    val reconStatementInput = utils.loadHQLStatementFromResource("Reconciliation/Currency/InputRecordCount.hql")
-    val reconStatementOutput = utils.loadHQLStatementFromResource("Reconciliation/Currency/OutputRecordCount.hql")
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/Currency.hql" )
+    val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Currency/InputRecordCount.hql" )
+    val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Currency/OutputRecordCount.hql" )
 
     // Act //
     lookup_currency.registerTempTable( "lookup_currency" )

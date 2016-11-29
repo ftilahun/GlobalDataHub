@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.LineOfBusiness
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{LineOfBusinessUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ LineOfBusinessUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -21,7 +21,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_block : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/lineofbusiness/input/lookup_block_test1.csv" ).toString,
       getClass.getResource( "/lineofbusiness/schemas/lookup_block.avro" ).toString,
-      _.split(","),
+      _.split( "," ),
       LineOfBusinessUtils.lookupBlockMapping,
       sqlc
     )
@@ -29,22 +29,22 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/lineofbusiness/input/underwriting_block_test1.csv" ).toString,
       getClass.getResource( "/lineofbusiness/schemas/underwriting_block.avro" ).toString,
-      _.split(","),
+      _.split( "," ),
       LineOfBusinessUtils.underwritingBlockMapping,
       sqlc
     )
 
     // Load expected result into dataframe
     val expectedLineOfBusiness : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource("/lineofbusiness/output/lineofbusiness_test1.csv").toString,
+      getClass.getResource( "/lineofbusiness/output/lineofbusiness_test1.csv" ).toString,
       getClass.getResource( "/lineofbusiness/schemas/lineofbusiness.avro" ).toString,
-      _.split(","),
+      _.split( "," ),
       LineOfBusinessUtils.lineOfBusinessMapping,
       sqlc
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource("Transformation/LineOfBusiness.hql")
+    val statement = utils.loadHQLStatementFromResource( "Transformation/LineOfBusiness.hql" )
 
     // Act //
     lookup_block.registerTempTable( "lookup_block" )
@@ -52,6 +52,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val result = SQLRunner.runStatement( statement, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedLineOfBusiness.orderBy("lineofbusinesscode"), result.orderBy("lineofbusinesscode") )
+    assertDataFrameEquals( expectedLineOfBusiness.orderBy( "lineofbusinesscode" ), result.orderBy( "lineofbusinesscode" ) )
   }
 }
