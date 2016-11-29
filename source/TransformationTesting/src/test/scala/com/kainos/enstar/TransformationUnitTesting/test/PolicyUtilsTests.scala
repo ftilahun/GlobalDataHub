@@ -8,26 +8,33 @@ import org.scalatest.FlatSpec
  */
 class PolicyUtilsTests extends FlatSpec {
 
-  "layerMapping" should "generate a Row" in {
+  "layerMapping" should "generate a Row given 9 inputs" in {
 
     // Arrange
     val column0 = "0"
-    val column1 = "B"
+    val column1 = "1"
     val column2 = "C"
     val column3 = "D"
-    val column4 = "E"
+    val column4 = "3"
+    val column5 = "F"
+    val column6 = "G"
+    val column7 = "H"
+    val column8 = "8"
 
     // Act
-    val row = PolicyUtils.layerMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: Nil ).toArray )
+    val row = PolicyUtils.layerMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: column8 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 5 )
+    assert( row.size == 9 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ).equals( column1 ) )
     assert( row.get( 2 ).equals( column2 ) )
     assert( row.get( 3 ).equals( column3 ) )
     assert( row.get( 4 ).equals( column4 ) )
-
+    assert( row.get( 5 ).equals( column5 ) )
+    assert( row.get( 6 ).equals( column6 ) )
+    assert( row.get( 7 ).equals( column7 ) )
+    assert( row.get( 8 ).equals( column8 ) )
   }
 
   "lineMapping" should "generate a Row" in {
