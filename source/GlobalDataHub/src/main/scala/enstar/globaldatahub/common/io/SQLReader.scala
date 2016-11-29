@@ -14,5 +14,5 @@ trait SQLReader {
    * @param path the path to read from
    * @return a sql statement
    */
-  def getSQLString( sparkContext : SparkContext, path : String ) : String
+  def getSQLString(sparkContext: SparkContext, path: String): String
 }

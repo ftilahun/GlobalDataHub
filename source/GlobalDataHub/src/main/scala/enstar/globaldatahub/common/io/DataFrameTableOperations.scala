@@ -14,9 +14,9 @@ class DataFrameTableOperations extends TableOperations with Logging {
    * @param dataFrame a dataframe
    * @param tableName the tablename
    */
-  def registerTempTable( dataFrame : DataFrame, tableName : String ) : Unit = {
-    logInfo( "registering temp table: " + tableName )
-    dataFrame.registerTempTable( tableName )
+  def registerTempTable(dataFrame: DataFrame, tableName: String): Unit = {
+    logInfo("registering temp table: " + tableName)
+    dataFrame.registerTempTable(tableName)
 
   }
 
@@ -26,8 +26,8 @@ class DataFrameTableOperations extends TableOperations with Logging {
    * @param sqlContext the sql context
    * @param tableName the temp table name.
    */
-  def deRegisterTempTable( sqlContext : SQLContext, tableName : String ) : Unit = {
-    logInfo( "removing temp table: " + tableName )
-    sqlContext.dropTempTable( tableName )
+  def deRegisterTempTable(sqlContext: SQLContext, tableName: String): Unit = {
+    logInfo("removing temp table: " + tableName)
+    sqlContext.dropTempTable(tableName)
   }
 }

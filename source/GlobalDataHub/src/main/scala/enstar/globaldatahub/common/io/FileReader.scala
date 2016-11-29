@@ -13,6 +13,6 @@ trait FileReader {
    * @param path the path to read from.
    * @return
    */
-  def getStringFromFile( sparkContext : SparkContext, path : String ) : String
+  def getStringFromFile(sparkContext: SparkContext, path: String): String
 
 }

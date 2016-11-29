@@ -14,8 +14,8 @@ class TextFileReader extends Logging with FileReader {
    * @param path the path to read from.
    * @return
    */
-  def getStringFromFile( sparkContext : SparkContext, path : String ) : String = {
-    logInfo( "reading from path: " + path )
-    sparkContext.textFile( new Path( path ).toString ).collect().mkString( " " )
+  def getStringFromFile(sparkContext: SparkContext, path: String): String = {
+    logInfo("reading from path: " + path)
+    sparkContext.textFile(new Path(path).toString).collect().mkString(" ")
   }
 }

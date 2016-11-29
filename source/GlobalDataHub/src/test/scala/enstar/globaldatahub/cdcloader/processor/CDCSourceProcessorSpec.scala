@@ -25,26 +25,26 @@ class CDCSourceProcessorSpec
   "CDCSourceProcessor" should "Process each table exactly once" in {
 
     val cdcSourceProcessor = new CDCSourceProcessor
-    val controlProcessor = Mockito.mock( classOf[ControlProcessor] )
-    val properties = Mockito.mock( classOf[GDHProperties] )
-    val reader = Mockito.mock( classOf[DataFrameReader] )
-    val writer = Mockito.mock( classOf[DataFrameWriter] )
-    val tableOperations = Mockito.mock( classOf[TableOperations] )
-    val tableProcessor = Mockito.mock( classOf[TableProcessor] )
-    val userFunctions = Mockito.mock( classOf[UserFunctions] )
-    val sqlReader = Mockito.mock( classOf[SQLReader] )
+    val controlProcessor = Mockito.mock(classOf[ControlProcessor])
+    val properties = Mockito.mock(classOf[GDHProperties])
+    val reader = Mockito.mock(classOf[DataFrameReader])
+    val writer = Mockito.mock(classOf[DataFrameWriter])
+    val tableOperations = Mockito.mock(classOf[TableOperations])
+    val tableProcessor = Mockito.mock(classOf[TableProcessor])
+    val userFunctions = Mockito.mock(classOf[UserFunctions])
+    val sqlReader = Mockito.mock(classOf[SQLReader])
 
-    Given( "Three tables" )
+    Given("Three tables")
     val tables = Array[String](
       "policy",
       "customer",
       "claim"
     )
     Mockito
-      .when( properties.getArrayProperty( "spark.cdcloader.input.tablenames" ) )
-      .thenReturn( tables )
+      .when(properties.getArrayProperty("spark.cdcloader.input.tablenames"))
+      .thenReturn(tables)
 
-    When( "Processing" )
+    When("Processing")
     cdcSourceProcessor.process(
       controlProcessor,
       properties,
@@ -57,28 +57,28 @@ class CDCSourceProcessorSpec
       sqlReader
     )
 
-    Then( "Each table should process once" )
-    for ( i <- 0 to 2 ) {
+    Then("Each table should process once")
+    for (i <- 0 to 2) {
       Mockito
-        .verify( tableProcessor, Mockito.times( 1 ) )
-        .process( tables( i ),
+        .verify(tableProcessor, Mockito.times(1))
+        .process(tables(i),
           TestContexts.sqlContext,
           controlProcessor,
           properties,
           reader,
           userFunctions,
           tableOperations,
-          sqlReader )
+          sqlReader)
     }
 
-    Then( "Each table should be saved once" )
+    Then("Each table should be saved once")
     Mockito
-      .verify( tableProcessor, Mockito.times( 3 ) )
+      .verify(tableProcessor, Mockito.times(3))
       .save(
-        org.mockito.Matchers.any( classOf[SQLContext] ),
-        org.mockito.Matchers.any( classOf[DataFrameWriter] ),
-        org.mockito.Matchers.any( classOf[GDHProperties] ),
-        org.mockito.Matchers.any( classOf[DataFrame] ),
+        org.mockito.Matchers.any(classOf[SQLContext]),
+        org.mockito.Matchers.any(classOf[DataFrameWriter]),
+        org.mockito.Matchers.any(classOf[GDHProperties]),
+        org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.anyString()
       )
   }

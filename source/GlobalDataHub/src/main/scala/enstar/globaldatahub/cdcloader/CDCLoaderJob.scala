@@ -11,26 +11,26 @@ import org.apache.spark.{ Logging, SparkConf, SparkContext }
  */
 object CDCLoaderJob extends Logging {
 
-  def main( args : Array[String] ) : Unit = {
+  def main(args: Array[String]): Unit = {
 
-    logInfo( "CDCLoader starting" )
+    logInfo("CDCLoader starting")
     val sparkConf = new SparkConf()
-    val sparkContext : SparkContext = new SparkContext( sparkConf )
-    val sqlContext : SQLContext = new SQLContext( sparkContext )
+    val sparkContext: SparkContext = new SparkContext(sparkConf)
+    val sqlContext: SQLContext = new SQLContext(sparkContext)
 
-    val parsedProperties = CDCProperties.parseProperties( args )
+    val parsedProperties = CDCProperties.parseProperties(args)
 
-    logInfo( "Starting processing!" )
+    logInfo("Starting processing!")
     new CDCSourceProcessor().process(
       CDCLoaderModule.controlProcessor,
-      CDCLoaderModule.properties( parsedProperties ),
+      CDCLoaderModule.properties(parsedProperties),
       sqlContext,
       CDCLoaderModule.dataFrameReader,
       CDCLoaderModule.dataFrameWriter,
       CDCLoaderModule.tableOperations,
       CDCLoaderModule.tableProcessor,
       CDCLoaderModule.userFunctions,
-      CDCLoaderModule.sqlReader )
-    logInfo( "Completed processing!" )
+      CDCLoaderModule.sqlReader)
+    logInfo("Completed processing!")
   }
 }

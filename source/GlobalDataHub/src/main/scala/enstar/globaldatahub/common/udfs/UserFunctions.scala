@@ -10,5 +10,5 @@ trait UserFunctions extends Serializable {
    *
    * @param sqlContext the sql context
    */
-  def registerUDFs( sqlContext : SQLContext, properties : GDHProperties ) : Unit
+  def registerUDFs(sqlContext: SQLContext, properties: GDHProperties): Unit
 }

@@ -19,15 +19,15 @@ class AvroDataFrameReader extends Logging with DataFrameReader {
    * @param storageLevel an optional storagelevel to persist the dataframe
    * @return a dataframe
    */
-  def read( sqlContext : SQLContext,
-            path : String,
-            storageLevel : Option[StorageLevel] ) : DataFrame = {
-    logInfo( s"reading from path: $path" )
-    val data = sqlContext.read.avro( new Path( path ).toString )
-    if ( storageLevel.isDefined ) {
+  def read(sqlContext: SQLContext,
+           path: String,
+           storageLevel: Option[StorageLevel]): DataFrame = {
+    logInfo(s"reading from path: $path")
+    val data = sqlContext.read.avro(new Path(path).toString)
+    if (storageLevel.isDefined) {
       logInfo(
-        s"Persisting dataframe at storage level ${storageLevel.toString}" )
-      data.persist( storageLevel.get )
+        s"Persisting dataframe at storage level ${storageLevel.toString}")
+      data.persist(storageLevel.get)
     }
     data
   }

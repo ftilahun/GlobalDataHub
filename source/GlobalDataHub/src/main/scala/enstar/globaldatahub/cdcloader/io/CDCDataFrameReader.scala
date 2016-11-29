@@ -13,7 +13,7 @@ import org.apache.spark.storage.StorageLevel
  *
  * @param reader filesystem reader
  */
-class CDCDataFrameReader( reader : DataFrameReader )
+class CDCDataFrameReader(reader: DataFrameReader)
     extends DataFrameReader
     with Logging {
 
@@ -25,15 +25,15 @@ class CDCDataFrameReader( reader : DataFrameReader )
    * @param storageLevel an optional storagelevel
    * @return a dataframe
    */
-  def read( sqlContext : SQLContext,
-            path : String,
-            storageLevel : Option[StorageLevel] ) : DataFrame = {
+  def read(sqlContext: SQLContext,
+           path: String,
+           storageLevel: Option[StorageLevel]): DataFrame = {
     try {
-      logInfo( "reading from " + path )
-      reader.read( sqlContext, path, storageLevel )
+      logInfo("reading from " + path)
+      reader.read(sqlContext, path, storageLevel)
     } catch {
       //a more readable exception
-      case e : InvalidInputException => throw new PathNotFoundException( path )
+      case e: InvalidInputException => throw new PathNotFoundException(path)
     }
   }
 

@@ -13,7 +13,7 @@ trait TableOperations {
    * @param sqlContext the sql context
    * @param tableName the temp table name.
    */
-  def deRegisterTempTable( sqlContext : SQLContext, tableName : String ) : Unit
+  def deRegisterTempTable(sqlContext: SQLContext, tableName: String): Unit
 
   /**
    * Register a temp table over a dataframe
@@ -21,6 +21,6 @@ trait TableOperations {
    * @param dataFrame a dataframe
    * @param tableName the tablename
    */
-  def registerTempTable( dataFrame : DataFrame, tableName : String ) : Unit
+  def registerTempTable(dataFrame: DataFrame, tableName: String): Unit
 
 }

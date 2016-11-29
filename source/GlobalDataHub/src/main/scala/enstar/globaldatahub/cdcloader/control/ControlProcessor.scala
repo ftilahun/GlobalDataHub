@@ -22,9 +22,9 @@ trait ControlProcessor extends processor.ControlProcessor {
    * @param properties properties file
    * @return true if previously processed
    */
-  def isInitialLoad( sqlContext : SQLContext,
-                     tableName : String,
-                     properties : GDHProperties ) : Boolean
+  def isInitialLoad(sqlContext: SQLContext,
+                    tableName: String,
+                    properties: GDHProperties): Boolean
 
   /**
    * Register a control table for the source system
@@ -33,10 +33,10 @@ trait ControlProcessor extends processor.ControlProcessor {
    * @param properties properties file
    * @param tableOperation table operations object, for registering tables
    */
-  def registerControlTable( sqlContext : SQLContext,
-                            reader : DataFrameReader,
-                            properties : GDHProperties,
-                            tableOperation : TableOperations ) : Unit
+  def registerControlTable(sqlContext: SQLContext,
+                           reader: DataFrameReader,
+                           properties: GDHProperties,
+                           tableOperation: TableOperations): Unit
 
   /**
    * De-register the control table for a source system
@@ -44,9 +44,9 @@ trait ControlProcessor extends processor.ControlProcessor {
    * @param properties properties file
    * @param tableOperation table operations object, for registering tables
    */
-  def deregisterControlTable( sqlContext : SQLContext,
-                              properties : GDHProperties,
-                              tableOperation : TableOperations ) : Unit
+  def deregisterControlTable(sqlContext: SQLContext,
+                             properties: GDHProperties,
+                             tableOperation: TableOperations): Unit
 
   /**
    * get the last attunity change sequence in the control table
@@ -58,8 +58,8 @@ trait ControlProcessor extends processor.ControlProcessor {
    * @param tableName the name of the source table being processed
    * @return an attunity change sequence
    */
-  def getLastSequenceNumber( sqlContext : SQLContext,
-                             sqlFileReader : SQLReader,
-                             properties : GDHProperties,
-                             tableName : String ) : String
+  def getLastSequenceNumber(sqlContext: SQLContext,
+                            sqlFileReader: SQLReader,
+                            properties: GDHProperties,
+                            tableName: String): String
 }

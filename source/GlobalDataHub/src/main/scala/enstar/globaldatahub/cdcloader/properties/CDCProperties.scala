@@ -12,7 +12,7 @@ import org.apache.spark.Logging
  *
  * @param propertyMap a map of the property values
  */
-class CDCProperties( propertyMap : Map[String, String] )
+class CDCProperties(propertyMap: Map[String, String])
     extends GDHProperties
     with Logging {
 
@@ -25,7 +25,7 @@ class CDCProperties( propertyMap : Map[String, String] )
    * @param name then name of the property
    * @return the property value in string format.
    */
-  override def getStringProperty( name : String ) : String = propertyMap( name )
+  override def getStringProperty(name: String): String = propertyMap(name)
 
   /**
    * Get the value of a property as a string array.
@@ -33,8 +33,8 @@ class CDCProperties( propertyMap : Map[String, String] )
    * @param name the name of the property
    * @return the property value as an array
    */
-  override def getArrayProperty( name : String ) : Array[String] =
-    propertyMap( name ).split( "_" )
+  override def getArrayProperty(name: String): Array[String] =
+    propertyMap(name).split("_")
 
   /**
    * Get the value of a property as a (Java) boolean.
@@ -42,8 +42,8 @@ class CDCProperties( propertyMap : Map[String, String] )
    * @param name the name of the property
    * @return the property value as a Java boolean.
    */
-  override def getBooleanProperty( name : String ) : java.lang.Boolean =
-    propertyMap( name ).toBoolean.asInstanceOf[java.lang.Boolean]
+  override def getBooleanProperty(name: String): java.lang.Boolean =
+    propertyMap(name).toBoolean.asInstanceOf[java.lang.Boolean]
 
   /**
    * Check that a property has been set correctly.
@@ -51,76 +51,76 @@ class CDCProperties( propertyMap : Map[String, String] )
    * @param keyName the property name
    * @param typeCheck a function to determine the type is correct.
    */
-  private def checkProperty( keyName : String,
-                             typeCheck : Option[Any] => Unit ) : Unit = {
-    logDebug( "Checking property: " + keyName )
-    if ( propertyMap.get( keyName ).isEmpty ) {
-      throw new PropertyNotSetException( keyName, null )
+  private def checkProperty(keyName: String,
+                            typeCheck: Option[Any] => Unit): Unit = {
+    logDebug("Checking property: " + keyName)
+    if (propertyMap.get(keyName).isEmpty) {
+      throw new PropertyNotSetException(keyName, null)
     }
     try {
-      val a = propertyMap.get( keyName )
-      typeCheck( a )
+      val a = propertyMap.get(keyName)
+      typeCheck(a)
     } catch {
-      case e : Exception =>
-        throw new PropertyNotSetException( "Wrong type: " + keyName, e )
+      case e: Exception =>
+        throw new PropertyNotSetException("Wrong type: " + keyName, e)
     }
-    logDebug( "property " + keyName + " is valid" )
+    logDebug("property " + keyName + " is valid")
   }
 
   /**
    * Check all required properties have been set correctly
    */
-  override def checkPropertiesSet() : Unit = {
+  override def checkPropertiesSet(): Unit = {
 
-    logInfo( "Checking standard properties" )
-    checkProperty( "spark.cdcloader.columns.attunity.name.changemask",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.columns.attunity.name.changeoperation",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.columns.attunity.name.changesequence",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.columns.attunity.value.changeoperation",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.columns.control.names.controlcolumnnames",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.columns.metadata.name.isdeleted",
-      _.get.toString.toBoolean == true )
-    checkProperty( "spark.cdcloader.control.attunity.changetablesuffix",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.columns.metadata.name.loadtimestamp",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.format.timestamp.attunity",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.format.timestamp.hive",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.path.data.basedir",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.path.data.control",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.path.data.outputbasedir",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.path.sql.basedir",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.path.sql.control",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.tables.control.name",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.control.changemask.enabled",
-      _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdcloader.input.tablenames",
-      _.get.asInstanceOf[String].split( "," ) )
-    checkProperty( "spark.cdcloader.path.data.outdir",
-      _.get.asInstanceOf[String] )
-    logInfo( "Checking per table properties." )
+    logInfo("Checking standard properties")
+    checkProperty("spark.cdcloader.columns.attunity.name.changemask",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.columns.attunity.name.changeoperation",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.columns.attunity.name.changesequence",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.columns.attunity.value.changeoperation",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.columns.control.names.controlcolumnnames",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.columns.metadata.name.isdeleted",
+      _.get.toString.toBoolean == true)
+    checkProperty("spark.cdcloader.control.attunity.changetablesuffix",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.columns.metadata.name.loadtimestamp",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.format.timestamp.attunity",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.format.timestamp.hive",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.path.data.basedir",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.path.data.control",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.path.data.outputbasedir",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.path.sql.basedir",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.path.sql.control",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.tables.control.name",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.control.changemask.enabled",
+      _.get.asInstanceOf[String])
+    checkProperty("spark.cdcloader.input.tablenames",
+      _.get.asInstanceOf[String].split(","))
+    checkProperty("spark.cdcloader.path.data.outdir",
+      _.get.asInstanceOf[String])
+    logInfo("Checking per table properties.")
     logInfo(
-      "EXpecting " + getArrayProperty( "spark.cdcloader.input.tablenames" ).length + " tables" )
-    getArrayProperty( "spark.cdcloader.input.tablenames" ).foreach { tableName =>
-      logInfo( "Checking properties for: " + tableName )
-      checkProperty( "spark.cdcloader.control.columnpositions." + tableName,
-        _.get.asInstanceOf[String].split( "," ) )
+      "EXpecting " + getArrayProperty("spark.cdcloader.input.tablenames").length + " tables")
+    getArrayProperty("spark.cdcloader.input.tablenames").foreach { tableName =>
+      logInfo("Checking properties for: " + tableName)
+      checkProperty("spark.cdcloader.control.columnpositions." + tableName,
+        _.get.asInstanceOf[String].split(","))
       checkProperty(
         "spark.cdcloader.columns.control.name.tablename." + tableName,
-        _.get.asInstanceOf[String].split( "," ) )
+        _.get.asInstanceOf[String].split(","))
     }
 
   }
@@ -134,16 +134,16 @@ object CDCProperties extends CommandLinePropertyParser {
   /**
    * command line parser
    */
-  override def parser = new scopt.OptionParser[Config]( "CDCLoader" ) {
-    head( "CDCLoader", "0.1" )
-    opt[Map[String, String]]( "cdcOptions" )
+  override def parser = new scopt.OptionParser[Config]("CDCLoader") {
+    head("CDCLoader", "0.1")
+    opt[Map[String, String]]("cdcOptions")
       .valueName(
         "spark.cdcloader.columns.attunity.name.changemask=v,etc..."
       )
       .required()
       .unbounded()
-      .action { ( x, c ) =>
-        c.copy( kwArgs = x )
+      .action { (x, c) =>
+        c.copy(kwArgs = x)
       }
     note(
       "The following arguments are required:" +

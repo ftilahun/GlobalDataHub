@@ -9,62 +9,62 @@ import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCProperties" should "Parse the command line arguments" in {
-    Given( "A set of command line args" )
+    Given("A set of command line args")
     val argsArray = Array[String](
       "--cdcOptions",
       "spark.cdcloader.columns.attunity.name.changemask=a," +
         "spark.cdcloader.columns.attunity.name.changeoperation=b," +
         "spark.cdcloader.columns.attunity.name.changesequence=c," +
-        "spark.cdcloader.columns.attunity.value.changeoperation=d" )
-    When( "Parsing arguments" )
-    val props = CDCProperties.parseProperties( argsArray )
-    Then( "Property values should be set " )
-    props.get( "spark.cdcloader.columns.attunity.name.changemask" ) should be(
-      Some( "a" ) )
-    props.get( "spark.cdcloader.columns.attunity.name.changeoperation" ) should be(
-      Some( "b" ) )
-    props.get( "spark.cdcloader.columns.attunity.name.changesequence" ) should be(
-      Some( "c" ) )
-    props.get( "spark.cdcloader.columns.attunity.value.changeoperation" ) should be(
-      Some( "d" ) )
+        "spark.cdcloader.columns.attunity.value.changeoperation=d")
+    When("Parsing arguments")
+    val props = CDCProperties.parseProperties(argsArray)
+    Then("Property values should be set ")
+    props.get("spark.cdcloader.columns.attunity.name.changemask") should be(
+      Some("a"))
+    props.get("spark.cdcloader.columns.attunity.name.changeoperation") should be(
+      Some("b"))
+    props.get("spark.cdcloader.columns.attunity.name.changesequence") should be(
+      Some("c"))
+    props.get("spark.cdcloader.columns.attunity.value.changeoperation") should be(
+      Some("d"))
   }
 
   "CDCProperties" should "Throw when unable to parse command line options" in {
-    Given( "Invalid input" )
-    When( "--cdcOptions has no arguments" )
-    Then( "a PropertyNotSetException should be thrown" )
+    Given("Invalid input")
+    When("--cdcOptions has no arguments")
+    Then("a PropertyNotSetException should be thrown")
     an[PropertyNotSetException] should be thrownBy {
-      CDCProperties.parseProperties( Array[String]( "--cdcOptions" ) )
+      CDCProperties.parseProperties(Array[String]("--cdcOptions"))
     }
-    Given( "Invalid input" )
-    When( "--cdcOptions was not set" )
-    Then( "a PropertyNotSetException should be thrown" )
+    Given("Invalid input")
+    When("--cdcOptions was not set")
+    Then("a PropertyNotSetException should be thrown")
     an[PropertyNotSetException] should be thrownBy {
-      CDCProperties.parseProperties( Array[String]() )
+      CDCProperties.parseProperties(Array[String]())
     }
-    Given( "Invalid input" )
-    When( "Passed a null reference" )
-    Then( "a NullPointerException should be thrown" )
+    Given("Invalid input")
+    When("Passed a null reference")
+    Then("a NullPointerException should be thrown")
     an[NullPointerException] should be thrownBy {
-      CDCProperties.parseProperties( null )
+      CDCProperties.parseProperties(null)
     }
   }
 
   "CDCProperties" should "Check properties have been set" in {
-    Given( "Valid input" )
-    When( "Any individual property has not been set" )
-    Then( "a PropertyNotSetException should be thrown" )
+    Given("Valid input")
+    When("Any individual property has not been set")
+    Then("a PropertyNotSetException should be thrown")
     an[PropertyNotSetException] should be thrownBy {
       new CDCProperties(
         CDCProperties.parseProperties(
           Array[String](
             "--cdcOptions",
             "spark.cdcloader.path.sql.control=a"
-          ) ) )
+          )))
     }
-    Given( "Valid input" )
-    When( "Any individual property has the wrong type" )
-    Then( "a PropertyNotSetException should be thrown" )
+    Given("Valid input")
+    When("Any individual property has the wrong type")
+    Then("a PropertyNotSetException should be thrown")
     an[PropertyNotSetException] should be thrownBy {
       new CDCProperties(
         CDCProperties.parseProperties(
@@ -91,11 +91,11 @@ class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
               "spark.cdcloader.input.tablenames=a," +
               "spark.cdcloader.control.columnpositions.a=a," +
               "spark.cdcloader.columns.control.name.tablename.a=a"
-          ) ) )
+          )))
     }
-    Given( "Valid input" )
-    When( "All propertie have been set correctly" )
-    Then( "all properties should have been set" )
+    Given("Valid input")
+    When("All propertie have been set correctly")
+    Then("all properties should have been set")
     val props = new CDCProperties(
       CDCProperties.parseProperties(
         Array[String](
@@ -124,50 +124,50 @@ class CDCPropertiesSpec extends FlatSpec with GivenWhenThen with Matchers {
             "spark.cdcloader.columns.control.name.tablename.a=a," +
             "spark.cdcloader.control.columnpositions.b=1_2_3," +
             "spark.cdcloader.columns.control.name.tablename.b=b"
-        ) ) )
+        )))
 
-    props.getStringProperty( "spark.cdcloader.columns.attunity.name.changemask" ) should be(
-      "a" )
+    props.getStringProperty("spark.cdcloader.columns.attunity.name.changemask") should be(
+      "a")
     props.getStringProperty(
-      "spark.cdcloader.columns.attunity.name.changeoperation" ) should be( "a" )
+      "spark.cdcloader.columns.attunity.name.changeoperation") should be("a")
     props.getStringProperty(
-      "spark.cdcloader.columns.attunity.name.changesequence" ) should be( "a" )
+      "spark.cdcloader.columns.attunity.name.changesequence") should be("a")
     props.getStringProperty(
-      "spark.cdcloader.columns.attunity.value.changeoperation" ) should be( "a" )
+      "spark.cdcloader.columns.attunity.value.changeoperation") should be("a")
     props.getStringProperty(
-      "spark.cdcloader.control.attunity.changetablesuffix" ) should be( "a" )
+      "spark.cdcloader.control.attunity.changetablesuffix") should be("a")
     props.getStringProperty(
-      "spark.cdcloader.columns.metadata.name.loadtimestamp" ) should be( "a" )
-    props.getStringProperty( "spark.cdcloader.format.timestamp.attunity" ) should be(
-      "a" )
-    props.getStringProperty( "spark.cdcloader.format.timestamp.hive" ) should be(
-      "a" )
-    props.getStringProperty( "spark.cdcloader.path.data.basedir" ) should be(
-      "a" )
-    props.getStringProperty( "spark.cdcloader.path.data.control" ) should be(
-      "a" )
-    props.getStringProperty( "spark.cdcloader.path.data.output" ) should be( "a" )
-    props.getStringProperty( "spark.cdcloader.path.sql.basedir" ) should be( "a" )
-    props.getStringProperty( "spark.cdcloader.path.sql.control" ) should be( "a" )
-    props.getStringProperty( "spark.cdcloader.tables.control.name" ) should be(
-      "a" )
-    props.getStringProperty( "spark.cdcloader.control.changemask.enabled" ) should be(
-      "a" )
-    props.getStringProperty( "spark.cdcloader.columns.control.name.tablename.a" ) should be(
-      "a" )
+      "spark.cdcloader.columns.metadata.name.loadtimestamp") should be("a")
+    props.getStringProperty("spark.cdcloader.format.timestamp.attunity") should be(
+      "a")
+    props.getStringProperty("spark.cdcloader.format.timestamp.hive") should be(
+      "a")
+    props.getStringProperty("spark.cdcloader.path.data.basedir") should be(
+      "a")
+    props.getStringProperty("spark.cdcloader.path.data.control") should be(
+      "a")
+    props.getStringProperty("spark.cdcloader.path.data.output") should be("a")
+    props.getStringProperty("spark.cdcloader.path.sql.basedir") should be("a")
+    props.getStringProperty("spark.cdcloader.path.sql.control") should be("a")
+    props.getStringProperty("spark.cdcloader.tables.control.name") should be(
+      "a")
+    props.getStringProperty("spark.cdcloader.control.changemask.enabled") should be(
+      "a")
+    props.getStringProperty("spark.cdcloader.columns.control.name.tablename.a") should be(
+      "a")
 
-    val tblNames = props.getArrayProperty( "spark.cdcloader.input.tablenames" )
-    tblNames.length should be( 2 )
-    tblNames( 0 ) should be( "a" )
-    tblNames( 1 ) should be( "b" )
+    val tblNames = props.getArrayProperty("spark.cdcloader.input.tablenames")
+    tblNames.length should be(2)
+    tblNames(0) should be("a")
+    tblNames(1) should be("b")
     val colPos =
-      props.getArrayProperty( "spark.cdcloader.control.columnpositions.a" )
-    colPos.length should be( 4 )
-    colPos( 0 ) should be( "1" )
-    colPos( 1 ) should be( "2" )
-    colPos( 2 ) should be( "3" )
-    colPos( 3 ) should be( "4" )
-    props.getBooleanProperty( "spark.cdcloader.columns.metadata.name.isdeleted" ) should be(
-      true.asInstanceOf[java.lang.Boolean] )
+      props.getArrayProperty("spark.cdcloader.control.columnpositions.a")
+    colPos.length should be(4)
+    colPos(0) should be("1")
+    colPos(1) should be("2")
+    colPos(2) should be("3")
+    colPos(3) should be("4")
+    props.getBooleanProperty("spark.cdcloader.columns.metadata.name.isdeleted") should be(
+      true.asInstanceOf[java.lang.Boolean])
   }
 }
