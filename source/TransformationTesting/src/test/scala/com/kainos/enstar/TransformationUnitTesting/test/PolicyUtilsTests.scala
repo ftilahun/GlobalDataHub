@@ -119,6 +119,110 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 5 ).equals( column5 ) )
   }
 
+  "riskMapping" should "generate a Row given 5 inputs" in {
+
+    // Arrange
+    val column0 = "1"
+    val column1 = "2"
+    val column2 = "3"
+    val column3 = "4"
+    val column4 = "A"
+
+    // Act
+    val row = PolicyUtils.riskMapping( Array( column0, column1, column2, column3, column4 ) )
+
+    // Assert
+    assert( row.size == 5 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ) == column1.toInt )
+    assert( row.get( 2 ) == column2.toInt )
+    assert( row.get( 3 ) == column3.toInt )
+    assert( row.get( 4 ).equals( column4 ) )
+  }
+
+  "riskMapping" should "generate a Row given 4 inputs with final value null" in {
+
+    // Arrange
+    val column0 = "1"
+    val column1 = "2"
+    val column2 = "3"
+    val column3 = "4"
+
+    // Act
+    val row = PolicyUtils.riskMapping( Array( column0, column1, column2, column3 ) )
+
+    // Assert
+    assert( row.size == 5 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ) == column1.toInt )
+    assert( row.get( 2 ) == column2.toInt )
+    assert( row.get( 3 ) == column3.toInt )
+    assert( row.get( 4 ) == null )
+  }
+
+  "submission" should "generate a Row given inputs" in {
+
+    // Arrange
+    val column0 = "1"
+    val column1 = "2"
+    val column2 = "3"
+    val column3 = "4"
+
+    // Act
+    val row = PolicyUtils.submissionMapping( Array( column0, column1, column2, column3 ) )
+
+    // Assert
+    assert( row.size == 4 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ) == column1.toInt )
+    assert( row.get( 2 ) == column2.toInt )
+    assert( row.get( 3 ) == column3.toInt )
+  }
+
+  "organisation" should "generate a Row given 2 inputs" in {
+
+    // Arrange
+    val column0 = "1"
+    val column1 = "A"
+
+    // Act
+    val row = PolicyUtils.organisationMapping( Array( column0, column1 ) )
+
+    // Assert
+    assert( row.size == 2 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ).equals( column1 ) )
+  }
+
+  "organisation" should "generate a Row given 1 inputs with final value null" in {
+
+    // Arrange
+    val column0 = "1"
+
+    // Act
+    val row = PolicyUtils.organisationMapping( Array( column0 ) )
+
+    // Assert
+    assert( row.size == 2 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ) == null )
+  }
+
+  "lookup_business_type" should "generate a Row given inputs" in {
+
+    // Arrange
+    val column0 = "1"
+    val column1 = "A"
+
+    // Act
+    val row = PolicyUtils.lookupBusinessTypeMapping( Array( column0, column1 ) )
+
+    // Assert
+    assert( row.size == 2 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ).equals( column1 ) )
+  }
+
   "lookupBlockMapping" should "generate a Row" in {
 
     // Arrange
@@ -197,9 +301,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column24 = "Y"
     val column25 = "Z"
     val column26 = "AA"
-    val column27 = "23"
-
-    // TODO Use iteration here
+    val column27 = "27"
 
     // Act
     val row = PolicyUtils.policyMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 ::
