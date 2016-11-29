@@ -1,10 +1,6 @@
 package enstar.globaldatahub.cdcloader.control
 
-import enstar.globaldatahub.common.io.{
-  DataFrameReader,
-  SQLReader,
-  TableOperations
-}
+import enstar.globaldatahub.common.io.{ DataFrameReader, SQLReader, TableOperations }
 import enstar.globaldatahub.common.properties.GDHProperties
 import org.apache.spark.Logging
 import org.apache.spark.sql.SQLContext
