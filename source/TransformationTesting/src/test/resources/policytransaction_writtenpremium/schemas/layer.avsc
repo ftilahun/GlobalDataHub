@@ -8,7 +8,7 @@
             "type": "int"
         },
         {
-            "name": "filcode",
+            "name": "fil_code",
             "type": ["string", "null"]
         },
         {

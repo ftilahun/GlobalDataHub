@@ -13,11 +13,13 @@
         },
         {
             "name": "coveragereference",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "iscashtransactiontype",
-            "type": ["boolean", "null"]
+            "type": "boolean",
+            "doc": "This field should be nullable however the value is hard-coded for NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "originalamount",
@@ -25,7 +27,8 @@
         },
         {
             "name": "originalcurrencycode",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "policynumber",
@@ -33,7 +36,8 @@
         },
         {
             "name": "sectionreference",
-            "type": ["string","null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "settlementamount",
@@ -49,23 +53,28 @@
         },
         {
             "name": "transactiontypecode",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is hard-coded for NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "transactiontypedescription",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is hard-coded for NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "transactionsubtypecode",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "transactionsubtypedescription",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "riskcode",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
         },
         {
             "name": "filcode",
@@ -73,7 +82,8 @@
         },
         {
             "name": "trustfundcode",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
         }
  	]
 }
