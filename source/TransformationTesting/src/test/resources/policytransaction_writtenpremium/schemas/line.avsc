@@ -4,16 +4,16 @@
  	"name": "line",
  	"fields": [
         {
-            "name": "risk_reference",
-            "type": ["string", "null"]
-        },
-        {
             "name": "line_id",
             "type": "int"
         },
         {
             "name": "layer_id",
             "type": "int"
+        },
+        {
+            "name": "risk_reference",
+            "type": ["string", "null"]
         },
         {
             "name": "epi_settlement_ccy",
