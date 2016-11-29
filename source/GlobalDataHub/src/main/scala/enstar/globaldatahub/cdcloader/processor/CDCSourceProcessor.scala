@@ -30,36 +30,36 @@ class CDCSourceProcessor extends SourceProcessor with Logging {
    * @param userFunctions user defined functions for this source.
    * @param sqlReader a SQL reader for this source.
    */
-  def process( controlProcessor : ControlProcessor,
-               properties : GDHProperties,
-               sqlContext : SQLContext,
-               reader : DataFrameReader,
-               writer : DataFrameWriter,
-               tableOperations : TableOperations,
-               tableProcessor : TableProcessor,
-               userFunctions : UserFunctions,
-               sqlReader : SQLReader ) : Unit = {
-    logInfo( "Registering control table" )
+  def process(controlProcessor: ControlProcessor,
+              properties: GDHProperties,
+              sqlContext: SQLContext,
+              reader: DataFrameReader,
+              writer: DataFrameWriter,
+              tableOperations: TableOperations,
+              tableProcessor: TableProcessor,
+              userFunctions: UserFunctions,
+              sqlReader: SQLReader): Unit = {
+    logInfo("Registering control table")
     controlProcessor
-      .registerControlTable( sqlContext, reader, properties, tableOperations )
+      .registerControlTable(sqlContext, reader, properties, tableOperations)
     //loop over the tables.
-    properties.getArrayProperty( "spark.cdcloader.input.tablenames" ).foreach {
+    properties.getArrayProperty("spark.cdcloader.input.tablenames").foreach {
       tableName =>
-        logInfo( "Processing table: " + tableName )
-        val tableData = tableProcessor.process( tableName,
+        logInfo("Processing table: " + tableName)
+        val tableData = tableProcessor.process(tableName,
           sqlContext,
           controlProcessor,
           properties,
           reader,
           userFunctions,
           tableOperations,
-          sqlReader )
-        logInfo( "Saving table " + tableName )
+          sqlReader)
+        logInfo("Saving table " + tableName)
         tableProcessor
-          .save( sqlContext, writer, properties, tableData, tableName )
+          .save(sqlContext, writer, properties, tableData, tableName)
     }
-    logInfo( "Removing control table" )
+    logInfo("Removing control table")
     controlProcessor
-      .deregisterControlTable( sqlContext, properties, tableOperations )
+      .deregisterControlTable(sqlContext, properties, tableOperations)
   }
 }

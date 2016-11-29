@@ -16,28 +16,28 @@ class ControlDataFrameReaderSpec
 
   "ControlDataFrameReader" should "read a dataframe" in {
 
-    Given( "A ControlDataFrameReader" )
-    val dfReader = Mockito.mock( classOf[DataFrameReader] )
-    val sqlContext = Mockito.mock( classOf[SQLContext] )
+    Given("A ControlDataFrameReader")
+    val dfReader = Mockito.mock(classOf[DataFrameReader])
+    val sqlContext = Mockito.mock(classOf[SQLContext])
     val path = "/some/path"
-    val storageLevelOption = Mockito.mock( classOf[Option[StorageLevel]] )
+    val storageLevelOption = Mockito.mock(classOf[Option[StorageLevel]])
 
-    val controlDataFrameReader = new ControlDataFrameReader( dfReader )
+    val controlDataFrameReader = new ControlDataFrameReader(dfReader)
 
-    When( "read is called" )
+    When("read is called")
     controlDataFrameReader.read(
       sqlContext,
       path,
       storageLevelOption
     )
 
-    Then( "The call should defer to the passed in reader" )
+    Then("The call should defer to the passed in reader")
     Mockito
-      .verify( dfReader, Mockito.times( 1 ) )
+      .verify(dfReader, Mockito.times(1))
       .read(
-        org.mockito.Matchers.any( classOf[SQLContext] ),
+        org.mockito.Matchers.any(classOf[SQLContext]),
         org.mockito.Matchers.anyString(),
-        org.mockito.Matchers.any( classOf[Option[StorageLevel]] )
+        org.mockito.Matchers.any(classOf[Option[StorageLevel]])
       )
   }
 }

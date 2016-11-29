@@ -11,7 +11,7 @@ trait UserFunctions extends UDFs with Serializable {
    *
    * @param sqlContext the sql context
    */
-  def registerUDFs( sqlContext : SQLContext, properties : GDHProperties ) : Unit
+  def registerUDFs(sqlContext: SQLContext, properties: GDHProperties): Unit
 
   /**
    * * Provides a string representation of the current time in the specified
@@ -19,14 +19,14 @@ trait UserFunctions extends UDFs with Serializable {
    * @param properties properties object
    * @return a string representation of the current timestamp
    */
-  def getCurrentTime( properties : GDHProperties ) : String
+  def getCurrentTime(properties: GDHProperties): String
 
   /**
    * Converts the attunity change mask from a Hexadecimal string to a binary string
    * @param changeMask the hex string to convert
    * @return a binary string
    */
-  def getBitMask( changeMask : String ) : String
+  def getBitMask(changeMask: String): String
 
   /**
    * checks if a bit has been set in a binary string
@@ -35,7 +35,7 @@ trait UserFunctions extends UDFs with Serializable {
    * @param position the position of the bit in the <b>change table</b>
    * @return true if the bit has been set
    */
-  def isBitSet( bitMask : String, position : Integer ) : java.lang.Boolean
+  def isBitSet(bitMask: String, position: Integer): java.lang.Boolean
 
   /**
    * Checks if any bit has been set in a change mask
@@ -44,8 +44,8 @@ trait UserFunctions extends UDFs with Serializable {
    * @param columnPositions the position of the columns to check
    * @return true if any bit has been set
    */
-  def isAnyBitSet( changeMask : String,
-                   columnPositions : Array[String] ) : java.lang.Boolean
+  def isAnyBitSet(changeMask: String,
+                  columnPositions: Array[String]): java.lang.Boolean
 
   /**
    * Check if a source row has been deleted.
@@ -54,8 +54,8 @@ trait UserFunctions extends UDFs with Serializable {
    * @param properties the properties object
    * @return true if the chsnge operation is DELETE.
    */
-  def isDeleted( changeOperation : String,
-                 properties : GDHProperties ) : java.lang.Boolean
+  def isDeleted(changeOperation: String,
+                properties: GDHProperties): java.lang.Boolean
 
   /**
    * Generate an attunity change sequence for a table.
@@ -63,5 +63,5 @@ trait UserFunctions extends UDFs with Serializable {
    * @param properties the properties object
    * @return a string representing a sequence number
    */
-  def generateSequenceNumber( properties : GDHProperties ) : String
+  def generateSequenceNumber(properties: GDHProperties): String
 }

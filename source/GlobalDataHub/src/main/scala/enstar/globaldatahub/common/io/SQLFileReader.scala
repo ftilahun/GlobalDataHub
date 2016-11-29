@@ -10,7 +10,7 @@ import org.apache.spark.{ Logging, SparkContext }
  *
  * @param textFileReader a TextFileReader
  */
-class SQLFileReader( textFileReader : FileReader )
+class SQLFileReader(textFileReader: FileReader)
     extends SQLReader
     with Logging {
 
@@ -21,21 +21,21 @@ class SQLFileReader( textFileReader : FileReader )
    * @param path the path to read from
    * @return a sql statement
    */
-  def getSQLString( sparkContext : SparkContext, path : String ) : String = {
+  def getSQLString(sparkContext: SparkContext, path: String): String = {
     try {
-      logInfo( "reading from: " + path )
-      val sql = textFileReader.getStringFromFile( sparkContext, path )
-      if ( !sql.matches( "^(?i)SELECT.+from.+" ) ) {
+      logInfo("reading from: " + path)
+      val sql = textFileReader.getStringFromFile(sparkContext, path)
+      if (!sql.matches("^(?i)SELECT.+from.+")) {
         //this is not a SQL Statement
-        logError( "Could not find SQL statment in " + path )
-        throw new SQLException( "Not an SQL statement", sql )
+        logError("Could not find SQL statment in " + path)
+        throw new SQLException("Not an SQL statement", sql)
       } else {
-        logInfo( "Got sql statement: " + sql )
+        logInfo("Got sql statement: " + sql)
         sql
       }
     } catch {
-      case e : InvalidInputException => throw new PathNotFoundException( path )
-      case e : SQLException          => throw e
+      case e: InvalidInputException => throw new PathNotFoundException(path)
+      case e: SQLException          => throw e
     }
   }
 }

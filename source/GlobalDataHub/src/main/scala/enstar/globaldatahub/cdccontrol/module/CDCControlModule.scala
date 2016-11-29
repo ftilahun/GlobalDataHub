@@ -12,56 +12,56 @@ import org.apache.spark.Logging
  */
 object CDCControlModule extends Logging {
 
-  logInfo( "Creating required objects" )
-  private val _dataFrameReader : DataFrameReader = new ControlDataFrameReader(
-    new AvroDataFrameReader )
-  private val _dataFrameWriter : DataFrameWriter = new ControlDataFrameWriter(
-    new AvroDataFrameWriter )
-  private val _tableOperations : TableOperations = new DataFrameTableOperations
-  private val _sqlReader : SQLReader = new SQLFileReader( new TextFileReader )
+  logInfo("Creating required objects")
+  private val _dataFrameReader: DataFrameReader = new ControlDataFrameReader(
+    new AvroDataFrameReader)
+  private val _dataFrameWriter: DataFrameWriter = new ControlDataFrameWriter(
+    new AvroDataFrameWriter)
+  private val _tableOperations: TableOperations = new DataFrameTableOperations
+  private val _sqlReader: SQLReader = new SQLFileReader(new TextFileReader)
   private val _userFunctions = new ControlUserFunctions
-  logInfo( "Completed required object creation" )
+  logInfo("Completed required object creation")
 
   /**
    * Get the properties object
    * @param propertyMap a Map of k->v objects
    * @return a properties object
    */
-  def properties( propertyMap : Map[String, String] ) : GDHProperties =
-    new ControlProperties( propertyMap )
+  def properties(propertyMap: Map[String, String]): GDHProperties =
+    new ControlProperties(propertyMap)
 
   /**
    * Get the TableOperations
    *
    * @return a TableOperations object
    */
-  def tableOperations : TableOperations = _tableOperations
+  def tableOperations: TableOperations = _tableOperations
   /**
    * Get an SQLFileReader
    *
    * @return an SQLFileReader
    */
-  def sqlReader : SQLReader = _sqlReader
+  def sqlReader: SQLReader = _sqlReader
 
   /**
    * Get the DataFrameWriter
    *
    * @return a DataFrameWriter
    */
-  def dataFrameWriter : DataFrameWriter = _dataFrameWriter
+  def dataFrameWriter: DataFrameWriter = _dataFrameWriter
 
   /**
    * Get the DataFrameReader
    *
    * @return a DataFrameReader
    */
-  def dataFrameReader : DataFrameReader = _dataFrameReader
+  def dataFrameReader: DataFrameReader = _dataFrameReader
 
   /**
    * Get the UDFs
    *
    * @return a UDF object
    */
-  def userFunctions : UserFunctions = _userFunctions
+  def userFunctions: UserFunctions = _userFunctions
 
 }

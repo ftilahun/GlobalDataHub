@@ -8,8 +8,8 @@ import org.apache.spark.Logging
  * @param message the error message
  * @param sqlStatement the SQL statement that causeed the error.
  */
-class SQLException( message : String, sqlStatement : String )
+class SQLException(message: String, sqlStatement: String)
     extends RuntimeException
     with Logging {
-  log.error( message, sqlStatement )
+  log.error(message, sqlStatement)
 }

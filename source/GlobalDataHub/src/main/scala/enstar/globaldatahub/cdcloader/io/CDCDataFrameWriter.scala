@@ -11,7 +11,7 @@ import org.apache.spark.storage.StorageLevel
  * Writes a DataFrame to filesystem.
  * @param writer filesystem writer
  */
-class CDCDataFrameWriter( writer : DataFrameWriter )
+class CDCDataFrameWriter(writer: DataFrameWriter)
     extends DataFrameWriter
     with Logging {
 
@@ -24,20 +24,20 @@ class CDCDataFrameWriter( writer : DataFrameWriter )
    * @param storageLevel a storage level to persist at
    * @return a count ot the rows written.
    */
-  def write( sqlContext : SQLContext,
-             path : String,
-             dataFrame : DataFrame,
-             storageLevel : Option[StorageLevel] ) : Long = {
+  def write(sqlContext: SQLContext,
+            path: String,
+            dataFrame: DataFrame,
+            storageLevel: Option[StorageLevel]): Long = {
     try {
-      logInfo( "Writing to: " + path )
-      writer.write( sqlContext, path, dataFrame, storageLevel )
+      logInfo("Writing to: " + path)
+      writer.write(sqlContext, path, dataFrame, storageLevel)
       val count = dataFrame.count
-      logInfo( "Wrote " + count + " rows." )
+      logInfo("Wrote " + count + " rows.")
       count
     } catch {
       //a more readable exception
-      case e : AnalysisException =>
-        throw new DataFrameWriteException( path, e )
+      case e: AnalysisException =>
+        throw new DataFrameWriteException(path, e)
     }
   }
 }

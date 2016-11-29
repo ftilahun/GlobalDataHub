@@ -16,16 +16,16 @@ class ControlDataFrameWriterSpec
 
   "ControlDataFrameWriter" should "Write a DataFrame" in {
 
-    Given( "A ControlDataFrameReader" )
-    val dfWriter = Mockito.mock( classOf[DataFrameWriter] )
-    val sqlContext = Mockito.mock( classOf[SQLContext] )
-    val data = Mockito.mock( classOf[DataFrame] )
-    val storageLevelOption = Mockito.mock( classOf[Option[StorageLevel]] )
+    Given("A ControlDataFrameReader")
+    val dfWriter = Mockito.mock(classOf[DataFrameWriter])
+    val sqlContext = Mockito.mock(classOf[SQLContext])
+    val data = Mockito.mock(classOf[DataFrame])
+    val storageLevelOption = Mockito.mock(classOf[Option[StorageLevel]])
 
     val path = "/some/path"
-    val controlDataFrameWriter = new ControlDataFrameWriter( dfWriter )
+    val controlDataFrameWriter = new ControlDataFrameWriter(dfWriter)
 
-    When( "write is called" )
+    When("write is called")
     controlDataFrameWriter.write(
       sqlContext,
       path,
@@ -33,12 +33,12 @@ class ControlDataFrameWriterSpec
       storageLevelOption
     )
 
-    Then( "The call should defer to the passed in writer" )
-    Mockito.verify( dfWriter, Mockito.times( 1 ) ).write(
-      org.mockito.Matchers.any( classOf[SQLContext] ),
+    Then("The call should defer to the passed in writer")
+    Mockito.verify(dfWriter, Mockito.times(1)).write(
+      org.mockito.Matchers.any(classOf[SQLContext]),
       org.mockito.Matchers.anyString(),
-      org.mockito.Matchers.any( classOf[DataFrame] ),
-      org.mockito.Matchers.any( classOf[Option[StorageLevel]] )
+      org.mockito.Matchers.any(classOf[DataFrame]),
+      org.mockito.Matchers.any(classOf[Option[StorageLevel]])
     )
   }
 }

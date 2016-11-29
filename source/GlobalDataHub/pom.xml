@@ -167,9 +167,9 @@
                             <preserveDanglingCloseParenthesis>true</preserveDanglingCloseParenthesis>
                             <preserveSpaceBeforeArguments>true</preserveSpaceBeforeArguments>
                             <rewriteArrowSymbols>false</rewriteArrowSymbols>
-                            <spaceBeforeColon>true</spaceBeforeColon>
+                            <spaceBeforeColon>false</spaceBeforeColon>
                             <spaceInsideBrackets>false</spaceInsideBrackets>
-                            <spaceInsideParentheses>true</spaceInsideParentheses>
+                            <spaceInsideParentheses>false</spaceInsideParentheses>
                         </configuration>
                     </execution>
                 </executions>

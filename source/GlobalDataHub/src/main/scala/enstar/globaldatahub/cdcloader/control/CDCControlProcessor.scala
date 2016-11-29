@@ -20,19 +20,19 @@ class CDCControlProcessor extends ControlProcessor with Logging {
    * @param properties properties file
    * @return true if previously processed
    */
-  def isInitialLoad( sqlContext : SQLContext,
-                     tableName : String,
-                     properties : GDHProperties ) : Boolean = {
-    val sqlString = s" SELECT ${properties.getArrayProperty( "spark.cdcloader.columns.control.names.controlcolumnnames" ).mkString( "," )} " +
-      s"FROM ${properties.getStringProperty( "spark.cdcloader.tables.control.name" )} " +
+  def isInitialLoad(sqlContext: SQLContext,
+                    tableName: String,
+                    properties: GDHProperties): Boolean = {
+    val sqlString = s" SELECT ${properties.getArrayProperty("spark.cdcloader.columns.control.names.controlcolumnnames").mkString(",")} " +
+      s"FROM ${properties.getStringProperty("spark.cdcloader.tables.control.name")} " +
       s" where ${
         properties.getStringProperty(
-          "spark.cdcloader.columns.control.name.tablename" )
+          "spark.cdcloader.columns.control.name.tablename")
       } = $tableName "
-    logInfo( "Running statment: " + sqlString )
-    val rows = sqlContext.sql( sqlString )
+    logInfo("Running statment: " + sqlString)
+    val rows = sqlContext.sql(sqlString)
     val i = rows.count()
-    logInfo( "Got " + i + " rows" )
+    logInfo("Got " + i + " rows")
     i == 0
   }
 
@@ -43,16 +43,16 @@ class CDCControlProcessor extends ControlProcessor with Logging {
    * @param properties properties file
    * @param tableOperation table operations object, for registering tables
    */
-  def registerControlTable( sqlContext : SQLContext,
-                            reader : DataFrameReader,
-                            properties : GDHProperties,
-                            tableOperation : TableOperations ) : Unit = {
+  def registerControlTable(sqlContext: SQLContext,
+                           reader: DataFrameReader,
+                           properties: GDHProperties,
+                           tableOperation: TableOperations): Unit = {
     val path =
-      properties.getStringProperty( "spark.cdcloader.path.data.controlpath" )
+      properties.getStringProperty("spark.cdcloader.path.data.controlpath")
     val name =
-      properties.getStringProperty( "spark.cdcloader.tables.control.name" )
-    logInfo( "Registering control table from " + path + " as " + name )
-    val controlTableDF = reader.read( sqlContext, path, None )
+      properties.getStringProperty("spark.cdcloader.tables.control.name")
+    logInfo("Registering control table from " + path + " as " + name)
+    val controlTableDF = reader.read(sqlContext, path, None)
     tableOperation.registerTempTable(
       controlTableDF,
       name
@@ -65,12 +65,12 @@ class CDCControlProcessor extends ControlProcessor with Logging {
    * @param properties properties file
    * @param tableOperation table operations object, for registering tables
    */
-  def deregisterControlTable( sqlContext : SQLContext,
-                              properties : GDHProperties,
-                              tableOperation : TableOperations ) : Unit = {
+  def deregisterControlTable(sqlContext: SQLContext,
+                             properties: GDHProperties,
+                             tableOperation: TableOperations): Unit = {
     val name =
-      properties.getStringProperty( "spark.cdcloader.tables.control.name" )
-    logInfo( "Removing control table:  " + name )
+      properties.getStringProperty("spark.cdcloader.tables.control.name")
+    logInfo("Removing control table:  " + name)
     tableOperation.deRegisterTempTable(
       sqlContext,
       name
@@ -89,25 +89,25 @@ class CDCControlProcessor extends ControlProcessor with Logging {
    * @param tableName the name of the source table being processed
    * @return an attunity change sequence or "0" if none found
    */
-  def getLastSequenceNumber( sqlContext : SQLContext,
-                             sqlFileReader : SQLReader,
-                             properties : GDHProperties,
-                             tableName : String ) : String = {
+  def getLastSequenceNumber(sqlContext: SQLContext,
+                            sqlFileReader: SQLReader,
+                            properties: GDHProperties,
+                            tableName: String): String = {
     val path =
-      properties.getStringProperty( "spark.cdcloader.path.sql.controlpath" )
-    logInfo( "Getting sql statement from: " + path )
+      properties.getStringProperty("spark.cdcloader.path.sql.controlpath")
+    logInfo("Getting sql statement from: " + path)
     val controlTableSQL = sqlFileReader.getSQLString(
       sqlContext.sparkContext,
       path
     )
-    logInfo( "Running sql statement: " + controlTableSQL + tableName )
+    logInfo("Running sql statement: " + controlTableSQL + tableName)
     val lastSeq =
-      sqlContext.sql( controlTableSQL + tableName ).collect()( 0 ).getString( 0 )
-    if ( lastSeq == null ) {
-      logInfo( "No last sequence found, returning 0" )
+      sqlContext.sql(controlTableSQL + tableName).collect()(0).getString(0)
+    if (lastSeq == null) {
+      logInfo("No last sequence found, returning 0")
       "0"
     } else {
-      logInfo( "Last sequence was: " + lastSeq )
+      logInfo("Last sequence was: " + lastSeq)
       lastSeq
     }
   }

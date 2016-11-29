@@ -19,17 +19,17 @@ class CDCUserFunctions extends UserFunctions with Serializable with Logging {
    * @param sqlContext the sql context
    * @param properties the properties object
    */
-  override def registerUDFs( sqlContext : SQLContext,
-                             properties : GDHProperties ) : Unit = {
-    logInfo( "Registering udfs" )
+  override def registerUDFs(sqlContext: SQLContext,
+                            properties: GDHProperties): Unit = {
+    logInfo("Registering udfs")
     sqlContext.udf.register(
       "isDeleted",
-      ( changeOperation : String ) => isDeleted( changeOperation, properties ) )
-    sqlContext.udf.register( "checkBitMask",
-      ( bitMask : String, position : Int ) =>
-        isBitSet( getBitMask( bitMask ), position ) )
-    sqlContext.udf.register( "getCurrentTime", () => getCurrentTime( properties ) )
-    logInfo( "Completed registering udfs" )
+      (changeOperation: String) => isDeleted(changeOperation, properties))
+    sqlContext.udf.register("checkBitMask",
+      (bitMask: String, position: Int) =>
+        isBitSet(getBitMask(bitMask), position))
+    sqlContext.udf.register("getCurrentTime", () => getCurrentTime(properties))
+    logInfo("Completed registering udfs")
   }
 
   /**
@@ -39,11 +39,11 @@ class CDCUserFunctions extends UserFunctions with Serializable with Logging {
    * @param properties the properties object
    * @return true if the chsnge operation is DELETE.
    */
-  override def isDeleted( changeOperation : String,
-                          properties : GDHProperties ) : java.lang.Boolean =
+  override def isDeleted(changeOperation: String,
+                         properties: GDHProperties): java.lang.Boolean =
     changeOperation.equalsIgnoreCase(
       properties.getStringProperty(
-        "spark.cdcloader.columns.attunity.value.changeoperation" ) )
+        "spark.cdcloader.columns.attunity.value.changeoperation"))
 
   /**
    * * Provides a string representation of the current time in the specified
@@ -51,20 +51,20 @@ class CDCUserFunctions extends UserFunctions with Serializable with Logging {
    * @param properties properties object
    * @return a string representation of the current timestamp
    */
-  def getCurrentTime( properties : GDHProperties ) : String =
+  def getCurrentTime(properties: GDHProperties): String =
     DateTimeFormat
       .forPattern(
-        properties.getStringProperty( "spark.cdcloader.format.timestamp.hive" ) )
-      .print( new DateTime() )
+        properties.getStringProperty("spark.cdcloader.format.timestamp.hive"))
+      .print(new DateTime())
 
   /**
    * Converts the attunity change mask from a Hexadecimal string to a binary string
    * @param changeMask the hex string to convert
    * @return a binary string
    */
-  def getBitMask( changeMask : String ) : String =
-    if ( null != changeMask ) {
-      new BigInteger( changeMask, 16 ).toString( 2 ).reverse
+  def getBitMask(changeMask: String): String =
+    if (null != changeMask) {
+      new BigInteger(changeMask, 16).toString(2).reverse
     } else {
       "0"
     }
@@ -76,9 +76,9 @@ class CDCUserFunctions extends UserFunctions with Serializable with Logging {
    * @param position the position of the bit in the <b>change table</b>
    * @return true if the bit has been set
    */
-  def isBitSet( bitMask : String, position : Integer ) : java.lang.Boolean = {
-    if ( bitMask.length > position ) {
-      return bitMask.charAt( position ) == '1'
+  def isBitSet(bitMask: String, position: Integer): java.lang.Boolean = {
+    if (bitMask.length > position) {
+      return bitMask.charAt(position) == '1'
     }
     false
   }
@@ -90,11 +90,11 @@ class CDCUserFunctions extends UserFunctions with Serializable with Logging {
    * @param columnPositions the position of the columns to check
    * @return true if any bit has been set
    */
-  def isAnyBitSet( changeMask : String,
-                   columnPositions : Array[String] ) : java.lang.Boolean = {
-    val bitMask = getBitMask( changeMask )
+  def isAnyBitSet(changeMask: String,
+                  columnPositions: Array[String]): java.lang.Boolean = {
+    val bitMask = getBitMask(changeMask)
     columnPositions.foreach { position =>
-      if ( isBitSet( bitMask, position.toInt ) ) {
+      if (isBitSet(bitMask, position.toInt)) {
         return true
       }
     }
@@ -107,12 +107,12 @@ class CDCUserFunctions extends UserFunctions with Serializable with Logging {
    * @param properties the properties object
    * @return a string representing a sequence number
    */
-  def generateSequenceNumber( properties : GDHProperties ) : String = {
+  def generateSequenceNumber(properties: GDHProperties): String = {
     DateTimeFormat
       .forPattern(
         properties.getStringProperty(
-          "spark.cdcloader.format.timestamp.attunity" ) )
-      .print( new DateTime() ) +
+          "spark.cdcloader.format.timestamp.attunity"))
+      .print(new DateTime()) +
       "0000000000000000000"
   }
 }

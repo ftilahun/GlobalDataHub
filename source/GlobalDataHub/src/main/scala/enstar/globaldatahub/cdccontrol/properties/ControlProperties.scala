@@ -7,7 +7,7 @@ import org.apache.spark.Logging
 /**
  *  Properties class for CDCControl
  */
-class ControlProperties( propertyMap : Map[String, String] )
+class ControlProperties(propertyMap: Map[String, String])
     extends GDHProperties
     with Logging {
 
@@ -20,8 +20,8 @@ class ControlProperties( propertyMap : Map[String, String] )
    * @param name the name of the property
    * @return the prperty value as a Java boolean.
    */
-  override def getBooleanProperty( name : String ) : java.lang.Boolean =
-    propertyMap( name ).toBoolean.asInstanceOf[java.lang.Boolean]
+  override def getBooleanProperty(name: String): java.lang.Boolean =
+    propertyMap(name).toBoolean.asInstanceOf[java.lang.Boolean]
 
   /**
    * Get the string value of a property
@@ -29,8 +29,8 @@ class ControlProperties( propertyMap : Map[String, String] )
    * @param name then name of the property
    * @return the property value in string format.
    */
-  override def getStringProperty( name : String ) : String =
-    propertyMap( name )
+  override def getStringProperty(name: String): String =
+    propertyMap(name)
 
   /**
    * Get the value of a property as a string array.
@@ -38,19 +38,19 @@ class ControlProperties( propertyMap : Map[String, String] )
    * @param name the name of the property
    * @return the property value as an array
    */
-  override def getArrayProperty( name : String ) : Array[String] =
-    propertyMap( name ).split( "_" )
+  override def getArrayProperty(name: String): Array[String] =
+    propertyMap(name).split("_")
 
   /**
    * Check all required properties have been set correctly
    */
-  override def checkPropertiesSet() : Unit = {
-    checkProperty( "spark.cdccontrol.path.sql", _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdccontrol.path.data.control.input", _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdccontrol.path.data.control.output", _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdccontrol.path.data.input", _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdccontrol.tables.control.name", _.get.asInstanceOf[String] )
-    checkProperty( "spark.cdccontrol.tables.temp.name", _.get.asInstanceOf[String] )
+  override def checkPropertiesSet(): Unit = {
+    checkProperty("spark.cdccontrol.path.sql", _.get.asInstanceOf[String])
+    checkProperty("spark.cdccontrol.path.data.control.input", _.get.asInstanceOf[String])
+    checkProperty("spark.cdccontrol.path.data.control.output", _.get.asInstanceOf[String])
+    checkProperty("spark.cdccontrol.path.data.input", _.get.asInstanceOf[String])
+    checkProperty("spark.cdccontrol.tables.control.name", _.get.asInstanceOf[String])
+    checkProperty("spark.cdccontrol.tables.temp.name", _.get.asInstanceOf[String])
   }
 
   /**
@@ -59,20 +59,20 @@ class ControlProperties( propertyMap : Map[String, String] )
    * @param keyName the property name
    * @param typeCheck a function to determine the type is correct.
    */
-  private def checkProperty( keyName : String,
-                             typeCheck : Option[Any] => Unit ) : Unit = {
-    logDebug( "Checking property: " + keyName )
-    if ( propertyMap.get( keyName ).isEmpty ) {
-      throw new PropertyNotSetException( keyName, None )
+  private def checkProperty(keyName: String,
+                            typeCheck: Option[Any] => Unit): Unit = {
+    logDebug("Checking property: " + keyName)
+    if (propertyMap.get(keyName).isEmpty) {
+      throw new PropertyNotSetException(keyName)
     }
     try {
-      val a = propertyMap.get( keyName )
-      typeCheck( a )
+      val a = propertyMap.get(keyName)
+      typeCheck(a)
     } catch {
-      case e : Exception =>
-        throw new PropertyNotSetException( "Wrong type: " + keyName, Some( e ) )
+      case e: Exception =>
+        throw new PropertyNotSetException("Wrong type: " + keyName, e)
     }
-    logDebug( "property " + keyName + " is valid" )
+    logDebug("property " + keyName + " is valid")
   }
 }
 
@@ -83,16 +83,16 @@ object ControlProperties
   /**
    * command line parser
    */
-  val parser = new scopt.OptionParser[Config]( "ControlJob" ) {
-    head( "CDCControl", "0.1" )
-    opt[Map[String, String]]( "ctrlOptions" )
+  val parser = new scopt.OptionParser[Config]("ControlJob") {
+    head("CDCControl", "0.1")
+    opt[Map[String, String]]("ctrlOptions")
       .valueName(
         "spark.cdccontrol.tables.control.name=v,etc..."
       )
       .required()
       .unbounded()
-      .action { ( x, c ) =>
-        c.copy( kwArgs = x )
+      .action { (x, c) =>
+        c.copy(kwArgs = x)
       }
     note(
       "The following arguments are required:" +

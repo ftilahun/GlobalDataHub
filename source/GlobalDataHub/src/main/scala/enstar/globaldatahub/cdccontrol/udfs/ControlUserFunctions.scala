@@ -19,11 +19,11 @@ class ControlUserFunctions
    *
    * @param sqlContext the sql context
    */
-  override def registerUDFs( sqlContext : SQLContext,
-                             properties : GDHProperties ) : Unit = {
-    logInfo( "Registering udfs" )
-    sqlContext.udf.register( "getCurrentTime", () => getCurrentTime( properties ) )
-    logInfo( "Completed registering udfs" )
+  override def registerUDFs(sqlContext: SQLContext,
+                            properties: GDHProperties): Unit = {
+    logInfo("Registering udfs")
+    sqlContext.udf.register("getCurrentTime", () => getCurrentTime(properties))
+    logInfo("Completed registering udfs")
   }
 
   /**
@@ -33,10 +33,10 @@ class ControlUserFunctions
    * @param properties properties object
    * @return a string representation of the current timestamp
    */
-  override def getCurrentTime( properties : GDHProperties ) : String =
+  override def getCurrentTime(properties: GDHProperties): String =
     DateTimeFormat
       .forPattern(
-        properties.getStringProperty( "spark.cdcloader.format.timestamp.hive" ) )
-      .print( new DateTime() )
+        properties.getStringProperty("spark.cdcloader.format.timestamp.hive"))
+      .print(new DateTime())
 
 }

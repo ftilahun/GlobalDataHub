@@ -16,8 +16,8 @@ trait DataFrameReader {
    * @param storageLevel an optional storagelevel to persist the dataframe
    * @return a dataframe
    */
-  def read( sqlContext : SQLContext,
-            path : String,
-            storageLevel : Option[StorageLevel] ) : DataFrame
+  def read(sqlContext: SQLContext,
+           path: String,
+           storageLevel: Option[StorageLevel]): DataFrame
 
 }

@@ -8,7 +8,7 @@ import org.apache.spark.storage.StorageLevel
 /**
  * Dataframe reader for CDCControl
  */
-class ControlDataFrameReader( reader : DataFrameReader )
+class ControlDataFrameReader(reader: DataFrameReader)
     extends DataFrameReader
     with Logging {
 
@@ -20,10 +20,10 @@ class ControlDataFrameReader( reader : DataFrameReader )
    * @param storageLevel an optional storagelevel to persist the dataframe
    * @return a dataframe
    */
-  override def read( sqlContext : SQLContext,
-                     path : String,
-                     storageLevel : Option[StorageLevel] ) : DataFrame = {
-    reader.read( sqlContext, path, storageLevel )
+  override def read(sqlContext: SQLContext,
+                    path: String,
+                    storageLevel: Option[StorageLevel]): DataFrame = {
+    reader.read(sqlContext, path, storageLevel)
   }
 
 }

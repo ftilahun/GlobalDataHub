@@ -8,7 +8,7 @@ import org.apache.spark.storage.StorageLevel
 /**
  * Dataframe writer for CDCControl
  */
-class ControlDataFrameWriter( writer : DataFrameWriter )
+class ControlDataFrameWriter(writer: DataFrameWriter)
     extends DataFrameWriter
     with Logging {
 
@@ -20,11 +20,11 @@ class ControlDataFrameWriter( writer : DataFrameWriter )
    * @param data         the dataframe
    * @param storageLevel an optional storagelevel to persist the dataframe
    */
-  override def write( sqlContext : SQLContext,
-                      path : String,
-                      data : DataFrame,
-                      storageLevel : Option[StorageLevel] ) : Long = {
-    writer.write( sqlContext, path, data, storageLevel )
+  override def write(sqlContext: SQLContext,
+                     path: String,
+                     data: DataFrame,
+                     storageLevel: Option[StorageLevel]): Long = {
+    writer.write(sqlContext, path, data, storageLevel)
   }
 
 }

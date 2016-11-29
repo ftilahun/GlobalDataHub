@@ -15,10 +15,10 @@ trait ControlProcessor {
    * @param properties properties file
    * @param tableOperation table operations object, for registering tables
    */
-  def registerControlTable( sqlContext : SQLContext,
-                            reader : DataFrameReader,
-                            properties : GDHProperties,
-                            tableOperation : TableOperations ) : Unit
+  def registerControlTable(sqlContext: SQLContext,
+                           reader: DataFrameReader,
+                           properties: GDHProperties,
+                           tableOperation: TableOperations): Unit
 
   /**
    * De-register the control table for a source system
@@ -26,8 +26,8 @@ trait ControlProcessor {
    * @param properties properties file
    * @param tableOperation table operations object, for registering tables
    */
-  def deregisterControlTable( sqlContext : SQLContext,
-                              properties : GDHProperties,
-                              tableOperation : TableOperations ) : Unit
+  def deregisterControlTable(sqlContext: SQLContext,
+                             properties: GDHProperties,
+                             tableOperation: TableOperations): Unit
 
 }

@@ -14,19 +14,19 @@ import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 class CDCLoaderModuleSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCLoaderModuleSpec" should "Return correct tyoes" in {
-      def typeCheck[T]( value : T ) = value match {
-        case _ : ControlProcessor => "ControlProcessor"
-        case _ : SourceProcessor  => "SourceProcessor"
-        case _ : DataFrameReader  => "DataFrameReader"
-        case _ : DataFrameWriter  => "DataFrameWriter"
-        case _ : TableOperations  => "TableOperations"
-        case _ : TableProcessor   => "TableProcessor"
-        case _ : UserFunctions    => "UserFunctions"
-        case _ : SQLReader        => "SQLFileReader"
-        case _ : GDHProperties    => "GDHProperties"
+      def typeCheck[T](value: T) = value match {
+        case _: ControlProcessor => "ControlProcessor"
+        case _: SourceProcessor  => "SourceProcessor"
+        case _: DataFrameReader  => "DataFrameReader"
+        case _: DataFrameWriter  => "DataFrameWriter"
+        case _: TableOperations  => "TableOperations"
+        case _: TableProcessor   => "TableProcessor"
+        case _: UserFunctions    => "UserFunctions"
+        case _: SQLReader        => "SQLFileReader"
+        case _: GDHProperties    => "GDHProperties"
       }
 
-    val args = CDCProperties.parseProperties( Array[String](
+    val args = CDCProperties.parseProperties(Array[String](
       "--cdcOptions",
       "spark.cdcloader.columns.attunity.name.changemask=a," +
         "spark.cdcloader.columns.control.names.controlcolumnnames=a," +
@@ -52,17 +52,17 @@ class CDCLoaderModuleSpec extends FlatSpec with GivenWhenThen with Matchers {
         "spark.cdcloader.columns.control.name.tablename.a=a," +
         "spark.cdcloader.control.columnpositions.b=1_2_3," +
         "spark.cdcloader.columns.control.name.tablename.b=b"
-    ) )
+    ))
 
-    typeCheck( CDCLoaderModule.controlProcessor ) should be( "ControlProcessor" )
-    typeCheck( CDCLoaderModule.cdcSourceProcessor ) should be( "SourceProcessor" )
-    typeCheck( CDCLoaderModule.dataFrameReader ) should be( "DataFrameReader" )
-    typeCheck( CDCLoaderModule.dataFrameWriter ) should be( "DataFrameWriter" )
-    typeCheck( CDCLoaderModule.tableOperations ) should be( "TableOperations" )
-    typeCheck( CDCLoaderModule.tableProcessor ) should be( "TableProcessor" )
-    typeCheck( CDCLoaderModule.userFunctions ) should be( "UserFunctions" )
-    typeCheck( CDCLoaderModule.sqlReader ) should be( "SQLFileReader" )
-    typeCheck( CDCLoaderModule.properties( args ) ) should be( "GDHProperties" )
+    typeCheck(CDCLoaderModule.controlProcessor) should be("ControlProcessor")
+    typeCheck(CDCLoaderModule.cdcSourceProcessor) should be("SourceProcessor")
+    typeCheck(CDCLoaderModule.dataFrameReader) should be("DataFrameReader")
+    typeCheck(CDCLoaderModule.dataFrameWriter) should be("DataFrameWriter")
+    typeCheck(CDCLoaderModule.tableOperations) should be("TableOperations")
+    typeCheck(CDCLoaderModule.tableProcessor) should be("TableProcessor")
+    typeCheck(CDCLoaderModule.userFunctions) should be("UserFunctions")
+    typeCheck(CDCLoaderModule.sqlReader) should be("SQLFileReader")
+    typeCheck(CDCLoaderModule.properties(args)) should be("GDHProperties")
   }
 
 }

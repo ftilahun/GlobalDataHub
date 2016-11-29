@@ -1,0 +1,17 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+ 	"type": "record",
+ 	"name": "lookup_premium_type",
+ 	"fields": [
+    	{
+    		"name": "premium_type_code",
+    		"type": "string",
+    		"doc": "The code for the transaction type"
+    	},
+    	{
+    	    "name": "premium_type_desc",
+            "type": "string"
+            "doc": "The description for the transaction type."
+        }
+ 	]
+}

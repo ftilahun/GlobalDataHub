@@ -29,14 +29,14 @@ trait SourceProcessor {
    * @param userFunctions user defined functions for this source.
    * @param sqlReader a SQL reader for this source.
    */
-  def process( controlProcessor : ControlProcessor,
-               properties : GDHProperties,
-               sqlContext : SQLContext,
-               reader : DataFrameReader,
-               writer : DataFrameWriter,
-               tableOperations : TableOperations,
-               tableProcessor : TableProcessor,
-               userFunctions : UserFunctions,
-               sqlReader : SQLReader ) : Unit
+  def process(controlProcessor: ControlProcessor,
+              properties: GDHProperties,
+              sqlContext: SQLContext,
+              reader: DataFrameReader,
+              writer: DataFrameWriter,
+              tableOperations: TableOperations,
+              tableProcessor: TableProcessor,
+              userFunctions: UserFunctions,
+              sqlReader: SQLReader): Unit
 
 }

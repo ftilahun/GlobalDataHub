@@ -14,5 +14,5 @@ trait UserFunctions extends UDFs with Serializable {
    * @param properties properties object
    * @return a string representation of the current timestamp
    */
-  def getCurrentTime( properties : GDHProperties ) : String
+  def getCurrentTime(properties: GDHProperties): String
 }

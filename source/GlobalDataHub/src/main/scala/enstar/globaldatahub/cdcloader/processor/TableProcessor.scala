@@ -26,14 +26,14 @@ trait TableProcessor {
    * @param sqlReader a sqlreader object
    * @return a dataframe of the source table
    */
-  def process( tableName : String,
-               sqlContext : SQLContext,
-               controlProcessor : ControlProcessor,
-               properties : GDHProperties,
-               reader : DataFrameReader,
-               userFunctiions : UserFunctions,
-               tableOperations : TableOperations,
-               sqlReader : SQLReader ) : DataFrame
+  def process(tableName: String,
+              sqlContext: SQLContext,
+              controlProcessor: ControlProcessor,
+              properties: GDHProperties,
+              reader: DataFrameReader,
+              userFunctiions: UserFunctions,
+              tableOperations: TableOperations,
+              sqlReader: SQLReader): DataFrame
 
   /**
    * Save source table dataframe to disk
@@ -45,11 +45,11 @@ trait TableProcessor {
    * @param tableName the name of the table
    * @return the number of rows written.
    */
-  def save( sqlContext : SQLContext,
-            writer : DataFrameWriter,
-            properties : GDHProperties,
-            dataFrame : DataFrame,
-            tableName : String ) : Long
+  def save(sqlContext: SQLContext,
+           writer: DataFrameWriter,
+           properties: GDHProperties,
+           dataFrame: DataFrame,
+           tableName: String): Long
 
   /**
    * Load the source table data
@@ -62,10 +62,10 @@ trait TableProcessor {
    * @param properties the properties object
    * @return a dataframe of the source table.
    */
-  def load( tableName : String,
-            sqlContext : SQLContext,
-            controlProcessor : ControlProcessor,
-            reader : DataFrameReader,
-            userFunctions : UserFunctions,
-            properties : GDHProperties ) : DataFrame
+  def load(tableName: String,
+           sqlContext: SQLContext,
+           controlProcessor: ControlProcessor,
+           reader: DataFrameReader,
+           userFunctions: UserFunctions,
+           properties: GDHProperties): DataFrame
 }
