@@ -24,7 +24,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Load Expected Results into dataframe
     val expectedCurrencyMapping : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/currency/output/currency_mapping_test1.csv" ).toString,
-      getClass.getResource( "/currency/schemas/currency_mapping.avro" ).toString,
+      getClass.getResource( "/currency/schemas/currency.avro" ).toString,
       _.split( "," ),
       CurrencyUtils.currencyMapping,
       sqlc

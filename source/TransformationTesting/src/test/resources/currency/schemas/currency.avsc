@@ -1,7 +1,7 @@
 {
 	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
  	"type": "record",
- 	"name": "currencymapping",
+ 	"name": "currency",
  	"fields": [
         {
             "name": "currencycode",
