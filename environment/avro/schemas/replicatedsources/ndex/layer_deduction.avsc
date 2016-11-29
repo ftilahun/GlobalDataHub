@@ -1,0 +1,63 @@
+{
+	"namespace": "com.kainos.enstar.avro.schemas.replicatedsources",
+	"type": "record"
+	"name": "layer_deductions",
+	"fields": [
+	{
+		"name": "deduction_id",
+		"type": "int"
+	},
+	{
+		"name": "layer_id",
+		"type": "string"
+	},  
+    {
+        "name": "deduction_code",
+        "type": ["string", "null"]
+    },
+    {
+        "name": "deduction_pct",
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 11,
+        "scale": 7
+    }, 
+    {
+        "name": "_changeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_loaddatetimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_loadidentifier",
+        "type": "string"
+    },
+    {
+        "name": "_cdcloadtimestamp",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangesequence",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangeoperation",
+        "type": "string"
+    },
+    {
+        "name": "_cdcchangemask",
+        "type": "string"
+    },
+    {
+        "name": "_sourcesystemtransactiondatetime",
+        "type": "string"
+    },
+    {
+        "name": "_isdeleted",
+        "type": "string"
+    }
+
+	]
+}
