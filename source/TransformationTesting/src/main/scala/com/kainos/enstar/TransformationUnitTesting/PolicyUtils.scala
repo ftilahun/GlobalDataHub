@@ -16,7 +16,7 @@ object PolicyUtils {
       if ( cols( 5 ).equals( "" ) ) null else cols( 5 ),
       if ( cols( 6 ).equals( "" ) ) null else cols( 6 ),
       if ( cols( 7 ).equals( "" ) ) null else cols( 7 ),
-      if ( cols( 8 ).equals( "" ) ) null else cols( 8 ).toInt
+      if ( cols.length > 8 ) if ( cols( 8 ).equals( "" ) ) null else cols( 8 ).toInt else null
     )
   }
 

@@ -13,7 +13,8 @@
     	},
         {
             "name": "risk_reference",  
-            "type": ["string","null"]
+            "type": ["string","null"],
+            "doc": "This is nullable in the NDEX source DB but if it is null this is an unrecoverable error.  Added validation check to ensure it is not null so we can make it not null in this schema."
         },
         {
             "name": "risk_code",  
@@ -35,6 +36,10 @@
         {
             "name": "line_status",  
             "type": ["string", "null"]
+        },
+        {
+            "name": "business_type",
+            "type": ["int","null"]
         }
  	]
 }

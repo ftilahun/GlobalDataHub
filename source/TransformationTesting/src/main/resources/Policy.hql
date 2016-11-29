@@ -39,11 +39,11 @@ JOIN layer
 ON line.line_id = layer.layer_id
 JOIN submission
 ON layer.submission_id = submission.submission_id
-LEFT JOIN risk
+JOIN risk
 ON risk.risk_id = submission.risk_id
 AND risk.programme_year = submission.programme_year
 AND risk.sequence_no = submission.sequence_no
-LEFT JOIN organisation
+JOIN organisation
 ON organisation.organisation_id = risk.assured_id
 LEFT JOIN lookup_profit_centre
 ON line.profit_centre_code = lookup_profit_centre.profit_centre_code
