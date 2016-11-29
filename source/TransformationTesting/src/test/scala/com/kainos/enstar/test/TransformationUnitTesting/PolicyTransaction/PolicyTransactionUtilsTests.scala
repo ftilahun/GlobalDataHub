@@ -151,15 +151,14 @@ class PolicyTransactionUtilsTests extends FlatSpec {
     val column15 = "P"
     val column16 = "Q"
     val column17 = "R"
-    val column18 = "S"
 
     // Act
     val row = PolicyTransactionUtils.policyTransactionMapping( ( column0 :: column1 :: column2 :: column3 ::
       column4 :: column5 :: column6 :: column7 :: column8 :: column9 :: column10 :: column11 :: column12 ::
-      column13 :: column14 :: column15 :: column16 :: column17 :: column18 :: Nil ).toArray )
+      column13 :: column14 :: column15 :: column16 :: column17 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 19 )
+    assert( row.size == 18 )
     assert( row.get( 0 ).equals( column0 ) )
     assert( row.get( 1 ).equals( column1 ) )
     assert( row.get( 2 ).equals( column2 ) )
@@ -178,7 +177,6 @@ class PolicyTransactionUtilsTests extends FlatSpec {
     assert( row.get( 15 ).equals( column15 ) )
     assert( row.get( 16 ).equals( column16 ) )
     assert( row.get( 17 ).equals( column17 ) )
-    assert( row.get( 18 ).equals( column18 ) )
 
   }
 
