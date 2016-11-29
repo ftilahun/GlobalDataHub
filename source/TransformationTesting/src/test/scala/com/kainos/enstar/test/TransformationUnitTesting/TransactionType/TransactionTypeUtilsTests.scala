@@ -12,12 +12,12 @@ class TransactionTypeUtilsTests extends FlatSpec {
     val column2 = "B"
 
     // Act
-    val row = TransactionTypeUtils.lookupPremiumTypeMapping(Array(column1, column2))
+    val row = TransactionTypeUtils.lookupPremiumTypeMapping( Array( column1, column2 ) )
 
     // Assert
-    assert(row.size == 2)
-    assert(row.get(0).equals("A"))
-    assert(row.get(1).equals("B"))
+    assert( row.size == 2 )
+    assert( row.get( 0 ).equals( "A" ) )
+    assert( row.get( 1 ).equals( "B" ) )
 
   }
 
@@ -32,20 +32,20 @@ class TransactionTypeUtilsTests extends FlatSpec {
     val column6 = "F"
     val column7 = "false"
 
-    val rowArray = Array(column1, column2, column3, column4, column5, column6, column7)
+    val rowArray = Array( column1, column2, column3, column4, column5, column6, column7 )
 
     // Act
-    val row = TransactionTypeUtils.transactionTypeMapping(rowArray)
+    val row = TransactionTypeUtils.transactionTypeMapping( rowArray )
 
     // Assert
-    assert(row.size == 7)
-    assert(row.get(0).equals(column1))
-    assert(row.get(1).equals(column2))
-    assert(row.get(2).equals(column3))
-    assert(row.get(3).equals(column4))
-    assert(row.get(4).equals(column5))
-    assert(row.get(5).equals(column6))
-    assert(row.get(6).equals(false))
+    assert( row.size == 7 )
+    assert( row.get( 0 ).equals( column1 ) )
+    assert( row.get( 1 ).equals( column2 ) )
+    assert( row.get( 2 ).equals( column3 ) )
+    assert( row.get( 3 ).equals( column4 ) )
+    assert( row.get( 4 ).equals( column5 ) )
+    assert( row.get( 5 ).equals( column6 ) )
+    assert( row.get( 6 ).equals( false ) )
 
   }
 

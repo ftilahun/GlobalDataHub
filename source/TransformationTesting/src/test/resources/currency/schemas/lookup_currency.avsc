@@ -1,0 +1,15 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "lookup_currency",
+    "fields": [
+        {
+            "name" : "currency_code",
+            "type" : "string"
+        },
+        {
+            "name": "currency_desc",
+            "type": ["string","null"]
+        }
+    ]
+}
