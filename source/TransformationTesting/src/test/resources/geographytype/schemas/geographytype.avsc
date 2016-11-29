@@ -1,0 +1,19 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+ 	"type": "record",
+ 	"name": "geographytype",
+ 	"fields": [
+    	{
+    		"name": "geographytypecode",
+    		"type": "string"
+    	},
+        {
+            "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "geographytypedescription",
+            "type": "string"
+        }
+ 	]
+}
