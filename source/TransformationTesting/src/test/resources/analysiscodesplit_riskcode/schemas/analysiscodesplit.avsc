@@ -1,0 +1,35 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+ 	"type": "record",
+ 	"name": "analysiscodesplit",
+    "fields": [
+    	{
+    		"name": "policynumber",
+    		"type": "string"
+        },
+        {
+            "name": "sectionreference",
+            "type": "string"
+        },
+        {
+            "name": "coveragereference",
+            "type": "string"
+        },
+        {
+            "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "analysiscodetype",
+            "type": "string"
+        },
+        {
+            "name": "analysiscode",
+            "type": "string"
+        },
+        {
+            "name": "splitpercent",
+            "type": "string"
+        }
+    ]
+}
