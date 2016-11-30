@@ -1,0 +1,15 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "lookup_risk_code",
+    "fields": [
+        {
+            "name" : "risk_code",
+            "type" : "string"
+        },
+        {
+            "name": "risk_code_desc",
+            "type": "string"
+        }
+    ]
+}
