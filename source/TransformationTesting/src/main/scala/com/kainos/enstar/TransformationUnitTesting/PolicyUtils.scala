@@ -58,7 +58,7 @@ object PolicyUtils {
   }
 
   def underwritingBlockMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ) )
+    Row( cols( 0 ), cols( 1 ), cols( 2 ) )
   }
 
   def policyMapping( cols : Array[String] ) : Row = {

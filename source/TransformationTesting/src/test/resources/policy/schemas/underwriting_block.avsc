@@ -7,6 +7,10 @@
             "name": "block", 
             "type": "string"
         },
+        {
+            "name": "subblock",
+            "type": "string"
+        },
     	{
     		"name": "description", 
     		"type": ["string", "null"]

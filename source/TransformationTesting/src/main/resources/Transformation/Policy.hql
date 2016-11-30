@@ -50,6 +50,7 @@ ON line.profit_centre_code = lookup_profit_centre.profit_centre_code
 LEFT JOIN lookup_block
 ON line.block = lookup_block.block
 LEFT JOIN underwriting_block
-ON lookup_block.block = underwriting_block.block
+ON line.block = underwriting_block.block
+AND line.subblock = underwriting_block.subblock
 LEFT JOIN lookup_business_type
 ON lookup_business_type.business_type = line.business_type

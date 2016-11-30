@@ -260,14 +260,16 @@ class PolicyUtilsTests extends FlatSpec {
     // Arrange
     val column0 = "A"
     val column1 = "B"
+    val column2 = "C"
 
     // Act
-    val row = PolicyUtils.underwritingBlockMapping( ( column0 :: column1 :: Nil ).toArray )
+    val row = PolicyUtils.underwritingBlockMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 2 )
+    assert( row.size == 3 )
     assert( row.get( 0 ).equals( column0 ) )
     assert( row.get( 1 ).equals( column1 ) )
+    assert( row.get( 2 ).equals( column2 ) )
 
   }
 
