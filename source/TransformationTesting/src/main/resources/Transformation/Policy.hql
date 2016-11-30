@@ -36,7 +36,7 @@ FROM
 
 line 
 JOIN layer
-ON line.line_id = layer.layer_id
+ON line.layer_id = layer.layer_id
 JOIN submission
 ON layer.submission_id = submission.submission_id
 JOIN risk
