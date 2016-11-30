@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.LineOfBusiness
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{LineOfBusinessUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ LineOfBusinessUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -21,7 +21,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_block : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/lineofbusiness/input/lookup_block_test1.csv" ).toString,
       getClass.getResource( "/lineofbusiness/schemas/lookup_block.avro" ).toString,
-      _.split(","),
+      _.split( "," ),
       LineOfBusinessUtils.lookupBlockMapping,
       sqlc
     )
@@ -29,7 +29,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/lineofbusiness/input/underwriting_block_test1.csv" ).toString,
       getClass.getResource( "/lineofbusiness/schemas/underwriting_block.avro" ).toString,
-      _.split(","),
+      _.split( "," ),
       LineOfBusinessUtils.underwritingBlockMapping,
       sqlc
     )
