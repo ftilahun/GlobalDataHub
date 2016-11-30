@@ -3,11 +3,17 @@ SELECT
     "NDEX" AS sourcesystemcode,
     CAST(line.line_id AS STRING) AS coveragereference,
     false AS iscashtransactiontype,
-    CAST( AS STRING)    AS originalamount,
+    CASE line.business_type
+        WHEN IN (1,17) THEN CAST(0 AS STRING)
+        ELSE CAST((settlement_schedule.amount * (line.reporting_line_pct / 100) * deduction%) AS STRING)
+        END AS originalamount,
     CAST(layer.premium_ccy AS STRING) AS originalcurrencycode,
     CAST(line.risk_reference AS STRING) AS policynumber,
     CAST(line.layer_id AS STRING) AS sectionreference,
-    CAST( AS STRING)    AS settlementamount,
+    CASE line.business_type
+        WHEN IN (1,17) THEN CAST(0 AS STRING)
+        ELSE CAST((settlement_schedule.amount / layer.premium_roe * (line.reporting_line_pct / 100) * deduction%) AS STRING)
+        END AS settlementamount,
     CAST(line.epi_settlement_ccy AS STRING) AS settlementcurrencycode,
     CAST(settlement_schedule.settlement_due_date AS STRING) AS transactiondate
     "WrittenDeductionsOurShare" AS transactiontypecode,
