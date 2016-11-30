@@ -1,0 +1,19 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "riskcode",
+    "fields": [
+        {
+            "name" : "riskcode",
+            "type" : "string"
+        },
+        {
+            "name" : "sourcesystemcode",
+            "type" : "string"
+        },
+        {
+            "name": "riskcodedescription",
+            "type": "string"
+        }
+    ]
+}
