@@ -10,7 +10,7 @@ import org.scalatest.FunSuite
  */
 class ValidationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "Validation: When input contains no null values for risk_reference validation should pass" ) {
+  test( "Validation: When input contains no null values for risk_reference validation script should return count 0" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -38,7 +38,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     assert( result.count() == 0 )
   }
 
-  test( "Validation: When input contains rows with risk_reference null validation should fail" ) {
+  test( "Validation: When input contains rows with risk_reference null validation script should return count 1" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base

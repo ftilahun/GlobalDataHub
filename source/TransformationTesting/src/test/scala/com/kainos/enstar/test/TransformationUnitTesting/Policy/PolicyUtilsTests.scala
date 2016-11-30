@@ -21,8 +21,10 @@ class PolicyUtilsTests extends FlatSpec {
     val column7 = "H"
     val column8 = "2"
 
+    val columns = Array( column0, column1, column2, column3,
+      column4, column5, column6, column7, column8 )
     // Act
-    val row = PolicyUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: column8 :: Nil ).toArray )
+    val row = PolicyUtils.lineMapping( columns )
 
     // Assert
     assert( row.size == 9 )
@@ -50,8 +52,11 @@ class PolicyUtilsTests extends FlatSpec {
     val column6 = "G"
     val column7 = "H"
 
+    val columns = Array( column0, column1, column2, column3,
+      column4, column5, column6, column7 )
+
     // Act
-    val row = PolicyUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: Nil ).toArray )
+    val row = PolicyUtils.lineMapping( columns )
 
     // Assert
     assert( row.size == 9 )
@@ -80,8 +85,11 @@ class PolicyUtilsTests extends FlatSpec {
     val column7 = "H"
     val column8 = "5"
 
+    val columns = Array( column0, column1, column2, column3,
+      column4, column5, column6, column7, column8 )
+
     // Act
-    val row = PolicyUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: column8 :: Nil ).toArray )
+    val row = PolicyUtils.lineMapping( columns )
 
     // Assert
     assert( row.size == 9 )
@@ -96,7 +104,7 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 8 ) == column8.toInt )
   }
 
-  "layerMapping" should "generate a Row given 9 inputs" in {
+  "layerMapping" should "generate a Row given 6 inputs" in {
 
     // Arrange
     val column0 = "0"
@@ -305,11 +313,13 @@ class PolicyUtilsTests extends FlatSpec {
     val column26 = "AA"
     val column27 = "27"
 
+    val columns = Array( column0, column1, column2, column3, column4, column5, column6,
+      column7, column8, column9, column10, column11, column12, column13, column14, column15,
+      column16, column17, column18, column19, column20, column21, column22, column23, column24,
+      column25, column26, column27 )
+
     // Act
-    val row = PolicyUtils.policyMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 ::
-      column7 :: column8 :: column9 :: column10 :: column11 :: column12 :: column13 :: column14 :: column15 ::
-      column16 :: column17 :: column18 :: column19 :: column20 :: column21 :: column22 :: column23 :: column24 ::
-      column25 :: column26 :: column27 :: Nil ).toArray )
+    val row = PolicyUtils.policyMapping( columns )
 
     // Assert
     assert( row.size == 28 )

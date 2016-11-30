@@ -2,7 +2,7 @@ package com.kainos.enstar.test.TransformationUnitTesting.Policy
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ LegalEntityUtils, PolicyUtils, SQLRunner, TransformationUnitTestingUtils }
-import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.{ DataFrame, Row }
 import org.scalatest.FunSuite
 
 /**
@@ -23,7 +23,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
       getClass.getResource( "/policy/schemas/line.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lineMapping,
-      sqlContext
+      sqlc
     )
 
     val layer : DataFrame = utils.populateDataFrameFromFile(

@@ -2,7 +2,7 @@ package com.kainos.enstar.test.TransformationUnitTesting.Policy
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ PolicyUtils, SQLRunner, TransformationUnitTestingUtils }
-import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
 /**
@@ -10,95 +10,128 @@ import org.scalatest.FunSuite
  */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "Policy Transformation mapping happy path data" ){
+  private val utils = new TransformationUnitTestingUtils
 
-    // Arrange //
-    // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
-    sqlc.sparkContext.setLogLevel( "WARN" )
-
-    // Load test data into dataframe
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test1.csv" ).toString,
+  def populateDataFrameWithLineTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
       getClass.getResource( "/policy/schemas/line.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lineMapping,
       sqlc
     )
+  }
 
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test1.csv" ).toString,
+  def populateDataFrameWithLayerTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
       getClass.getResource( "/policy/schemas/layer.avro" ).toString,
       _.split( "," ),
       PolicyUtils.layerMapping,
       sqlc
     )
+  }
 
-    val submission : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/submission_test1.csv" ).toString,
+  def populateDataFrameWithSubmissionTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
       getClass.getResource( "/policy/schemas/submission.avro" ).toString,
       _.split( "," ),
       PolicyUtils.submissionMapping,
       sqlc
     )
+  }
 
-    val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test1.csv" ).toString,
+  def populateDataFrameWithRiskTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
       getClass.getResource( "/policy/schemas/risk.avro" ).toString,
       _.split( "," ),
       PolicyUtils.riskMapping,
       sqlc
     )
+  }
 
-    val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.organisationMapping,
-      sqlc
-    )
-
-    val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBusinessTypeMapping,
-      sqlc
-    )
-
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
+  def populateDataFrameWithLookupBlockTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
       getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupBlockMapping,
       sqlc
     )
+  }
 
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
+  def populateDataFrameWithLookupProfitCentreTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
       getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupProfitCentreMapping,
       sqlc
     )
+  }
 
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
+  def populateDataFrameWithLookupBusinessTypeTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
+      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
+      _.split( "," ),
+      PolicyUtils.lookupBusinessTypeMapping,
+      sqlc
+    )
+  }
+
+  def populateDataFrameWithOrganisationTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
+      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
+      _.split( "," ),
+      PolicyUtils.organisationMapping,
+      sqlc
+    )
+  }
+
+  def populateDataFrameWithUnderwritingBlockTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/" + dataFileName ).toString,
       getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
       _.split( "," ),
       PolicyUtils.underwritingBlockMapping,
       sqlc
     )
+  }
 
-    // Load expected result into dataframe
-    val expectedPolicy : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/output/policy_test1.csv" ).toString,
+  def populateDataFrameWithPolicyTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/output/" + dataFileName ).toString,
       getClass.getResource( "/policy/schemas/policy.avro" ).toString,
       _.split( "," ),
       PolicyUtils.policyMapping,
       sqlc
     )
+  }
+
+  test( "Policy Transformation mapping happy path data" ){
+
+    // Arrange //
+    // Use sqlContext from spark-testing-base
+    val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
+
+    // Load test data into dataframe
+    val line = this.populateDataFrameWithLineTestData( "line_test1.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+
+    // Load expected result into dataframe
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test1.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -126,90 +159,21 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test2.csv" ).toString,
-      getClass.getResource( "/policy/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.layerMapping,
-      sqlc
-    )
-
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lineMapping,
-      sqlc
-    )
-
-    val submission : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/submission_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.submissionMapping,
-      sqlc
-    )
-
-    val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.riskMapping,
-      sqlc
-    )
-
-    val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.organisationMapping,
-      sqlc
-    )
-
-    val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBusinessTypeMapping,
-      sqlc
-    )
-
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBlockMapping,
-      sqlc
-    )
-
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupProfitCentreMapping,
-      sqlc
-    )
-
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.underwritingBlockMapping,
-      sqlc
-    )
+    val line = this.populateDataFrameWithLineTestData( "line_test1.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_test2.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/output/policy_test2.csv" ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.policyMapping,
-      sqlc
-    )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test2.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -223,6 +187,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     lookup_business_type.registerTempTable( "lookup_business_type" )
     lookup_block.registerTempTable( "lookup_block" )
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -239,86 +204,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test3.csv" ).toString,
-      getClass.getResource( "/policy/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.layerMapping,
-      sqlc
-    )
-
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lineMapping,
-      sqlc
-    )
-
-    val submission : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/submission_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.submissionMapping,
-      sqlc
-    )
-
-    val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.riskMapping,
-      sqlc
-    )
-
-    val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.organisationMapping,
-      sqlc
-    )
-
-    val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBusinessTypeMapping,
-      sqlc
-    )
-
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBlockMapping,
-      sqlc
-    )
-
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupProfitCentreMapping,
-      sqlc
-    )
-
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.underwritingBlockMapping,
-      sqlc
-    )
+    val line = this.populateDataFrameWithLineTestData( "line_test1.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_test3.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/output/policy_test3.csv" ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.policyMapping,
-      sqlc
-    )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test3.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -332,6 +229,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     lookup_business_type.registerTempTable( "lookup_business_type" )
     lookup_block.registerTempTable( "lookup_block" )
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -344,90 +242,21 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test4.csv" ).toString,
-      getClass.getResource( "/policy/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.layerMapping,
-      sqlc
-    )
-
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lineMapping,
-      sqlc
-    )
-
-    val submission : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/submission_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.submissionMapping,
-      sqlc
-    )
-
-    val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.riskMapping,
-      sqlc
-    )
-
-    val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.organisationMapping,
-      sqlc
-    )
-
-    val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBusinessTypeMapping,
-      sqlc
-    )
-
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBlockMapping,
-      sqlc
-    )
-
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupProfitCentreMapping,
-      sqlc
-    )
-
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.underwritingBlockMapping,
-      sqlc
-    )
+    val line = this.populateDataFrameWithLineTestData( "line_test1.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_test4.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/output/policy_test4.csv" ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.policyMapping,
-      sqlc
-    )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test4.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -441,6 +270,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     lookup_business_type.registerTempTable( "lookup_business_type" )
     lookup_block.registerTempTable( "lookup_block" )
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -453,90 +283,21 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.layerMapping,
-      sqlc
-    )
-
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test5.csv" ).toString,
-      getClass.getResource( "/policy/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lineMapping,
-      sqlc
-    )
-
-    val submission : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/submission_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.submissionMapping,
-      sqlc
-    )
-
-    val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.riskMapping,
-      sqlc
-    )
-
-    val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.organisationMapping,
-      sqlc
-    )
-
-    val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBusinessTypeMapping,
-      sqlc
-    )
-
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBlockMapping,
-      sqlc
-    )
-
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupProfitCentreMapping,
-      sqlc
-    )
-
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.underwritingBlockMapping,
-      sqlc
-    )
+    val line = this.populateDataFrameWithLineTestData( "line_test5.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/output/policy_test5.csv" ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.policyMapping,
-      sqlc
-    )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test5.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -550,6 +311,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     lookup_business_type.registerTempTable( "lookup_business_type" )
     lookup_block.registerTempTable( "lookup_block" )
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -566,86 +328,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.layerMapping,
-      sqlc
-    )
-
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test6.csv" ).toString,
-      getClass.getResource( "/policy/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lineMapping,
-      sqlc
-    )
-
-    val submission : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/submission_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.submissionMapping,
-      sqlc
-    )
-
-    val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.riskMapping,
-      sqlc
-    )
-
-    val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.organisationMapping,
-      sqlc
-    )
-
-    val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBusinessTypeMapping,
-      sqlc
-    )
-
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBlockMapping,
-      sqlc
-    )
-
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupProfitCentreMapping,
-      sqlc
-    )
-
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.underwritingBlockMapping,
-      sqlc
-    )
+    val line = this.populateDataFrameWithLineTestData( "line_test6.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/output/policy_test6.csv" ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.policyMapping,
-      sqlc
-    )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test6.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -659,6 +353,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     lookup_business_type.registerTempTable( "lookup_business_type" )
     lookup_block.registerTempTable( "lookup_block" )
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -675,86 +370,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.layerMapping,
-      sqlc
-    )
-
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test7.csv" ).toString,
-      getClass.getResource( "/policy/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lineMapping,
-      sqlc
-    )
-
-    val submission : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/submission_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.submissionMapping,
-      sqlc
-    )
-
-    val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.riskMapping,
-      sqlc
-    )
-
-    val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.organisationMapping,
-      sqlc
-    )
-
-    val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBusinessTypeMapping,
-      sqlc
-    )
-
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBlockMapping,
-      sqlc
-    )
-
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupProfitCentreMapping,
-      sqlc
-    )
-
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.underwritingBlockMapping,
-      sqlc
-    )
+    val line = this.populateDataFrameWithLineTestData( "line_test7.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/output/policy_test7.csv" ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.policyMapping,
-      sqlc
-    )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test7.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -768,6 +395,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     lookup_business_type.registerTempTable( "lookup_business_type" )
     lookup_block.registerTempTable( "lookup_block" )
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -783,86 +411,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test8.csv" ).toString,
-      getClass.getResource( "/policy/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lineMapping,
-      sqlc
-    )
-
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.layerMapping,
-      sqlc
-    )
-
-    val submission : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/submission_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.submissionMapping,
-      sqlc
-    )
-
-    val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.riskMapping,
-      sqlc
-    )
-
-    val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.organisationMapping,
-      sqlc
-    )
-
-    val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBusinessTypeMapping,
-      sqlc
-    )
-
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupBlockMapping,
-      sqlc
-    )
-
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.lookupProfitCentreMapping,
-      sqlc
-    )
-
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.underwritingBlockMapping,
-      sqlc
-    )
+    val line = this.populateDataFrameWithLineTestData( "line_test8.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/output/policy_test8.csv" ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
-      _.split( "," ),
-      PolicyUtils.policyMapping,
-      sqlc
-    )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test8.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -876,6 +436,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     lookup_business_type.registerTempTable( "lookup_business_type" )
     lookup_block.registerTempTable( "lookup_block" )
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 

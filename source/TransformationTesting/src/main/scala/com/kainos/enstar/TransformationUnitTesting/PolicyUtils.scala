@@ -21,7 +21,8 @@ object PolicyUtils {
   }
 
   def layerMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ).toInt, cols( 1 ).toInt,
+    Row( cols( 0 ).toInt,
+      cols( 1 ).toInt,
       if ( cols.length > 2 ) ( if ( cols( 2 ).equals( "" ) ) null else cols( 2 ) ) else null,
       if ( cols.length > 3 ) ( if ( cols( 3 ).equals( "" ) ) null else cols( 3 ) ) else null,
       if ( cols.length > 4 ) ( if ( cols( 4 ).equals( "" ) ) null else cols( 4 ) ) else null,
