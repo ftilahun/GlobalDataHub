@@ -1,0 +1,23 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "deductiontype",
+    "fields": [
+        {
+            "name": "deductiontypecode",
+            "type": "string"
+        },
+        {
+            "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "deductiondescription",
+            "type": "string"
+        },
+        {
+            "name": "group",
+            "type": ["string", "null"]
+        }
+    ]
+}
