@@ -1,5 +1,5 @@
 {
-    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
     "type": "record",
     "name": "deductiontype",
     "fields": [
@@ -12,8 +12,9 @@
             "type": "string"
         },
         {
-            "name": "deductiondescription",
-            "type": "string"
+            "name": "deductiontypedescription",
+            "type": "string",
+            "doc": "Field should be nullable but comes from a not null field in NDEX, so schemas need to match"
         },
         {
             "name": "group",

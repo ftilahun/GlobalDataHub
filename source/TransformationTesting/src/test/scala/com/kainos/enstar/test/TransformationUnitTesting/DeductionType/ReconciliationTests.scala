@@ -17,7 +17,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val utils = new TransformationUnitTestingUtils
 
     val lookup_deduction_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/deductiontype/input/lookup_deduction_type_test1.csv" ).toString,
+      getClass.getResource( "/deductiontype/input/lookup_deduction_type_standard_data.csv" ).toString,
       getClass.getResource( "/deductiontype/schema/lookup_deduction_type.avro" ).toString,
       _.split( "," ),
       DeductionTypeUtils.lookupDeductionTypeMapping,

@@ -31,7 +31,7 @@ class DeductionTypeUtilsTests extends FlatSpec {
     assert( row.get( 2 ) == column3 )
   }
 
-  "deductionTypeMapping" should "generate a Row given 3s inputs" in {
+  "deductionTypeMapping" should "generate a Row given 3 inputs" in {
     val column1 = "A"
     val column2 = "B"
     val column3 = "C"
