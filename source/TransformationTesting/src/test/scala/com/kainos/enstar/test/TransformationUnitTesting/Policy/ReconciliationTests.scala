@@ -19,7 +19,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/line_test9.csv" ).toString,
+      getClass.getResource( "/policy/input/line_ReconciliationPrimary.csv" ).toString,
       getClass.getResource( "/policy/schemas/line.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lineMapping,
@@ -27,7 +27,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/layer_test9.csv" ).toString,
+      getClass.getResource( "/policy/input/layer_ReconciliationPrimary.csv" ).toString,
       getClass.getResource( "/policy/schemas/layer.avro" ).toString,
       _.split( "," ),
       PolicyUtils.layerMapping,
@@ -43,7 +43,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val risk : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/risk_test9.csv" ).toString,
+      getClass.getResource( "/policy/input/risk_ReconciliationPrimary.csv" ).toString,
       getClass.getResource( "/policy/schemas/risk.avro" ).toString,
       _.split( "," ),
       PolicyUtils.riskMapping,
@@ -51,7 +51,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val organisation : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/organisation_test1.csv" ).toString,
+      getClass.getResource( "/policy/input/organisation_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
       _.split( "," ),
       PolicyUtils.organisationMapping,
@@ -59,7 +59,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val lookup_business_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_business_type_test1.csv" ).toString,
+      getClass.getResource( "/policy/input/lookup_business_type_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupBusinessTypeMapping,
@@ -67,7 +67,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_block_test1.csv" ).toString,
+      getClass.getResource( "/policy/input/lookup_block_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupBlockMapping,
@@ -75,7 +75,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/lookup_profit_centre_test1.csv" ).toString,
+      getClass.getResource( "/policy/input/lookup_profit_centre_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupProfitCentreMapping,
@@ -83,7 +83,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/underwriting_block_test1.csv" ).toString,
+      getClass.getResource( "/policy/input/underwriting_block_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
       _.split( "," ),
       PolicyUtils.underwritingBlockMapping,

@@ -20,7 +20,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy_validation/input/line_test1.csv" ).toString,
+      getClass.getResource( "/policy_validation/input/line_NoNullRiskReference.csv" ).toString,
       getClass.getResource( "/policy_validation/schemas/line.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lineMapping,
@@ -48,7 +48,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy_validation/input/line_test2.csv" ).toString,
+      getClass.getResource( "/policy_validation/input/line_NullRiskReference.csv" ).toString,
       getClass.getResource( "/policy_validation/schemas/line.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lineMapping,

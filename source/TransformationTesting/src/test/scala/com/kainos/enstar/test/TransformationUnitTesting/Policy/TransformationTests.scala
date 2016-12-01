@@ -120,18 +120,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_test1.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
-    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
-    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
-    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
-    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
-    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
-    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
-    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test1.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_PrimaryTestData.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -162,18 +162,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_test1.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_test2.csv", sqlc )
-    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
-    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
-    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
-    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
-    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
-    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
-    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_NullInceptionDate.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test2.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullInceptionDateInLayer.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -204,18 +204,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_test1.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_test3.csv", sqlc )
-    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
-    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
-    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
-    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
-    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
-    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
-    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_NullExpiryDate.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test3.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullExpiryDateInLayer.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -245,18 +245,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_test1.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_test4.csv", sqlc )
-    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
-    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
-    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
-    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
-    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
-    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
-    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_VariousNullValues.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test4.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_VariousNullsInLayer.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -286,18 +286,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_test5.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
-    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
-    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
-    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
-    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
-    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
-    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
-    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+    val line = this.populateDataFrameWithLineTestData( "line_NullProfitCentreCode.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test5.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullProfitCentreCodeInLine.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -328,18 +328,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_test6.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
-    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
-    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
-    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
-    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
-    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
-    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
-    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+    val line = this.populateDataFrameWithLineTestData( "line_NullBlock.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test6.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullBlockInLine.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -370,18 +370,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_test7.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
-    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
-    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
-    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
-    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
-    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
-    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
-    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+    val line = this.populateDataFrameWithLineTestData( "line_LineStatusNotC.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test7.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_LineStatusNotEqualC.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
@@ -411,18 +411,18 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_test8.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_test1.csv", sqlc )
-    val submission = this.populateDataFrameWithSubmissionTestData( "submission_test1.csv", sqlc )
-    val risk = this.populateDataFrameWithRiskTestData( "risk_test1.csv", sqlc )
-    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_test1.csv", sqlc )
-    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_test1.csv", sqlc )
-    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_test1.csv", sqlc )
-    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_test1.csv", sqlc )
-    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_test1.csv", sqlc )
+    val line = this.populateDataFrameWithLineTestData( "line_NullBusinessType.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_test8.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullBusineTypeFromLine.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
