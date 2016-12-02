@@ -5,7 +5,7 @@ import com.kainos.enstar.TransformationUnitTesting.{ TransactionTypeUtils, SQLRu
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-class TransactionTypeReconciliationTests extends FunSuite with DataFrameSuiteBase {
+class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "TransactionType reconciliation over test data" ) {
 
