@@ -1,0 +1,19 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "layer",
+ 	"fields": [
+        {
+            "name": "layer_id",  
+            "type": "int"
+        },
+        {
+            "name": "fil_code",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "premium_ccy",
+            "type": "string"
+        }
+ 	]
+}
