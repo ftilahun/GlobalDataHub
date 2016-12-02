@@ -1,0 +1,39 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "geography",
+    "fields": [
+        {
+            "name" : "geographycode",
+            "type" : "string"
+        },
+        {
+            "name" : "sourcesystemcode",
+            "type" : "string"
+        },
+        {
+            "name" : "zipcode",
+            "type" : "string"
+        },
+        {
+            "name" : "city",
+            "type" : "string"
+        },
+        {
+            "name" : "statecode",
+            "type" : "string"
+        },
+        {
+            "name" : "statedescription",
+            "type" : "string"
+        },
+        {
+            "name": "countrycode",
+            "type": "string"
+        },
+        {
+            "name": "countrydescription",
+            "type": "string"
+        }
+    ]
+}
