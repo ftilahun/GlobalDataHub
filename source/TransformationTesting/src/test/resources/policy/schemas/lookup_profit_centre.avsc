@@ -1,0 +1,16 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "lookup_profit_centre",
+ 	"fields": [
+        {
+            "name": "profit_centre_code", 
+            "type": ["int", "null"]
+        },
+    	{
+    		"name": "profit_centre_desc", 
+    		"type": ["string", "null"],
+    		"doc": "Nullable just for purpose of tests"
+    	}
+ 	]
+}
