@@ -1,0 +1,31 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "layer",
+ 	"fields": [
+        {
+            "name": "layer_id",  
+            "type": "int"
+        },
+        {
+            "name": "submission_id",
+            "type": "int"
+        },
+        {
+            "name": "fil_code",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "inception_date",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "expiry_date",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "unique_market_ref", 
+            "type": ["string", "null"]
+        }
+ 	]
+}
