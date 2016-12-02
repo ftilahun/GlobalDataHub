@@ -1,0 +1,79 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+    "type": "record",
+    "name": "policytransactionwrittendeductions",
+    "fields": [
+    	{
+	        "name": "transactionreference",
+    	    "type": "string"
+    	},
+        {
+            "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "coveragereference",
+            "type": ["string", "null"]
+        },
+    	{
+	        "name": "iscashtransactiontype",
+    	    "type": ["boolean", "null"]
+    	},
+        {
+            "name": "originalamount",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "originalcurrencycode",
+            "type": ["string", "null"]
+        },
+    	{
+	        "name": "policynumber",
+    	    "type": ["string", "null"]
+    	},
+        {
+            "name": "sectionreference",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "settlementamount",
+            "type": ["string", "null"]
+        },
+    	{
+	        "name": "settlementcurrencycode",
+    	    "type": ["string", "null"]
+    	},
+        {
+            "name": "transactiondate",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "transactiontypecode",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "transactiontypedescription",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "transactionsubtypecode",
+            "type": ["string", "null"]
+        },
+    	{
+	        "name": "transactionsubtypedescription",
+    	    "type": ["string", "null"]
+    	},
+        {
+            "name": "filcode",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "riskcode",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "trustfundcode",
+            "type": ["string", "null"]
+        }
+    ]
+}
