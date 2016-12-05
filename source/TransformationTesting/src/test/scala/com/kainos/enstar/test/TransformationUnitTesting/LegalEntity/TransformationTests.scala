@@ -10,16 +10,17 @@ import org.scalatest.FunSuite
  */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "LegalEntityTransformation_test1" ){
+  test( "LegalEntity transformation mapping test with primary test data" ){
 
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel("WARN")
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
     val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/legalentity/input/lookup_profit_centre_test1.csv" ).toString,
+      getClass.getResource( "/legalentity/input/lookup_profit_centre_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/legalentity/schemas/lookup_profit_centre.avro" ).toString,
       _.split( "," ),
       LegalEntityUtils.lookupProfitCentreMapping,
@@ -28,7 +29,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load expected result into dataframe
     val expectedLegalEntity : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/legalentity/output/legalentity_test1.csv" ).toString,
+      getClass.getResource( "/legalentity/output/legalentity_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/legalentity/schemas/legalentity.avro" ).toString,
       _.split( "," ),
       LegalEntityUtils.legalEntityMapping,

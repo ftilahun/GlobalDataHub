@@ -12,8 +12,14 @@ object LegalEntityUtils {
     case _                        => Row( cols( 0 ).toInt, cols( 1 ) )
   }
 
-  def legalEntityMapping( cols : Array[String] ) : Row = cols match {
-    case cols if cols.length == 2 => Row( cols( 0 ), cols( 1 ), null, null, null )
-    case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ), null, null )
+  def legalEntityMapping( cols : Array[String] ) : Row = {
+    Row( cols( 0 ),
+      cols( 1 ),
+      if ( cols( 2 ).equals( "" ) ) null else cols( 2 ),
+      if ( cols( 3 ).equals( "" ) ) null else cols( 3 ),
+      if ( cols( 4 ).equals( "" ) ) null else cols( 4 ),
+      cols( 5 ).toBoolean,
+      cols( 6 )
+    )
   }
 }

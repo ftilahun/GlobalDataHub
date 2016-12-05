@@ -15,8 +15,8 @@
     	},
     	{
     		"name": "legalentitydescription",
-    		"type": ["string", "null"],
-    		"doc": "The description associated with the Legal Entity stored on the policy"
+    		"type": ["string","null"],
+    		"doc": "Not null for purposes of this test"
     	},
     	{
     		"name": "parentlegalentitycode",
@@ -25,6 +25,15 @@
     	{
     		"name": "parentlegalentitysourcesystemcode",
     		"type": ["string", "null"]
+    	},
+    	{
+    	    "name": "isconformed",
+    	    "type": "boolean",
+    	    "doc": "Should be nullable in target but in reality is never null as it is hard coded in hql statement"
+    	},
+    	{
+    	    "name": "sourcesystemdescription",
+    	    "type": "string"
     	}
  	]
 }
