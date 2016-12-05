@@ -8,47 +8,48 @@ import org.apache.spark.sql.Row
 object PolicyTransactionDeductionsUtils {
 
   def lineMapping( cols : Array[String] ) : Row = cols match {
-    case cols if cols.length == 4 => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), null )
-    case cols if cols.length == 3 => Row( cols( 0 ), cols( 1 ), cols( 2 ), null, null )
-    case cols if cols.length == 2 => Row( cols( 0 ), cols( 1 ), null, null, null )
-    case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ) )
+    case cols if cols.length == 5 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), cols( 3 ).toInt, cols( 4 ), null )
+    case cols if cols.length == 4 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), cols( 3 ).toInt, null, null )
+    case cols if cols.length == 3 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), null, null, null )
+    case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ).toInt, null, null, null, null )
+    case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), cols( 3 ).toInt, cols( 4 ), cols( 5) )
   }
 
   def layerMapping( cols : Array[String] ) : Row = cols match {
-      case cols if cols.length == 2 => Row( cols( 0 ), cols( 1 ), null )
-      case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ) )
+      case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ), null )
+      case _                        => Row( cols( 0 ).toInt, cols( 1 ), cols( 2 ) )
   }
 
   def layerDeductionMapping( cols : Array[String] ) : Row = {
     cols match {
-      case cols if cols.length == 2 => Row( cols( 0 ), cols( 1 ), null )
-      case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ) )
+      case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ).toInt, null )
+      case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ) )
     }  }
 
   def layerTrustFundMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ) )
+    Row( cols( 0 ), cols( 1 ).toInt )
   }
 
   def lineRiskCodeMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ) )
+    Row( cols( 0 ), cols( 1 ).toInt )
   }
 
   def lookupDeductionTypeMapping( cols : Array[String] ) : Row = {
     Row( cols( 0 ), cols( 1 ) )
   }
 
-  def riskCodeMapping( cols : Array[String] ) : Row = {
+  def lookupRiskCodeMapping( cols : Array[String] ) : Row = {
     Row( cols( 0 ))
   }
 
   def settlementScheduleMapping( cols : Array[String] ) : Row =  cols match {
-    case cols if cols.length == 4 => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), null )
-    case cols if cols.length == 3 => Row( cols( 0 ), cols( 1 ), cols( 2 ), null, null )
-    case cols if cols.length == 2 => Row( cols( 0 ), cols( 1 ), null, null, null )
-    case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ) )
+    case cols if cols.length == 4 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ).toInt, cols( 3 ), null )
+    case cols if cols.length == 3 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ).toInt, null, null )
+    case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ).toInt, null, null, null )
+    case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ).toInt, cols( 3 ), cols( 4 ) )
   }
 
-  def trustFundIndicatorMapping( cols : Array[String] ) : Row = {
+  def lookupTrustFundMapping( cols : Array[String] ) : Row = {
     Row( cols( 0 ))
   }
 

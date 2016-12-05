@@ -8,12 +8,12 @@
             "type": "int"
         },
         {
-            "name": "fil_code",  
-            "type": ["string", "null"]
-        },
-        {
             "name": "premium_ccy",
             "type": "string"
+        },
+        {
+            "name": "fil_code",
+            "type": ["string", "null"]
         }
  	]
 }

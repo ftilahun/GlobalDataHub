@@ -7,13 +7,13 @@
             "name": "deduction_id",
             "type": "int"
         },
-        {
-            "name": "deduction_code",
-            "type": ["string", "null"]
-        },
     	{
     		"name": "layer_id",
     		"type": "int"
-    	}
+    	},
+        {
+            "name": "deduction_code",
+            "type": ["string", "null"]
+        }
     ]
 }
