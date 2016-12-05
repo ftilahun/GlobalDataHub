@@ -5,7 +5,8 @@
     "fields": [
     	{
 	        "name": "transactionreference",
-    	    "type": "string"
+    	    "type": ["string", "null"],
+             "doc": "This field should not be nullable, added to allow the schemas to match."
     	},
         {
             "name": "sourcesystemcode",
@@ -17,7 +18,8 @@
         },
     	{
 	        "name": "iscashtransactiontype",
-    	    "type": ["boolean", "null"]
+    	    "type": "boolean",
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
     	},
         {
             "name": "originalamount",
@@ -49,11 +51,13 @@
         },
         {
             "name": "transactiontypecode",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
         },
         {
             "name": "transactiontypedescription",
-            "type": ["string", "null"]
+            "type": "string",
+            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
         },
         {
             "name": "transactionsubtypecode",

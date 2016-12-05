@@ -5,7 +5,8 @@
     "fields": [
         {
             "name": "trust_fund_indicator",
-            "type": "string"
+            "type": ["string", "null"],
+            "doc": "Nullable for purposes of test"
         },
     	{
     		"name": "layer_id",

@@ -9,10 +9,15 @@
         },
         {
             "name": "premium_ccy",
-            "type": "string"
+            "type": ["string", "null"],
+    		"doc": "Nullable for purposes of test"
         },
         {
             "name": "fil_code",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "premium_roe",
             "type": ["string", "null"]
         }
  	]

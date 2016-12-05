@@ -5,7 +5,8 @@
     "fields": [
         {
             "name": "risk_code",
-            "type": "string"
+            "type": ["string", "null"],
+            "doc": "Nullable for purposes of test"
         },
     	{
     		"name": "line_id",

@@ -56,7 +56,7 @@ object PolicyTransactionDeductionsUtils {
   def policyTransactionDeductionsMapping( cols : Array[String] ) : Row = {
     Row( cols( 0 ), cols( 1 ),
       if ( cols( 2 ).equals( "" ) ) null else cols( 2 ),
-      if ( cols( 3 ).equals( "" ) ) null else cols( 3 ),
+      if ( cols( 3 ).equals( "" ) ) null else cols( 3 ).toBoolean,
       if ( cols( 4 ).equals( "" ) ) null else cols( 4 ),
       if ( cols( 5 ).equals( "" ) ) null else cols( 5 ),
       if ( cols( 6 ).equals( "" ) ) null else cols( 6 ),
