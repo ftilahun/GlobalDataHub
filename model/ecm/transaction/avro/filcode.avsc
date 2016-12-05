@@ -1,10 +1,10 @@
 {
     "namespace": "com.kainos.enstar.gdh.ecm",
  	"type": "record",
- 	"name": "broker",
-    "doc": "The broker company placing the risk",
+ 	"name": "filcode",
+    "doc": "",
  	"fields": [
-        {
+       {
             "name": "meta_sourcesystemtransactiondentifier", 
             "type": [ "null", "string" ],
             "default" : "null",
@@ -59,19 +59,19 @@
             "doc":  "Metadata to identify the date and time this record was loaded into the Enstar Conformed Model."
         },
         {
+            "name": "filcode", 
+            "type": "string",
+            "doc": ""
+        },
+        {
             "name": "sourcesystemcode",  
             "type": "string",
-            "doc": "The source system code of the broker."
+            "doc": "The source system code associated with the insured"
         },
-    	{
-    		"name": "brokercode", 
-    		"type": "string",
-    		"doc": "The code associated with the broker"
-    	},
-    	{
-    		"name": "brokerdescription", 
+        {
+            "name": "filcodedescription",  
             "type": [ "null", "string" ],
-    		"doc": "The description of the broker"
-    	}
+            "doc": "The source system code associated with the insured"
+        }
  	]
 }

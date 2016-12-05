@@ -1,8 +1,8 @@
 {
     "namespace": "com.kainos.enstar.gdh.ecm",
  	"type": "record",
- 	"name": "broker",
-    "doc": "The broker company placing the risk",
+ 	"name": "trustfund",
+    "doc": "",
  	"fields": [
         {
             "name": "meta_sourcesystemtransactiondentifier", 
@@ -58,20 +58,18 @@
             "default" : "null",
             "doc":  "Metadata to identify the date and time this record was loaded into the Enstar Conformed Model."
         },
-        {
-            "name": "sourcesystemcode",  
-            "type": "string",
-            "doc": "The source system code of the broker."
-        },
     	{
-    		"name": "brokercode", 
-    		"type": "string",
-    		"doc": "The code associated with the broker"
+    		"name": "trustfundcode", 
+    		"type": "string"
     	},
     	{
-    		"name": "brokerdescription", 
-            "type": [ "null", "string" ],
-    		"doc": "The description of the broker"
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier for the Deduction Type record"
+    	},
+    	{
+    		"name": "trustfundcodedescription", 
+            "type": [ "null", "string" ]
     	}
  	]
 }

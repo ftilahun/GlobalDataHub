@@ -4,6 +4,60 @@
  	"name": "deduction",
     "doc": "Allows the policy record to be associated with many different types of Deductions. These might include:   - Broker Fee - Commission - Charges - Interest.   These can be specified  as a percentage value or an amount and can also be a positive or negative deduction",
  	"fields": [
+       {
+            "name": "meta_sourcesystemtransactiondentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the transaction on the source system that caused a change to this specific record." 
+        },
+       {
+            "name": "meta_sourcesystemtransactiondatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was updated on the source system. This should formatted as a JDBC-compliant java.sql.Timestamp:'YYYY-MM-DD HH:MM:SS.fffffffff'."
+        },
+        {
+            "name": "meta_cdcchangesequence", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the position in the CDC sequence that this change occurred."
+        },
+        {
+            "name": "meta_cdcloaddatetime",     
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Source Data layer."
+        },
+        {
+            "name": "meta_cdcchangeoperation", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to record the operation identified by CDC on the source system - one of Update, Insert or Delete."
+        },
+        {
+            "name": "meta_ecmtransformidentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the load event which appended this record was transformed into the Enstar Conformed Model format."
+        },
+        {
+            "name": "meta_ecmtransformdatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was transformed into the Enstar Conformed Model format."
+        },
+        {
+            "name": "meta_ecmloadidentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the load event which appended this record into the Enstar Conformed Model."
+        },
+        {
+            "name": "meta_ecmloaddatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Enstar Conformed Model."
+        },
     	{
     		"name": "deductionreference", 
     		"type": "string",
@@ -19,30 +73,73 @@
             "type": "string",
             "doc": "Section reference identifies a unique section on a policy, a policy may contain multiple sections"
         },
-    	{
-    		"name": "coveragereference", 
-    		"type": "string",
-    		"doc": "Coverage reference identifies unique coverages on a policy section, a section may contain multiple coverages"
-    	},
+
     	{
     		"name": "sourcesystemcode",  
     		"type": ["string", "null"],
     		"doc": "Source System Identifier for the Deduction record"
     	},
-    	{
-    		"name": "deductiontypecode", 
-    		"type": ["string", "null"],
-    		"doc": "The classification of the type of deduction. Deductions can be grouped into various buckets to represent whether it is an acquisition cost or an underwriting credit."
-    	},
+        {
+            "name": "sourcesystemdescription", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "calculateddeductionamount",  
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
+            "doc": "Transaction original amount"
+        },
+        {
+            "name": "coveragereference", 
+            "type": "string",
+            "doc": "Coverage reference identifies unique coverages on a policy section, a section may contain multiple coverages"
+        },
+        {
+            "name": "currencycode", 
+            "type": [ "null", "string" ],
+            "doc": "FK to Currency"
+        },
+        {
+            "name": "deductionsequence", 
+            "type": [ "null", "int" ]
+        },
+        {
+            "name": "deductiontypecode", 
+            "type": [ "null", "string" ],
+            "doc": "The classification of the type of deduction. Deductions can be grouped into various buckets to represent whether it is an acquisition cost or an underwriting credit."
+        },
+        {
+            "name": "deductiontypedescription", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "deductiontypegroup", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "isnetofprevious", 
+            "type": "boolean"
+        },
+        {
+            "name": "ispercentage", 
+            "type": "boolean",
+            "doc": "Is the deduction value, expressed as a financial amount or a percentage?"
+        },
     	{
     		"name": "value", 
-    		"type": ["double", "null"],
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
     		"doc": "The deduction value, expressed as a financial amount or a percentage"
-    	},
-    	{
-    		"name": "ispercentage", 
-    		"type": "boolean",
-    		"doc": "Is the deduction value, expressed as a financial amount or a percentage?"
     	}
  	]
 }

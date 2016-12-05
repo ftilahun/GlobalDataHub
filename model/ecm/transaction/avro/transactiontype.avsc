@@ -1,29 +1,91 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+    "namespace": "com.kainos.enstar.gdh.ecm",
  	"type": "record",
  	"name": "transactiontype",
     "doc": "TransactionType includes   - Premium  - Additional Premium  - Return Premium  - RI Premium  - RI Return Premium etc",
  	"fields": [
+        {
+            "name": "meta_sourcesystemtransactiondentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the transaction on the source system that caused a change to this specific record." 
+        },
+       {
+            "name": "meta_sourcesystemtransactiondatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was updated on the source system. This should formatted as a JDBC-compliant java.sql.Timestamp:'YYYY-MM-DD HH:MM:SS.fffffffff'."
+        },
+        {
+            "name": "meta_cdcchangesequence", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the position in the CDC sequence that this change occurred."
+        },
+        {
+            "name": "meta_cdcloaddatetime",     
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Source Data layer."
+        },
+        {
+            "name": "meta_cdcchangeoperation", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to record the operation identified by CDC on the source system - one of Update, Insert or Delete."
+        },
+        {
+            "name": "meta_ecmtransformidentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the load event which appended this record was transformed into the Enstar Conformed Model format."
+        },
+        {
+            "name": "meta_ecmtransformdatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was transformed into the Enstar Conformed Model format."
+        },
+        {
+            "name": "meta_ecmloadidentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the load event which appended this record into the Enstar Conformed Model."
+        },
+        {
+            "name": "meta_ecmloaddatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Enstar Conformed Model."
+        },
     	{
     		"name": "transactiontypecode", 
     		"type": "string"
     	},
+        {
+            "name": "transactionsubtypecode", 
+            "type": "string"
+        },
     	{
     		"name": "sourcesystemcode",  
     		"type": "string"
     	},
-    	{
-    		"name": "description", 
-    		"type": ["string", "null"]
-    	},
         {
-            "name": "group",  
-            "type": ["string", "null"],
-            "doc": "Allows for basic grouping of transactions, such as "USM" or "SCM""
+            "name": "transactiontypedescription", 
+            "type": [ "null", "string" ]
         },
         {
+            "name": "transactionsubtypedescription", 
+            "type": [ "null", "string" ]
+        },
+    	{
+    		"name": "group", 
+            "type": [ "null", "string" ],
+            "doc": "Allows for basic grouping of transactions, such as 'USM' or 'SCM'"
+    	},
+        {
             "name": "iscashtransactiontype", 
-            "type": ["boolean", "null"]
+            "type": [ "null", "boolean" ]
         }
  	]
 }

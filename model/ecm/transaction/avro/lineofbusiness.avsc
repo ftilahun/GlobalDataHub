@@ -1,14 +1,73 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+    "namespace": "com.kainos.enstar.gdh.ecm",
  	"type": "record",
  	"name": "lineofbusiness",
     "doc": "Defines how the business is classified in the source system for the policy. This is the same as Lloyd''s Block Code but different to Reserving Class.",
  	"fields": [
+        {
+            "name": "meta_sourcesystemtransactiondentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the transaction on the source system that caused a change to this specific record." 
+        },
+       {
+            "name": "meta_sourcesystemtransactiondatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was updated on the source system. This should formatted as a JDBC-compliant java.sql.Timestamp:'YYYY-MM-DD HH:MM:SS.fffffffff'."
+        },
+        {
+            "name": "meta_cdcchangesequence", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the position in the CDC sequence that this change occurred."
+        },
+        {
+            "name": "meta_cdcloaddatetime",     
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Source Data layer."
+        },
+        {
+            "name": "meta_cdcchangeoperation", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to record the operation identified by CDC on the source system - one of Update, Insert or Delete."
+        },
+        {
+            "name": "meta_ecmtransformidentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the load event which appended this record was transformed into the Enstar Conformed Model format."
+        },
+        {
+            "name": "meta_ecmtransformdatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was transformed into the Enstar Conformed Model format."
+        },
+        {
+            "name": "meta_ecmloadidentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the load event which appended this record into the Enstar Conformed Model."
+        },
+        {
+            "name": "meta_ecmloaddatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Enstar Conformed Model."
+        },
     	{
     		"name": "lineofbusinesscode", 
     		"type": "string",
     		"doc": "Code associated with how the business is classified in the source policy administration system for the policy"
     	},
+        {
+            "name": "sublineofbusinesscode", 
+            "type": "string",
+            "doc": "Code associated with how the business is classified in the source policy administration system for the policy"
+        },
     	{
     		"name": "sourcesystemcode",  
     		"type": "string",
@@ -16,8 +75,13 @@
     	},
     	{
     		"name": "lineofbusinessdescription", 
-    		"type": ["string", "null"],
+            "type": [ "null", "string" ],
     		"doc": "Description associated with how the business is classified in the source policy administration system for the policy"
-    	}
+    	},
+        {
+            "name": "sublineofbusinessdescription", 
+            "type": [ "null", "string" ],
+            "doc": "Description associated with how the business is classified in the source policy administration system for the policy"
+        }
  	]
 }

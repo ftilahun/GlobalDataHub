@@ -1,9 +1,63 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+    "namespace": "com.kainos.enstar.gdh.ecm",
  	"type": "record",
  	"name": "methodofplacement",
     "doc": "The description of how the business was placed  1. Declaration  2. Open Market Direct  3. Facultative RI  4. MGA  5. Lineslip Master  6. Cat  7. Treaty X/L  8. Master Policy  9. Stop Loss  10. Proportional Treaty  11. LineSlip Declaration  12. Binding Master  13. Service Company",
  	"fields": [
+       {
+            "name": "meta_sourcesystemtransactiondentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the transaction on the source system that caused a change to this specific record." 
+        },
+       {
+            "name": "meta_sourcesystemtransactiondatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was updated on the source system. This should formatted as a JDBC-compliant java.sql.Timestamp:'YYYY-MM-DD HH:MM:SS.fffffffff'."
+        },
+        {
+            "name": "meta_cdcchangesequence", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the position in the CDC sequence that this change occurred."
+        },
+        {
+            "name": "meta_cdcloaddatetime",     
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Source Data layer."
+        },
+        {
+            "name": "meta_cdcchangeoperation", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to record the operation identified by CDC on the source system - one of Update, Insert or Delete."
+        },
+        {
+            "name": "meta_ecmtransformidentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the load event which appended this record was transformed into the Enstar Conformed Model format."
+        },
+        {
+            "name": "meta_ecmtransformdatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was transformed into the Enstar Conformed Model format."
+        },
+        {
+            "name": "meta_ecmloadidentifier", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the load event which appended this record into the Enstar Conformed Model."
+        },
+        {
+            "name": "meta_ecmloaddatetime", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time this record was loaded into the Enstar Conformed Model."
+        },
     	{
     		"name": "methodofplacementcode", 
     		"type": "string",
@@ -16,7 +70,7 @@
     	},
     	{
     		"name": "methodofplacementdescription", 
-    		"type": ["string", "null"],
+            "type": [ "null", "string" ],
     		"doc": "The description associated with the Method of Placement"
     	}
  	]

@@ -1,5 +1,5 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+	"namespace": "com.kainos.enstar.gdh.ecm",
  	"type": "record",
  	"name": "policy",
     "doc": "Policy contains policy attributes and may contain section or coverage level attributes too.  Some sources may implement multiple sections and coverages per policy",
@@ -10,7 +10,7 @@
             "default" : "null",
             "doc":  "Metadata to identify the transaction on the source system that caused a change to this specific record." 
         },
-	{
+	   {
             "name": "meta_sourcesystemtransactiondatetime", 
             "type": [ "null", "string" ],
             "default" : "null",
@@ -23,7 +23,7 @@
             "doc":  "Metadata to identify the position in the CDC sequence that this change occurred."
         },
         {
-            "name": "meta_cdcloaddatetime", 
+            "name": "meta_cdcloaddatetime",     
             "type": [ "null", "string" ],
             "default" : "null",
             "doc":  "Metadata to identify the date and time this record was loaded into the Source Data layer."
