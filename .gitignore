@@ -32,5 +32,8 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+### Mac ###
+.DS_Store
+=======
 *.log
 source/GlobalDataHub/metastore_db
