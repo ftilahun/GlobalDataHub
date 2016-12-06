@@ -19,7 +19,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtenpremium/input/layer_test1.csv" ).toString,
+      getClass.getResource( "/policytransaction_writtenpremium/input/layer_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policytransaction_writtenpremium/schemas/layer.avro" ).toString,
       _.split( "," ),
       PolicyTransactionUtils.layerMapping,
@@ -27,7 +27,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val layer_trust_fund : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtenpremium/input/layer_trust_fund_test1.csv" ).toString,
+      getClass.getResource( "/policytransaction_writtenpremium/input/layer_trust_fund_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policytransaction_writtenpremium/schemas/layer_trust_fund.avro" ).toString,
       _.split( "," ),
       PolicyTransactionUtils.layerTrustFundMapping,
@@ -35,7 +35,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtenpremium/input/line_test1.csv" ).toString,
+      getClass.getResource( "/policytransaction_writtenpremium/input/line_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policytransaction_writtenpremium/schemas/line.avro" ).toString,
       _.split( "," ),
       PolicyTransactionUtils.lineMapping,
@@ -43,7 +43,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val line_risk_code : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtenpremium/input/line_risk_code_test1.csv" ).toString,
+      getClass.getResource( "/policytransaction_writtenpremium/input/line_risk_code_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policytransaction_writtenpremium/schemas/line_risk_code.avro" ).toString,
       _.split( "," ),
       PolicyTransactionUtils.lineRiskCodeMapping,
@@ -51,7 +51,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val lookup_premium_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtenpremium/input/lookup_premium_type_test1.csv" ).toString,
+      getClass.getResource( "/policytransaction_writtenpremium/input/lookup_premium_type_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policytransaction_writtenpremium/schemas/lookup_premium_type.avro" ).toString,
       _.split( "," ),
       PolicyTransactionUtils.lookupPremiumTypeMapping,
@@ -59,7 +59,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val settlement_schedule : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtenpremium/input/settlement_schedule_test1.csv" ).toString,
+      getClass.getResource( "/policytransaction_writtenpremium/input/settlement_schedule_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policytransaction_writtenpremium/schemas/settlement_schedule.avro" ).toString,
       _.split( "," ),
       PolicyTransactionUtils.settlementScheduleMapping,
