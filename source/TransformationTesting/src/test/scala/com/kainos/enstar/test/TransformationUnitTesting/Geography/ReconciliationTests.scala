@@ -18,7 +18,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val utils = new TransformationUnitTestingUtils
 
     val lookup_country : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/geography/input/lookup_country_standard_data.csv" ).toString,
+      getClass.getResource( "/geography/input/lookup_country_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/geography/schemas/lookup_country.avro" ).toString,
       _.split( "," ),
       GeographyUtils.lookupCountryMapping,

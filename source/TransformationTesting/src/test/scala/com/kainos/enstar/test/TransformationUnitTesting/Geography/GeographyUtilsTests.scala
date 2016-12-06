@@ -13,15 +13,14 @@ class GeographyUtilsTests extends FlatSpec {
     // Arrange
     val column1 = "A"
     val column2 = "B"
-    val column3 = "C"
+
     // Act
-    val row = GeographyUtils.lookupCountryMapping( Array( column1, column2, column3 ) )
+    val row = GeographyUtils.lookupCountryMapping( Array( column1, column2 ) )
 
     // Assert
-    assert( row.size == 3 )
+    assert( row.size == 2 )
     assert( row.get( 0 ) == column1 )
     assert( row.get( 1 ) == column2 )
-    assert( row.get( 2 ) == column3 )
 
   }
 

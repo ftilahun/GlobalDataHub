@@ -10,12 +10,12 @@ import org.scalatest.FunSuite
 
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "Geography Standard Data test1" ){
+  test( "Geography Transformation with Primary data" ){
     val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
 
     val lookup_country : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/geography/input/lookup_country_standard_data.csv" ).toString,
+      getClass.getResource( "/geography/input/lookup_country_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/geography/schemas/lookup_country.avro" ).toString,
       _.split( "," ),
       GeographyUtils.lookupCountryMapping,
@@ -23,7 +23,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     val expectedGeographyMapping : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/geography/output/geography_standard_data.csv" ).toString,
+      getClass.getResource( "/geography/output/geography_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/geography/schemas/geography.avro" ).toString,
       _.split( "," ),
       GeographyUtils.geographyMapping,
@@ -38,4 +38,3 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     assertDataFrameEquals( expectedGeographyMapping, result )
   }
 }
-

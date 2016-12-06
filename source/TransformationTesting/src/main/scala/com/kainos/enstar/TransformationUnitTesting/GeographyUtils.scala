@@ -7,7 +7,7 @@ import org.apache.spark.sql.Row
  */
 object GeographyUtils {
   def lookupCountryMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ), cols ( 2 ) )
+    Row( cols( 0 ), cols( 1 ) )
   }
 
   def geographyMapping( cols : Array[String] ) : Row = {

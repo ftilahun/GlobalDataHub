@@ -1,5 +1,5 @@
 {
-    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
     "type": "record",
     "name": "geography",
     "fields": [
