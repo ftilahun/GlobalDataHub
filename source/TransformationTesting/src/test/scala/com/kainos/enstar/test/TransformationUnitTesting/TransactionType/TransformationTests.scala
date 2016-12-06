@@ -7,7 +7,7 @@ import org.scalatest.FunSuite
 
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "TransactionType transformation mapping test" ) {
+  test( "TransactionType-WrittenPremium transformation mapping test" ) {
 
     // Arrange
     val sqlc = sqlContext
@@ -30,7 +30,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
       sqlc
     )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TransactionType.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource("Transformation/TransactionTypeWrittenPremium.hql")
 
     // Act
     lookup_premium_type.registerTempTable( "lookup_premium_type" )

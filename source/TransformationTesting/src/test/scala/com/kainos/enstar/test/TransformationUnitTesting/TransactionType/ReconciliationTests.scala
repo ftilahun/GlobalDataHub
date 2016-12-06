@@ -22,9 +22,9 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
       sqlContext
     )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TransactionType.hql" )
-    val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/TransactionType/InputRecordCounts.hql" )
-    val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/TransactionType/OutputRecordCounts.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource("Transformation/TransactionTypeWrittenPremium.hql")
+    val reconStatementInput = utils.loadHQLStatementFromResource("Reconciliation/TransactionTypeWrittenPremium/InputRecordCounts.hql")
+    val reconStatementOutput = utils.loadHQLStatementFromResource("Reconciliation/TransactionTypeWrittenPremium/OutputRecordCounts.hql")
 
     // Act //
     lookup_premium_type.registerTempTable( "lookup_premium_type" )
