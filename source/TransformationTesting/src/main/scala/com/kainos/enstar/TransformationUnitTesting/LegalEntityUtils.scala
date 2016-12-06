@@ -13,13 +13,13 @@ object LegalEntityUtils {
   }
 
   def legalEntityMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ),
+    Row(
+      cols( 0 ),
       cols( 1 ),
       if ( cols( 2 ).equals( "" ) ) null else cols( 2 ),
       if ( cols( 3 ).equals( "" ) ) null else cols( 3 ),
       if ( cols( 4 ).equals( "" ) ) null else cols( 4 ),
-      cols( 5 ).toBoolean,
-      cols( 6 )
+      cols( 5 ).toBoolean
     )
   }
 }

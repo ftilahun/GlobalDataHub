@@ -30,10 +30,6 @@
     	    "name": "isconformed",
     	    "type": "boolean",
     	    "doc": "Should be nullable in target but in reality is never null as it is hard coded in hql statement"
-    	},
-    	{
-    	    "name": "sourcesystemdescription",
-    	    "type": "string"
     	}
  	]
 }
