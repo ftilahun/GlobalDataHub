@@ -15,8 +15,8 @@
     	},
     	{
     		"name": "legalentitydescription",
-    		"type": ["string","null"],
-    		"doc": "Not null for purposes of this test"
+    		"type": "string",
+    		"doc": "Not null for purposes of this test. Comes from the same field as legalentitycode which cannot be null."
     	},
     	{
     		"name": "parentlegalentitycode",

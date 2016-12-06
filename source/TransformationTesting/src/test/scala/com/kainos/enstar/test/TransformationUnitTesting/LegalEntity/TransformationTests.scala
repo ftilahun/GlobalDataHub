@@ -15,7 +15,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    sqlc.sparkContext.setLogLevel("WARN")
+    sqlc.sparkContext.setLogLevel( "WARN" )
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
@@ -44,6 +44,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val result = SQLRunner.runStatement( statement, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedLegalEntity, result )
+    assertDataFrameEquals( expectedLegalEntity, result.orderBy( "legalentitycode" ) )
   }
 }
