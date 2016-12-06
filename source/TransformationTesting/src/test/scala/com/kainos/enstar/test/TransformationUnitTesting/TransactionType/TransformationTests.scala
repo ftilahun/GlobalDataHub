@@ -5,7 +5,7 @@ import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransactionTypeU
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-class TransactionTypeTests extends FunSuite with DataFrameSuiteBase {
+class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "TransactionType transformation mapping test" ) {
 
