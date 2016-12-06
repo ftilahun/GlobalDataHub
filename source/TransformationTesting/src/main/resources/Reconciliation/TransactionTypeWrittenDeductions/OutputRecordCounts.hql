@@ -1,4 +1,4 @@
 SELECT
     COUNT(transactionsubtypecode) AS recordcount
 FROM transactiontype
-WHERE transactiontypecode = "WrittenPremiumOurShare"
+WHERE transactiontypecode = "WrittenDeductionsOurShare"

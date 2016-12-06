@@ -1,0 +1,15 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+ 	"type": "record",
+ 	"name": "lookup_premium_type",
+ 	"fields": [
+    	{
+    		"name": "deduction_code",
+    		"type": "string"
+    	},
+    	{
+    	    "name": "deduction_description",
+            "type": "string"
+        }
+ 	]
+}
