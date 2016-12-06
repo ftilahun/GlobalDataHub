@@ -1,8 +1,9 @@
-SELECT
-    CAST(profit_centre_code AS STRING) AS legalentitycode,
+SELECT DISTINCT
+    regexp_extract(profit_centre_desc, '(^(TIE)|(TIUK)|(Syndicate 1301))', 0) AS legalentitycode,
     "NDEX" AS sourcesystemcode,
-    profit_centre_desc AS legalentitydescription,
+    regexp_extract(profit_centre_desc, '(^(TIE)|(TIUK)|(Syndicate 1301))', 0) as legalentitydescription,
     CAST(NULL AS STRING) AS parentlegalentitycode,
-    CAST(NULL AS STRING) AS parentlegalentitysourcesystemcode
+    CAST(NULL AS STRING) AS parentlegalentitysourcesystemcode,
+    false AS isconformed
 FROM
     lookup_profit_centre
