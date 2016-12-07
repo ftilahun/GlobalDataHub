@@ -1,3 +1,3 @@
 SELECT
-    COUNT(*) AS recordcount
+    COUNT(trustfundcode) AS recordcount
 FROM trustfund

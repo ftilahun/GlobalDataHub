@@ -8,7 +8,7 @@ import org.scalatest.FlatSpec
  */
 class TrustFundUtilsTests extends FlatSpec {
 
-  "lookupTrustFundMapping" should "generate a Row" in {
+  "lookupTrustFundMapping" should "generate a Row given 2 inputs" in {
 
     // Arrange
     val column0 = "A"
@@ -24,7 +24,7 @@ class TrustFundUtilsTests extends FlatSpec {
 
   }
 
-  "trustFundMapping" should "generate a Row" in {
+  "trustFundMapping" should "generate a Row given 3 inputs" in {
 
     // Arrange
     val column0 = "A"

@@ -40,8 +40,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
 
-    val lookup_trust_fund = this.populateDataFrameWithLookupTrustFundTestData( "lookup_trust_fund_test1.csv", sqlc )
-    val expectedTrustFund = this.populateDataFrameWithTrustFundTestData( "trustfund_test1.csv", sqlc )
+    val lookup_trust_fund = this.populateDataFrameWithLookupTrustFundTestData( "lookup_trust_fund_PrimaryTestData.csv", sqlc )
+    val expectedTrustFund = this.populateDataFrameWithTrustFundTestData( "trustfund_PrimaryTestData.csv", sqlc )
 
     val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TrustFund.hql" )
 

@@ -192,7 +192,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
     // Act Assert
     intercept[NumberFormatException] {
-      PolicyTransactionUtils.lineMapping( Array("P", "1") )
+      PolicyTransactionUtils.lineMapping( Array( "P", "1" ) )
     }
   }
 
@@ -334,11 +334,10 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
     // Act Assert
     intercept[NumberFormatException] {
-      PolicyTransactionUtils.settlementScheduleMapping( Array("P", "1", "C") )
+      PolicyTransactionUtils.settlementScheduleMapping( Array( "P", "1", "C" ) )
     }
 
   }
-
 
   "policyTransactionMapping" should "generate a Row given 18 inputs" in {
 
