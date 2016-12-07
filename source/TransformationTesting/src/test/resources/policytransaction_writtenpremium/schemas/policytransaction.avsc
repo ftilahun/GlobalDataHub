@@ -63,13 +63,11 @@
         },
         {
             "name": "transactionsubtypecode",
-            "type": ["string", "null"],
-            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
+            "type": ["string", "null"]
         },
         {
             "name": "transactionsubtypedescription",
-            "type": ["string", "null"],
-            "doc": "This field should be nullable however the value is mapped from a non-nullable field in NDEX, so nullable is removed to allow the schemas to match."
+            "type": ["string", "null"]
         },
         {
             "name": "riskcode",
