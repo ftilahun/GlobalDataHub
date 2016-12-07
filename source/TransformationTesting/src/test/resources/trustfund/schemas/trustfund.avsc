@@ -1,0 +1,20 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+ 	"type": "record",
+ 	"name": "trustfund",
+ 	"fields": [
+    	{
+    		"name": "trustfundcode",
+    		"type": "string"
+    	},
+    	{
+    	    "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "trustfunddescription",
+            "type": "string",
+            "doc": "This field should be nullable however NDEX table has a non-nullable field populating this field, therefore it is removed to allow test schemas to match."
+        }
+ 	]
+}
