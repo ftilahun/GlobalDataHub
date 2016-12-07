@@ -125,7 +125,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_deduction = this.populateDataFrameWithLayerDeductionTestData( "layer_deduction.csv", sqlc )
     val line_risk_code = this.populateDataFrameWithLineRiskCodeTestData( "line_risk_code.csv", sqlc )
     val lookup_deduction_type = this.populateDataFrameWithLookupDeductionTypeTestData( "lookup_deduction_type.csv", sqlc )
-    val lookup_risk_code = this.populateDataFrameWithLookupRiskCodeMappingTestData( "risk_code.csv", sqlc )
+    val lookup_risk_code = this.populateDataFrameWithLookupRiskCodeMappingTestData( "lookup_risk_code.csv", sqlc )
     val settlement_schedule = this.populateDataFrameWithSettlementScheduleTestData( "settlement_schedule.csv", sqlc )
     val lookup_trust_fund = this.populateDataFrameWithLookupTrustFundTestData( "lookup_trust_fund.csv", sqlc )
     val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund.csv", sqlc )
