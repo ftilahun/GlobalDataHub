@@ -10,7 +10,7 @@ import org.scalatest.FunSuite
  */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "BranchTransformation_test1" ){
+  test( "BranchTransformation tes with Priamry data" ){
 
     sqlContext.sparkContext.setLogLevel( "WARN" )
 
@@ -21,7 +21,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/branch/input/lookup_profit_centre_test1.csv" ).toString,
+      getClass.getResource("/branch/input/lookup_profit_centre_PrimaryTestData.csv").toString,
       getClass.getResource( "/branch/schemas/lookup_profit_centre.avro" ).toString,
       _.split( "," ),
       BranchUtils.lookupProfitCentreMapping,
@@ -30,7 +30,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load expected result into dataframe
     val expectedBranch : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/branch/output/branch_test1.csv" ).toString,
+      getClass.getResource("/branch/output/branch_PriamryTestData.csv").toString,
       getClass.getResource( "/branch/schemas/branch.avro" ).toString,
       _.split( "," ),
       BranchUtils.branchMapping,
