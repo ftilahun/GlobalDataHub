@@ -5,7 +5,7 @@ import org.scalatest.FlatSpec
 
 class PolicyTransactionUtilsTests extends FlatSpec {
 
-  "layerMapping" should "generate a Row" in {
+  "layerMapping" should "generate a Row given 4 inputs" in {
 
     // Arrange
     val column0 = "0"
@@ -48,7 +48,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "layerTrustFundMapping" should "generate a Row" in {
+  "layerTrustFundMapping" should "generate a Row given 3 inputs" in {
 
     // Arrange
     val column0 = "0"
@@ -68,7 +68,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "lineMapping" should "generate a Row" in {
+  "lineMapping" should "generate a Row given 6 inputs" in {
 
     // Arrange
     val column0 = "0"
@@ -94,7 +94,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "lineMapping" should "generate a Row given 5 inputs" in {
+  "lineMapping" should "generate a Row given 5 inputs with the last value null" in {
 
     // Arrange
     val column0 = "0"
@@ -119,7 +119,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "lineMapping" should "generate a Row given 4 inputs" in {
+  "lineMapping" should "generate a Row given 4 inputs with the last two values null" in {
 
     // Arrange
     val column0 = "0"
@@ -143,7 +143,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "lineMapping" should "generate a Row given 3 inputs" in {
+  "lineMapping" should "generate a Row given 3 inputs with the last three values null" in {
 
     // Arrange
     val column0 = "0"
@@ -166,7 +166,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "lineMapping" should "generate a Row given 2 inputs" in {
+  "lineMapping" should "generate a Row given 2 inputs with the last four values null" in {
 
     // Arrange
     val column0 = "0"
@@ -188,7 +188,15 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "lineRiskCodeMapping" should "generate a Row" in {
+  "lineMapping" should "throw a NumberFormatException exception if passed a non-parseble string" in {
+
+    // Act Assert
+    intercept[NumberFormatException] {
+      PolicyTransactionUtils.lineMapping( Array("P", "1") )
+    }
+  }
+
+  "lineRiskCodeMapping" should "generate a Row given 3 inputs" in {
 
     // Arrange
     val column0 = "A"
@@ -208,7 +216,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "lookupPremiumTypeMapping" should "generate a Row" in {
+  "lookupPremiumTypeMapping" should "generate a Row given 2 inputs" in {
 
     // Arrange
     val column0 = "A"
@@ -224,7 +232,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "settlementScheduleMapping" should "generate a Row" in {
+  "settlementScheduleMapping" should "generate a Row given 6 inputs" in {
 
     // Arrange
     val column0 = "0"
@@ -250,7 +258,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "settlementScheduleMapping" should "generate a Row given 5 inputs" in {
+  "settlementScheduleMapping" should "generate a Row given 5 inputs with the last value null" in {
 
     // Arrange
     val column0 = "0"
@@ -275,7 +283,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "settlementScheduleMapping" should "generate a Row given 4 inputs" in {
+  "settlementScheduleMapping" should "generate a Row given 4 inputs with the last two values null" in {
 
     // Arrange
     val column0 = "0"
@@ -299,7 +307,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "settlementScheduleMapping" should "generate a Row given 3 inputs" in {
+  "settlementScheduleMapping" should "generate a Row given 3 inputs with the last three values null" in {
 
     // Arrange
     val column0 = "0"
@@ -322,7 +330,17 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "policyTransactionMapping" should "generate a Row" in {
+  "settlementScheduleMapping" should "throw a NumberFormatException exception if passed a non-parseble string" in {
+
+    // Act Assert
+    intercept[NumberFormatException] {
+      PolicyTransactionUtils.settlementScheduleMapping( Array("P", "1", "C") )
+    }
+
+  }
+
+
+  "policyTransactionMapping" should "generate a Row given 18 inputs" in {
 
     // Arrange
     val column0 = "A"
@@ -376,7 +394,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
 
   }
 
-  "policyTransactionMapping" should "generate a Row with null values in first three fields" in {
+  "policyTransactionMapping" should "generate a Row given 15 inputs with first 3 values null" in {
 
     // Arrange
     val column0 = ""
@@ -411,7 +429,7 @@ class PolicyTransactionUtilsTests extends FlatSpec {
     assert( row.size == 18 )
     assert( row.get( 0 ) == null )
     assert( row.get( 1 ) == null )
-    assert( row.get( 2 ) == null)
+    assert( row.get( 2 ) == null )
     assert( row.get( 3 ).equals( column3.toBoolean ) )
     assert( row.get( 4 ).equals( column4 ) )
     assert( row.get( 5 ).equals( column5 ) )

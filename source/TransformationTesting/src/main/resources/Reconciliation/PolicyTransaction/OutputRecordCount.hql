@@ -1,4 +1,4 @@
 SELECT
-    COUNT(*) AS record_count
+    COUNT(transactionreference) AS record_count
 FROM
     policytransaction

@@ -1,5 +1,5 @@
 SELECT
-    COUNT(*) AS record_count
+    COUNT(line.risk_reference) AS record_count
 FROM
     line
     JOIN layer
@@ -10,5 +10,5 @@ FROM
     ON line.line_id = line_risk_code.line_id
     JOIN layer_trust_fund
     ON line.layer_id = layer_trust_fund.layer_id
-    JOIN lookup_premium_type
+    LEFT JOIN lookup_premium_type
     ON lookup_premium_type.premium_type_code = settlement_schedule.premium_type_code

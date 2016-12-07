@@ -83,12 +83,11 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "PolicyTransaction_WP_Transformation test with happy path data" ){
 
-    sqlContext.sparkContext.setLogLevel( "WARN" )
-
     // Arrange //
     val sqlc = sqlContext
+    sqlContext.sparkContext.setLogLevel( "WARN" )
 
-    // Load test data into dataframe
+    // Load test data into dataframes
     val line = populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
     val layer = populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
     val line_risk_code = populateDataFrameWithLinkRiskCodeTestData( "line_risk_code_PrimaryTestData.csv", sqlc )
@@ -120,13 +119,11 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "PolicyTransaction_WP_Transformation test using null values in 3 input tables" ){
 
+    // Arrange //
+    val sqlc = sqlContext
     sqlContext.sparkContext.setLogLevel( "WARN" )
 
-    // Arrange //
-    // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
-
+    // Load test data into dataframes
     val line = populateDataFrameWithLineTestData( "line_VariousNullValues.csv", sqlc )
     val layer = populateDataFrameWithLayerTestData( "layer_VariousNullValues.csv", sqlc )
     val line_risk_code = populateDataFrameWithLinkRiskCodeTestData( "line_risk_code_PrimaryTestData.csv", sqlc )
@@ -161,8 +158,9 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
+    sqlContext.sparkContext.setLogLevel( "WARN" )
 
+    // Load test data into dataframes
     // data file for line contains a business type outside of range to perform calculation
     val line = populateDataFrameWithLineTestData( "line_BusinessTypeOutsideRange.csv", sqlc )
     val layer = populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
