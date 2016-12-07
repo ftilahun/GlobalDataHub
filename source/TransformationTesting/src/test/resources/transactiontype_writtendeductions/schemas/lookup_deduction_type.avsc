@@ -1,7 +1,7 @@
 {
 	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
  	"type": "record",
- 	"name": "lookup_premium_type",
+ 	"name": "lookup_deduction_type",
  	"fields": [
     	{
     		"name": "deduction_code",
@@ -9,7 +9,8 @@
     	},
     	{
     	    "name": "deduction_description",
-            "type": "string"
+            "type": ["string","null"],
+            "doc": "Not nullable in NDEX, nullable for purposes of this test"
         }
  	]
 }

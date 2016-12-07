@@ -34,6 +34,7 @@ class TransactionTypeUtilsTests extends FlatSpec with Matchers {
     assert( row.size == 2 )
     assert( row.get( 0 ).equals( "A" ) )
     assert( row.get( 1 ).equals( "B" ) )
+
   }
 
   "transactionTypeMapping" should "generate a Row given 7 inputs" in {
@@ -81,6 +82,7 @@ class TransactionTypeUtilsTests extends FlatSpec with Matchers {
     a[IllegalArgumentException] should be thrownBy {
       TransactionTypeUtils.transactionTypeMapping( rowArray )
     }
+
   }
 
 }

@@ -55,7 +55,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
       getClass.getResource( "/transactiontype_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/transactiontype_writtendeductions/schemas/lookup_deduction_type.avro" ).toString,
       _.split( "," ),
-      TransactionTypeUtils.lookupPremiumTypeMapping,
+      TransactionTypeUtils.lookupDeductionTypeMapping,
       sqlc
     )
 

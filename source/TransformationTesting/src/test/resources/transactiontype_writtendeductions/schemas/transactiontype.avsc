@@ -25,8 +25,7 @@
         },
         {
             "name": "transactionsubtypedescription",
-            "type": "string",
-            "doc": "This field should be nullable however NDEX has a hardcoded value for this field and nullable is removed to allow the schemas to match."
+            "type": ["string","null"]
         },
         {
             "name": "group",
