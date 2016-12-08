@@ -1,3 +1,3 @@
 SELECT
     COUNT(*) AS recordcount
-FROM transactiontype
+FROM lookup_country

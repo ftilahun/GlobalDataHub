@@ -9,7 +9,8 @@
     	},
         {
             "name": "profit_centre_desc", 
-            "type": ["string","null"]
+            "type": "string",
+            "doc": "Used to populate primary key LegalEntityCode so can not be null."
         }
     ]
 }
