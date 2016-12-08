@@ -1,0 +1,33 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "line",
+    "fields": [
+        {
+            "name": "line_id",
+            "type": ["int","null"],
+            "doc": "Not nullable in NDEX, nullable for purposes of this test"
+        },
+        {
+            "name": "layer_id",
+            "type": ["int","null"],
+            "doc": "Not nullable in NDEX, nullable for purposes of this test"
+        },
+        {
+            "name": "risk_reference",
+            "type": ["string","null"]
+        },
+        {
+            "name": "business_type",
+            "type": ["string","null"]
+        },
+        {
+            "name": "slip_income_amount",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "reporting_line_pct",
+            "type": ["string","null"]
+        }
+    ]
+}
