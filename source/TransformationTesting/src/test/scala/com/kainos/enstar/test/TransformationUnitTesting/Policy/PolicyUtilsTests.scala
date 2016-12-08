@@ -281,7 +281,7 @@ class PolicyUtilsTests extends FlatSpec {
 
   }
 
-  "policyMapping" should "generate a Row given 28 inputs" in {
+  "policyMapping" should "generate a Row given 29 inputs" in {
 
     // Arrange
     val column0 = "A"
@@ -312,17 +312,18 @@ class PolicyUtilsTests extends FlatSpec {
     val column25 = "Z"
     val column26 = "AA"
     val column27 = "27"
+    val column28 = "BB"
 
     val columns = Array( column0, column1, column2, column3, column4, column5, column6,
       column7, column8, column9, column10, column11, column12, column13, column14, column15,
       column16, column17, column18, column19, column20, column21, column22, column23, column24,
-      column25, column26, column27 )
+      column25, column26, column27, column28 )
 
     // Act
     val row = PolicyUtils.policyMapping( columns )
 
     // Assert
-    assert( row.size == 28 )
+    assert( row.size == 29 )
     assert( row.get( 0 ).equals( column0 ) )
     assert( row.get( 1 ).equals( column1 ) )
     assert( row.get( 2 ).equals( column2 ) )
@@ -351,6 +352,7 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 25 ).equals( column25 ) )
     assert( row.get( 26 ).equals( column26 ) )
     assert( row.get( 27 ) == column27.toInt )
+    assert( row.get( 28 ).equals( column28 ) )
 
   }
 }
