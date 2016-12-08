@@ -130,21 +130,9 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_trust_fund = this.populateDataFrameWithLookupTrustFundTestData( "lookup_trust_fund.csv", sqlc )
     val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund.csv", sqlc )
 
-    line.collect()
-    layer.collect()
-    layer_deduction.collect()
-    line_risk_code.collect()
-    lookup_deduction_type.collect()
-    lookup_risk_code.collect()
-    settlement_schedule.collect()
-    lookup_trust_fund.collect()
-    layer_trust_fund.collect()
-
-
     // Load expected result into dataframe
     val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions.csv", sqlc )
 
-    expectedPolicyTransaction.collect()
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
 
@@ -159,13 +147,10 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     lookup_trust_fund.registerTempTable( "lookup_trust_fund" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
 
-    //val output = sqlc.sql("Select * from line")
     val result = SQLRunner.runStatement( statement, sqlc )
-result.collect()
+
     // Assert //
-    //   println(output.collect())
-    //  println(expectedPolicyTransaction.count())
-    //assertDataFrameEquals( expectedPolicyTransaction, result )
+    assertDataFrameEquals( expectedPolicyTransaction, result )
 
   }
 
