@@ -281,6 +281,34 @@ class PolicyUtilsTests extends FlatSpec {
 
   }
 
+  "lookupCountryMapping" should "generate a Row given 1 input" in {
+
+    // Arrange
+    val column1 = "A"
+
+    // Act
+    val row = PolicyUtils.lookupCountryMapping(Array(column1))
+
+    // Assert
+    assert( row.size == 1 )
+    assert( row.get( 0 ).equals( column1 ) )
+
+  }
+
+  "lookupCountryMapping" should "generate a Row with the value being null" in {
+
+    // Arrange
+    val column1 = ""
+
+    // Act
+    val row = PolicyUtils.lookupCountryMapping(Array(column1))
+
+    // Assert
+    assert( row.size == 1 )
+    assert( row.get( 0 ) == null )
+
+  }
+
   "policyMapping" should "generate a Row given 28 inputs" in {
 
     // Arrange

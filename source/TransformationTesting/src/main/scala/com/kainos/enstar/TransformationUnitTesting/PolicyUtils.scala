@@ -62,6 +62,10 @@ object PolicyUtils {
     Row( cols( 0 ), cols( 1 ), cols( 2 ) )
   }
 
+  def lookupCountryMapping( cols : Array[String] ) : Row = {
+    Row( if ( cols( 0 ).equals( "" ) ) null else cols( 0 ) )
+  }
+
   def policyMapping( cols : Array[String] ) : Row = {
     Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ),
       if ( cols( 4 ).equals( "" ) ) null else cols( 4 ),

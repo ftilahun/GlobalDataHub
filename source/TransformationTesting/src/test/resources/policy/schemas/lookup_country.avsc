@@ -1,0 +1,11 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources ",
+ 	"type": "record",
+ 	"name": "lookup_country",
+ 	"fields": [
+        {
+            "name": "country_code",
+            "type": "string"
+        }
+ 	]
+}

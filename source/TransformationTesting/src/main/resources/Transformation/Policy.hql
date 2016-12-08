@@ -15,7 +15,7 @@ layer.expiry_date AS coverageeffectivetodate,
 layer.expiry_date AS expirydate,
 layer.fil_code AS filcode, 
 layer.inception_date AS inceptiondate,
-organisation.domicile_country_code AS insureddomicilecode,
+CONCAT("[Missing][Missing][Missing][", organisation.domicile_country_code, "]") AS insureddomicilecode,
 CAST(NULL AS STRING) AS legacypolicynumber,
 regexp_extract(lookup_profit_centre.profit_centre_desc, '(^(TIE)|(TIUK)|(Syndicate 1301))', 0) AS legalentitycode,
 line.block AS lineofbusinesscode,
@@ -25,7 +25,7 @@ line.risk_code AS majorriskcode,
 CAST(NULL AS STRING) AS majortrustfundcode,
 CAST(line.business_type AS STRING) AS methodofplacementcode,
 lookup_business_type.type_description AS methodofplacementdescription,
-risk.area_code AS risklocationcode,
+CONCAT("[Missing][Missing][Missing][", risk.area_code, "]") AS risklocationcode,
 line.risk_reference AS sourcesystempolicynumber,
 line.subblock AS sublineofbusinesscode, 
 underwriting_block.description AS sublineofbusinessdescription, 
@@ -45,6 +45,8 @@ AND risk.programme_year = submission.programme_year
 AND risk.sequence_no = submission.sequence_no
 JOIN organisation
 ON organisation.organisation_id = risk.assured_id
+LEFT JOIN lookup_country
+ON risk.area_code = lookup_country.country_code
 LEFT JOIN lookup_profit_centre
 ON line.profit_centre_code = lookup_profit_centre.profit_centre_code
 LEFT JOIN lookup_block
