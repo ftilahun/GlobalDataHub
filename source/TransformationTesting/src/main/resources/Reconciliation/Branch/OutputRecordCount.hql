@@ -1,3 +1,3 @@
 SELECT
-    COUNT(*) AS recordcount
+    COUNT(branchcode) AS recordcount
 FROM branch
