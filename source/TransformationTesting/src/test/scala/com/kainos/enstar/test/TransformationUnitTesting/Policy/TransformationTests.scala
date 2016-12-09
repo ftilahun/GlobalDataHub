@@ -37,7 +37,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithSubmissionTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( testDataInputPath + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
+      getClass.getResource( schemasPath + "submission.avro" ).toString,
       _.split( "," ),
       PolicyUtils.submissionMapping,
       sqlc
@@ -47,7 +47,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithRiskTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( testDataInputPath + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
+      getClass.getResource( schemasPath + "risk.avro" ).toString,
       _.split( "," ),
       PolicyUtils.riskMapping,
       sqlc
@@ -57,7 +57,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLookupBlockTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( testDataInputPath + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
+      getClass.getResource( schemasPath + "lookup_block.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupBlockMapping,
       sqlc
@@ -67,7 +67,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLookupProfitCentreTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( testDataInputPath + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
+      getClass.getResource( schemasPath + "lookup_profit_centre.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupProfitCentreMapping,
       sqlc
@@ -77,7 +77,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLookupBusinessTypeTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( testDataInputPath + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
+      getClass.getResource( schemasPath + "lookup_business_type.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupBusinessTypeMapping,
       sqlc
@@ -87,7 +87,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithOrganisationTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( testDataInputPath + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
+      getClass.getResource( schemasPath + "organisation.avro" ).toString,
       _.split( "," ),
       PolicyUtils.organisationMapping,
       sqlc
@@ -97,7 +97,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithUnderwritingBlockTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( testDataInputPath + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
+      getClass.getResource( schemasPath + "underwriting_block.avro" ).toString,
       _.split( "," ),
       PolicyUtils.underwritingBlockMapping,
       sqlc
@@ -107,7 +107,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithPolicyTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policy/output/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
+      getClass.getResource( schemasPath + "policy.avro" ).toString,
       _.split( "," ),
       PolicyUtils.policyMapping,
       sqlc
