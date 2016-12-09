@@ -15,7 +15,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLineTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/line.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/line.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.lineMapping,
       sqlc
@@ -25,7 +25,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLayerTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/layer.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.layerMapping,
       sqlc
@@ -35,7 +35,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLayerDeductionTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/layer_deduction.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer_deduction.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.layerDeductionMapping,
       sqlc
@@ -45,7 +45,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLayerTrustFundTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/layer_trust_fund.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer_trust_fund.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.layerTrustFundMapping,
       sqlc
@@ -55,7 +55,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLineRiskCodeTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/line_risk_code.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/line_risk_code.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.lineRiskCodeMapping,
       sqlc
@@ -65,7 +65,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLookupDeductionTypeTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/lookup_deduction_type.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/lookup_deduction_type.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.lookupDeductionTypeMapping,
       sqlc
@@ -75,7 +75,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLookupRiskCodeMappingTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/lookup_risk_code.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/lookup_risk_code.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.lookupRiskCodeMapping,
       sqlc
@@ -85,7 +85,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithSettlementScheduleTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/settlement_schedule.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/settlement_schedule.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.settlementScheduleMapping,
       sqlc
@@ -95,7 +95,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithLookupTrustFundTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/lookup_trust_fund.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/lookup_trust_fund.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.lookupTrustFundMapping,
       sqlc
@@ -105,7 +105,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithPolicyTransactionDeductionsTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/output/" + dataFileName ).toString,
-      getClass.getResource("/policytransaction_writtendeductions/schemas/policytransactionwrittendeductions.avro").toString,
+      getClass.getResource( "/policytransaction_writtendeductions/schemas/policytransactionwrittendeductions.avro" ).toString,
       _.split( "," ),
       PolicyTransactionDeductionsUtils.policyTransactionDeductionsMapping,
       sqlc

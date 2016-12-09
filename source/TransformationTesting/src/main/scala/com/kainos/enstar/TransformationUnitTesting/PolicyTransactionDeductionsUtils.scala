@@ -16,10 +16,10 @@ object PolicyTransactionDeductionsUtils {
   }
 
   def layerMapping( cols : Array[String] ) : Row = cols match {
-    case cols if cols.length == 3 => Row( cols( 0 ).toInt, cols( 1 ), cols(2), null)
-    case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ), null, null)
-    case cols if cols.length == 1 => Row( cols( 0 ).toInt, null, null, null)
-    case _                        => Row( cols( 0 ).toInt, cols( 1 ), if ( cols( 2 ).equals( "" ) ) null else cols(2), cols(3) )
+    case cols if cols.length == 3 => Row( cols( 0 ).toInt, cols( 1 ), cols( 2 ), null )
+    case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ), null, null )
+    case cols if cols.length == 1 => Row( cols( 0 ).toInt, null, null, null )
+    case _                        => Row( cols( 0 ).toInt, cols( 1 ), if ( cols( 2 ).equals( "" ) ) null else cols( 2 ), cols( 3 ) )
   }
 
   def layerDeductionMapping( cols : Array[String] ) : Row = {
@@ -49,7 +49,7 @@ object PolicyTransactionDeductionsUtils {
     case cols if cols.length == 4 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ).toInt, cols( 3 ), null )
     case cols if cols.length == 3 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ).toInt, null, null )
     case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ).toInt, null, null, null )
-    case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ).toInt, if ( cols( 3 ).equals( "" ) ) null else cols(3), cols( 4 ) )
+    case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ).toInt, if ( cols( 3 ).equals( "" ) ) null else cols( 3 ), cols( 4 ) )
   }
 
   def lookupTrustFundMapping( cols : Array[String] ) : Row = {

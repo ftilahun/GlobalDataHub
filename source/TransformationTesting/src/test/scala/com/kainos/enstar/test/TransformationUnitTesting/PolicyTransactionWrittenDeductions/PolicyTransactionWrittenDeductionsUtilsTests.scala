@@ -115,72 +115,72 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
 
   "layer" should "generate a Row" in {
 
-  // Arrange
-  val column0 = "1"
-  val column1 = "B"
-  val column2 = "AA"
-  val column3 = "1"
+    // Arrange
+    val column0 = "1"
+    val column1 = "B"
+    val column2 = "AA"
+    val column3 = "1"
 
-  // Act
-  val row = PolicyTransactionDeductionsUtils.layerMapping( ( column0 :: column1 :: column2 :: column3 :: Nil ).toArray )
+    // Act
+    val row = PolicyTransactionDeductionsUtils.layerMapping( ( column0 :: column1 :: column2 :: column3 :: Nil ).toArray )
 
-  // Assert
-  assert( row.size == 4 )
-  assert( row.get( 0 ) == column0.toInt )
-  assert( row.get( 1 ).equals( column1 ) )
-  assert( row.get( 2 ).equals( column2 ) )
-  assert( row.get( 3 ).equals( column3 ) )
+    // Assert
+    assert( row.size == 4 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ).equals( column1 ) )
+    assert( row.get( 2 ).equals( column2 ) )
+    assert( row.get( 3 ).equals( column3 ) )
   }
 
   "layer" should "generate a Row given 3 inputs with final value null" in {
 
-  // Arrange
-  val column0 = "1"
-  val column1 = "B"
-  val column2 = "AA"
+    // Arrange
+    val column0 = "1"
+    val column1 = "B"
+    val column2 = "AA"
 
-  // Act
-  val row = PolicyTransactionDeductionsUtils.layerMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
+    // Act
+    val row = PolicyTransactionDeductionsUtils.layerMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
 
-  // Assert
-  assert( row.size == 4 )
-  assert( row.get( 0 ) == column0.toInt )
-  assert( row.get( 1 ).equals( column1 ) )
-  assert( row.get( 2 ).equals( column2 ) )
-  assert( row.get( 3 ) == null )
+    // Assert
+    assert( row.size == 4 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ).equals( column1 ) )
+    assert( row.get( 2 ).equals( column2 ) )
+    assert( row.get( 3 ) == null )
   }
 
   "layer" should "generate a Row given 2 inputs with final two values of null" in {
 
-  // Arrange
-  val column0 = "1"
-  val column1 = "B"
+    // Arrange
+    val column0 = "1"
+    val column1 = "B"
 
-  // Act
-  val row = PolicyTransactionDeductionsUtils.layerMapping( ( column0 :: column1 :: Nil ).toArray )
+    // Act
+    val row = PolicyTransactionDeductionsUtils.layerMapping( ( column0 :: column1 :: Nil ).toArray )
 
-  // Assert
-  assert( row.size == 4 )
-  assert( row.get( 0 ) == column0.toInt )
-  assert( row.get( 1 ).equals( column1 ) )
-  assert( row.get( 2 ) == null )
-  assert( row.get( 3 ) == null )
+    // Assert
+    assert( row.size == 4 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ).equals( column1 ) )
+    assert( row.get( 2 ) == null )
+    assert( row.get( 3 ) == null )
   }
 
   "layer" should "generate a Row given 1 input with final three values of null" in {
 
-  // Arrange
-  val column0 = "1"
+    // Arrange
+    val column0 = "1"
 
-  // Act
-  val row = PolicyTransactionDeductionsUtils.layerMapping( ( column0 :: Nil ).toArray )
+    // Act
+    val row = PolicyTransactionDeductionsUtils.layerMapping( ( column0 :: Nil ).toArray )
 
-  // Assert
-  assert( row.size == 4 )
-  assert( row.get( 0 ) == column0.toInt )
-  assert( row.get( 1 ) == null )
-  assert( row.get( 2 ) == null )
-  assert( row.get( 3 ) == null )
+    // Assert
+    assert( row.size == 4 )
+    assert( row.get( 0 ) == column0.toInt )
+    assert( row.get( 1 ) == null )
+    assert( row.get( 2 ) == null )
+    assert( row.get( 3 ) == null )
   }
 
   "layerDeduction" should "generate a Row given 2 inputs with final value null" in {

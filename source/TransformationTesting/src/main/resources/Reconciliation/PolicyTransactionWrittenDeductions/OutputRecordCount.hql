@@ -1,1 +1,1 @@
-SELECT COUNT(*) AS policytransactionwrittendeductions_count FROM policytransactionwrittendeductions
+SELECT COUNT(*) AS policytransactionwrittendeductions_count FROM policytransaction_writtendeductions
