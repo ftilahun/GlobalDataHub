@@ -61,4 +61,3 @@ ON line.block = underwriting_block.block
 AND line.subblock = underwriting_block.subblock
 LEFT JOIN lookup_business_type
 ON lookup_business_type.business_type = line.business_type
-WHERE line.line_status IN ('I', 'S', 'U', 'L', 'N', 'Q','P','D')
