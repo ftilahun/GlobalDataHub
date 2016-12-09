@@ -13,7 +13,7 @@ SELECT
             WHEN '17' THEN '0'
             ELSE line.slip_income_amount * (line.reporting_line_pct/100) * (layer_deduction.deduction_pct/100)
         END
-        AS STRING) AS calculateddeductionamount,
+        AS DECIMAL(12,7)) AS calculateddeductionamount,
     layer_deduction.deduction_pct AS value,
     true AS ispercentage,
     true AS isnetofprevious
