@@ -1,13 +1,13 @@
 package com.kainos.enstar.test.TransformationUnitTesting.MethodOfPlacement
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{MethodOfPlacementUtils, SQLRunner, TransformationUnitTestingUtils}
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import com.kainos.enstar.TransformationUnitTesting.{ MethodOfPlacementUtils, SQLRunner, TransformationUnitTestingUtils }
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
 /**
-  * Created by caoimheb on 08/12/2016.
-  */
+ * Created by caoimheb on 08/12/2016.
+ */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils

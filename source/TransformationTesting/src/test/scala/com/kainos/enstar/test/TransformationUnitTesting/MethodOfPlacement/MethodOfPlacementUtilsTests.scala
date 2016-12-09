@@ -4,14 +4,14 @@ import com.kainos.enstar.TransformationUnitTesting.MethodOfPlacementUtils
 import org.scalatest.FlatSpec
 
 /**
-  * Created by caoimheb on 08/12/2016.
-  */
+ * Created by caoimheb on 08/12/2016.
+ */
 class MethodOfPlacementUtilsTests extends FlatSpec {
 
   "lookupBusinessTypeMapping" should "generate a Row given 2 inputs" in {
 
     // Arrange
-    val column0 = "A"
+    val column0 = "1"
     val column1 = "B"
 
     // Act
@@ -19,7 +19,7 @@ class MethodOfPlacementUtilsTests extends FlatSpec {
 
     // Assert
     assert( row.size == 2 )
-    assert( row.get( 0 ).equals( column0 ) )
+    assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ).equals( column1 ) )
 
   }
