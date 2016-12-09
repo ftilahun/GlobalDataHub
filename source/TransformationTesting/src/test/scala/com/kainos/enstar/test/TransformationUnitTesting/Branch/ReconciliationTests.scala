@@ -19,7 +19,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/branch/input/lookup_profit_centre_test1.csv" ).toString,
+      getClass.getResource( "/branch/input/lookup_profit_centre_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/branch/schemas/lookup_profit_centre.avro" ).toString,
       _.split( "," ),
       BranchUtils.lookupProfitCentreMapping,

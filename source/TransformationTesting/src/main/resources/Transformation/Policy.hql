@@ -4,8 +4,14 @@ line.risk_reference AS policynumber,
 CAST(line.line_id AS STRING) AS coveragereference,
 CAST(line.layer_id AS STRING) AS sectionreference,
 "NDEX" AS sourcesystemcode, 
-CAST(line.profit_centre_code AS STRING) AS branchcode,
-lookup_profit_centre.profit_centre_desc AS branchdescription,
+ltrim(CASE regexp_extract(profit_centre_desc, '((?:Syndicate 1301)|(?:TIE)|(?:TIUK))(.*)', 2)
+        WHEN '' THEN 'London'
+        ELSE regexp_extract(profit_centre_desc, '((?:Syndicate 1301)|(?:TIE)|(?:TIUK))(.*)', 2)
+    END) AS branchcode,
+ltrim(CASE regexp_extract(profit_centre_desc, '((?:Syndicate 1301)|(?:TIE)|(?:TIUK))(.*)', 2)
+        WHEN '' THEN 'London'
+        ELSE regexp_extract(profit_centre_desc, '((?:Syndicate 1301)|(?:TIE)|(?:TIUK))(.*)', 2)
+    END) AS branchdescription,
 CASE line.line_status
 	WHEN 'C' THEN layer.expiry_date
     ELSE CAST(NULL AS STRING)

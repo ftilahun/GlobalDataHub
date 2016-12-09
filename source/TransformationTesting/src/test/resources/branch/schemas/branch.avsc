@@ -16,8 +16,8 @@
         },
     	{
     		"name": "branchdescription",
-    		"type": ["string", "null"],
-    		"doc": "The description associated with the company branch through which the business has been placed"
+    		"type": "string",
+    		"doc": "Not null for the purposes of this test."
     	},
     	{
     		"name": "branchlocationcode",
