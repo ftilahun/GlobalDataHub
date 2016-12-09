@@ -91,6 +91,16 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
       sqlc
     )
 
+    val lookup_country : DataFrame = utils.populateDataFrameFromFile(
+      getClass.getResource( "/policy/input/lookup_country_PrimaryTestData.csv" ).toString,
+      getClass.getResource( "/policy/schemas/lookup_country.avro" ).toString,
+      _.split( "," ),
+      PolicyUtils.lookupCountryMapping,
+      sqlc
+    )
+
+
+
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Policy/InputRecordCount.hql" )
@@ -106,6 +116,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     lookup_block.registerTempTable( "lookup_block" )
     lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
     underwriting_block.registerTempTable( "underwriting_block" )
+    lookup_country.registerTempTable("lookup_country")
 
     val output = SQLRunner.runStatement( statement, sqlc )
     output.registerTempTable( "policy" )
