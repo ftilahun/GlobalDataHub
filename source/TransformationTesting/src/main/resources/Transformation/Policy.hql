@@ -51,8 +51,6 @@ AND risk.programme_year = submission.programme_year
 AND risk.sequence_no = submission.sequence_no
 JOIN organisation
 ON organisation.organisation_id = risk.assured_id
-LEFT JOIN lookup_country
-ON risk.area_code = lookup_country.country_code
 LEFT JOIN lookup_profit_centre
 ON line.profit_centre_code = lookup_profit_centre.profit_centre_code
 LEFT JOIN lookup_block
