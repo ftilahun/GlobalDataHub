@@ -91,8 +91,8 @@ object PolicyUtils {
       if ( cols( 24 ).equals( "" ) ) null else cols( 24 ),
       if ( cols( 25 ).equals( "" ) ) null else cols( 25 ),
       if ( cols.length > 26 ) ( if ( cols( 26 ).equals( "" ) ) null else cols( 26 ) ) else null,
-      if ( cols.length > 27 ) cols( 27 ).toInt else null,
-      if ( cols( 28 ).equals( "" ) ) null else cols( 28 )
+      if ( cols.length > 27 ) ( if ( cols( 27 ).equals( "" ) ) null else cols( 27 ).toInt ),
+      if ( cols.length > 28 ) ( if ( cols( 28 ).equals( "" ) ) null else cols( 28 ) )
     )
   }
 
