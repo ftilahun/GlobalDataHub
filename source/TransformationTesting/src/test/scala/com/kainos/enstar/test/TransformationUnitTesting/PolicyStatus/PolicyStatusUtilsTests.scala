@@ -24,7 +24,7 @@ class PolicyStatusUtilsTests extends FlatSpec {
 
   }
 
-  "trustFundMapping" should "generate a Row given 3 inputs" in {
+  "policyStatusMapping" should "generate a Row given 3 inputs" in {
 
     // Arrange
     val column0 = "A"
