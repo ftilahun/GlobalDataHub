@@ -100,7 +100,8 @@ object PolicyUtils {
       if ( cols.length > 29 ) if ( cols( 29 ).equals( "" ) ) null else cols( 29 ) else null,
       if ( cols.length > 30 ) if ( cols( 30 ).equals( "" ) ) null else cols( 30 ) else null,
       if ( cols.length > 31 ) if ( cols( 31 ).equals( "" ) ) null else cols( 31 ) else null,
-      if ( cols.length > 32 ) if ( cols( 32 ).equals( "" ) ) null else cols( 32 ) else null
+      if ( cols.length > 32 ) if ( cols( 32 ).equals( "" ) ) null else cols( 32 ) else null,
+      if ( cols.length > 33 ) if ( cols( 32 ).equals( "" ) ) null else cols( 33 ) else null
     )
   }
 
