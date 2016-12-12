@@ -63,7 +63,11 @@ object PolicyUtils {
   }
 
   def policyMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ),
+    Row(
+      cols( 0 ),
+      cols( 1 ),
+      cols( 2 ),
+      cols( 3 ),
       if ( cols( 4 ).equals( "" ) ) null else cols( 4 ),
       if ( cols( 5 ).equals( "" ) ) null else cols( 5 ),
       if ( cols( 6 ).equals( "" ) ) null else cols( 6 ),
@@ -87,7 +91,8 @@ object PolicyUtils {
       if ( cols( 24 ).equals( "" ) ) null else cols( 24 ),
       if ( cols( 25 ).equals( "" ) ) null else cols( 25 ),
       if ( cols.length > 26 ) ( if ( cols( 26 ).equals( "" ) ) null else cols( 26 ) ) else null,
-      if ( cols.length > 27 ) cols( 27 ).toInt else null
+      if ( cols.length > 27 ) ( if ( cols( 27 ).equals( "" ) ) null else cols( 27 ).toInt ),
+      if ( cols.length > 28 ) ( if ( cols( 28 ).equals( "" ) ) null else cols( 28 ) )
     )
   }
 
