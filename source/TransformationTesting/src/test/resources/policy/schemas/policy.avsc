@@ -116,6 +116,26 @@
         {
             "name": "yearofaccount",  
             "type": ["int", "null"]
+        },
+        {
+            "name": "estimatedsignedpercent",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "signedorderpercent",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "signedlinepercent",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "writtenlinepercent",
+            "type": ["string", "null"]
+        },
+        {
+             "name": "writtenorderpercent",
+             "type": ["string", "null"]
         }
  	]
 }

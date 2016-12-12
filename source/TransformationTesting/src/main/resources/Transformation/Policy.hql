@@ -36,7 +36,12 @@ line.risk_reference AS sourcesystempolicynumber,
 line.subblock AS sublineofbusinesscode, 
 underwriting_block.description AS sublineofbusinessdescription, 
 layer.unique_market_ref AS uniquemarketreference,
-YEAR(layer.inception_date) AS yearofaccount
+YEAR(layer.inception_date) AS yearofaccount,
+CAST(line.est_signing_down_pct AS STRING) AS estimatedsignedpercent,
+CAST(line.signed_order_pct AS STRING) AS signedorderpercent,
+CAST(line.signed_line_pct AS STRING) AS signedlinepercent,
+CAST(line.written_line_pct AS STRING) AS writtenlinepercent,
+CAST(line.written_order_pct AS STRING) AS writtenorderpercent
 
 FROM
 
