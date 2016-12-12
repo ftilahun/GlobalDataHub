@@ -36,7 +36,8 @@ line.risk_reference AS sourcesystempolicynumber,
 line.subblock AS sublineofbusinesscode, 
 underwriting_block.description AS sublineofbusinessdescription, 
 layer.unique_market_ref AS uniquemarketreference,
-YEAR(layer.inception_date) AS yearofaccount
+YEAR(layer.inception_date) AS yearofaccount,
+line.line_status AS policystatuscode
 
 FROM
 

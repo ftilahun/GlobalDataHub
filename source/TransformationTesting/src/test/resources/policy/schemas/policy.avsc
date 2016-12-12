@@ -116,6 +116,10 @@
         {
             "name": "yearofaccount",  
             "type": ["int", "null"]
+        },
+        {
+            "name": "policystatuscode",
+            "type": ["string", "null"]
         }
  	]
 }
