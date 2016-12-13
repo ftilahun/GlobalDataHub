@@ -10,13 +10,14 @@ import org.scalatest.FunSuite
  */
 class ValidationTests extends FunSuite with DataFrameSuiteBase {
 
+  private val utils = new TransformationUnitTestingUtils
+
   test( "Validation: When input contains no null values for risk_reference validation script should return count 0" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
     val line : DataFrame = utils.populateDataFrameFromFile(
@@ -44,7 +45,6 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
     val line : DataFrame = utils.populateDataFrameFromFile(
