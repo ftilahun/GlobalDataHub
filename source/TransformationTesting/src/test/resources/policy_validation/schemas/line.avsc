@@ -13,53 +13,53 @@
     	},
         {
             "name": "risk_reference",  
-            "type": "string",
+            "type": ["string","null"],
             "doc": "This is nullable in the NDEX source DB but if it is null this is an unrecoverable error.  Added validation check to ensure it is not null so we can make it not null in this schema."
         },
         {
             "name": "risk_code",  
-            "type": ["null", "string"]
+            "type": ["string", "null"]
         },
         {
             "name": "profit_centre_code",  
-            "type": ["null", "int"],
+            "type": ["int", "null"],
             "doc" : "Nullable just for purpose of tests"
         },
         {
             "name": "block",  
-            "type": ["null", "string"]
+            "type": ["string", "null"]
         },
         {
             "name": "subblock",  
-            "type": ["null", "string"]
+            "type": ["string", "null"]
         },
         {
             "name": "line_status",  
-            "type": ["null", "string"]
+            "type": ["string", "null"]
         },
         {
             "name": "business_type",
-            "type": ["null", "int"]
+            "type": ["int","null"]
         },
         {
             "name": "est_signing_down_pct",
             "type": ["null", "string"]
         },
         {
-            "name": "signed_order_pct",
-            "type": ["null", "string"]
+             "name": "signed_order_pct",
+             "type": ["null", "string"]
         },
         {
-            "name": "signed_line_pct",
-            "type": ["null", "string"]
+             "name": "signed_line_pct",
+             "type": ["null", "string"]
         },
         {
-            "name": "written_line_pct",
-            "type": ["null", "string"]
+             "name": "written_line_pct",
+             "type": ["null", "string"]
         },
         {
-            "name": "written_order_pct",
-            "type": ["null", "string"]
+             "name": "written_order_pct",
+             "type": ["null", "string"]
         }
  	]
 }
