@@ -562,4 +562,47 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     assertDataFrameEquals( expectedPolicy, result )
   }
 
+  test( "Policy Transformation test with null percentage fields in line" ) {
+    // Arrange //
+    // Use sqlContext from spark-testing-base
+    val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
+
+    // Load test data into dataframe
+    val line = this.populateDataFrameWithLineTestData( "line_NullPercentageFields.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
+
+    // Load expected result into dataframe
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullPercentageFields.csv", sqlc )
+
+    // Load the hql statement under test
+    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+
+    // Act //
+    line.registerTempTable( "line" )
+    layer.registerTempTable( "layer" )
+    submission.registerTempTable( "submission" )
+    risk.registerTempTable( "risk" )
+    organisation.registerTempTable( "organisation" )
+    lookup_business_type.registerTempTable( "lookup_business_type" )
+    lookup_block.registerTempTable( "lookup_block" )
+    lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
+
+    val result = SQLRunner.runStatement( statement, sqlc )
+
+    // Assert //
+    assertDataFrameEquals( expectedPolicy, result )
+
+    // Assert //
+    assertDataFrameEquals( expectedPolicy, result )
+  }
+
 }

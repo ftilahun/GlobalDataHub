@@ -65,4 +65,5 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     // Assert //
     assert( result.count() == 1 )
   }
+
 }

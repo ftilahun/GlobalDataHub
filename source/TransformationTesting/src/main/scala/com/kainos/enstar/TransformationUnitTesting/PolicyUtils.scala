@@ -95,7 +95,7 @@ object PolicyUtils {
       if ( cols( 24 ).equals( "" ) ) null else cols( 24 ),
       if ( cols( 25 ).equals( "" ) ) null else cols( 25 ),
       if ( cols.length > 26 ) if ( cols( 26 ).equals( "" ) ) null else cols( 26 ) else null,
-      if ( cols.length > 27 ) if (cols(27).equals("")) null else cols( 27 ).toInt,
+      if ( cols.length > 27 ) if ( cols( 27 ).equals( "" ) ) null else cols( 27 ).toInt,
       if ( cols.length > 28 ) if ( cols( 28 ).equals( "" ) ) null else cols( 28 ) else null,
       if ( cols.length > 29 ) if ( cols( 29 ).equals( "" ) ) null else cols( 29 ) else null,
       if ( cols.length > 30 ) if ( cols( 30 ).equals( "" ) ) null else cols( 30 ) else null,

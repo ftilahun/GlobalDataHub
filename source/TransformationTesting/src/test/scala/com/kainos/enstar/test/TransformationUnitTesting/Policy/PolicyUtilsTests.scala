@@ -23,9 +23,10 @@ class PolicyUtilsTests extends FlatSpec {
     val column12 = "L"
     val column13 = "M"
 
-    val columns = Array( column0, column1, column2, column3,
-      column4, column5, column6, column7, column8, column9,
-      column10, column11, column12, column13 )
+    val columns = Array(
+      column0, column1, column2, column3, column4, column5, column6,
+      column7, column8, column9, column10, column11, column12, column13
+    )
 
     // Act
     val row = PolicyUtils.lineMapping( columns )
@@ -61,8 +62,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column6 = "G"
     val column7 = "H"
 
-    val columns = Array( column0, column1, column2, column3,
-      column4, column5, column6, column7 )
+    val columns = Array( column0, column1, column2, column3, column4, column5, column6, column7 )
 
     // Act
     val row = PolicyUtils.lineMapping( columns )
@@ -112,7 +112,7 @@ class PolicyUtilsTests extends FlatSpec {
     val row = PolicyUtils.lineMapping( columns )
 
     // Assert
-    assert( row.size ==  14)
+    assert( row.size == 14 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ) == null )
@@ -141,7 +141,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column5 = "F"
 
     // Act
-    val row = PolicyUtils.layerMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: Nil ).toArray )
+    val row = PolicyUtils.layerMapping( Array( column0, column1, column2, column3, column4, column5 ) )
 
     // Assert
     assert( row.size == 6 )
@@ -264,7 +264,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column1 = "B"
 
     // Act
-    val row = PolicyUtils.lookupBlockMapping( ( column0 :: column1 :: Nil ).toArray )
+    val row = PolicyUtils.lookupBlockMapping( Array( column0, column1 ) )
 
     // Assert
     assert( row.size == 2 )
@@ -280,7 +280,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column1 = "B"
 
     // Act
-    val row = PolicyUtils.lookupProfitCentreMapping( ( column0 :: column1 :: Nil ).toArray )
+    val row = PolicyUtils.lookupProfitCentreMapping( Array( column0, column1 ) )
 
     // Assert
     assert( row.size == 2 )
@@ -297,7 +297,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column2 = "C"
 
     // Act
-    val row = PolicyUtils.underwritingBlockMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
+    val row = PolicyUtils.underwritingBlockMapping( Array( column0, column1, column2 ) )
 
     // Assert
     assert( row.size == 3 )

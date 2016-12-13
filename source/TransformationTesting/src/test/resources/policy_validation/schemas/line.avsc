@@ -13,33 +13,53 @@
     	},
         {
             "name": "risk_reference",  
-            "type": ["string","null"],
+            "type": "string",
             "doc": "This is nullable in the NDEX source DB but if it is null this is an unrecoverable error.  Added validation check to ensure it is not null so we can make it not null in this schema."
         },
         {
             "name": "risk_code",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "profit_centre_code",  
-            "type": ["int", "null"],
+            "type": ["null", "int"],
             "doc" : "Nullable just for purpose of tests"
         },
         {
             "name": "block",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "subblock",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "line_status",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "business_type",
-            "type": ["int","null"]
+            "type": ["null", "int"]
+        },
+        {
+            "name": "est_signing_down_pct",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "signed_order_pct",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "signed_line_pct",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "written_line_pct",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "written_order_pct",
+            "type": ["null", "string"]
         }
  	]
 }
