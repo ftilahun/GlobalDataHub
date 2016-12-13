@@ -5,38 +5,6 @@ import org.scalatest.FlatSpec
 
 class PolicyUtilsTests extends FlatSpec {
 
-  "lineMapping" should "generate a Row given 9 inputs of correct type" in {
-
-    // Arrange
-    val column0 = "0"
-    val column1 = "1"
-    val column2 = "C"
-    val column3 = "D"
-    val column4 = "4"
-    val column5 = "F"
-    val column6 = "G"
-    val column7 = "H"
-    val column8 = "2"
-
-    val columns = Array( column0, column1, column2, column3,
-      column4, column5, column6, column7, column8 )
-    // Act
-    val row = PolicyUtils.lineMapping( columns )
-
-    // Assert
-    assert( row.size == 9 )
-    assert( row.get( 0 ) == column0.toInt )
-    assert( row.get( 1 ) == column1.toInt )
-    assert( row.get( 2 ).equals( column2 ) )
-    assert( row.get( 3 ).equals( column3 ) )
-    assert( row.get( 4 ) == column4.toInt )
-    assert( row.get( 5 ).equals( column5 ) )
-    assert( row.get( 6 ).equals( column6 ) )
-    assert( row.get( 7 ).equals( column7 ) )
-    assert( row.get( 8 ) == column8.toInt )
-
-  }
-
   "lineMapping" should "generate a Row given 14 inputs of correct type" in {
 
     // Arrange
@@ -129,16 +97,22 @@ class PolicyUtilsTests extends FlatSpec {
     val column5 = "F"
     val column6 = "G"
     val column7 = "H"
-    val column8 = "5"
+    val column8 = "2"
+    val column9 = "I"
+    val column10 = "J"
+    val column11 = "K"
+    val column12 = "L"
+    val column13 = "M"
 
     val columns = Array( column0, column1, column2, column3,
-      column4, column5, column6, column7, column8 )
+      column4, column5, column6, column7, column8, column9,
+      column10, column11, column12, column13 )
 
     // Act
     val row = PolicyUtils.lineMapping( columns )
 
     // Assert
-    assert( row.size == 9 )
+    assert( row.size ==  14)
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ) == null )
@@ -148,37 +122,11 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 6 ).equals( column6 ) )
     assert( row.get( 7 ).equals( column7 ) )
     assert( row.get( 8 ) == column8.toInt )
-  }
-
-  "lineMapping" should "generate a Row given " in {
-
-    // Arrange
-    val column0 = "0"
-    val column1 = "1"
-    val column2 = "C"
-    val column3 = "D"
-    val column4 = "4"
-    val column5 = "F"
-    val column6 = "G"
-    val column7 = "H"
-    val column8 = "2"
-
-    val columns = Array( column0, column1, column2, column3,
-      column4, column5, column6, column7, column8 )
-    // Act
-    val row = PolicyUtils.lineMapping( columns )
-
-    // Assert
-    assert( row.size == 9 )
-    assert( row.get( 0 ) == column0.toInt )
-    assert( row.get( 1 ) == column1.toInt )
-    assert( row.get( 2 ).equals( column2 ) )
-    assert( row.get( 3 ).equals( column3 ) )
-    assert( row.get( 4 ) == column4.toInt )
-    assert( row.get( 5 ).equals( column5 ) )
-    assert( row.get( 6 ).equals( column6 ) )
-    assert( row.get( 7 ).equals( column7 ) )
-    assert( row.get( 8 ) == column8.toInt )
+    assert( row.get( 9 ).equals( column9 ) )
+    assert( row.get( 10 ).equals( column10 ) )
+    assert( row.get( 11 ).equals( column11 ) )
+    assert( row.get( 12 ).equals( column12 ) )
+    assert( row.get( 13 ).equals( column13 ) )
 
   }
 
@@ -363,8 +311,9 @@ class PolicyUtilsTests extends FlatSpec {
 
     // Arrange
     val columns = Array(
-      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "", "N", "O", "P", "Q",
-      "S", "", "T", "U", "V", "W", "X", "Y", "Z", "AA", "27", "BB", "AB", "AC", "AD", "AE", "AD"
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+      "", "N", "O", "P", "Q", "S", "", "T", "U", "V", "W", "X",
+      "Y", "Z", "AA", "27", "BB", "AB", "AC", "AD", "AE", "AD"
     )
 
     // Act

@@ -118,10 +118,8 @@
             "type": ["int", "null"]
         },
         {
-
             "name": "policystatuscode",
             "type": ["string", "null"]
-
         },
         {
             "name": "estimatedsignedpercent",
