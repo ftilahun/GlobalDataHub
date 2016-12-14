@@ -599,8 +599,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Assert //
     assertDataFrameEquals( expectedPolicy, result )
 
-    // Assert //
-    assertDataFrameEquals( expectedPolicy, result )
   }
 
 }

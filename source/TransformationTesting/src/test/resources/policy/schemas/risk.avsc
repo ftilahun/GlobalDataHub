@@ -21,7 +21,7 @@
         },
         {
             "name": "area_code",
-            "type": ["string","null"]
+            "type": ["null", "string"]
         }
  	]
 }
