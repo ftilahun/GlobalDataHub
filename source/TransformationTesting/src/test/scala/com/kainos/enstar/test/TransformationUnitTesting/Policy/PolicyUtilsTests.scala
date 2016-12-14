@@ -3,12 +3,9 @@ package com.kainos.enstar.test.TransformationUnitTesting.Policy
 import com.kainos.enstar.TransformationUnitTesting.PolicyUtils
 import org.scalatest.FlatSpec
 
-/**
- * Created by caoimheb on 23/11/2016.
- */
 class PolicyUtilsTests extends FlatSpec {
 
-  "lineMapping" should "generate a Row given 9 inputs of correct type" in {
+  "lineMapping" should "generate a Row given 14 inputs of correct type" in {
 
     // Arrange
     val column0 = "0"
@@ -20,14 +17,22 @@ class PolicyUtilsTests extends FlatSpec {
     val column6 = "G"
     val column7 = "H"
     val column8 = "2"
+    val column9 = "I"
+    val column10 = "J"
+    val column11 = "K"
+    val column12 = "L"
+    val column13 = "M"
 
-    val columns = Array( column0, column1, column2, column3,
-      column4, column5, column6, column7, column8 )
+    val columns = Array(
+      column0, column1, column2, column3, column4, column5, column6,
+      column7, column8, column9, column10, column11, column12, column13
+    )
+
     // Act
     val row = PolicyUtils.lineMapping( columns )
 
     // Assert
-    assert( row.size == 9 )
+    assert( row.size == 14 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ).equals( column2 ) )
@@ -37,10 +42,15 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 6 ).equals( column6 ) )
     assert( row.get( 7 ).equals( column7 ) )
     assert( row.get( 8 ) == column8.toInt )
+    assert( row.get( 9 ).equals( column9 ) )
+    assert( row.get( 10 ).equals( column10 ) )
+    assert( row.get( 11 ).equals( column11 ) )
+    assert( row.get( 12 ).equals( column12 ) )
+    assert( row.get( 13 ).equals( column13 ) )
 
   }
 
-  "lineMapping" should "generate a Row given 8 inputs of correct type with final value equal to null" in {
+  "lineMapping" should "generate a Row given 14 inputs of correct type with final 6 values equal to null" in {
 
     // Arrange
     val column0 = "0"
@@ -52,14 +62,13 @@ class PolicyUtilsTests extends FlatSpec {
     val column6 = "G"
     val column7 = "H"
 
-    val columns = Array( column0, column1, column2, column3,
-      column4, column5, column6, column7 )
+    val columns = Array( column0, column1, column2, column3, column4, column5, column6, column7 )
 
     // Act
     val row = PolicyUtils.lineMapping( columns )
 
     // Assert
-    assert( row.size == 9 )
+    assert( row.size == 14 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ).equals( column2 ) )
@@ -69,6 +78,11 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 6 ).equals( column6 ) )
     assert( row.get( 7 ).equals( column7 ) )
     assert( row.get( 8 ) == null )
+    assert( row.get( 9 ) == null )
+    assert( row.get( 10 ) == null )
+    assert( row.get( 11 ) == null )
+    assert( row.get( 12 ) == null )
+    assert( row.get( 13 ) == null )
 
   }
 
@@ -83,16 +97,23 @@ class PolicyUtilsTests extends FlatSpec {
     val column5 = "F"
     val column6 = "G"
     val column7 = "H"
-    val column8 = "5"
+    val column8 = "2"
+    val column9 = "I"
+    val column10 = "J"
+    val column11 = "K"
+    val column12 = "L"
+    val column13 = "M"
 
-    val columns = Array( column0, column1, column2, column3,
-      column4, column5, column6, column7, column8 )
+    val columns = Array(
+      column0, column1, column2, column3, column4, column5, column6,
+      column7, column8, column9, column10, column11, column12, column13
+    )
 
     // Act
     val row = PolicyUtils.lineMapping( columns )
 
     // Assert
-    assert( row.size == 9 )
+    assert( row.size == 14 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ) == null )
@@ -102,6 +123,12 @@ class PolicyUtilsTests extends FlatSpec {
     assert( row.get( 6 ).equals( column6 ) )
     assert( row.get( 7 ).equals( column7 ) )
     assert( row.get( 8 ) == column8.toInt )
+    assert( row.get( 9 ).equals( column9 ) )
+    assert( row.get( 10 ).equals( column10 ) )
+    assert( row.get( 11 ).equals( column11 ) )
+    assert( row.get( 12 ).equals( column12 ) )
+    assert( row.get( 13 ).equals( column13 ) )
+
   }
 
   "layerMapping" should "generate a Row given 6 inputs" in {
@@ -115,7 +142,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column5 = "F"
 
     // Act
-    val row = PolicyUtils.layerMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: Nil ).toArray )
+    val row = PolicyUtils.layerMapping( Array( column0, column1, column2, column3, column4, column5 ) )
 
     // Assert
     assert( row.size == 6 )
@@ -238,7 +265,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column1 = "B"
 
     // Act
-    val row = PolicyUtils.lookupBlockMapping( ( column0 :: column1 :: Nil ).toArray )
+    val row = PolicyUtils.lookupBlockMapping( Array( column0, column1 ) )
 
     // Assert
     assert( row.size == 2 )
@@ -254,7 +281,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column1 = "B"
 
     // Act
-    val row = PolicyUtils.lookupProfitCentreMapping( ( column0 :: column1 :: Nil ).toArray )
+    val row = PolicyUtils.lookupProfitCentreMapping( Array( column0, column1 ) )
 
     // Assert
     assert( row.size == 2 )
@@ -271,7 +298,7 @@ class PolicyUtilsTests extends FlatSpec {
     val column2 = "C"
 
     // Act
-    val row = PolicyUtils.underwritingBlockMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
+    val row = PolicyUtils.underwritingBlockMapping( Array( column0, column1, column2 ) )
 
     // Assert
     assert( row.size == 3 )
@@ -281,78 +308,54 @@ class PolicyUtilsTests extends FlatSpec {
 
   }
 
-  "policyMapping" should "generate a Row given 29 inputs" in {
+  "policyMapping" should "generate a Row given 34 inputs" in {
 
     // Arrange
-    val column0 = "A"
-    val column1 = "B"
-    val column2 = "C"
-    val column3 = "D"
-    val column4 = "E"
-    val column5 = "F"
-    val column6 = "G"
-    val column7 = "H"
-    val column8 = "I"
-    val column9 = "J"
-    val column10 = "K"
-    val column11 = "L"
-    val column12 = ""
-    val column13 = "N"
-    val column14 = "O"
-    val column15 = "P"
-    val column16 = "Q"
-    val column17 = "S"
-    val column18 = ""
-    val column19 = "T"
-    val column20 = "U"
-    val column21 = "V"
-    val column22 = "W"
-    val column23 = "X"
-    val column24 = "Y"
-    val column25 = "Z"
-    val column26 = "AA"
-    val column27 = "27"
-    val column28 = "BB"
-
-    val columns = Array( column0, column1, column2, column3, column4, column5, column6,
-      column7, column8, column9, column10, column11, column12, column13, column14, column15,
-      column16, column17, column18, column19, column20, column21, column22, column23, column24,
-      column25, column26, column27, column28 )
+    val columns = Array(
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+      "", "N", "O", "P", "Q", "S", "", "T", "U", "V", "W", "X",
+      "Y", "Z", "AA", "27", "BB", "AB", "AC", "AD", "AE", "AD"
+    )
 
     // Act
     val row = PolicyUtils.policyMapping( columns )
 
     // Assert
-    assert( row.size == 29 )
-    assert( row.get( 0 ).equals( column0 ) )
-    assert( row.get( 1 ).equals( column1 ) )
-    assert( row.get( 2 ).equals( column2 ) )
-    assert( row.get( 3 ).equals( column3 ) )
-    assert( row.get( 4 ).equals( column4 ) )
-    assert( row.get( 5 ).equals( column5 ) )
-    assert( row.get( 6 ).equals( column6 ) )
-    assert( row.get( 7 ).equals( column7 ) )
-    assert( row.get( 8 ).equals( column8 ) )
-    assert( row.get( 9 ).equals( column9 ) )
-    assert( row.get( 10 ).equals( column10 ) )
-    assert( row.get( 11 ).equals( column11 ) )
+    assert( row.size == 34 )
+    assert( row.get( 0 ).equals( columns( 0 ) ) )
+    assert( row.get( 1 ).equals( columns( 1 ) ) )
+    assert( row.get( 2 ).equals( columns( 2 ) ) )
+    assert( row.get( 3 ).equals( columns( 3 ) ) )
+    assert( row.get( 4 ).equals( columns( 4 ) ) )
+    assert( row.get( 5 ).equals( columns( 5 ) ) )
+    assert( row.get( 6 ).equals( columns( 6 ) ) )
+    assert( row.get( 7 ).equals( columns( 7 ) ) )
+    assert( row.get( 8 ).equals( columns( 8 ) ) )
+    assert( row.get( 9 ).equals( columns( 9 ) ) )
+    assert( row.get( 10 ).equals( columns( 10 ) ) )
+    assert( row.get( 11 ).equals( columns( 11 ) ) )
     assert( row.get( 12 ) == null )
-    assert( row.get( 13 ).equals( column13 ) )
-    assert( row.get( 14 ).equals( column14 ) )
-    assert( row.get( 15 ).equals( column15 ) )
-    assert( row.get( 16 ).equals( column16 ) )
-    assert( row.get( 17 ).equals( column17 ) )
+    assert( row.get( 13 ).equals( columns( 13 ) ) )
+    assert( row.get( 14 ).equals( columns( 14 ) ) )
+    assert( row.get( 15 ).equals( columns( 15 ) ) )
+    assert( row.get( 16 ).equals( columns( 16 ) ) )
+    assert( row.get( 17 ).equals( columns( 17 ) ) )
     assert( row.get( 18 ) == null )
-    assert( row.get( 19 ).equals( column19 ) )
-    assert( row.get( 20 ).equals( column20 ) )
-    assert( row.get( 21 ).equals( column21 ) )
-    assert( row.get( 22 ).equals( column22 ) )
-    assert( row.get( 23 ).equals( column23 ) )
-    assert( row.get( 24 ).equals( column24 ) )
-    assert( row.get( 25 ).equals( column25 ) )
-    assert( row.get( 26 ).equals( column26 ) )
-    assert( row.get( 27 ) == column27.toInt )
-    assert( row.get( 28 ).equals( column28 ) )
+    assert( row.get( 19 ).equals( columns( 19 ) ) )
+    assert( row.get( 20 ).equals( columns( 20 ) ) )
+    assert( row.get( 21 ).equals( columns( 21 ) ) )
+    assert( row.get( 22 ).equals( columns( 22 ) ) )
+    assert( row.get( 23 ).equals( columns( 23 ) ) )
+    assert( row.get( 24 ).equals( columns( 24 ) ) )
+    assert( row.get( 25 ).equals( columns( 25 ) ) )
+    assert( row.get( 26 ).equals( columns( 26 ) ) )
+    assert( row.get( 27 ) == columns( 27 ).toInt )
+    assert( row.get( 28 ).equals( columns( 28 ) ) )
+    assert( row.get( 29 ).equals( columns( 29 ) ) )
+    assert( row.get( 30 ).equals( columns( 30 ) ) )
+    assert( row.get( 31 ).equals( columns( 31 ) ) )
+    assert( row.get( 32 ).equals( columns( 32 ) ) )
+    assert( row.get( 33 ).equals( columns( 33 ) ) )
 
   }
 }

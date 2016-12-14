@@ -1,16 +1,16 @@
 {
-	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
- 	"type": "record",
- 	"name": "policy",
- 	"fields": [
-    	{
-    		"name": "policynumber", 
-    		"type": "string"
-    	},
-    	{
-    		"name": "coveragereference",  
-    		"type": "string"
-    	},
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+    "type": "record",
+    "name": "policy",
+    "fields": [
+        {
+            "name": "policynumber",
+            "type": "string"
+        },
+        {
+            "name": "coveragereference",
+            "type": "string"
+        },
         {
             "name": "sectionreference",  
             "type": "string"
@@ -21,55 +21,55 @@
         },
         {
             "name": "branchcode",  
-            "type": ["string","null"]
+            "type": ["null", "string"]
         },
         {
             "name": "branchdescription",  
-            "type": ["string","null"]
+            "type": ["null", "string"]
         },
         {
             "name": "cancellationdate",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "coverageeffectivefromdate",  
-            "type": ["string","null"]
+            "type": ["null", "string"]
         },
         {
             "name": "coverageeffectivetodate",  
-            "type": ["string","null"]
+            "type": ["null", "string"]]
         },
         {
             "name": "expirydate",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "filcode",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "inceptiondate",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "insureddomicilecode",
-            "type": ["string","null"]
+            "type": ["null", "string"]
         },
         {
             "name": "legacypolicynumber",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "legalentitycode",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "lineofbusinesscode",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "lineofbusinessdescription",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "linkedmasterreference",  
@@ -78,11 +78,11 @@
         },
         {
             "name": "majorriskcode",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "majortrustfundcode",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "methodofplacementcode",
@@ -90,7 +90,7 @@
         },
         {
             "name": "methodofplacementdescription",
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "risklocationcode",
@@ -103,23 +103,43 @@
         },
         {
             "name": "sublineofbusinesscode",  
-            "type": ["string","null"]
+            "type": ["null", "string"]
         },
         {
             "name": "sublineofbusinessdescription",  
-            "type": ["string","null"]
+            "type": ["null", "string"]
         },
         {
             "name": "uniquemarketreference",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "yearofaccount",  
-            "type": ["int", "null"]
+            "type": ["null", "int"]
         },
         {
             "name": "policystatuscode",
-            "type": ["string", "null"]
+            "type": ["null", "string"]
+        },
+        {
+            "name": "estimatedsignedpercent",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "signedorderpercent",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "signedlinepercent",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "writtenlinepercent",
+            "type": ["null", "string"]
+        },
+        {
+             "name": "writtenorderpercent",
+             "type": ["null", "string"]
         }
- 	]
+    ]
 }
