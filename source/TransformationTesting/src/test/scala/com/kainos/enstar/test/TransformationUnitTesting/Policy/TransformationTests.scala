@@ -5,14 +5,12 @@ import com.kainos.enstar.TransformationUnitTesting.{ PolicyUtils, SQLRunner, Tra
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
-/**
- * Created by caoimheb on 23/11/2016.
- */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputPath = "/policy/input/"
   private val schemasPath = "/policy/schemas/"
+  private val policyTransformation = "Transformation/Policy.hql"
 
   def populateDataFrameWithLineTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
@@ -136,7 +134,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_PrimaryTestData.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -178,7 +176,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullInceptionDateInLayer.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -219,7 +217,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullExpiryDateInLayer.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -260,7 +258,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_VariousNullsInLayer.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -301,7 +299,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullProfitCentreCodeInLine.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -342,7 +340,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullBlockInLine.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -383,7 +381,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_LineStatusNotEqualC.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -423,7 +421,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullBusinessTypeFromLine.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -463,7 +461,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_TIUKProfitCentre.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -503,7 +501,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_TIEProfitCentre.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -543,7 +541,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_SyndicateBranch.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -583,7 +581,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullPercentageFields.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
