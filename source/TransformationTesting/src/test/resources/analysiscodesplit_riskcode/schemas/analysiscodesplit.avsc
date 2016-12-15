@@ -28,6 +28,10 @@
             "type": "string"
         },
         {
+            "name": "analysiscodedescription",
+            "type": ["null", "string"]
+        },
+        {
             "name": "splitpercent",
             "type": "string"
         }

@@ -5,9 +5,6 @@ import com.kainos.enstar.TransformationUnitTesting.{ AnalysisCodeSplitRiskCodeUt
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-/**
- * Created by terences on 23/11/2016.
- */
 class ValidationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "Validation: When input contains no null values for risk_reference validation should pass" ) {
@@ -87,7 +84,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
       getClass.getResource( "/analysiscodesplit_riskcode_validation/input/line_risk_code_test3.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode_validation/schema/line_risk_code.avro" ).toString,
       _.split( "," ),
-      AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping,
+      AnalysisCodeSplitRiskCodeUtils.lineRiskCodeMapping,
       sqlc
     )
 
@@ -124,7 +121,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
       getClass.getResource( "/analysiscodesplit_riskcode_validation/input/line_risk_code_test4.csv" ).toString,
       getClass.getResource( "/analysiscodesplit_riskcode_validation/schema/line_risk_code.avro" ).toString,
       _.split( "," ),
-      AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping,
+      AnalysisCodeSplitRiskCodeUtils.lineRiskCodeMapping,
       sqlc
     )
 

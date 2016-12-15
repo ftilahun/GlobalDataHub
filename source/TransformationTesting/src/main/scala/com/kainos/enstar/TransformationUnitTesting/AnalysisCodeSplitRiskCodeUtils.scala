@@ -12,12 +12,28 @@ object AnalysisCodeSplitRiskCodeUtils {
     case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ) )
   }
 
-  def lineriskcodeMapping( cols : Array[String] ) : Row = {
+  def lineRiskCodeMapping( cols : Array[String] ) : Row = {
     Row( cols( 0 ).toInt, cols( 1 ), cols( 2 ) )
   }
 
-  def analysiscodesplitMapping( cols : Array[String] ) : Row = cols match {
-    case cols if cols.length == 6 => Row( null, cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ), cols( 5 ) )
-    case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ), cols( 5 ), cols( 6 ) )
+  def lookupRiskCodeMapping( cols : Array[String] ) : Row = {
+    Row(
+      cols( 0 ),
+      if ( cols( 1 ).equals( "" ) ) null else cols( 1 ) )
+  }
+
+  def analysisCodeSplitMapping( cols : Array[String] ) : Row = {
+    Row(
+      if ( cols( 0 ).equals( "" ) ) null else cols( 0 ),
+      cols( 1 ),
+      cols( 2 ),
+      cols( 3 ),
+      cols( 4 ),
+      cols( 5 ),
+      if ( cols( 6 ).equals( "" ) ) null else cols( 6 ),
+      cols( 7 )
+    )
+    //case cols if cols.length == 6 => Row( null, cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ), cols( 5 ) )
+    //case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ), cols( 5 ), cols( 6 ) )
   }
 }

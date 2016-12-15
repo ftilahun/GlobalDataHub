@@ -3,9 +3,6 @@ package com.kainos.enstar.test.TransformationUnitTesting.AnalysisCodeSplitRiskCo
 import com.kainos.enstar.TransformationUnitTesting.AnalysisCodeSplitRiskCodeUtils
 import org.scalatest.{ FlatSpec, Matchers }
 
-/**
- * Created by terences on 23/11/2016.
- */
 class AnalysisCodeSplitRiskCodeUtilsTest extends FlatSpec with Matchers {
 
   "lineMapping" should "populate a Row given 3 inputs" in {
@@ -93,7 +90,7 @@ class AnalysisCodeSplitRiskCodeUtilsTest extends FlatSpec with Matchers {
     val column3 = "C"
 
     // Act
-    val row = AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping( ( column1 :: column2 :: column3 :: Nil ).toArray )
+    val row = AnalysisCodeSplitRiskCodeUtils.lineRiskCodeMapping( ( column1 :: column2 :: column3 :: Nil ).toArray )
 
     // Assert
     row.length should be( 3 )
@@ -113,7 +110,7 @@ class AnalysisCodeSplitRiskCodeUtilsTest extends FlatSpec with Matchers {
 
     // Act Assert
     a[ArrayIndexOutOfBoundsException] should be thrownBy {
-      AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping( ( column1 :: column2 :: Nil ).toArray )
+      AnalysisCodeSplitRiskCodeUtils.lineRiskCodeMapping( ( column1 :: column2 :: Nil ).toArray )
     }
 
   }
@@ -126,12 +123,12 @@ class AnalysisCodeSplitRiskCodeUtilsTest extends FlatSpec with Matchers {
 
     // Act Assert
     a[NumberFormatException] should be thrownBy {
-      AnalysisCodeSplitRiskCodeUtils.lineriskcodeMapping( ( column1 :: column2 :: Nil ).toArray )
+      AnalysisCodeSplitRiskCodeUtils.lineRiskCodeMapping( ( column1 :: column2 :: Nil ).toArray )
     }
 
   }
 
-  "analysiscodesplitMapping" should "generate a row when passed 7 inputs" in {
+  "analysiscodesplitMapping" should "generate a row when passed 8 inputs" in {
 
     // Arrange
     val column1 = "A"
@@ -141,12 +138,14 @@ class AnalysisCodeSplitRiskCodeUtilsTest extends FlatSpec with Matchers {
     val column5 = "E"
     val column6 = "F"
     val column7 = "G"
+    val column8 = "H"
 
     // Act
-    val row = AnalysisCodeSplitRiskCodeUtils.analysiscodesplitMapping( ( column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: Nil ).toArray )
+    val row = AnalysisCodeSplitRiskCodeUtils.analysisCodeSplitMapping( ( column1 :: column2 :: column3 :: column4 ::
+      column5 :: column6 :: column7 :: column8 :: Nil ).toArray )
 
     // Assert
-    row.length should be( 7 )
+    row.length should be( 8 )
     row.get( 0 ).getClass should be ( classOf[String] )
     row.get( 0 ) should be( column1 )
     row.get( 1 ).getClass should be ( classOf[String] )
@@ -161,24 +160,29 @@ class AnalysisCodeSplitRiskCodeUtilsTest extends FlatSpec with Matchers {
     row.get( 5 ) should be( column6 )
     row.get( 6 ).getClass should be ( classOf[String] )
     row.get( 6 ) should be( column7 )
+    row.get( 7 ).getClass should be ( classOf[String] )
+    row.get( 7 ) should be( column8 )
 
   }
 
-  "analysiscodesplitMapping" should "generate a row when passed 6 inputs" in {
+  "analysiscodesplitMapping" should "generate a row when passed null inputs" in {
 
     // Arrange
+    val column1 = ""
     val column2 = "B"
     val column3 = "C"
     val column4 = "D"
     val column5 = "E"
     val column6 = "F"
     val column7 = "G"
+    val column8 = "H"
 
     // Act
-    val row = AnalysisCodeSplitRiskCodeUtils.analysiscodesplitMapping( ( column2 :: column3 :: column4 :: column5 :: column6 :: column7 :: Nil ).toArray )
+    val row = AnalysisCodeSplitRiskCodeUtils.analysisCodeSplitMapping( ( column1 :: column2 :: column3 :: column4 ::
+      column5 :: column6 :: column7 :: column8 :: Nil ).toArray )
 
     // Assert
-    row.length should be( 7 )
+    row.length should be( 8 )
     assert( null == row.get( 0 ) )
     row.get( 1 ).getClass should be ( classOf[String] )
     row.get( 1 ) should be( column2 )
@@ -192,9 +196,11 @@ class AnalysisCodeSplitRiskCodeUtilsTest extends FlatSpec with Matchers {
     row.get( 5 ) should be( column6 )
     row.get( 6 ).getClass should be ( classOf[String] )
     row.get( 6 ) should be( column7 )
+    row.get( 7 ).getClass should be ( classOf[String] )
+    row.get( 7 ) should be( column8 )
   }
 
-  "analysiscodeplitMapping" should "throw an error when passed less than 6 inputs" in {
+  "analysiscodeplitMapping" should "throw an error when passed less than 7 inputs" in {
 
     // Arrange
     val column1 = "A"
@@ -202,10 +208,14 @@ class AnalysisCodeSplitRiskCodeUtilsTest extends FlatSpec with Matchers {
     val column3 = "C"
     val column4 = "D"
     val column5 = "E"
+    val column6 = "F"
 
     // Act
     a[ArrayIndexOutOfBoundsException] should be thrownBy {
-      AnalysisCodeSplitRiskCodeUtils.analysiscodesplitMapping( ( column1 :: column2 :: column3 :: column4 :: column5 :: Nil ).toArray )
+      AnalysisCodeSplitRiskCodeUtils.analysisCodeSplitMapping( ( column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: Nil ).toArray )
     }
   }
+
+  // TODO Update for added field
+
 }
