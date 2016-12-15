@@ -37,10 +37,7 @@
         },
         {
             "name": "calculateddeductionamount",
-            "type": "bytes",
-            "logicalType": "decimal",
-            "precision": "12",
-            "scale": "7"
+            "type": "string"
         },
         {
             "name": "value",
