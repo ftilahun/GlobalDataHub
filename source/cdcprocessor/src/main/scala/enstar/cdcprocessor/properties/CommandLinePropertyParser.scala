@@ -5,26 +5,24 @@ import org.apache.spark.Logging
 import scopt.OptionParser
 
 /**
-  * Expected behaviour for a command line parser.
-  */
-class CommandLinePropertyParser extends Logging {
+ * Expected behaviour for a command line parser.
+ */
+abstract class CommandLinePropertyParser extends Logging {
 
   /**
-    * configuration object, required by parser
-    * @param kwArgs a property map.
-    */
+   * configuration object, required by parser
+   * @param kwArgs a property map.
+   */
   case class Config(kwArgs: Map[String, String])
 
-  def parser: OptionParser[Config] = {
-
-  }
+  def parser: OptionParser[Config]
 
   /**
-    * Map an array of strings in k1=v1,k2=v2 format to a Map[String,String]
-    *
-    * @param propertyArray the string array to map
-    * @return a Map of values
-    */
+   * Map an array of strings in k1=v1,k2=v2 format to a Map[String,String]
+   *
+   * @param propertyArray the string array to map
+   * @return a Map of values
+   */
   def parseProperties(propertyArray: Array[String]): Map[String, String] = {
     logInfo("Parsing command line args")
     parser.parse(propertyArray, Config(Map[String, String]())) match {
