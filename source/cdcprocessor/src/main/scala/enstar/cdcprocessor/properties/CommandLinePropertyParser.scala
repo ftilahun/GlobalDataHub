@@ -5,36 +5,51 @@ import org.apache.spark.Logging
 import scopt.OptionParser
 
 /**
- * Expected behaviour for a command line parser.
+ * Parses command line properties.
  */
-abstract class CommandLinePropertyParser extends Logging {
+class CommandLinePropertyParser extends Logging {
 
-  /**
-   * configuration object, required by parser
-   * @param kwArgs a property map.
-   */
-  case class Config(kwArgs: Map[String, String])
+  val parser: OptionParser[CDCProperties] = new scopt.OptionParser[CDCProperties]("cdcprocessor") {
+    head("cdcprocessor", "0.3")
 
-  def parser: OptionParser[Config]
+    opt[String]("changeInput").
+      required().
+      action(
+        (i, p) => p.copy(changeInputDir = i)
+      ).
+        text("The input directory for change data")
 
-  /**
-   * Map an array of strings in k1=v1,k2=v2 format to a Map[String,String]
-   *
-   * @param propertyArray the string array to map
-   * @return a Map of values
-   */
-  def parseProperties(propertyArray: Array[String]): Map[String, String] = {
-    logInfo("Parsing command line args")
-    parser.parse(propertyArray, Config(Map[String, String]())) match {
-      case Some(config) => {
-        logInfo("Got valid arguments, continuing")
-        config.kwArgs
-      }
-      case None =>
-        logError("could not parse command line arguments")
-        throw new PropertyNotSetException(
-          "Unable to parse command line options",
-          null)
+    opt[String]("activeOutput").
+      required().
+      action(
+        (i, p) => p.copy(activeOutput = i)
+      ).
+        text("The output directory for active data")
+
+    opt[String]("idColumnName").
+      required().
+      action(
+        (i, p) => p.copy(idColumnName = i)
+      ).
+        text("The name of the id column")
+    opt[String]("transactionColumnName").
+      required().
+      action(
+        (t, p) => p.copy(transactionColumnName = t)
+      ).
+        text("The name of the transaction column")
+    opt[String]("changeSequenceColumnName").
+      required().
+      action(
+        (c, p) => p.copy(changeSequenceColumnName = c)
+      ).
+        text("The name of the change sequence column name")
+  }
+
+  def parse(commandLineArgs: Array[String]): CDCProperties = {
+    parser.parse(commandLineArgs, CDCProperties()) match {
+      case Some(properties) => properties
+      case None             => throw new PropertyNotSetException()
     }
   }
 }
