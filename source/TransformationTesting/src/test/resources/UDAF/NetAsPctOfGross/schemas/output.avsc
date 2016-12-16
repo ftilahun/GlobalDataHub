@@ -1,0 +1,19 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.input.udaf",
+ 	"type": "record",
+ 	"name": "PctGrossToNet",
+ 	"fields": [
+ 	    {
+        	"name": "id",
+            "type": "int"
+        },
+    	{
+    		"name": "grouping_id",
+    		"type": "string"
+    	},
+        {
+            "name": "net_pct",
+            "type": ["string","null"]
+        }
+ 	]
+}
