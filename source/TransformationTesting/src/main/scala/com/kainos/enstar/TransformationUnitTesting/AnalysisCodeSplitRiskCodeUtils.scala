@@ -2,9 +2,6 @@ package com.kainos.enstar.TransformationUnitTesting
 
 import org.apache.spark.sql.Row
 
-/**
- * Created by terences on 23/11/2016.
- */
 object AnalysisCodeSplitRiskCodeUtils {
 
   def lineMapping( cols : Array[String] ) : Row = cols match {
@@ -19,7 +16,7 @@ object AnalysisCodeSplitRiskCodeUtils {
   def lookupRiskCodeMapping( cols : Array[String] ) : Row = {
     Row(
       cols( 0 ),
-      if ( cols( 1 ).equals( "" ) ) null else cols( 1 ) )
+      if ( cols.length > 1 ) if ( cols( 1 ).equals( "" ) ) null else cols( 1 ) else null )
   }
 
   def analysisCodeSplitMapping( cols : Array[String] ) : Row = {
@@ -33,7 +30,5 @@ object AnalysisCodeSplitRiskCodeUtils {
       if ( cols( 6 ).equals( "" ) ) null else cols( 6 ),
       cols( 7 )
     )
-    //case cols if cols.length == 6 => Row( null, cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ), cols( 5 ) )
-    //case _                        => Row( cols( 0 ), cols( 1 ), cols( 2 ), cols( 3 ), cols( 4 ), cols( 5 ), cols( 6 ) )
   }
 }

@@ -84,7 +84,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val result = SQLRunner.runStatement( statement, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedAnalysisCodeSplit, result )
+    assertDataFrameEquals( expectedAnalysisCodeSplit.orderBy( "policynumber", "coveragereference" ), result.orderBy( "policynumber", "coveragereference" ) )
   }
 
   test( "AnalysisCodeSplitRiskCodeTransformation mapping test many line_risk_code rows to one line row" ){
@@ -99,7 +99,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Load test data into dataframe
     val line = this.populateDataFrameWithLineTestData( "line_ManyLineRiskToOneLine.csv", sqlc )
     val line_risk_code = this.populateDataFrameWithLineRiskCodeTestData( "line_risk_code_ManyLineRiskToOneLine.csv", sqlc )
-    val lookup_risk_code = this.populateDataFrameWithLookupRiskCodeTestData( "lookup_risk_code_PrimaryTestData.csv", sqlc )
+    val lookup_risk_code = this.populateDataFrameWithLookupRiskCodeTestData( "lookup_risk_code_ManyLineRiskToOneLine.csv", sqlc )
 
     // Load expected result into dataframe
     val expectedAnalysisCodeSplit = this.populateDataFrameWithAnalysisCodeSplitTestData( "analysiscodesplit_ManyLineRiskToOneLine.csv", sqlc )
@@ -114,6 +114,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val result = SQLRunner.runStatement( statement, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedAnalysisCodeSplit, result )
+    assertDataFrameEquals( expectedAnalysisCodeSplit.orderBy( "policynumber", "analysiscode" ), result.orderBy( "policynumber", "analysiscode" ) )
   }
 }
