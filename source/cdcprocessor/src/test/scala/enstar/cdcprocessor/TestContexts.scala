@@ -1,8 +1,8 @@
-package enstar.cdcprocessor.io
+package enstar.cdcprocessor
 
 import org.apache.spark.sql.functions.udf
-import org.apache.spark.{ SparkConf, SparkContext }
 import org.apache.spark.sql.{ DataFrame, SQLContext }
+import org.apache.spark.{ SparkConf, SparkContext }
 
 /**
  * Provides spark and hive contexts to be shared by all test cases.

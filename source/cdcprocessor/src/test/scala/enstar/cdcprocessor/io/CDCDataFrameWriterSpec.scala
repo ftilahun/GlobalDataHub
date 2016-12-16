@@ -1,5 +1,6 @@
 package enstar.cdcprocessor.io
 
+import enstar.cdcprocessor.TestContexts
 import enstar.cdcprocessor.exceptions.DataFrameWriteException
 import org.apache.spark.sql.{ AnalysisException, DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel

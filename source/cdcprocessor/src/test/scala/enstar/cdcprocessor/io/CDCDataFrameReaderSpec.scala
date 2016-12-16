@@ -1,5 +1,6 @@
 package enstar.cdcprocessor.io
 
+import enstar.cdcprocessor.TestContexts
 import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.sql.SQLContext
