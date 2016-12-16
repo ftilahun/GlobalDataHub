@@ -17,10 +17,8 @@ trait UserFunctions extends Serializable {
    * Group changes in a dataframe by transaction
    * @param df the dataframe to group
    * @param properties the GDH properties object
-   * @param tableName the name of the table being processed
    * @return a dataframe filtered by group
    */
   def groupByTransactionAndKey(df: DataFrame,
-                               properties: CDCProperties,
-                               tableName: String): DataFrame
+                               properties: CDCProperties): DataFrame
 }

@@ -1,6 +1,7 @@
 package enstar.cdcprocessor.module
 
 import enstar.cdcprocessor.io._
+import enstar.cdcprocessor.processor.{ CDCTableProcessor, TableProcessor }
 import enstar.cdcprocessor.properties.{ CDCProperties, CommandLinePropertyParser }
 import enstar.cdcprocessor.udfs.{ CDCUserFunctions, UserFunctions }
 import org.apache.spark.Logging
@@ -15,6 +16,7 @@ object CDCProcessorModule extends Logging {
   private val _dataFrameWriter: DataFrameWriter = new CDCDataFrameWriter(
     new AvroDataFrameWriter)
   private val _userFunctions: UserFunctions = new CDCUserFunctions
+  private val _tableProcessor: TableProcessor = new CDCTableProcessor
   logInfo("Completed required object creation")
 
   /**
@@ -37,6 +39,13 @@ object CDCProcessorModule extends Logging {
    * @return a UserFunctions object
    */
   def userFunctions: UserFunctions = _userFunctions
+
+  /**
+   * Get the TableProcessor
+   *
+   * @return a TableProcessor
+   */
+  def tableProcessor: TableProcessor = _tableProcessor
 
   /**
    * Get the properties object

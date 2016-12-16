@@ -27,7 +27,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   }
 
   "CDCUserFunctions" should "Group changes by transaction" in {
-    val tableName = "Policy"
+
     val userFunctions = new CDCUserFunctions
     val properties =
       Mockito.mock(classOf[CDCProperties],
@@ -51,8 +51,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
     userFunctions
       .groupByTransactionAndKey(TestContexts.changeDummyData(10),
-        properties,
-        tableName)
+        properties)
       .count should be(10)
   }
 }
