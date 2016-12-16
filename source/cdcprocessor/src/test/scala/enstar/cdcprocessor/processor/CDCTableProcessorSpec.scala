@@ -36,6 +36,12 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       org.mockito.Matchers.any(classOf[DataFrame]),
       org.mockito.Matchers.any(classOf[CDCProperties])
     )
+
+    Then("Attunity columns should be dropped")
+    Mockito.verify(userFunctions, Mockito.times(1)).dropAttunityColumns(
+      org.mockito.Matchers.any(classOf[DataFrame]),
+      org.mockito.Matchers.any(classOf[CDCProperties])
+    )
   }
 
   "CDCTableProcessor" should "Save a table" in {

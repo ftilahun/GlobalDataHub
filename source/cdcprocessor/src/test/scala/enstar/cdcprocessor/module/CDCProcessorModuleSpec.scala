@@ -26,7 +26,8 @@ class CDCProcessorModuleSpec extends FlatSpec with GivenWhenThen with Matchers {
       "--activeOutput", "a",
       "--idColumnName", "i",
       "--transactionColumnName", "t",
-      "--changeSequenceColumnName", "c"
+      "--changeSequenceColumnName", "c",
+      "--attunityColumnPrefix", "header__"
     )
 
     typeCheck(CDCProcessorModule.dataFrameReader) should be("DataFrameReader")

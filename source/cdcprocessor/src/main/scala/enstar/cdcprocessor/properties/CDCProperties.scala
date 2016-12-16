@@ -8,4 +8,5 @@ case class CDCProperties(
   transactionColumnName: String = "",
   changeSequenceColumnName: String = "",
   changeInputDir: String = "",
-  activeOutput: String = "") extends Serializable
+  activeOutput: String = "",
+  attunityColumnPrefix: String = "") extends Serializable

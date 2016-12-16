@@ -4,12 +4,12 @@ import java.math.BigInteger
 
 import enstar.cdcprocessor.properties.CDCProperties
 import org.apache.spark.sql.DataFrame
-import org.apache.spark.sql.functions.udf
+import org.apache.spark.sql.functions._
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 
 /**
- * Created by ciaranke on 16/12/2016.
+ * User functions
  */
 class CDCUserFunctions extends UserFunctions {
 
@@ -52,6 +52,20 @@ class CDCUserFunctions extends UserFunctions {
           properties.transactionColumnName),
       "inner")
 
+  }
+
+  /**
+   * Drops attunity columns from the output dataset
+   * @param df the dataframe to operate on
+   * @param properties the properties object
+   * @return a dataframe
+   */
+  def dropAttunityColumns(df: DataFrame,
+                          properties: CDCProperties): DataFrame = {
+    val selection = df.columns.filter { colName =>
+      !colName.contains(properties.attunityColumnPrefix)
+    }.map(col(_))
+    df.select(selection: _*)
   }
 
 }

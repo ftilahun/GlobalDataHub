@@ -15,7 +15,8 @@ class CommandLinePropertyParserSpec extends FlatSpec with GivenWhenThen with Mat
       "--activeOutput", "a",
       "--idColumnName", "i",
       "--transactionColumnName", "t",
-      "--changeSequenceColumnName", "c"
+      "--changeSequenceColumnName", "c",
+      "--attunityColumnPrefix", "header__"
     )
     When("The argument list is complete")
     val parser = new CommandLinePropertyParser

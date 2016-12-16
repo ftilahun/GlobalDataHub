@@ -21,4 +21,13 @@ trait UserFunctions extends Serializable {
    */
   def groupByTransactionAndKey(df: DataFrame,
                                properties: CDCProperties): DataFrame
+
+  /**
+   * Drops attunity columns from the output dataset
+   * @param df the dataframe to operate on
+   * @param properties the properties object
+   * @return a dataframe
+   */
+  def dropAttunityColumns(df: DataFrame,
+                          properties: CDCProperties): DataFrame
 }

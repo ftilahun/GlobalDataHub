@@ -6,7 +6,7 @@ import enstar.cdcprocessor.udfs.UserFunctions
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 
 /**
- * Created by ciaranke on 16/12/2016.
+ * Expected behaviour for a table processor
  */
 trait TableProcessor {
 

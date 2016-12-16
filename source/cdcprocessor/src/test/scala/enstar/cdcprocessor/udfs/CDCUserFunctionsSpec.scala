@@ -2,6 +2,7 @@ package enstar.cdcprocessor.udfs
 
 import enstar.cdcprocessor.TestContexts
 import enstar.cdcprocessor.properties.CDCProperties
+import org.apache.spark.sql.AnalysisException
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.{ DateTime, DateTimeUtils }
 import org.mockito.Mockito
@@ -38,7 +39,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito
       .when(
         properties.transactionColumnName)
-      .thenReturn("_transaction")
+      .thenReturn("header__transaction")
     Mockito
       .when(
         properties.idColumnName)
@@ -47,11 +48,29 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito
       .when(
         properties.changeSequenceColumnName)
-      .thenReturn("_changesequence")
+      .thenReturn("header__changesequence")
 
     userFunctions
       .groupByTransactionAndKey(TestContexts.changeDummyData(10),
         properties)
       .count should be(10)
+  }
+
+  "CDCUserFunctions" should "Drop attunity columns" in {
+    val userFunctions = new CDCUserFunctions
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+    Mockito
+      .when(
+        properties.attunityColumnPrefix)
+      .thenReturn("header__")
+
+    an[AnalysisException] should be thrownBy {
+      userFunctions.dropAttunityColumns(TestContexts.changeDummyData(10),
+        properties).select("header__transaction")
+    }
   }
 }

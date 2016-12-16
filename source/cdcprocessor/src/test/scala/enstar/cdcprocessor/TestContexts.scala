@@ -42,10 +42,11 @@ object TestContexts {
       (num: Int) => "20160712111232110000000000000000000" + num)
     val data = dummyData(numItems)
     data
-      .withColumn("_operation", changeOperation(data("id")))
-      .withColumn("_timeStamp", dateTime())
-      .withColumn("_changesequence", changeSeq(data("id")))
-      .withColumn("_transaction", changeTransacion(data("id")))
+      .withColumn("header__operation", changeOperation(data("id")))
+      .withColumn("header__timeStamp", dateTime())
+      .withColumn("header__changesequence", changeSeq(data("id")))
+      .withColumn("header__transaction", changeTransacion(data("id")))
+      .withColumn("header__id", data("id"))
   }
 
 }
