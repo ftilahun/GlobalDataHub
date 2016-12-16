@@ -7,6 +7,8 @@ import org.apache.spark.{ SparkConf, SparkContext }
 /**
  * Provides spark and hive contexts to be shared by all test cases.
  */
+case class Data(id: Int, value: String)
+
 object TestContexts {
 
   private val _sc: SparkContext = new SparkContext(
@@ -18,8 +20,6 @@ object TestContexts {
 
   def sparkContext = _sc
   def sqlContext = _sqlC
-
-  case class Data(id: Int, value: String)
 
   def dummyData(numItems: Int): DataFrame = {
     val list = (1 to numItems).map { number =>
