@@ -26,9 +26,11 @@ class CDCTableProcessor extends TableProcessor with Logging {
     properties: CDCProperties,
     reader: DataFrameReader,
     userFunctions: UserFunctions): DataFrame = {
-    //read the change data
+    logInfo("Reading change data")
     val changeData = reader.read(sqlContext, properties.changeInputDir, Some(StorageLevel.MEMORY_AND_DISK_SER))
+    logInfo("Getting net changes")
     val groupedData = userFunctions.groupByTransactionAndKey(changeData, properties)
+    logInfo("Droping attunity columns")
     userFunctions.dropAttunityColumns(groupedData, properties)
   }
 
