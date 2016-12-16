@@ -1,4 +1,4 @@
-package enstar.globaldatahub.common.io
+package enstar.cdcprocessor.io
 
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel

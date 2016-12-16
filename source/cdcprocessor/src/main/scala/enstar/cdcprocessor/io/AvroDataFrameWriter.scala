@@ -1,4 +1,4 @@
-package enstar.globaldatahub.io
+package enstar.cdcprocessor.io
 
 import org.apache.hadoop.fs.Path
 import org.apache.spark.Logging
