@@ -25,23 +25,29 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     tableProcessor.process(sqlContext, properties, reader, userFunctions)
 
     Then("A dataframe should be read from disk")
-    Mockito.verify(reader, Mockito.times(1)).read(
-      org.mockito.Matchers.any(classOf[SQLContext]),
-      org.mockito.Matchers.any(classOf[String]),
-      org.mockito.Matchers.any(classOf[Some[StorageLevel]])
-    )
+    Mockito
+      .verify(reader, Mockito.times(1))
+      .read(
+        org.mockito.Matchers.any(classOf[SQLContext]),
+        org.mockito.Matchers.any(classOf[String]),
+        org.mockito.Matchers.any(classOf[Some[StorageLevel]])
+      )
 
     Then("Transactions should be grouped for net changes")
-    Mockito.verify(userFunctions, Mockito.times(1)).groupByTransactionAndKey(
-      org.mockito.Matchers.any(classOf[DataFrame]),
-      org.mockito.Matchers.any(classOf[CDCProperties])
-    )
+    Mockito
+      .verify(userFunctions, Mockito.times(1))
+      .groupByTransactionAndKey(
+        org.mockito.Matchers.any(classOf[DataFrame]),
+        org.mockito.Matchers.any(classOf[CDCProperties])
+      )
 
     Then("Attunity columns should be dropped")
-    Mockito.verify(userFunctions, Mockito.times(1)).dropAttunityColumns(
-      org.mockito.Matchers.any(classOf[DataFrame]),
-      org.mockito.Matchers.any(classOf[CDCProperties])
-    )
+    Mockito
+      .verify(userFunctions, Mockito.times(1))
+      .dropAttunityColumns(
+        org.mockito.Matchers.any(classOf[DataFrame]),
+        org.mockito.Matchers.any(classOf[CDCProperties])
+      )
   }
 
   "CDCTableProcessor" should "Save a table" in {
@@ -55,11 +61,13 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     When("Save is called")
     tableProcessor.save(sqlContext, writer, properties, data)
     Then("The dataframe should be persisted to disk")
-    Mockito.verify(writer, Mockito.times(1)).write(
-      org.mockito.Matchers.any(classOf[SQLContext]),
-      org.mockito.Matchers.any(classOf[String]),
-      org.mockito.Matchers.any(classOf[DataFrame]),
-      org.mockito.Matchers.any(classOf[Some[StorageLevel]])
-    )
+    Mockito
+      .verify(writer, Mockito.times(1))
+      .write(
+        org.mockito.Matchers.any(classOf[SQLContext]),
+        org.mockito.Matchers.any(classOf[String]),
+        org.mockito.Matchers.any(classOf[DataFrame]),
+        org.mockito.Matchers.any(classOf[Some[StorageLevel]])
+      )
   }
 }

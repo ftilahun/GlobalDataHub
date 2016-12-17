@@ -2,7 +2,7 @@ package enstar.cdcprocessor.udfs
 
 import enstar.cdcprocessor.{ Data, TestContexts }
 import enstar.cdcprocessor.properties.CDCProperties
-import org.apache.spark.sql.{ AnalysisException, Row }
+import org.apache.spark.sql.Row
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.{ DateTime, DateTimeUtils }
 import org.mockito.Mockito
@@ -38,34 +38,28 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
           .serializable(SerializableMode.ACROSS_CLASSLOADERS))
 
     Mockito
-      .when(
-        properties.transactionColumnName)
+      .when(properties.transactionColumnName)
       .thenReturn("header__transaction")
 
     Mockito
-      .when(
-        properties.changeSequenceColumnName)
+      .when(properties.changeSequenceColumnName)
       .thenReturn("header__changesequence")
 
-    Mockito
-      .when(
-        properties.idColumnName)
-      .thenReturn("id")
+    Mockito.when(properties.idColumnName).thenReturn("id")
 
     Given("a user functions object")
     When("no rows are present in the dataframe")
     Then("No rows should be returned")
     userFunctions
-      .groupByTransactionAndKey(TestContexts.changeDummyData(0),
-        properties)
+      .groupByTransactionAndKey(TestContexts.changeDummyData(0), properties)
       .count should be(0)
 
     Given("a user functions object")
-    When("There are 10 rows each with a distinct transaction id and business id")
+    When(
+      "There are 10 rows each with a distinct transaction id and business id")
     Then("10 rows should be returned")
     userFunctions
-      .groupByTransactionAndKey(TestContexts.changeDummyData(10),
-        properties)
+      .groupByTransactionAndKey(TestContexts.changeDummyData(10), properties)
       .count should be(10)
 
     Given("a user functions object")
@@ -76,7 +70,8 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Then("1 row should be returned")
     userFunctions
       .groupByTransactionAndKey(
-        data1.drop(data1("header__transaction"))
+        data1
+          .drop(data1("header__transaction"))
           .drop(data1("id"))
           .withColumn("id", id())
           .withColumn("header__transaction", transactionid()),
@@ -85,17 +80,15 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
     Given("a user functions object")
     When("There are 10 rows in a single transaction for two business ids")
-    Mockito
-      .when(
-        properties.idColumnName)
-      .thenReturn("newid")
+    Mockito.when(properties.idColumnName).thenReturn("newid")
     val data = TestContexts.changeDummyData(10)
     val transactionid2 = udf(() => "ONE")
     val id2 = udf((id: Int) => if (id < 5) 1 else 2)
     Then("2 rows should be returned")
     userFunctions
       .groupByTransactionAndKey(
-        data.drop(data("header__transaction"))
+        data
+          .drop(data("header__transaction"))
           .withColumn("header__transaction", transactionid2())
           .withColumn("newid", id2(data("id"))),
         properties)
@@ -109,10 +102,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         Mockito
           .withSettings()
           .serializable(SerializableMode.ACROSS_CLASSLOADERS))
-    Mockito
-      .when(
-        properties.attunityColumnPrefix)
-      .thenReturn("header__")
+    Mockito.when(properties.attunityColumnPrefix).thenReturn("header__")
     Given("a user functions object")
     val userFunctions = new CDCUserFunctions
 
@@ -126,15 +116,23 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       }
     }
 
-    userFunctions.dropAttunityColumns(data, properties).collect().map{
-      case Row(id: Int, value: String) => Data(id, value)
-    }.length should be (10)
+    userFunctions
+      .dropAttunityColumns(data, properties)
+      .collect()
+      .map {
+        case Row(id: Int, value: String) => Data(id, value)
+      }
+      .length should be(10)
 
     When("There are no rows to be processed")
     val nodata = TestContexts.changeDummyData(0)
     Then("No errors should occur")
-    userFunctions.dropAttunityColumns(nodata, properties).collect().map{
-      case Row(id: Int, value: String) => Data(id, value)
-    }.length should be (0)
+    userFunctions
+      .dropAttunityColumns(nodata, properties)
+      .collect()
+      .map {
+        case Row(id: Int, value: String) => Data(id, value)
+      }
+      .length should be(0)
   }
 }

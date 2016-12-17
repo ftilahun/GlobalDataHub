@@ -28,6 +28,5 @@ trait UserFunctions extends Serializable {
    * @param properties the properties object
    * @return a dataframe
    */
-  def dropAttunityColumns(df: DataFrame,
-                          properties: CDCProperties): DataFrame
+  def dropAttunityColumns(df: DataFrame, properties: CDCProperties): DataFrame
 }

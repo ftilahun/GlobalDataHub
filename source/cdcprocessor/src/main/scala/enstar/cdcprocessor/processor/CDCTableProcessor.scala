@@ -21,15 +21,17 @@ class CDCTableProcessor extends TableProcessor with Logging {
    * @param userFunctions a udfs object
    * @return a dataframe of the source table
    */
-  def process(
-    sqlContext: SQLContext,
-    properties: CDCProperties,
-    reader: DataFrameReader,
-    userFunctions: UserFunctions): DataFrame = {
+  def process(sqlContext: SQLContext,
+              properties: CDCProperties,
+              reader: DataFrameReader,
+              userFunctions: UserFunctions): DataFrame = {
     logInfo("Reading change data")
-    val changeData = reader.read(sqlContext, properties.changeInputDir, Some(StorageLevel.MEMORY_AND_DISK_SER))
+    val changeData = reader.read(sqlContext,
+      properties.changeInputDir,
+      Some(StorageLevel.MEMORY_AND_DISK_SER))
     logInfo("Getting net changes")
-    val groupedData = userFunctions.groupByTransactionAndKey(changeData, properties)
+    val groupedData =
+      userFunctions.groupByTransactionAndKey(changeData, properties)
     logInfo("Droping attunity columns")
     userFunctions.dropAttunityColumns(groupedData, properties)
   }
@@ -43,11 +45,13 @@ class CDCTableProcessor extends TableProcessor with Logging {
    * @param dataFrame the dataframe to save
    * @return the number of rows written.
    */
-  def save(
-    sqlContext: SQLContext,
-    writer: DataFrameWriter,
-    properties: CDCProperties,
-    dataFrame: DataFrame): Long = {
-    writer.write(sqlContext, properties.activeOutput, dataFrame, Some(StorageLevel.MEMORY_AND_DISK_SER))
+  def save(sqlContext: SQLContext,
+           writer: DataFrameWriter,
+           properties: CDCProperties,
+           dataFrame: DataFrame): Long = {
+    writer.write(sqlContext,
+      properties.activeOutput,
+      dataFrame,
+      Some(StorageLevel.MEMORY_AND_DISK_SER))
   }
 }

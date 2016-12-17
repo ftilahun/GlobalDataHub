@@ -9,7 +9,10 @@ import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 /**
  * Unit tests for CDCLoaderModule
  */
-class CDCProcessorModuleSpec extends FlatSpec with GivenWhenThen with Matchers {
+class CDCProcessorModuleSpec
+    extends FlatSpec
+    with GivenWhenThen
+    with Matchers {
 
   "CDCLoaderModuleSpec" should "Return correct tyoes" in {
       def typeCheck[T](value: T) = value match {
@@ -22,18 +25,25 @@ class CDCProcessorModuleSpec extends FlatSpec with GivenWhenThen with Matchers {
       }
 
     val argsArray = Array[String](
-      "--changeInput", "c",
-      "--activeOutput", "a",
-      "--idColumnName", "i",
-      "--transactionColumnName", "t",
-      "--changeSequenceColumnName", "c",
-      "--attunityColumnPrefix", "header__"
+      "--changeInput",
+      "c",
+      "--activeOutput",
+      "a",
+      "--idColumnName",
+      "i",
+      "--transactionColumnName",
+      "t",
+      "--changeSequenceColumnName",
+      "c",
+      "--attunityColumnPrefix",
+      "header__"
     )
 
     typeCheck(CDCProcessorModule.dataFrameReader) should be("DataFrameReader")
     typeCheck(CDCProcessorModule.dataFrameWriter) should be("DataFrameWriter")
     typeCheck(CDCProcessorModule.userFunctions) should be("UserFunctions")
-    typeCheck(CDCProcessorModule.properties(argsArray)) should be("CDCProperties")
+    typeCheck(CDCProcessorModule.properties(argsArray)) should be(
+      "CDCProperties")
     typeCheck(CDCProcessorModule.tableProcessor) should be("TableProcessor")
   }
 }

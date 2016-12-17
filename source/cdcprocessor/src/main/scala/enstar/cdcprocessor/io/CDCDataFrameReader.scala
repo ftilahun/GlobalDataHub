@@ -32,7 +32,9 @@ class CDCDataFrameReader(reader: DataFrameReader)
       reader.read(sqlContext, path, storageLevel)
     } catch {
       //a more readable exception
-      case e: InvalidInputException => throw new PathNotFoundException(path)
+      case e: InvalidInputException =>
+        logError(e.getMessage)
+        throw new PathNotFoundException(path)
     }
   }
 

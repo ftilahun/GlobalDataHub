@@ -19,11 +19,10 @@ trait TableProcessor {
    * @param userFunctions a udfs object
    * @return a dataframe of the source table
    */
-  def process(
-    sqlContext: SQLContext,
-    properties: CDCProperties,
-    reader: DataFrameReader,
-    userFunctions: UserFunctions): DataFrame
+  def process(sqlContext: SQLContext,
+              properties: CDCProperties,
+              reader: DataFrameReader,
+              userFunctions: UserFunctions): DataFrame
 
   /**
    * Save source table dataframe to disk
@@ -34,10 +33,9 @@ trait TableProcessor {
    * @param dataFrame the dataframe to save
    * @return the number of rows written.
    */
-  def save(
-    sqlContext: SQLContext,
-    writer: DataFrameWriter,
-    properties: CDCProperties,
-    dataFrame: DataFrame): Long
+  def save(sqlContext: SQLContext,
+           writer: DataFrameWriter,
+           properties: CDCProperties,
+           dataFrame: DataFrame): Long
 
 }

@@ -6,5 +6,6 @@ package enstar.cdcprocessor.exceptions
  * @param message the message to display
  * @param exception the original exception
  */
-class PropertyNotSetException(message: String = null, exception: Throwable = null)
-  extends RuntimeException(message, exception)
+class PropertyNotSetException(message: String = null,
+                              exception: Throwable = null)
+    extends RuntimeException(message, exception)

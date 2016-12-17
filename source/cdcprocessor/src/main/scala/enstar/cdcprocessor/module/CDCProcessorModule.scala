@@ -2,7 +2,10 @@ package enstar.cdcprocessor.module
 
 import enstar.cdcprocessor.io._
 import enstar.cdcprocessor.processor.{ CDCTableProcessor, TableProcessor }
-import enstar.cdcprocessor.properties.{ CDCProperties, CommandLinePropertyParser }
+import enstar.cdcprocessor.properties.{
+  CDCProperties,
+  CommandLinePropertyParser
+}
 import enstar.cdcprocessor.udfs.{ CDCUserFunctions, UserFunctions }
 import org.apache.spark.Logging
 
