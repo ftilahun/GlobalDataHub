@@ -18,8 +18,8 @@ object TestContexts {
   _sc.setLogLevel("OFF")
   private val _sqlC: SQLContext = new SQLContext(_sc)
 
-  def sparkContext = _sc
-  def sqlContext = _sqlC
+  def sparkContext: SparkContext = _sc
+  def sqlContext: SQLContext = _sqlC
 
   def dummyData(numItems: Int): DataFrame = {
     val list = (1 to numItems).map { number =>

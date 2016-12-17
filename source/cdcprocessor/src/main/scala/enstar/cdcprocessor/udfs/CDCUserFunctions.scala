@@ -1,7 +1,5 @@
 package enstar.cdcprocessor.udfs
 
-import java.math.BigInteger
-
 import enstar.cdcprocessor.properties.CDCProperties
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._
@@ -38,16 +36,16 @@ class CDCUserFunctions extends UserFunctions {
       }
     )
     val grouped = df
-      .withColumn("changeNumber",
+      .withColumn(properties.attunityColumnPrefix + "changeNumber",
         changeNumber(df(properties.changeSequenceColumnName)))
       .groupBy(
         df(properties.transactionColumnName),
         df(properties.idColumnName)
       )
-      .max("changeNumber")
+      .max(properties.attunityColumnPrefix + "changeNumber")
     df.join(grouped,
       changeNumber(df(properties.changeSequenceColumnName)) === grouped(
-        "max(changeNumber)") &&
+        s"max(${properties.attunityColumnPrefix}changeNumber)") &&
         df(properties.transactionColumnName) === grouped(
           properties.transactionColumnName),
       "inner")
@@ -64,7 +62,7 @@ class CDCUserFunctions extends UserFunctions {
                           properties: CDCProperties): DataFrame = {
     val selection = df.columns.filter { colName =>
       !colName.contains(properties.attunityColumnPrefix)
-    }.map(col(_))
+    }.map(col)
     df.select(selection: _*)
   }
 
