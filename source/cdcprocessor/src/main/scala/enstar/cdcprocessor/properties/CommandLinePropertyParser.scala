@@ -7,7 +7,7 @@ import scopt.OptionParser
 /**
  * Parses command line properties.
  */
-class CommandLinePropertyParser extends Logging {
+class CommandLinePropertyParser extends PropertyParser[Array[String]] with Logging {
 
   val parser: OptionParser[CDCProperties] =
     new scopt.OptionParser[CDCProperties]("cdcprocessor") {
