@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.Branch
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ BranchUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -14,17 +14,11 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/branch/input/lookup_profit_centre_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/branch/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      BranchUtils.lookupProfitCentreMapping,
-      sqlContext
-    )
+    val lookup_profit_centre = utils.populateDataFrameFromCsvWithHeader( "/branch/input/lookup_profit_centre_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/Branch.hql" )
