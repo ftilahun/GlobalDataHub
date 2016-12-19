@@ -17,7 +17,7 @@ class CsvReader( url : URL ) {
 
   val body : List[Array[String]] = lines.tail map lineToFields
 
-  // basic implemented just splits on comma
+  // basic implementation just splits on comma
   // can be replaced with more advanced impl if we need to include quotes, escaping, etc
   private def lineToFields( rawRow : String ) : Array[String] = rawRow.split( "," )
 }

@@ -7,10 +7,10 @@ import org.apache.spark.sql.Row
 /**
  * Created by neilri on 16/12/2016.
  */
-class StructuredCsvReader( url : URL ) {
+class StructuredCsvReader( url : URL, ignoreNullable : Boolean = false ) {
   private val csvReader = CsvReader( url )
 
-  val schema : Schema = Schema( csvReader.headers )
+  val schema : Schema = Schema( csvReader.headers, ignoreNullable )
 
   lazy val rows : List[Row] = csvReader.body map schema.stringFieldsToAny map fieldsToRow
 
