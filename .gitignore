@@ -37,3 +37,4 @@ buildNumber.properties
 =======
 *.log
 source/GlobalDataHub/metastore_db
+source/cdcprocessor/metastore_db
