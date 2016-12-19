@@ -30,7 +30,7 @@ class TransformationUnitTestingUtilsTests extends FunSuite with DataFrameSuiteBa
     val expectedDataFrame = sqlContext.createDataFrame( dataRDD.map( _.split( "," ) ).map( col => Row( col( 0 ), col( 1 ), col( 2 ) ) ), schema )
 
     val utils = Mockito.mock( classOf[TransformationUnitTestingUtils] )
-    Mockito.when( utils.loadRDDFromFile( "location", sqlContext ) ).thenReturn( dataRDD )
+    Mockito.when( utils.loadRDDFromFile( "location" )( sqlContext ) ).thenReturn( dataRDD )
     Mockito.when( utils.loadSchemaFromFile( "avroLocation", sqlContext ) ).thenReturn( schema )
     Mockito.when( utils.populateDataFrameFromFile( any[String], any[String], any[( String => Array[String] )](), any[( Array[String] ) => Row](), any[SQLContext] ) ).thenCallRealMethod()
 

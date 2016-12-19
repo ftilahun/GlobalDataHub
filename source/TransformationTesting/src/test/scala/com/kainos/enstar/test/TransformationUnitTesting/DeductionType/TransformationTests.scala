@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.DeductionType
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ BranchUtils, DeductionTypeUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ DeductionTypeUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -26,7 +26,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
       getClass.getResource( "/deductiontype/output/deductiontype_standard_data.csv" ).toString,
       getClass.getResource( "/deductiontype/schema/deductiontype.avro" ).toString,
       _.split( "," ),
-      BranchUtils.branchMapping,
+      DeductionTypeUtils.deductionTypeMapping,
       sqlc
     )
 

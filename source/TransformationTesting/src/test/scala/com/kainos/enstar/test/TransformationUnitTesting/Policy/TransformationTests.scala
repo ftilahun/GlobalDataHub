@@ -5,17 +5,17 @@ import com.kainos.enstar.TransformationUnitTesting.{ PolicyUtils, SQLRunner, Tra
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
-/**
- * Created by caoimheb on 23/11/2016.
- */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
+  private val testDataInputPath = "/policy/input/"
+  private val schemasPath = "/policy/schemas/"
+  private val policyTransformation = "Transformation/Policy.hql"
 
   def populateDataFrameWithLineTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/line.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "line.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lineMapping,
       sqlc
@@ -24,8 +24,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   def populateDataFrameWithLayerTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/layer.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "layer.avro" ).toString,
       _.split( "," ),
       PolicyUtils.layerMapping,
       sqlc
@@ -34,8 +34,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   def populateDataFrameWithSubmissionTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/submission.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "submission.avro" ).toString,
       _.split( "," ),
       PolicyUtils.submissionMapping,
       sqlc
@@ -44,8 +44,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   def populateDataFrameWithRiskTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/risk.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "risk.avro" ).toString,
       _.split( "," ),
       PolicyUtils.riskMapping,
       sqlc
@@ -54,8 +54,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   def populateDataFrameWithLookupBlockTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/lookup_block.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "lookup_block.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupBlockMapping,
       sqlc
@@ -64,8 +64,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   def populateDataFrameWithLookupProfitCentreTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/lookup_profit_centre.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "lookup_profit_centre.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupProfitCentreMapping,
       sqlc
@@ -74,8 +74,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   def populateDataFrameWithLookupBusinessTypeTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/lookup_business_type.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "lookup_business_type.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lookupBusinessTypeMapping,
       sqlc
@@ -84,8 +84,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   def populateDataFrameWithOrganisationTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/organisation.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "organisation.avro" ).toString,
       _.split( "," ),
       PolicyUtils.organisationMapping,
       sqlc
@@ -94,8 +94,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   def populateDataFrameWithUnderwritingBlockTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy/input/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/underwriting_block.avro" ).toString,
+      getClass.getResource( testDataInputPath + dataFileName ).toString,
+      getClass.getResource( schemasPath + "underwriting_block.avro" ).toString,
       _.split( "," ),
       PolicyUtils.underwritingBlockMapping,
       sqlc
@@ -105,7 +105,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   def populateDataFrameWithPolicyTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
     utils.populateDataFrameFromFile(
       getClass.getResource( "/policy/output/" + dataFileName ).toString,
-      getClass.getResource( "/policy/schemas/policy.avro" ).toString,
+      getClass.getResource( schemasPath + "policy.avro" ).toString,
       _.split( "," ),
       PolicyUtils.policyMapping,
       sqlc
@@ -134,7 +134,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_PrimaryTestData.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -176,7 +176,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullInceptionDateInLayer.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -200,7 +200,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
@@ -218,7 +217,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullExpiryDateInLayer.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -259,7 +258,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_VariousNullsInLayer.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -300,7 +299,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullProfitCentreCodeInLine.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -324,7 +323,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
@@ -342,7 +340,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullBlockInLine.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -366,7 +364,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
@@ -384,7 +381,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_LineStatusNotEqualC.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -407,7 +404,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
@@ -422,10 +418,10 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullBusineTypeFromLine.csv", sqlc )
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullBusinessTypeFromLine.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -444,11 +440,10 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     assertDataFrameEquals( expectedPolicy, result )
   }
 
-  test( "Policy Transformation test with TIUK profit centre" ){
+  test( "Policy Transformation test with TIUK profit centre" ) {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
@@ -466,7 +461,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_TIUKProfitCentre.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -485,11 +480,10 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     assertDataFrameEquals( expectedPolicy, result )
   }
 
-  test( "Policy Transformation test with TIE profit centre" ){
+  test( "Policy Transformation test with TIE profit centre" ) {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
@@ -507,7 +501,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_TIEProfitCentre.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -526,11 +520,10 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     assertDataFrameEquals( expectedPolicy, result )
   }
 
-  test( "Policy Transformation test with Syndicate 1301 Milan profit centre" ){
+  test( "Policy Transformation test with Syndicate 1301 Milan profit centre" ) {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
@@ -548,7 +541,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_SyndicateBranch.csv", sqlc )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Policy.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
 
     // Act //
     line.registerTempTable( "line" )
@@ -566,4 +559,46 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Assert //
     assertDataFrameEquals( expectedPolicy, result )
   }
+
+  test( "Policy Transformation test with null percentage fields in line" ) {
+    // Arrange //
+    // Use sqlContext from spark-testing-base
+    val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
+
+    // Load test data into dataframe
+    val line = this.populateDataFrameWithLineTestData( "line_NullPercentageFields.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
+    val submission = this.populateDataFrameWithSubmissionTestData( "submission_PrimaryTestData.csv", sqlc )
+    val risk = this.populateDataFrameWithRiskTestData( "risk_PrimaryTestData.csv", sqlc )
+    val organisation = this.populateDataFrameWithOrganisationTestData( "organisation_PrimaryTestData.csv", sqlc )
+    val lookup_block = this.populateDataFrameWithLookupBlockTestData( "lookup_block_PrimaryTestData.csv", sqlc )
+    val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
+    val lookup_profit_centre = this.populateDataFrameWithLookupProfitCentreTestData( "lookup_profit_centre_PrimaryTestData.csv", sqlc )
+    val underwriting_block = this.populateDataFrameWithUnderwritingBlockTestData( "underwriting_block_PrimaryTestData.csv", sqlc )
+
+    // Load expected result into dataframe
+    val expectedPolicy = this.populateDataFrameWithPolicyTestData( "policy_NullPercentageFields.csv", sqlc )
+
+    // Load the hql statement under test
+    val statement = utils.loadHQLStatementFromResource( policyTransformation )
+
+    // Act //
+    line.registerTempTable( "line" )
+    layer.registerTempTable( "layer" )
+    submission.registerTempTable( "submission" )
+    risk.registerTempTable( "risk" )
+    organisation.registerTempTable( "organisation" )
+    lookup_business_type.registerTempTable( "lookup_business_type" )
+    lookup_block.registerTempTable( "lookup_block" )
+    lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    underwriting_block.registerTempTable( "underwriting_block" )
+
+    val result = SQLRunner.runStatement( statement, sqlc )
+
+    // Assert //
+    assertDataFrameEquals( expectedPolicy, result )
+
+  }
+
 }
