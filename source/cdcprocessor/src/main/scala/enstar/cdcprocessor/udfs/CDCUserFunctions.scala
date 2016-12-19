@@ -59,11 +59,8 @@ class CDCUserFunctions extends UserFunctions {
    * @return a dataframe
    */
   def dropAttunityColumns(df: DataFrame,
-                          properties: CDCProperties): DataFrame = {
-    val selection = df.columns.filter { colName =>
-      !colName.contains(properties.attunityColumnPrefix)
-    }.map(col)
-    df.select(selection: _*)
-  }
+                          properties: CDCProperties): DataFrame =
+    df.select(df.columns.filter(!_.contains(properties.attunityColumnPrefix)
+    ).map(col): _*)
 
 }
