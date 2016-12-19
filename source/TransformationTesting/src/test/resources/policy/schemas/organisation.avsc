@@ -9,7 +9,7 @@
         },
         {
             "name": "domicile_country_code",
-            "type": ["string","null"]
+            "type": ["null", "string"]
         }
  	]
 }
