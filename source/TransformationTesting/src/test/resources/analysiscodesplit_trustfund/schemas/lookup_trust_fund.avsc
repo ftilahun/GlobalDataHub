@@ -1,0 +1,15 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+ 	"type": "record",
+ 	"name": "lookup_trust_fund",
+    "fields": [
+        {
+            "name": "trust_fund_indicator",
+            "type": "string"
+        },
+        {
+            "name": "fund_description",
+            "type": "string"
+        }
+    ]
+}
