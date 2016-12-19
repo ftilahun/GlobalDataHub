@@ -37,7 +37,7 @@
         },
         {
             "name": "calculateddeductionamount",
-            "type": "string"
+            "type": ["string","null"]
         },
         {
             "name": "value",
