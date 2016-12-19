@@ -1,15 +1,14 @@
 package com.kainos.enstar.test.TransformationUnitTesting.Deduction
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{DeductionUtils, NetAsPctOfGross, SQLRunner, TransformationUnitTestingUtils}
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import com.kainos.enstar.TransformationUnitTesting.{ DeductionUtils, NetAsPctOfGross, SQLRunner, TransformationUnitTestingUtils }
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
 /**
-  * Created by terences on 19/12/2016.
-  */
+ * Created by terences on 19/12/2016.
+ */
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
-
 
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputPath = "/deduction/input/"
@@ -74,17 +73,16 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql")
+    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Deduction/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Deduction/OutputRecordCount.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
-    result.registerTempTable("deduction")
+    result.registerTempTable( "deduction" )
 
     val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
     val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )
-
 
     // Assert
     assertDataFrameEquals( reconInput, reconOutput )
@@ -109,17 +107,16 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql")
+    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Deduction/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Deduction/OutputRecordCount.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
-    result.registerTempTable("deduction")
+    result.registerTempTable( "deduction" )
 
     val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
     val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )
-
 
     // Assert
     assertDataFrameEquals( reconInput, reconOutput )
