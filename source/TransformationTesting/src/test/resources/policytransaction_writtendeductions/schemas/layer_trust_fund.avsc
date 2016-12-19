@@ -11,6 +11,10 @@
     	{
     		"name": "layer_id",
     		"type": "int"
+    	},
+    	{
+    	    "name": "est_premium_split_pct",
+    	    "type": "string"
     	}
     ]
 }
