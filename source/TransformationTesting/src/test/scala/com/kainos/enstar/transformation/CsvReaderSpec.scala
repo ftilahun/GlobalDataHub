@@ -9,7 +9,7 @@ class CsvReaderSpec extends WordSpec with Matchers {
 
   val testInputGood = getClass.getResource( "/com/kainos/enstar/transformation/test_input_good.csv" )
   val testInputBadNulls = getClass.getResource( "/com/kainos/enstar/transformation/test_input_bad_nulls.csv" )
-  val doesntExist = getClass.getResource( "/com/kainos/enstar/transformation/doesnt_exist.csv" )
+  val testInputDoesntExist = getClass.getResource( "/com/kainos/enstar/transformation/doesnt_exist.csv" )
 
   "A CsvReader" when {
     "being created" should {
@@ -19,15 +19,14 @@ class CsvReaderSpec extends WordSpec with Matchers {
       }
       "throw a NullPointerException for resources that don't exist" in {
         a[NullPointerException] should be thrownBy {
-          val csvReader = CsvReader( doesntExist )
+          val csvReader = CsvReader( testInputDoesntExist )
         }
       }
     }
 
     "reading the file" should {
-      "use the first line as the header" in {
+      "use the first line (name[string],count[int],description[string?]) as the header" in {
         val csvReader = CsvReader( testInputGood )
-        // name[string],count[int],description[string?]
         csvReader.headers.length should be ( 3 ) // 3 columns
         csvReader.headers( 0 ) should be ( "name[string]" )
         csvReader.headers( 1 ) should be ( "count[int]" )
