@@ -28,10 +28,7 @@ class CDCTableProcessorJob extends Logging {
 
     logInfo("Processing table")
     val tableData =
-      tableProcessor.process(sqlContext, properties, reader, userFunctions)
-
-    logInfo("Saving table")
-    tableProcessor.save(sqlContext, writer, properties, tableData)
+      tableProcessor.process(sqlContext, properties, reader, writer, userFunctions)
     logInfo("Done!")
   }
 }
