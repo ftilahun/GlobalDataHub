@@ -88,6 +88,14 @@ class CDCUserFunctions extends UserFunctions {
         .contains(properties.operationColumnValueBefore))
   }
 
+  /**
+   * Update the valid to date for a given row
+   * @param changeOperation the change operation value
+   * @param validTo the valid from date of the subsequent row
+   * @param transactionTimeStamp the transaction timestamp
+   * @param properties the properties object
+   * @return the valid to date for this row (as a string)
+   */
   def updateClosedRecord(changeOperation: String,
                          validTo: String,
                          transactionTimeStamp: String,
@@ -102,6 +110,12 @@ class CDCUserFunctions extends UserFunctions {
     }
   }
 
+  /**
+   * Close records that have been superseded in the dataframe
+   * @param dataFrame the dataframe to process
+   * @param properties the properties object
+   * @return a dataframe
+   */
   def closeRecords(dataFrame: DataFrame,
                    properties: CDCProperties): DataFrame = {
 
