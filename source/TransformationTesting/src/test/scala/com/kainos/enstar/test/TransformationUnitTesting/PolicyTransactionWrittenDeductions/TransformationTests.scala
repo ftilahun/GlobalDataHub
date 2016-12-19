@@ -1,8 +1,8 @@
 package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWrittenDeductions
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils }
-import org.apache.spark.sql.{ DataFrame, SQLContext }
+import com.kainos.enstar.TransformationUnitTesting.{NetAsPctOfGross, PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils}
+import org.apache.spark.sql.{DataFrame, SQLContext}
 import org.scalatest.FunSuite
 
 /**
@@ -146,6 +146,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     settlement_schedule.registerTempTable( "settlement_schedule" )
     lookup_trust_fund.registerTempTable( "lookup_trust_fund" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -188,6 +189,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     settlement_schedule.registerTempTable( "settlement_schedule" )
     lookup_trust_fund.registerTempTable( "lookup_trust_fund" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -230,6 +232,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     settlement_schedule.registerTempTable( "settlement_schedule" )
     lookup_trust_fund.registerTempTable( "lookup_trust_fund" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 
@@ -272,6 +275,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     settlement_schedule.registerTempTable( "settlement_schedule" )
     lookup_trust_fund.registerTempTable( "lookup_trust_fund" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     val result = SQLRunner.runStatement( statement, sqlc )
 

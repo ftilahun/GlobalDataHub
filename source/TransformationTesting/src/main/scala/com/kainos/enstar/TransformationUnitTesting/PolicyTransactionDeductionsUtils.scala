@@ -24,17 +24,17 @@ object PolicyTransactionDeductionsUtils {
 
   def layerDeductionMapping( cols : Array[String] ) : Row = {
     cols match {
-      case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ).toInt, null )
-      case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ) )
+      case cols if cols.length == 4 => Row( cols( 0 ).toInt, cols( 1 ).toInt, null, cols( 2 ).toInt, cols( 3 ) )
+      case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), cols( 3 ).toInt, cols( 4 ) )
     }
   }
 
   def layerTrustFundMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ).toInt )
+    Row( cols( 0 ), cols( 1 ).toInt, cols(2) )
   }
 
   def lineRiskCodeMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ).toInt )
+    Row( cols( 0 ), cols( 1 ).toInt, cols( 2 ) )
   }
 
   def lookupDeductionTypeMapping( cols : Array[String] ) : Row = {

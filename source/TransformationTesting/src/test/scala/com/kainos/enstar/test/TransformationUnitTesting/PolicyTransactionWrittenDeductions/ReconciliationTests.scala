@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWrittenDeductions
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{NetAsPctOfGross, PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils}
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -105,6 +105,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     lookup_trust_fund.registerTempTable( "lookup_trust_fund" )
     lookup_risk_code.registerTempTable( "lookup_risk_code" )
     settlement_schedule.registerTempTable( "settlement_schedule" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     val output = SQLRunner.runStatement( statement, sqlc )
     output.registerTempTable( "policytransaction_writtendeductions" )

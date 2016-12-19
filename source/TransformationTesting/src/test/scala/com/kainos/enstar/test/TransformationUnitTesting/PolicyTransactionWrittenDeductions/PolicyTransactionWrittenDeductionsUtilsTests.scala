@@ -183,20 +183,24 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     assert( row.get( 3 ) == null )
   }
 
-  "layerDeduction" should "generate a Row given 2 inputs with final value null" in {
+  "layerDeduction" should "generate a Row given 4 inputs with null deduction code" in {
 
     // Arrange
     val column0 = "1"
     val column1 = "2"
+    val column3 = "2"
+    val column4 = "15"
 
     // Act
-    val row = PolicyTransactionDeductionsUtils.layerDeductionMapping( ( column0 :: column1 :: Nil ).toArray )
+    val row = PolicyTransactionDeductionsUtils.layerDeductionMapping( ( column0 :: column1 :: column3 :: column4 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 3 )
+    assert( row.size == 5 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ) == null )
+    assert( row.get( 3 ) == column3.toInt )
+    assert( row.get( 4 ).equals( column4 ) )
   }
 
   "layerDeduction" should "generate a Row" in {
@@ -205,16 +209,19 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     val column0 = "1"
     val column1 = "2"
     val column2 = "AA"
+    val column3 = "1"
+    val column4 = "10"
 
     // Act
-    val row = PolicyTransactionDeductionsUtils.layerDeductionMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
+    val row = PolicyTransactionDeductionsUtils.layerDeductionMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 3 )
+    assert( row.size == 5 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ).equals( column2 ) )
-
+    assert( row.get( 3 ) == column3.toInt )
+    assert( row.get( 4 ).equals( column4 ) )
   }
 
   "layerTrustFundMapping" should "generate a Row" in {
@@ -222,15 +229,16 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     // Arrange
     val column0 = "C"
     val column1 = "5"
+    val column2 = "15"
 
     // Act
-    val row = PolicyTransactionDeductionsUtils.layerTrustFundMapping( ( column0 :: column1 :: Nil ).toArray )
+    val row = PolicyTransactionDeductionsUtils.layerTrustFundMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 2 )
+    assert( row.size == 3 )
     assert( row.get( 0 ).equals( column0 ) )
     assert( row.get( 1 ) == column1.toInt )
-
+    assert( row.get( 2 ).equals( column2 ) )
   }
 
   "lineRiskCodeMapping" should "generate a Row" in {
@@ -238,15 +246,16 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     // Arrange
     val column0 = "A"
     val column1 = "1"
+    val column2 = "20"
 
     // Act
-    val row = PolicyTransactionDeductionsUtils.lineRiskCodeMapping( ( column0 :: column1 :: Nil ).toArray )
+    val row = PolicyTransactionDeductionsUtils.lineRiskCodeMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 2 )
+    assert( row.size == 3 )
     assert( row.get( 0 ).equals( column0 ) )
     assert( row.get( 1 ) == column1.toInt )
-
+    assert( row.get( 2 ).equals( column2 ) )
   }
 
   "lookupDeductionTypeMapping" should "generate a Row" in {
