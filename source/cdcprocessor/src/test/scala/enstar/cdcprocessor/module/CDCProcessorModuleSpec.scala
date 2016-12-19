@@ -36,7 +36,23 @@ class CDCProcessorModuleSpec
       "--changeSequenceColumnName",
       "c",
       "--attunityColumnPrefix",
-      "header__"
+      "header__",
+      "--operationColumnName",
+      "B",
+      "--operationColumnValueBefore",
+      "B",
+      "--operationColumnValueInsert",
+      "B",
+      "--operationColumnValueUpdate",
+      "B",
+      "--operationColumnValueDelete",
+      "B",
+      "--validFromColumnName",
+      "A",
+      "--validToColumnName",
+      "A",
+      "--transactionTimeStampColumnName",
+      "A"
     )
 
     typeCheck(CDCProcessorModule.dataFrameReader) should be("DataFrameReader")

@@ -25,7 +25,23 @@ class CommandLinePropertyParserSpec
       "--changeSequenceColumnName",
       "c",
       "--attunityColumnPrefix",
-      "header__"
+      "header__",
+      "--operationColumnName",
+      "B",
+      "--operationColumnValueBefore",
+      "B",
+      "--operationColumnValueInsert",
+      "B",
+      "--operationColumnValueUpdate",
+      "B",
+      "--operationColumnValueDelete",
+      "B",
+      "--validFromColumnName",
+      "A",
+      "--validToColumnName",
+      "A",
+      "--transactionTimeStampColumnName",
+      "A"
     )
     When("The argument list is complete")
     val parser = new CommandLinePropertyParser
