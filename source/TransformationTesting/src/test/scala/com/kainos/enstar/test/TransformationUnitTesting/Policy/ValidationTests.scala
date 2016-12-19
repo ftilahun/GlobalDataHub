@@ -5,10 +5,11 @@ import com.kainos.enstar.TransformationUnitTesting.{ PolicyUtils, SQLRunner, Tra
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-/**
- * Created by terences on 25/11/2016.
- */
 class ValidationTests extends FunSuite with DataFrameSuiteBase {
+
+  private val utils = new TransformationUnitTestingUtils
+  private val testDataInputPath = "/policy_validation/input/"
+  private val schemasPath = "/policy_validation/schemas/"
 
   test( "Validation: When input contains no null values for risk_reference validation script should return count 0" ) {
 
@@ -16,12 +17,11 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
     val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy_validation/input/line_NoNullRiskReference.csv" ).toString,
-      getClass.getResource( "/policy_validation/schemas/line.avro" ).toString,
+      getClass.getResource( testDataInputPath + "line_NoNullRiskReference.csv" ).toString,
+      getClass.getResource( schemasPath + "line.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lineMapping,
       sqlc
@@ -44,12 +44,11 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
     val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policy_validation/input/line_NullRiskReference.csv" ).toString,
-      getClass.getResource( "/policy_validation/schemas/line.avro" ).toString,
+      getClass.getResource( testDataInputPath + "line_NullRiskReference.csv" ).toString,
+      getClass.getResource( schemasPath + "line.avro" ).toString,
       _.split( "," ),
       PolicyUtils.lineMapping,
       sqlc
@@ -65,4 +64,5 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     // Assert //
     assert( result.count() == 1 )
   }
+
 }

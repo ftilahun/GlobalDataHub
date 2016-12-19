@@ -13,19 +13,19 @@
         },
         {
             "name": "fil_code",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "inception_date",
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "expiry_date",  
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         },
         {
             "name": "unique_market_ref", 
-            "type": ["string", "null"]
+            "type": ["null", "string"]
         }
  	]
 }
