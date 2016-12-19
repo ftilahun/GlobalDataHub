@@ -1,7 +1,7 @@
 package enstar.cdcprocessor
 
 import enstar.cdcprocessor.module.CDCProcessorModule
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.hive.HiveContext
 import org.apache.spark.{ Logging, SparkConf, SparkContext }
 
 /**
@@ -21,7 +21,8 @@ class CDCTableProcessorJob extends Logging {
     logInfo("Creating contexts")
     val sparkConf = new SparkConf()
     val sparkContext = new SparkContext(sparkConf)
-    val sqlContext = new SQLContext(sparkContext)
+    //hive context required for Window functions
+    val sqlContext = new HiveContext(sparkContext)
 
     val tableProcessor = CDCProcessorModule.tableProcessor
 
