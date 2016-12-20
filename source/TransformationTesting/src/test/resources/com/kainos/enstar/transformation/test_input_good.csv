@@ -1,0 +1,4 @@
+name[string],count[int],description[string?]
+green,2,A green widget
+red,3,A red widget
+blue,1,[NULL]
