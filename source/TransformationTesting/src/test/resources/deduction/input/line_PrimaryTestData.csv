@@ -1,1 +1,2 @@
+line_id[int],layer_id[int],risk_reference[string?],business_type[string?],slip_income_amount[string?],reporting_line_pct[string?]
 9302,9302,077004S05AA,2,1721.00,100.00

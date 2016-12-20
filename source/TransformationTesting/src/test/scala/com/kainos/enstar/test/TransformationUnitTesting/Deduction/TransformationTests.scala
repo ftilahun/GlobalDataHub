@@ -58,15 +58,16 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   test( "Deduction transformation mapping test with primary data sets" ){
 
     // Arrange
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlContext.sparkContext.setLogLevel( "WARN" )
+    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframes
-    val line = populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
-    val layer = populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
-    val layerDeduction = populateDataFrameWithLayerDeductionTestData( "layer_deduction_PrimaryTestData.csv", sqlc )
+    val line = utils.populateDataFrameFromCsvWithHeader("/deduction/input/line_PrimaryTestData.csv")
+    val layer = utils.populateDataFrameFromCsvWithHeader("/deduction/input/layer_PrimaryTestData.csv")
+    val layerDeduction = utils.populateDataFrameFromCsvWithHeader("/deduction/input/layer_deduction_PrimaryTestData.csv")
 
-    val expectedDeduction = populateDataFrameWithDeductionTestData( "deduction_PrimaryTestData.csv", sqlc )
+    val expectedDeduction = utils.populateDataFrameFromCsvWithHeader("/deduction/output/deduction_PrimaryTestData.csv")
 
     line.registerTempTable( "line" )
     layer.registerTempTable( "layer" )

@@ -23,6 +23,7 @@ class Schema( headers : Array[String], ignoreNullable : Boolean = false ) {
             case LongType        => field.toLong
             case IntegerType     => field.toInt
             case d : DecimalType => BigDecimal( field )
+            case BooleanType     => field.toBoolean
           }
         }
     }
@@ -43,6 +44,7 @@ object Schema {
         case colDef( name, "long", _, _, nullable )                => new StructField( name, LongType, nullable != null )
         case colDef( name, "int", _, _, nullable )                 => new StructField( name, IntegerType, nullable != null )
         case colDef( name, "decimal", precision, scale, nullable ) => new StructField( name, DecimalType( precision.toInt, scale.toInt ), nullable != null )
+        case colDef( name, "boolean", _, _, nullable )             => new StructField( name, BooleanType, nullable != null)
       }
       new StructType( headerFields )
     } catch {
