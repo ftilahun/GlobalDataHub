@@ -217,7 +217,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund_BrokenJoin.csv", sqlc )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions.csv", sqlc )
+    val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions_BrokenJoin.csv", sqlc )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
