@@ -1,9 +1,10 @@
-package com.kainos.enstar.TransformationUnitTesting
+package com.kainos.enstar.transformation.udf
 
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
-import org.apache.spark.sql.types.{StructType, IntegerType, DecimalType, ArrayType, DataType}
-import math.BigDecimal._
+import org.apache.spark.sql.types._
+
+import scala.math.BigDecimal._
 
 /**
   * Created by neilri (&terences) on 13/12/2016.

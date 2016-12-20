@@ -1,3 +1,4 @@
+id[int],grouping_id[string],net_pct[string?]
 1,1,100.00
 2,1,100.00
 3,1,85.00
