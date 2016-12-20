@@ -1,5 +1,6 @@
-0004PAA,1,1,NDEX,RiskCode,XP,Terrorism Pool,100.00
-0004PAA,145,2,NDEX,RiskCode,[NULL],Blank Desc,1.00
-0004PAA,145,3,NDEX,RiskCode, A,,10.00
-0004PAA,145,4,NDEX,RiskCode,A ,Cash1,88.00
-0004PAA,1,5,NDEX,RiskCode,XP,Terrorism Pool,123456.88
+policynumber[string],sectionreference[string],coveragereference[string],sourcesystemcode[string],analysiscodetype[string],analysiscode[string],analysiscodedescription[string],splitpercent[decimal(5:2)]
+0004PAA,11,1,NDEX,TrustFund,SL,Surplus Lines,100.00
+0004PAA,12,2,NDEX,TrustFund,NR,Non Regulated,90.00
+0004PAA,13,3,NDEX,TrustFund,SL,Surplus Lines,80.00
+0004PAA,14,4,NDEX,TrustFund,KY,Kentucky & Other,70.00
+0004PAA,15,5,NDEX,TrustFund,SL,Surplus Lines,60.00
