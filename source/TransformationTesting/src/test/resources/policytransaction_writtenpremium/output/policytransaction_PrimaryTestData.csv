@@ -1,1 +1,2 @@
-1-1-1-XP-SL,NDEX,1,false,0.0,USD,00013T0000,1,0.0,USD,2000-01-01 00:00:00.000,WrittenPremiumOurShare,WrittenPremiumOurShare,ADD,Additional Premium,XP,JAC2,SL
+transactionreference[string?],sourcesystemcode[string],coveragereference[string],iscashtransactiontype[boolean],originalamount[string?],originalcurrencycode[string],policynumber[string?],sectionreference[string],settlementamount[string?],settlementcurrencycode[string?],transactiondate[string?],transactiontypecode[string],transactionsubtypecode[string],riskcode[string?],filcode[string?],trustfundcode[string?]
+1-XP-SL,NDEX,1,false,0.0,USD,00013T0000,1,0.0,USD,2000-01-01 00:00:00.000,WrittenPremiumOurShare,WrittenPremiumOurShare,XP,JAC2,SL

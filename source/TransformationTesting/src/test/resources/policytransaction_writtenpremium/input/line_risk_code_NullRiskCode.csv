@@ -1,2 +1,2 @@
 risk_code[string?],risk_code_pct[string],line_id[int]
-XP,100.00,1
+[NULL],100.00,1

@@ -10,7 +10,7 @@ import org.scalatest.FunSuite
  */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "BranchTransformation tes with Priamry data" ){
+  test( "BranchTransformation test with Priamry data" ){
 
     // Arrange //
     // Use sqlContext from spark-testing-base

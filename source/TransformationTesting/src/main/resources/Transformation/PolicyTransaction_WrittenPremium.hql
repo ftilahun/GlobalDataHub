@@ -3,8 +3,7 @@ SELECT
     CONCAT(
         CAST(line.line_id AS STRING), "-",
         IF(line_risk_code.risk_code IS NOT NULL, line_risk_code.risk_code, "MISSING"), "-",
-        IF(layer_trust_fund.trust_fund_indicator IS NOT NULL, layer_trust_fund.trust_fund_indicator, "MISSING")
-    ) AS transactionreference,
+        IF(layer_trust_fund.trust_fund_indicator IS NOT NULL, layer_trust_fund.trust_fund_indicator, "MISSING")) AS transactionreference,
     "NDEX" AS sourcesystemcode,
     CAST(line.line_id AS STRING) AS coveragereference,
     false AS iscashtransactiontype,

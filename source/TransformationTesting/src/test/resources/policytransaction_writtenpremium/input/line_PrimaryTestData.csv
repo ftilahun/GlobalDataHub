@@ -1,1 +1,2 @@
-1,1,00013T0000,USD,17,0.5130000
+line_id[int],layer_id[int],risk_reference[string?],epi_settlement_ccy[string?],business_type[int?],reporting_line_pct[string?],slip_income_amount[string]
+1,1,00013T0000,USD,17,0.5130000,76.00

@@ -1,1 +1,2 @@
-1,,USD,
+layer_id[int],fil_code[string?],premium_ccy[string],premium_roe[string?],inception_date[string?]
+1,[NULL],USD,[NULL],[NULL]

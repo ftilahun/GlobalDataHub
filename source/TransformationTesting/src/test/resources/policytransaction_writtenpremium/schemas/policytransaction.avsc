@@ -57,16 +57,7 @@
             "doc": "This field should be nullable however the value is hard-coded for NDEX, so nullable is removed to allow the schemas to match."
         },
         {
-            "name": "transactiontypedescription",
-            "type": "string",
-            "doc": "This field should be nullable however the value is hard-coded for NDEX, so nullable is removed to allow the schemas to match."
-        },
-        {
             "name": "transactionsubtypecode",
-            "type": ["string", "null"]
-        },
-        {
-            "name": "transactionsubtypedescription",
             "type": ["string", "null"]
         },
         {
