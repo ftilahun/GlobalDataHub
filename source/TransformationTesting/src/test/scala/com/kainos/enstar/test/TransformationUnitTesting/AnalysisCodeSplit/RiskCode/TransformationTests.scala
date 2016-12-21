@@ -7,9 +7,9 @@ import org.scalatest.FunSuite
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
-  private val testDataInputPath = "/analysiscodesplit/riskcode/input/"
-  private val testDataOutputPath = "/analysiscodesplit/riskcode/output/"
-  private val analysisCodeSplitRiskCodeTransformation = "Transformation/AnalysisCodeSplitRiskCode.hql"
+  private val testDataInputDirPath = "/analysiscodesplit/riskcode/input/"
+  private val testDataOutputDirPath = "/analysiscodesplit/riskcode/output/"
+  private val analysisCodeSplitRiskCodeTransformationPath = "Transformation/AnalysisCodeSplitRiskCode.hql"
 
   test( "AnalysisCodeSplitRiskCodeTransformation mapping test one line row to one line_risk_code row" ){
 
@@ -18,15 +18,15 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_PrimaryTestData.csv" )
-    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_risk_code_PrimaryTestData.csv" )
-    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_risk_code_PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
+    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_risk_code_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedAnalysisCodeSplit = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "analysiscodesplit_PrimaryTestData.csv" )
+    val expectedAnalysisCodeSplit = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "analysiscodesplit_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitRiskCodeTransformation )
+    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitRiskCodeTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )
@@ -44,15 +44,15 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_ManyLineRiskToOneLine.csv" )
-    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_risk_code_ManyLineRiskToOneLine.csv" )
-    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_risk_code_ManyLineRiskToOneLine.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_ManyLineRiskToOneLine.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_ManyLineRiskToOneLine.csv" )
+    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_risk_code_ManyLineRiskToOneLine.csv" )
 
     // Load expected result into dataframe
-    val expectedAnalysisCodeSplit = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "analysiscodesplit_ManyLineRiskToOneLine.csv" )
+    val expectedAnalysisCodeSplit = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "analysiscodesplit_ManyLineRiskToOneLine.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitRiskCodeTransformation )
+    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitRiskCodeTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )

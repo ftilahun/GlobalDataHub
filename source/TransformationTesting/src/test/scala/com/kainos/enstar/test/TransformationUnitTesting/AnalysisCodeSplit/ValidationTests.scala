@@ -6,6 +6,7 @@ import org.scalatest.FunSuite
 
 class ValidationTests extends FunSuite with DataFrameSuiteBase {
 
+  private val utils = new TransformationUnitTestingUtils
   private val testDataInputPath = "/analysiscodesplit/validation/input/"
 
   test( "Validation: When input contains no null values for risk_reference validation should pass" ) {
@@ -14,7 +15,6 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     // Use sqlContext from spark-testing-base
     implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
     val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_NoNulls.csv" )
@@ -36,7 +36,6 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     // Use sqlContext from spark-testing-base
     implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
     val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_NullRiskReference.csv" )

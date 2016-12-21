@@ -1,4 +1,4 @@
-policynumber[string],sectionreference[string],coveragereference[string],sourcesystemcode[string],analysiscodetype[string],analysiscode[string],analysiscodedescription[string],splitpercent[decimal(5:2)]
+policynumber[string],sectionreference[string],coveragereference[string],sourcesystemcode[string],analysiscodetype[string],analysiscode[string],analysiscodedescription[string],splitpercent[decimal(12:7)?]
 0004PAA,1,1,NDEX,TrustFund,SL,Surplus Lines,100.00
 0004PAA,1,1,NDEX,TrustFund,SL,Surplus Lines,90.00
 0004PAA,1,1,NDEX,TrustFund,SL,Surplus Lines,80.00

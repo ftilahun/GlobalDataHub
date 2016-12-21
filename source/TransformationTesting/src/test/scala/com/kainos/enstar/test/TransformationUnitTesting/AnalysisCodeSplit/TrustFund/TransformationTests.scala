@@ -7,9 +7,9 @@ import org.scalatest.FunSuite
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
-  private val testDataInputPath = "/analysiscodesplit/trustfund/input/"
-  private val testDataOutputPath = "/analysiscodesplit/trustfund/output/"
-  private val analysisCodeSplitTrustFundTransformation = "Transformation/AnalysisCodeSplitTrustFund.hql"
+  private val testDataInputDirPath = "/analysiscodesplit/trustfund/input/"
+  private val testDataOutputDirPath = "/analysiscodesplit/trustfund/output/"
+  private val analysisCodeSplitTrustFundTransformationPath = "Transformation/AnalysisCodeSplitTrustFund.hql"
 
   test( "AnalysisCodeSplitTrustFundTransformation mapping test one line row to one layer_trust_fund row" ){
 
@@ -18,15 +18,15 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_PrimaryTestData.csv" )
-    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_trust_fund_PrimaryTestData.csv" )
-    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_trust_fund_PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
+    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedAnalysisCodeSplit = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "analysiscodesplit_PrimaryTestData.csv" )
+    val expectedAnalysisCodeSplit = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "analysiscodesplit_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformation )
+    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )
@@ -44,15 +44,15 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_ManyTrustFundToOneLayer.csv" )
-    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_trust_fund_ManyTrustFundToOneLayer.csv" )
-    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_trust_fund_ManyTrustFundToOneLayer.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_ManyTrustFundToOneLayer.csv" )
+    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_ManyTrustFundToOneLayer.csv" )
+    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_trust_fund_ManyTrustFundToOneLayer.csv" )
 
     // Load expected result into dataframe
-    val expectedAnalysisCodeSplit = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "analysiscodesplit_ManyTrustFundToOneLayer.csv" )
+    val expectedAnalysisCodeSplit = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "analysiscodesplit_ManyTrustFundToOneLayer.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformation )
+    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )

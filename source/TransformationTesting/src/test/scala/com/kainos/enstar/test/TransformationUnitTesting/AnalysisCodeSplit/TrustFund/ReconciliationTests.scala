@@ -7,10 +7,10 @@ import org.scalatest.FunSuite
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
-  private val testDataInputPath = "/analysiscodesplit/trustfund/input/"
-  private val analysisCodeSplitTrustFundTransformation = "Transformation/AnalysisCodeSplitTrustFund.hql"
+  private val testDataInputDirPath = "/analysiscodesplit/trustfund/input/"
+  private val analysisCodeSplitTrustFundTransformationPath = "Transformation/AnalysisCodeSplitTrustFund.hql"
 
-  test( "Reconciliation on test case 1 input test data for AnalysisCodeSplit TrustFund" ) {
+  test( "Reconciliation on primary input test data for AnalysisCodeSplit TrustFund" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -18,12 +18,12 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_PrimaryTestData.csv" )
-    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_trust_fund_PrimaryTestData.csv" )
-    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_trust_fund_PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
+    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_trust_fund_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformation )
+    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformationPath )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitTrustFund/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitTrustFund/OutputRecordCount.hql" )
 
@@ -41,7 +41,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     assertDataFrameEquals( reconInput, reconOutput )
   }
 
-  test( "Reconciliation on test case 2 input test data for AnalysisCodeSplit TrustFund" ) {
+  test( "Reconciliation on input test data with many trust funds to one layer for AnalysisCodeSplit TrustFund" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -49,12 +49,12 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_ManyTrustFundToOneLayer.csv" )
-    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_trust_fund_ManyTrustFundToOneLayer.csv" )
-    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_trust_fund_ManyTrustFundToOneLayer.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_ManyTrustFundToOneLayer.csv" )
+    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_ManyTrustFundToOneLayer.csv" )
+    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_trust_fund_ManyTrustFundToOneLayer.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformation )
+    val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformationPath )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitTrustFund/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitTrustFund/OutputRecordCount.hql" )
 

@@ -6,7 +6,7 @@ SELECT
     "TrustFund" AS analysiscodetype,
     layer_trust_fund.trust_fund_indicator AS analysiscode,
     lookup_trust_fund.fund_description AS analysiscodedescription,
-    layer_trust_fund.est_premium_split_pct AS splitpercent
+    CAST(layer_trust_fund.est_premium_split_pct AS DECIMAL(12,7)) AS splitpercent
 FROM
     line JOIN layer_trust_fund
     ON line.layer_id = layer_trust_fund.layer_id

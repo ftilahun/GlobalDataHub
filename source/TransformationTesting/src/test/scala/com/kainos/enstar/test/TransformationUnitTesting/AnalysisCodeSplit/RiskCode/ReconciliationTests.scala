@@ -7,21 +7,19 @@ import org.scalatest.FunSuite
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
-  private val testDataInputPath = "/analysiscodesplit/riskcode/input/"
-  private val testDataOutputPath = "/analysiscodesplit/riskcode/output/"
+  private val testDataInputDirPath = "/analysiscodesplit/riskcode/input/"
 
-  test( "Reconciliation on test case 1 input test data" ) {
+  test( "Reconciliation on primary input test data for AnalysisCodeSplit RiskCode" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
     implicit val sqlc = sqlContext
-    val utils = new TransformationUnitTestingUtils
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_PrimaryTestData.csv" )
-    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_risk_code_PrimaryTestData.csv" )
-    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_risk_code_PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
+    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_risk_code_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/AnalysisCodeSplitRiskCode.hql" )
@@ -42,7 +40,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     assertDataFrameEquals( reconInput, reconOutput )
   }
 
-  test( "Reconciliation on test case 2 input test data" ) {
+  test( "Reconciliation on input test data for many line risks to one line for AnalysisCodeSplit RiskCode" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -51,9 +49,9 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_ManyLineRiskToOneLine.csv" )
-    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_risk_code_ManyLineRiskToOneLine.csv" )
-    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_risk_code_PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_ManyLineRiskToOneLine.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_ManyLineRiskToOneLine.csv" )
+    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_risk_code_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/AnalysisCodeSplitRiskCode.hql" )
