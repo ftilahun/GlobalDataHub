@@ -11,13 +11,12 @@ SELECT
         CASE line.business_type
             WHEN '1' THEN '0'
             WHEN '17' THEN '0'
-            ELSE CAST((
+            ELSE
                 line.slip_income_amount * (line.reporting_line_pct/100)
                 * ((tmptable.net_pct/100) * (layer_deduction.deduction_pct/100))
-                ) AS DECIMAL(10,2))
         END
-        AS STRING) AS calculateddeductionamount,
-    layer_deduction.deduction_pct AS value,
+        AS DECIMAL(18,6)) AS calculateddeductionamount,
+    CAST(layer_deduction.deduction_pct AS DECIMAL(18,6)) AS value,
     true AS ispercentage,
     true AS isnetofprevious
 FROM
