@@ -1,5 +1,5 @@
 SELECT
-    CAST(layer_deduction.deduction_id AS STRING) AS deductionreference,
+    CONCAT(line.line_id, '-', layer_deduction.layer_id, '-', layer_deduction.deduction_id) AS deductionreference,
     CAST(layer_deduction.sequence_no AS STRING) AS deductionsequence,
     line.risk_reference AS policynumber,
     CAST(line.layer_id AS STRING) AS sectionreference,

@@ -1,7 +1,7 @@
 deductionreference[string],deductionsequence[string?],policynumber[string?],sectionreference[string],coveragereference[string],sourcesystemcode[string],currencycode[string?],deductiontypecode[string?],calculateddeductionamount[string?],value[string],ispercentage[boolean],isnetofprevious[boolean]
-7537,1,077004S05AA,9302,9302,NDEX,CLF,GBK,172.10,10.00,true,true
-7538,2,077004S05AA,9302,9302,NDEX,CLF,GBK,77.45,5.00,true,true
-7539,3,077004S05AA,9302,9302,NDEX,CLF,GBK,735.73,50.00,true,true
-7540,1,077004S05AA,9303,9303,NDEX,CLF,GBK,86.05,10.00,true,true
-7541,2,077004S05AA,9303,9303,NDEX,CLF,GBK,38.72,5.00,true,true
-7542,3,077004S05AA,9303,9303,NDEX,CLF,GBK,367.86,50.00,true,true
+9302-9302-7537,1,077004S05AA,9302,9302,NDEX,CLF,GBK,172.10,10.00,true,true
+9302-9302-7538,2,077004S05AA,9302,9302,NDEX,CLF,GBK,77.45,5.00,true,true
+9302-9302-7539,3,077004S05AA,9302,9302,NDEX,CLF,GBK,735.73,50.00,true,true
+9303-9303-7540,1,077004S05AA,9303,9303,NDEX,CLF,GBK,86.05,10.00,true,true
+9303-9303-7541,2,077004S05AA,9303,9303,NDEX,CLF,GBK,38.72,5.00,true,true
+9303-9303-7542,3,077004S05AA,9303,9303,NDEX,CLF,GBK,367.86,50.00,true,true
