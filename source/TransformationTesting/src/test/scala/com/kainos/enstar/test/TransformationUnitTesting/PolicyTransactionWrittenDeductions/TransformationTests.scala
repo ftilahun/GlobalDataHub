@@ -155,6 +155,49 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   }
 
+  test( "PolicyTransactionDeductions Transformation mapping increasing sequence number" ){
+
+    // Arrange //
+    // Use sqlContext from spark-testing-base
+    val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
+
+    // Load test data into dataframe
+    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
+    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
+    val layer_deduction = this.populateDataFrameWithLayerDeductionTestData( "layer_deduction_IncreasingSequenceNo.csv", sqlc )
+    val line_risk_code = this.populateDataFrameWithLineRiskCodeTestData( "line_risk_code_PrimaryTestData.csv", sqlc )
+    val lookup_deduction_type = this.populateDataFrameWithLookupDeductionTypeTestData( "lookup_deduction_type_PrimaryTestData.csv", sqlc )
+    val lookup_risk_code = this.populateDataFrameWithLookupRiskCodeMappingTestData( "lookup_risk_code_PrimaryTestData.csv", sqlc )
+    val settlement_schedule = this.populateDataFrameWithSettlementScheduleTestData( "settlement_schedule_PrimaryTestData.csv", sqlc )
+    val lookup_trust_fund = this.populateDataFrameWithLookupTrustFundTestData( "lookup_trust_fund_PrimaryTestData.csv", sqlc )
+    val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund_PrimaryTestData.csv", sqlc )
+
+    // Load expected result into dataframe
+    val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions_IncreasingSequenceNumber.csv", sqlc )
+
+    // Load the hql statement under test
+    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
+
+    // Act //
+    line.registerTempTable( "line" )
+    layer.registerTempTable( "layer" )
+    layer_deduction.registerTempTable( "layer_deduction" )
+    line_risk_code.registerTempTable( "line_risk_code" )
+    lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
+    lookup_risk_code.registerTempTable( "lookup_risk_code" )
+    settlement_schedule.registerTempTable( "settlement_schedule" )
+    lookup_trust_fund.registerTempTable( "lookup_trust_fund" )
+    layer_trust_fund.registerTempTable( "layer_trust_fund" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
+
+    val result = SQLRunner.runStatement( statement, sqlc )
+
+    // Assert //
+    assertDataFrameEquals( expectedPolicyTransaction, result )
+
+  }
+
   test( "PolicyTransactionDeductions Transformation mapping special characters in all input data" ){
 
     // Arrange //
