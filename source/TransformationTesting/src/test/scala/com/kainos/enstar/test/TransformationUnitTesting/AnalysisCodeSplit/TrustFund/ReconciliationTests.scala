@@ -1,4 +1,4 @@
-package com.kainos.enstar.test.TransformationUnitTesting.AnalysisCodeSplitTrustFund
+package com.kainos.enstar.test.TransformationUnitTesting.AnalysisCodeSplit.TrustFund
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }

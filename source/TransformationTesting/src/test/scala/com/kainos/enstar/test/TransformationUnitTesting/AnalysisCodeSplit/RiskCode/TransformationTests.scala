@@ -1,4 +1,4 @@
-package com.kainos.enstar.test.TransformationUnitTesting.AnalysisCodeSplitRiskCode
+package com.kainos.enstar.test.TransformationUnitTesting.AnalysisCodeSplit.RiskCode
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
