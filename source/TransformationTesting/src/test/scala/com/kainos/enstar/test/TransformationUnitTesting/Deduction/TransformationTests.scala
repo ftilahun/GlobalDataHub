@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.Deduction
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{NetAsPctOfGross, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.TransformationUnitTesting.{ NetAsPctOfGross, SQLRunner, TransformationUnitTestingUtils }
 import org.scalatest.FunSuite
 
 /**
