@@ -5,12 +5,9 @@ import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUn
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-/**
- * Created by terences on 20/11/2016.
- */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "BranchTransformation test with Priamry data" ){
+  test( "BranchTransformation test with Primary data" ){
 
     // Arrange //
     // Use sqlContext from spark-testing-base

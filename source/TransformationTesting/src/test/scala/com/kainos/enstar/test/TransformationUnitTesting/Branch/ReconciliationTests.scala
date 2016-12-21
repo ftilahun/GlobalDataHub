@@ -5,15 +5,11 @@ import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUn
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-/**
- * Created by adamf on 30/11/2016.
- */
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "Reconciliation over test data for Branch" ) {
 
     // Arrange //
-    // Use sqlContext from spark-testing-base
     implicit val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
 

@@ -1,2 +1,2 @@
-layer_id[int],fil_code[string?],premium_ccy[string],premium_roe[string?],inception_date[string?]
+layer_id[int],fil_code[string?],premium_ccy[string],premium_roe[decimal(18:7)?],inception_date[string?]
 1,[NULL],USD,[NULL],[NULL]

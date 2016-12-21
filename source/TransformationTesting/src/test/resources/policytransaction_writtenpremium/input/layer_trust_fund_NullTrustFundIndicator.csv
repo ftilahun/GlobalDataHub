@@ -1,2 +1,0 @@
-layer_id[int],trust_fund_indicator[string?],est_premium_split_pct[string]
-1,[NULL],100.00
