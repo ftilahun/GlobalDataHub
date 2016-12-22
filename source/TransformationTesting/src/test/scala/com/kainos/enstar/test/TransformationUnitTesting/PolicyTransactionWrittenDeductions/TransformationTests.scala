@@ -1,8 +1,9 @@
 package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWrittenDeductions
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{NetAsPctOfGross, PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils}
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import com.kainos.enstar.transformation.udf.NetAsPctOfGross
+import com.kainos.enstar.TransformationUnitTesting.{ PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils }
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
 /**
@@ -237,7 +238,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val result = SQLRunner.runStatement( statement, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedPolicyTransaction.orderBy("transactionreference"), result.orderBy("transactionreference") )
+    assertDataFrameEquals( expectedPolicyTransaction.orderBy( "transactionreference" ), result.orderBy( "transactionreference" ) )
 
   }
 

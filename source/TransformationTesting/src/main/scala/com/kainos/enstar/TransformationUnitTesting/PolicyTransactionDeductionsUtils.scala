@@ -30,7 +30,7 @@ object PolicyTransactionDeductionsUtils {
   }
 
   def layerTrustFundMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ).toInt, cols(2) )
+    Row( cols( 0 ), cols( 1 ).toInt, cols( 2 ) )
   }
 
   def lineRiskCodeMapping( cols : Array[String] ) : Row = {

@@ -1,7 +1,8 @@
 package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWrittenDeductions
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{NetAsPctOfGross, PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils}
+import com.kainos.enstar.transformation.udf.NetAsPctOfGross
+import com.kainos.enstar.TransformationUnitTesting.{ PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
