@@ -1,4 +1,4 @@
-SELECT COUNT(*) AS policytransactionwrittendeductions_count
+SELECT COUNT(line.risk_reference) AS policytransactionwrittendeductions_count
 FROM
     line
     JOIN settlement_schedule
@@ -9,11 +9,7 @@ FROM
     ON line.layer_id = layer_trust_fund.layer_id
     JOIN layer_deduction
     ON line.layer_id = layer_deduction.layer_id
-    JOIN lookup_risk_code
-    ON line_risk_code.risk_code = lookup_risk_code.risk_code
     LEFT JOIN lookup_deduction_type
     ON layer_deduction.deduction_code = lookup_deduction_type.deduction_code
-    JOIN lookup_trust_fund
-    ON layer_trust_fund.trust_fund_indicator = lookup_trust_fund.trust_fund_indicator
     JOIN layer
     ON line.layer_id = layer.layer_id

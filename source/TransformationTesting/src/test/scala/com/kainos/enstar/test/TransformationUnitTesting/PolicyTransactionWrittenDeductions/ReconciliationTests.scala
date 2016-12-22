@@ -16,6 +16,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     // Use sqlContext from spark-testing-base
     val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
@@ -67,22 +68,6 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
       sqlc
     )
 
-    val lookup_trust_fund : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/lookup_trust_fund_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/lookup_trust_fund.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.lookupTrustFundMapping,
-      sqlc
-    )
-
-    val lookup_risk_code : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/lookup_risk_code_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/lookup_risk_code.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.lookupRiskCodeMapping,
-      sqlc
-    )
-
     val settlement_schedule : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/policytransaction_writtendeductions/input/settlement_schedule_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/policytransaction_writtendeductions/schemas/settlement_schedule.avro" ).toString,
@@ -103,8 +88,6 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    lookup_trust_fund.registerTempTable( "lookup_trust_fund" )
-    lookup_risk_code.registerTempTable( "lookup_risk_code" )
     settlement_schedule.registerTempTable( "settlement_schedule" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
