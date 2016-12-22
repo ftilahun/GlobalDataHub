@@ -19,7 +19,9 @@ SELECT
     line.epi_settlement_ccy AS settlementcurrencycode,
     CAST(layer.inception_date AS STRING) AS transactiondate,
     "WrittenPremiumOurShare" AS transactiontypecode,
+    "WrittenPremiumOurShare" AS transactiontypedescription,
     "WrittenPremiumOurShare" AS transactionsubtypecode,
+    "WrittenPremiumOurShare" AS transactionsubtypedescription,
     IF(line_risk_code.risk_code IS NOT NULL, line_risk_code.risk_code, "MISSING") AS riskcode,
     layer.fil_code AS filcode,
     IF(layer_trust_fund.trust_fund_indicator IS NOT NULL, layer_trust_fund.trust_fund_indicator, "MISSING") AS trustfundcode
