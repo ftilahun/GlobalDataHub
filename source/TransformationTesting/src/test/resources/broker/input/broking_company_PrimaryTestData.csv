@@ -1,0 +1,4 @@
+broking_company_name[string],broking_company_code[int],broking_company_pseudonym[string]
+TBA,44,PC
+Cyril ltd,20123,CL
+Walnut & Chestnut Insurance(ltd),99,WCI
