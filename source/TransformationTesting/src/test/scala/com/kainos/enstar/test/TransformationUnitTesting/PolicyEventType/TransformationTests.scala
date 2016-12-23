@@ -1,16 +1,12 @@
-package com.kainos.enstar.test.TransformationUnitTesting.Branch
+package com.kainos.enstar.test.TransformationUnitTesting.PolicyEventType
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
-import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-/**
- * Created by terences on 20/11/2016.
- */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "BranchTransformation tes with Priamry data" ){
+  test( "PolicyEventTypeTransformation tes with Primary data" ){
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -19,19 +15,19 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val lookupProfitCentre = utils.populateDataFrameFromCsvWithHeader( "/branch/input/lookup_profit_centre_PrimaryTestData.csv" )
+    val lookup_renewal_status = utils.populateDataFrameFromCsvWithHeader( "/policyeventtype/input/lookup_renewal_status_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedBranch = utils.populateDataFrameFromCsvWithHeader( "/branch/output/branch_PriamryTestData.csv" )
+    val expectedPolicyEventType = utils.populateDataFrameFromCsvWithHeader( "/policyeventtype/output/policyeventtype_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Branch.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyEventType.hql" )
 
     // Act //
-    lookupProfitCentre.registerTempTable( "lookup_profit_centre" )
+    lookup_renewal_status.registerTempTable( "lookup_renewal_status" )
     val result = SQLRunner.runStatement( statement, sqlc )
 
     // Assert //
-    assertDataFrameEquals( expectedBranch, result )
+    assertDataFrameEquals( expectedPolicyEventType, result )
   }
 }

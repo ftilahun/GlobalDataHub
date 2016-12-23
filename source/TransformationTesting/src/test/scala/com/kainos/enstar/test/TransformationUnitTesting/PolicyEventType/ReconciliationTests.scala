@@ -1,16 +1,12 @@
-package com.kainos.enstar.test.TransformationUnitTesting.Branch
+package com.kainos.enstar.test.TransformationUnitTesting.PolicyEventType
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
-import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-/**
- * Created by adamf on 30/11/2016.
- */
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "Reconciliation over test data for Branch" ) {
+  test( "Reconciliation over test data for PolicyEventType" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -18,17 +14,17 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val lookup_profit_centre = utils.populateDataFrameFromCsvWithHeader( "/branch/input/lookup_profit_centre_PrimaryTestData.csv" )
+    val lookup_renewal_status = utils.populateDataFrameFromCsvWithHeader( "/policyeventtype/input/lookup_renewal_status_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Branch.hql" )
-    val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Branch/InputRecordCount.hql" )
-    val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Branch/OutputRecordCount.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyEventType.hql" )
+    val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/PolicyEventType/InputRecordCount.hql" )
+    val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/PolicyEventType/OutputRecordCount.hql" )
 
     // Act //
-    lookup_profit_centre.registerTempTable( "lookup_profit_centre" )
+    lookup_renewal_status.registerTempTable( "lookup_renewal_status" )
     val output = SQLRunner.runStatement( statement, sqlc )
-    output.registerTempTable( "branch" )
+    output.registerTempTable( "policyeventtype" )
 
     val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
     val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )
