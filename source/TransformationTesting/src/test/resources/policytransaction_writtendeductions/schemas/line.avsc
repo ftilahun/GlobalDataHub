@@ -28,6 +28,10 @@
         {
             "name": "epi_settlement_ccy",
             "type": ["string", "null" ]
+        },
+        {
+            "name": "slip_income_amount",
+            "type": ["int", "null"]
         }
     ]
 }

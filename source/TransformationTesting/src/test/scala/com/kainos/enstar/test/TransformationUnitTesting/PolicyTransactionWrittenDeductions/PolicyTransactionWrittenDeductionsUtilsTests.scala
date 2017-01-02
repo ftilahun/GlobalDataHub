@@ -17,21 +17,23 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     val column3 = "3"
     val column4 = "CD"
     val column5 = "EF"
+    val column6 = "3"
 
     // Act
-    val row = PolicyTransactionDeductionsUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: Nil ).toArray )
+    val row = PolicyTransactionDeductionsUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: column5 :: column6 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 6 )
+    assert( row.size == 7 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ).equals( column2 ) )
     assert( row.get( 3 ) == column3.toInt )
     assert( row.get( 4 ).equals( column4 ) )
     assert( row.get( 5 ).equals( column5 ) )
+    assert( row.get( 6 ) == column6.toInt )
   }
 
-  "line" should "generate a Row given 5 inputs with final value null" in {
+  "line" should "generate a Row given 5 inputs with final two values null" in {
 
     // Arrange
     val column0 = "1"
@@ -44,13 +46,14 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     val row = PolicyTransactionDeductionsUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: column4 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 6 )
+    assert( row.size == 7 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ).equals( column2 ) )
     assert( row.get( 3 ) == column3.toInt )
     assert( row.get( 4 ).equals( column4 ) )
     assert( row.get( 5 ) == null )
+    assert( row.get( 6 ) == null )
   }
 
   "line" should "generate a Row given 4 inputs with final two values of null" in {
@@ -65,13 +68,14 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     val row = PolicyTransactionDeductionsUtils.lineMapping( ( column0 :: column1 :: column2 :: column3 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 6 )
+    assert( row.size == 7 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ).equals( column2 ) )
     assert( row.get( 3 ) == column3.toInt )
     assert( row.get( 4 ) == null )
     assert( row.get( 5 ) == null )
+    assert( row.get( 6 ) == null )
   }
 
   "line" should "generate a Row given 3 inputs with final three values of null" in {
@@ -85,13 +89,14 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     val row = PolicyTransactionDeductionsUtils.lineMapping( ( column0 :: column1 :: column2 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 6 )
+    assert( row.size == 7 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ).equals( column2 ) )
     assert( row.get( 3 ) == null )
     assert( row.get( 4 ) == null )
     assert( row.get( 5 ) == null )
+    assert( row.get( 6 ) == null )
   }
 
   "line" should "generate a Row given 2 inputs with final four values of null" in {
@@ -104,13 +109,14 @@ class PolicyTransactionWrittenDeductionsUtilsTests extends FlatSpec {
     val row = PolicyTransactionDeductionsUtils.lineMapping( ( column0 :: column1 :: Nil ).toArray )
 
     // Assert
-    assert( row.size == 6 )
+    assert( row.size == 7 )
     assert( row.get( 0 ) == column0.toInt )
     assert( row.get( 1 ) == column1.toInt )
     assert( row.get( 2 ) == null )
     assert( row.get( 3 ) == null )
     assert( row.get( 4 ) == null )
     assert( row.get( 5 ) == null )
+    assert( row.get( 6 ) == null )
   }
 
   "layer" should "generate a Row" in {
