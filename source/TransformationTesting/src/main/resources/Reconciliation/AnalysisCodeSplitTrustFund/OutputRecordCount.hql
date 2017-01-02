@@ -3,4 +3,4 @@ SELECT
 FROM
     analysiscodesplit
 WHERE
-    analysiscodetype = "RiskCode"
+    analysiscodetype = "TrustFund"

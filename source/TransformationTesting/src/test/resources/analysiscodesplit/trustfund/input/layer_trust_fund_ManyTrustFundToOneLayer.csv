@@ -1,0 +1,4 @@
+layer_id[int],trust_fund_indicator[string],est_premium_split_pct[decimal(5:2)]
+1,SL,100.00
+1,SL,90.00
+1,SL,80.00
