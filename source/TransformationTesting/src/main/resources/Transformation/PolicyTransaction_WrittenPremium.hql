@@ -22,9 +22,9 @@ SELECT
     "WrittenPremiumOurShare" AS transactiontypedescription,
     "WrittenPremiumOurShare" AS transactionsubtypecode,
     "WrittenPremiumOurShare" AS transactionsubtypedescription,
-    IF(line_risk_code.risk_code IS NOT NULL, line_risk_code.risk_code, "MISSING") AS riskcode,
+    line_risk_code.risk_code AS riskcode,
     layer.fil_code AS filcode,
-    IF(layer_trust_fund.trust_fund_indicator IS NOT NULL, layer_trust_fund.trust_fund_indicator, "MISSING") AS trustfundcode
+    layer_trust_fund.trust_fund_indicator AS trustfundcode
 
 FROM
 
