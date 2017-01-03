@@ -2,7 +2,7 @@ package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWritte
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.transformation.udf.NetAsPctOfGross
-import com.kainos.enstar.TransformationUnitTesting.{ PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -15,66 +15,25 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val layer : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/layer_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.layerMapping,
-      sqlc
-    )
+    val layer : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/layer_PrimaryTestData.csv" )
 
-    val layer_deduction : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/layer_deduction_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer_deduction.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.layerDeductionMapping,
-      sqlc
-    )
+    val layer_deduction : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/layer_deduction_PrimaryTestData.csv" )
 
-    val layer_trust_fund : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/layer_trust_fund_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer_trust_fund.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.layerTrustFundMapping,
-      sqlc
-    )
+    val layer_trust_fund : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/layer_trust_fund_PrimaryTestData.csv" )
 
-    val line : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/line_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.lineMapping,
-      sqlc
-    )
+    val line : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/line_PrimaryTestData.csv" )
 
-    val line_risk_code : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/line_risk_code_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/line_risk_code.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.lineRiskCodeMapping,
-      sqlc
-    )
 
-    val lookup_deduction_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/lookup_deduction_type.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.lookupDeductionTypeMapping,
-      sqlc
-    )
+    val line_risk_code : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/line_risk_code_PrimaryTestData.csv" )
 
-    val settlement_schedule : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/settlement_schedule_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/settlement_schedule.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.settlementScheduleMapping,
-      sqlc
-    )
+    val lookup_deduction_type : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" )
+
+    val settlement_schedule : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/settlement_schedule_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
