@@ -12,15 +12,16 @@ class SchemaSpec extends WordSpec with Matchers {
 
   "A Schema" when {
     "creating from headers" should {
-      "evaluate long, int, string and decimal headers" in {
-        val headers = Array( "col0[long]", "col1[int]", "col2[string]", "col3[decimal(10:2)]" )
+      "evaluate long, int, string, boolean and decimal headers" in {
+        val headers = Array( "col0[long]", "col1[int]", "col2[string]", "col3[boolean]", "col4[decimal(10:2)]")
         val struct = Schema.structFromHeaders( headers )
 
-        struct.length should be ( 4 )
+        struct.length should be ( 5 )
         struct( 0 ) should be ( StructField( "col0", LongType, false ) )
         struct( 1 ) should be ( StructField( "col1", IntegerType, false ) )
         struct( 2 ) should be ( StructField( "col2", StringType, false ) )
-        struct( 3 ) should be ( StructField( "col3", DecimalType( 10, 2 ), false ) )
+        struct( 3 ) should be ( StructField( "col3", BooleanType, false ) )
+        struct( 4 ) should be ( StructField( "col4", DecimalType( 10, 2 ), false ) )
       }
 
       "support nullable columns" in {
