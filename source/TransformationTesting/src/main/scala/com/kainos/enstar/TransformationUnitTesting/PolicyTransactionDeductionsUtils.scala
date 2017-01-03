@@ -12,7 +12,7 @@ object PolicyTransactionDeductionsUtils {
     case cols if cols.length == 4 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), cols( 3 ).toInt, null, null, null )
     case cols if cols.length == 3 => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), null, null, null, null )
     case cols if cols.length == 2 => Row( cols( 0 ).toInt, cols( 1 ).toInt, null, null, null, null, null )
-    case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), cols( 3 ).toInt, cols( 4 ), cols( 5 ), cols(6).toInt )
+    case _                        => Row( cols( 0 ).toInt, cols( 1 ).toInt, cols( 2 ), cols( 3 ).toInt, cols( 4 ), cols( 5 ), cols(6) )
   }
 
   def layerMapping( cols : Array[String] ) : Row = cols match {

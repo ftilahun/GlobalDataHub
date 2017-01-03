@@ -31,7 +31,7 @@
         },
         {
             "name": "slip_income_amount",
-            "type": ["int", "null"]
+            "type": ["string", "null"]
         }
     ]
 }
