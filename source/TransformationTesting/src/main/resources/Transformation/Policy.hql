@@ -1,9 +1,9 @@
 SELECT
 
-line.risk_reference AS policynumber, 
+line.risk_reference AS policynumber,
 CAST(line.line_id AS STRING) AS coveragereference,
 CAST(line.layer_id AS STRING) AS sectionreference,
-"NDEX" AS sourcesystemcode, 
+"NDEX" AS sourcesystemcode,
 ltrim(CASE regexp_extract(profit_centre_desc, '((?:Syndicate 1301)|(?:TIE)|(?:TIUK))(.*)', 2)
         WHEN '' THEN 'London'
         ELSE regexp_extract(profit_centre_desc, '((?:Syndicate 1301)|(?:TIE)|(?:TIUK))(.*)', 2)
@@ -47,15 +47,15 @@ CAST(line.written_order_pct AS STRING) AS writtenorderpercent
 FROM
 
 line 
-JOIN layer
+INNER JOIN layer
 ON line.layer_id = layer.layer_id
-JOIN submission
+INNER JOIN submission
 ON layer.submission_id = submission.submission_id
-JOIN risk
+INNER JOIN risk
 ON risk.risk_id = submission.risk_id
 AND risk.programme_year = submission.programme_year
 AND risk.sequence_no = submission.sequence_no
-JOIN organisation
+INNER JOIN organisation
 ON organisation.organisation_id = risk.assured_id
 LEFT JOIN lookup_profit_centre
 ON line.profit_centre_code = lookup_profit_centre.profit_centre_code
