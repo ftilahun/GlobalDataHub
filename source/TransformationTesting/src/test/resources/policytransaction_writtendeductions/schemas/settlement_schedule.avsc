@@ -18,10 +18,6 @@
     	{
     		"name": "settlement_due_date",
     		"type": ["string", "null"]
-    	},
-    	{
-    		"name": "amount",
-    		"type": ["string", "null"]
     	}
     ]
 }

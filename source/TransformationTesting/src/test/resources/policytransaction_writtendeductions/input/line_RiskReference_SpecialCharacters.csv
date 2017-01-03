@@ -1,1 +1,2 @@
+line_id[int?],layer_id[int?],risk_reference[string?],business_type[int?],reporting_line_pct[string?],epi_settlement_ccy[string?],slip_income_amount[string?]
 1,6,00/*BC1,17,1,GBP,1000.0

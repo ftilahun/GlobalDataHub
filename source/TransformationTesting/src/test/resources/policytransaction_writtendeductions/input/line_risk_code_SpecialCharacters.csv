@@ -1,1 +1,2 @@
+risk_code[string?],line_id[int],risk_code_pct[string]
 X!@3,1,15.0
