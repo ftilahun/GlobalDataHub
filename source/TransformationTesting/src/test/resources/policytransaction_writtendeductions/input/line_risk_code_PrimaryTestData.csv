@@ -1,2 +1,2 @@
-risk_code[string?],line_id[int],risk_code_pct[string]
+risk_code[string?],line_id[int],risk_code_pct[decimal(18:2)]
 XP,1,10.0
