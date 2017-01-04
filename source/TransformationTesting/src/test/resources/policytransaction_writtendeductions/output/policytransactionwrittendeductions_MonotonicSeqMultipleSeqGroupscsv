@@ -1,3 +1,4 @@
+transactionreference[string?],sourcesystemcode[string],coveragereference[string?],iscashtransactiontype[boolean],originalamount[decimal(18:6)?],originalcurrencycode[string?],policynumber[string?],sectionreference[string?],settlementamount[decimal(18:6)?],settlementcurrencycode[string?],transactiondate[string?],transactiontypecode[string],transactiontypedescription[string],transactionsubtypecode[string?],transactionsubtypedescription[string?],filcode[string?],riskcode[string?],trustfundcode[string?]
 2-1-1-XP-SL-1,NDEX,1,false,500.0000,AAA1,00PA15,2,500.0000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,BKR,Brokerage,AUD,XP,SL
 2-1-1-XP-SL-2,NDEX,1,false,1000.0000,AAA1,00PA15,2,1000.0000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,IPT,IPT,AUD,XP,SL
 2-1-1-XP-SL-3,NDEX,1,false,1020.0000,AAA1,00PA15,2,1020.0000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,COM,Commission,AUD,XP,SL

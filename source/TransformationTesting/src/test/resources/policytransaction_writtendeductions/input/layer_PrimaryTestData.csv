@@ -1,1 +1,2 @@
+layer_id[int],premium_ccy[string?],fil_code[string?],premium_roe[decimal(18:7)?]
 2,AAA1,AUD,1
