@@ -13,7 +13,7 @@ class SchemaSpec extends WordSpec with Matchers {
   "A Schema" when {
     "creating from headers" should {
       "evaluate long, int, string, boolean and decimal headers" in {
-        val headers = Array( "col0[long]", "col1[int]", "col2[string]", "col3[boolean]", "col4[decimal(10:2)]")
+        val headers = Array( "col0[long]", "col1[int]", "col2[string]", "col3[boolean]", "col4[decimal(10:2)]" )
         val struct = Schema.structFromHeaders( headers )
 
         struct.length should be ( 5 )
