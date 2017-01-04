@@ -28,7 +28,6 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     val line : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/line_PrimaryTestData.csv" )
 
-
     val line_risk_code : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/line_risk_code_PrimaryTestData.csv" )
 
     val lookup_deduction_type : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" )
