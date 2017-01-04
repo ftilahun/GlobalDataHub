@@ -1,0 +1,19 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+    "type": "record",
+    "name": "underwriter",
+    "fields": [
+        {
+            "name" : "sourcesystemcode",
+            "type" : "string"
+        },
+        {
+            "name" : "underwritercode",
+            "type" : "string"
+        },
+        {
+            "name": "underwritername",
+            "type": "string"
+        }
+    ]
+}

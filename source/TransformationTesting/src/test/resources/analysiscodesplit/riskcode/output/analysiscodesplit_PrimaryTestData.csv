@@ -1,0 +1,6 @@
+policynumber[string],sectionreference[string],coveragereference[string],sourcesystemcode[string],analysiscodetype[string],analysiscode[string],analysiscodedescription[string?],splitpercent[decimal(12:7)?]
+0004PAA,1,1,NDEX,RiskCode,XP,Terrorism Pool,100.00
+0004PAA,145,2,NDEX,RiskCode,    ,Blank Desc,1.00
+0004PAA,145,3,NDEX,RiskCode, A,[NULL],10.00
+0004PAA,145,4,NDEX,RiskCode,A ,Cash1,88.00
+0004PAA,1,5,NDEX,RiskCode,XP,Terrorism Pool,123456.88

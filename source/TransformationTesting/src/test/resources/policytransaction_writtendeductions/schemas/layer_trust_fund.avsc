@@ -1,0 +1,20 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+ 	"type": "record",
+ 	"name": "layer_trust_fund",
+    "fields": [
+        {
+            "name": "trust_fund_indicator",
+            "type": ["string", "null"],
+            "doc": "Nullable for purposes of test"
+        },
+    	{
+    		"name": "layer_id",
+    		"type": "int"
+    	},
+    	{
+    	    "name": "est_premium_split_pct",
+    	    "type": "string"
+    	}
+    ]
+}

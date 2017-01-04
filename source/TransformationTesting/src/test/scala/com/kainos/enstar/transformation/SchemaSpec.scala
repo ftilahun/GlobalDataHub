@@ -12,15 +12,16 @@ class SchemaSpec extends WordSpec with Matchers {
 
   "A Schema" when {
     "creating from headers" should {
-      "evaluate long, int, string and decimal headers" in {
-        val headers = Array( "col0[long]", "col1[int]", "col2[string]", "col3[decimal(10:2)]" )
+      "evaluate long, int, string, boolean and decimal headers" in {
+        val headers = Array( "col0[long]", "col1[int]", "col2[string]", "col3[boolean]", "col4[decimal(10:2)]")
         val struct = Schema.structFromHeaders( headers )
 
-        struct.length should be ( 4 )
+        struct.length should be ( 5 )
         struct( 0 ) should be ( StructField( "col0", LongType, false ) )
         struct( 1 ) should be ( StructField( "col1", IntegerType, false ) )
         struct( 2 ) should be ( StructField( "col2", StringType, false ) )
-        struct( 3 ) should be ( StructField( "col3", DecimalType( 10, 2 ), false ) )
+        struct( 3 ) should be ( StructField( "col3", BooleanType, false ) )
+        struct( 4 ) should be ( StructField( "col4", DecimalType( 10, 2 ), false ) )
       }
 
       "support nullable columns" in {
@@ -40,11 +41,11 @@ class SchemaSpec extends WordSpec with Matchers {
     }
 
     "converting rows according to schema" should {
-      "convert long, int, string and decimals fields" in {
-        val headers = Array( "col0[long]", "col1[int]", "col2[string]", "col3[decimal(10:2)]" )
+      "convert long, int, string, boolean and decimals fields" in {
+        val headers = Array( "col0[long]", "col1[int]", "col2[string]", "col3[boolean]", "col4[decimal(10:2)]" )
         val schema = Schema( headers )
 
-        val data = Array( "9223372036854775807", "2147483647", "A string", "99999999.99" )
+        val data = Array( "9223372036854775807", "2147483647", "A string", "true", "99999999.99" )
 
         val x = schema.stringFieldsToAny( data )
 
@@ -57,22 +58,26 @@ class SchemaSpec extends WordSpec with Matchers {
         x( 2 ) shouldBe a[String]
         x( 2 ) should be ( "A string" )
 
-        x( 3 ) shouldBe a[scala.math.BigDecimal]
-        x( 3 ) should be ( BigDecimal( "99999999.99" ) )
+        x( 3 ) shouldBe a[java.lang.Boolean]
+        x( 3 ) shouldEqual ( true )
+
+        x( 4 ) shouldBe a[scala.math.BigDecimal]
+        x( 4 ) should be ( BigDecimal( "99999999.99" ) )
       }
 
       "support nullable columns" in {
-        val headers = Array( "col0[long?]", "col1[int?]", "col2[string?]", "col3[decimal(10:2)?]" )
+        val headers = Array( "col0[long?]", "col1[int?]", "col2[string?]", "col3[boolean?]", "col4[decimal(10:2)?]" )
         val schema = Schema( headers )
 
-        val data = Array( "[NULL]", "[NULL]", "[NULL]", "[NULL]" )
+        val data = Array( "[NULL]", "[NULL]", "[NULL]", "[NULL]", "[NULL]" )
 
         val x = schema.stringFieldsToAny( data )
 
         x( 0 ) should be ( null : java.lang.Long )
         x( 1 ) should be ( null : java.lang.Integer )
         x( 2 ) should be ( null : String )
-        x( 3 ) should be ( null : scala.math.BigDecimal )
+        x( 3 ) should be ( null : java.lang.Boolean )
+        x( 4 ) should be ( null : scala.math.BigDecimal )
       }
 
       "fail if null values are stored in not-null fields" in {

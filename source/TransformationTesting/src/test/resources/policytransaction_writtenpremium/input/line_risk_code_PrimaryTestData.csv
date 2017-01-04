@@ -1,1 +1,2 @@
+risk_code[string],risk_code_pct[decimal(18:2)],line_id[int]
 XP,100.00,1

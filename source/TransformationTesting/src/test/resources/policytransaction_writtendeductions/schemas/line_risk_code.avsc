@@ -1,0 +1,20 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.replicatedsources",
+ 	"type": "record",
+ 	"name": "line_risk_code",
+    "fields": [
+        {
+            "name": "risk_code",
+            "type": ["string", "null"],
+            "doc": "Nullable for purposes of test"
+        },
+    	{
+    		"name": "line_id",
+    		"type": "int"
+    	},
+    	{
+    	    "name": "risk_code_pct",
+    	    "type": "string"
+    	}
+    ]
+}

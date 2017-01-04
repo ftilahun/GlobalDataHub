@@ -1,7 +1,5 @@
 package com.kainos.enstar.TransformationUnitTesting
 
-import java.io.InputStream
-
 import com.databricks.spark.avro._
 import com.kainos.enstar.transformation.{ CsvReader, Schema, StructuredCsvReader }
 import org.apache.spark.rdd.RDD
@@ -39,11 +37,9 @@ class TransformationUnitTestingUtils {
     sqlContext.createDataFrame( rows, reader.schema.structType )
   }
 
-  def loadHQLStatementFromResource( filename : String )() : String = {
-    val stream : InputStream = getClass.getResourceAsStream( "/" + filename )
-    val lines = scala.io.Source.fromInputStream( stream ).mkString
-    stream.close()
-    lines
+  def loadHQLStatementFromResource( filename : String ) : String = {
+    val source = Source.fromURL( getClass.getResource( "/" + filename ) )
+    try source.mkString finally source.close()
   }
 
   def loadRDDFromFile( dataResourceLocation : String )( implicit sqlContext : SQLContext ) : RDD[String] = {
