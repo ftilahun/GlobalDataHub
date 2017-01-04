@@ -1,30 +1,27 @@
 SELECT
 
-    CONCAT(settlement_schedule.layer_id, "-",
-        settlement_schedule.endorsement_id, "-",
-        settlement_schedule.row_number, "-",
-        line_risk_code.risk_code, "-",
-        layer_trust_fund.trust_fund_indicator) AS transactionreference,
+    CONCAT(
+        CAST(line.line_id AS STRING), "-",
+        IF(line_risk_code.risk_code IS NOT NULL, line_risk_code.risk_code, "MISSING"), "-",
+        IF(layer_trust_fund.trust_fund_indicator IS NOT NULL, layer_trust_fund.trust_fund_indicator, "MISSING")) AS transactionreference,
     "NDEX" AS sourcesystemcode,
     CAST(line.line_id AS STRING) AS coveragereference,
     false AS iscashtransactiontype,
-    CAST(
-        IF (line.business_type IN (1,17), 0,
-        settlement_schedule.amount * (line.reporting_line_pct / 100)  *
-        line_risk_code.risk_code_pct * layer_trust_fund.est_premium_split_pct) AS STRING) AS originalamount,
+    CAST(IF (line.business_type IN (1,17), 0,
+        line.slip_income_amount * (line.reporting_line_pct / 100.00)  *
+        line_risk_code.risk_code_pct * layer_trust_fund.est_premium_split_pct) AS DECIMAL(18,6)) AS originalamount,
     layer.premium_ccy AS originalcurrencycode,
     line.risk_reference AS policynumber,
     CAST(line.layer_id AS STRING) AS sectionreference,
-    CAST(
-        IF (line.business_type IN (1,17), 0,
-        settlement_schedule.amount / layer.premium_roe * (line.reporting_line_pct / 100)  *
-        line_risk_code.risk_code_pct * layer_trust_fund.est_premium_split_pct) AS STRING) AS settlementamount,
+    CAST(IF(line.business_type IN (1,17), 0,
+        (line.slip_income_amount / layer.premium_roe )* (line.reporting_line_pct / 100.00)  *
+        line_risk_code.risk_code_pct * layer_trust_fund.est_premium_split_pct ) AS DECIMAL(18,6)) AS settlementamount,
     line.epi_settlement_ccy AS settlementcurrencycode,
-    settlement_schedule.settlement_due_date AS transactiondate,
+    CAST(layer.inception_date AS STRING) AS transactiondate,
     "WrittenPremiumOurShare" AS transactiontypecode,
-    "WrittenPremiumOurShare"AS transactiontypedescription,
-    lookup_premium_type.premium_type_code AS transactionsubtypecode,
-    lookup_premium_type.premium_type_desc AS transactionsubtypedescription,
+    "WrittenPremiumOurShare" AS transactiontypedescription,
+    "WrittenPremiumOurShare" AS transactionsubtypecode,
+    "WrittenPremiumOurShare" AS transactionsubtypedescription,
     line_risk_code.risk_code AS riskcode,
     layer.fil_code AS filcode,
     layer_trust_fund.trust_fund_indicator AS trustfundcode
@@ -34,11 +31,7 @@ FROM
     line
     JOIN layer
     ON layer.layer_id = line.layer_id
-    JOIN settlement_schedule
-    ON line.layer_id = settlement_schedule.layer_id
-    JOIN line_risk_code
+    LEFT JOIN line_risk_code
     ON line.line_id = line_risk_code.line_id
-    JOIN layer_trust_fund
+    LEFT JOIN layer_trust_fund
     ON line.layer_id = layer_trust_fund.layer_id
-    LEFT JOIN lookup_premium_type
-    ON lookup_premium_type.premium_type_code = settlement_schedule.premium_type_code
