@@ -1,4 +1,4 @@
-deductionreference[string],deductionsequence[string?],policynumber[string?],sectionreference[string],coveragereference[string],sourcesystemcode[string],currencycode[string?],deductiontypecode[string?],calculateddeductionamount[decimal(18:6)?],value[decimal(18:6)?],ispercentage[boolean],isnetofprevious[boolean]
+deductionreference[string],deductionsequence[string],policynumber[string?],sectionreference[string],coveragereference[string],sourcesystemcode[string],currencycode[string],deductiontypecode[string?],calculateddeductionamount[decimal(18:6)?],value[decimal(18:6)?],ispercentage[boolean],isnetofprevious[boolean]
 9302-9302-7537,1,077004S05AA,9302,9302,NDEX,CLF,GBK,172.10,10.00,true,true
 9302-9302-7538,3,077004S05AA,9302,9302,NDEX,CLF,GBK,77.445,5.00,true,true
 9302-9302-7539,3,077004S05AA,9302,9302,NDEX,CLF,GBK,154.89,10.00,true,true

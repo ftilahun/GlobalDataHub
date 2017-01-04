@@ -9,8 +9,8 @@ SELECT
     layer_deduction.deduction_code AS deductiontypecode,
     CAST(
         CASE line.business_type
-            WHEN '1' THEN '0'
-            WHEN '17' THEN '0'
+            WHEN 1 THEN '0'
+            WHEN 17 THEN '0'
             ELSE
                 line.slip_income_amount * (line.reporting_line_pct/100)
                 * ((tmptable.net_pct/100) * (layer_deduction.deduction_pct/100))

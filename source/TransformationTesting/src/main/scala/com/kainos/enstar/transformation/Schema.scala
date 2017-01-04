@@ -24,7 +24,6 @@ class Schema( headers : Array[String], ignoreNullable : Boolean = false ) {
             case IntegerType     => field.toInt
             case BooleanType     => field.toBoolean
             case d : DecimalType => BigDecimal( field )
-            case BooleanType     => field.toBoolean
           }
         }
     }
