@@ -259,7 +259,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_LineStatusNotC.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_LineStatusNotEqualC.csv" )
     val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_PrimaryTestData.csv" )
     val submission = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "submission_PrimaryTestData.csv" )
     val risk = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "risk_PrimaryTestData.csv" )

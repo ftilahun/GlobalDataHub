@@ -1,2 +1,2 @@
 layer_id[int],submission_id[int],fil_code[string?],inception_date[string?],expiry_date[string?],unique_market_ref[string?]
-1,10,JAC,2000-07-01 00:00:00.000,,BO456TG
+1,10,JAC,2000-07-01 00:00:00.000,[NULL],BO456TG
