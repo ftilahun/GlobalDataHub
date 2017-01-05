@@ -2,8 +2,7 @@ package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWritte
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.transformation.udf.NetAsPctOfGross
-import com.kainos.enstar.TransformationUnitTesting.{ PolicyTransactionDeductionsUtils, SQLRunner, TransformationUnitTestingUtils }
-import org.apache.spark.sql.{ DataFrame, SQLContext }
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.scalatest.FunSuite
 
 /**
@@ -12,108 +11,31 @@ import org.scalatest.FunSuite
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
-
-  def populateDataFrameWithLineTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/line.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.lineMapping,
-      sqlc
-    )
-  }
-
-  def populateDataFrameWithLayerTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.layerMapping,
-      sqlc
-    )
-  }
-
-  def populateDataFrameWithLayerDeductionTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer_deduction.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.layerDeductionMapping,
-      sqlc
-    )
-  }
-
-  def populateDataFrameWithLayerTrustFundTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/layer_trust_fund.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.layerTrustFundMapping,
-      sqlc
-    )
-  }
-
-  def populateDataFrameWithLineRiskCodeTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/line_risk_code.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.lineRiskCodeMapping,
-      sqlc
-    )
-  }
-
-  def populateDataFrameWithLookupDeductionTypeTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/lookup_deduction_type.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.lookupDeductionTypeMapping,
-      sqlc
-    )
-  }
-
-  def populateDataFrameWithSettlementScheduleTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/input/" + dataFileName ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/settlement_schedule.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.settlementScheduleMapping,
-      sqlc
-    )
-  }
-
-  def populateDataFrameWithPolicyTransactionDeductionsTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policytransaction_writtendeductions/output/" + dataFileName ).toString,
-      getClass.getResource( "/policytransaction_writtendeductions/schemas/policytransactionwrittendeductions.avro" ).toString,
-      _.split( "," ),
-      PolicyTransactionDeductionsUtils.policyTransactionDeductionsMapping,
-      sqlc
-    )
-  }
+  private val testDataInputDirPath = "/policytransaction_writtendeductions/input/"
+  private val testDataOutputDirPath = "/policytransaction_writtendeductions/output/"
+  private val policyTransactionWrittenDeductionsTransformationPath = "Transformation/PolicyTransactionWrittenDeductions.hql"
 
   test( "PolicyTransactionDeductions Transformation mapping happy path data" ){
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
-    val layer_deduction = this.populateDataFrameWithLayerDeductionTestData( "layer_deduction_PrimaryTestData.csv", sqlc )
-    val line_risk_code = this.populateDataFrameWithLineRiskCodeTestData( "line_risk_code_PrimaryTestData.csv", sqlc )
-    val lookup_deduction_type = this.populateDataFrameWithLookupDeductionTypeTestData( "lookup_deduction_type_PrimaryTestData.csv", sqlc )
-    val settlement_schedule = this.populateDataFrameWithSettlementScheduleTestData( "settlement_schedule_PrimaryTestData.csv", sqlc )
-    val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund_PrimaryTestData.csv", sqlc )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_PrimaryTestData.csv" )
+    val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
+    val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
+    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions.csv", sqlc )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )
@@ -136,23 +58,24 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
+    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
-    val layer_deduction = this.populateDataFrameWithLayerDeductionTestData( "layer_deduction_MonotonicSeqMultipleSeqGroups.csv", sqlc )
-    val line_risk_code = this.populateDataFrameWithLineRiskCodeTestData( "line_risk_code_PrimaryTestData.csv", sqlc )
-    val lookup_deduction_type = this.populateDataFrameWithLookupDeductionTypeTestData( "lookup_deduction_type_PrimaryTestData.csv", sqlc )
-    val settlement_schedule = this.populateDataFrameWithSettlementScheduleTestData( "settlement_schedule_PrimaryTestData.csv", sqlc )
-    val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund_PrimaryTestData.csv", sqlc )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_PrimaryTestData.csv" )
+    val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_MonotonicSeqMultipleSeqGroups.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
+    val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
+    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions_MonotonicSeqMultipleSeqGroupscsv", sqlc )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_MonotonicSeqMultipleSeqGroupscsv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )
@@ -175,23 +98,24 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
+    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_PrimaryTestData.csv", sqlc )
-    val layer_deduction = this.populateDataFrameWithLayerDeductionTestData( "layer_deduction_NonMonotonicSeqMultipleSeqGroups.csv", sqlc )
-    val line_risk_code = this.populateDataFrameWithLineRiskCodeTestData( "line_risk_code_PrimaryTestData.csv", sqlc )
-    val lookup_deduction_type = this.populateDataFrameWithLookupDeductionTypeTestData( "lookup_deduction_type_PrimaryTestData.csv", sqlc )
-    val settlement_schedule = this.populateDataFrameWithSettlementScheduleTestData( "settlement_schedule_PrimaryTestData.csv", sqlc )
-    val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund_PrimaryTestData.csv", sqlc )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_PrimaryTestData.csv" )
+    val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_NonMonotonicSeqMultipleSeqGroups.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
+    val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
+    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions_NonMonotonicSeqMultipleSeqGroups.csv", sqlc )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_NonMonotonicSeqMultipleSeqGroups.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )
@@ -214,23 +138,24 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
+    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_RiskReference_SpecialCharacters.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_FILCode_SpecialCharacters.csv", sqlc )
-    val layer_deduction = this.populateDataFrameWithLayerDeductionTestData( "layer_deduction_DeductionCode_SpecialCharacters.csv", sqlc )
-    val line_risk_code = this.populateDataFrameWithLineRiskCodeTestData( "line_risk_code_SpecialCharacters.csv", sqlc )
-    val lookup_deduction_type = this.populateDataFrameWithLookupDeductionTypeTestData( "lookup_deduction_type_DeductionDescription_SpecialCharacters.csv", sqlc )
-    val settlement_schedule = this.populateDataFrameWithSettlementScheduleTestData( "settlement_schedule_SpecialCharacters.csv", sqlc )
-    val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund_Trustfundindicator_SpecialCharacters.csv", sqlc )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_RiskReference_SpecialCharacters.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_FILCode_SpecialCharacters.csv" )
+    val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_DeductionCode_SpecialCharacters.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_SpecialCharacters.csv" )
+    val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_DeductionDescription_SpecialCharacters.csv" )
+    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_SpecialCharacters.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_Trustfundindicator_SpecialCharacters.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions_SpecialCharacters.csv", sqlc )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_SpecialCharacters.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )
@@ -253,23 +178,24 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
+    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val line = this.populateDataFrameWithLineTestData( "line_PrimaryTestData.csv", sqlc )
-    val layer = this.populateDataFrameWithLayerTestData( "layer_Null_FILCode.csv", sqlc )
-    val layer_deduction = this.populateDataFrameWithLayerDeductionTestData( "layer_deduction_PrimaryTestData.csv", sqlc )
-    val line_risk_code = this.populateDataFrameWithLineRiskCodeTestData( "line_risk_code_PrimaryTestData.csv", sqlc )
-    val lookup_deduction_type = this.populateDataFrameWithLookupDeductionTypeTestData( "lookup_deduction_type_PrimaryTestData.csv", sqlc )
-    val settlement_schedule = this.populateDataFrameWithSettlementScheduleTestData( "settlement_schedule_Null_SettlementDueDate.csv", sqlc )
-    val layer_trust_fund = this.populateDataFrameWithLayerTrustFundTestData( "layer_trust_fund_PrimaryTestData.csv", sqlc )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_Null_FILCode.csv" )
+    val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
+    val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
+    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_Null_SettlementDueDate.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = this.populateDataFrameWithPolicyTransactionDeductionsTestData( "policytransactionwrittendeductions_NullValues.csv", sqlc )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_NullValues.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
 
     // Act //
     line.registerTempTable( "line" )
