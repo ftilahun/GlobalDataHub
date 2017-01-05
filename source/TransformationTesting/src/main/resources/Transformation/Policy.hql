@@ -38,11 +38,11 @@ SELECT
     layer.unique_market_ref AS uniquemarketreference,
     YEAR(layer.inception_date) AS yearofaccount,
     line.line_status AS policystatuscode,
-    CAST(line.est_signing_down_pct AS STRING) AS estimatedsignedpercent,
-    CAST(line.signed_order_pct AS STRING) AS signedorderpercent,
-    CAST(line.signed_line_pct AS STRING) AS signedlinepercent,
-    CAST(line.written_line_pct AS STRING) AS writtenlinepercent,
-    CAST(line.written_order_pct AS STRING) AS writtenorderpercent
+    CAST(line.est_signing_down_pct AS DECIMAL(12,7)) AS estimatedsignedpercent,
+    CAST(line.signed_order_pct AS DECIMAL(12,7)) AS signedorderpercent,
+    CAST(line.signed_line_pct AS DECIMAL(12,7)) AS signedlinepercent,
+    CAST(line.written_line_pct AS DECIMAL(12,7)) AS writtenlinepercent,
+    CAST(line.written_order_pct AS DECIMAL(12,7)) AS writtenorderpercent
 
 FROM
 
