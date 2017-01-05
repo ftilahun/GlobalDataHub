@@ -21,7 +21,7 @@ SELECT
     layer.expiry_date AS expirydate,
     layer.fil_code AS filcode,
     layer.inception_date AS inceptiondate,
-    IF(organisation.domicile_country_code IS NOT NULL, CONCAT("[Missing][Missing][Missing][", organisation.domicile_country_code, "]"), NULL) AS insureddomicilecode,
+    CONCAT("[Missing][Missing][Missing][", organisation.domicile_country_code, "]") AS insureddomicilecode,
     CAST(NULL AS STRING) AS legacypolicynumber,
     regexp_extract(lookup_profit_centre.profit_centre_desc, '(^(TIE)|(TIUK)|(Syndicate 1301))', 0) AS legalentitycode,
     line.block AS lineofbusinesscode,
