@@ -1,4 +1,4 @@
-package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransaction
+package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWrittenPremium
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
@@ -26,7 +26,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // in the transform due to the LEFT join on line_risk_code and layer_trust_fund tables.
     val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "policytransaction_PrimaryTestData.csv" )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransaction_WrittenPremium.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenPremium.hql" )
 
     // Act
     line.registerTempTable( "line" )
@@ -55,7 +55,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // in the transform due to the LEFT join on line_risk_code and layer_trust_fund tables.
     val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "policytransaction_VariousNullValues.csv" )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransaction_WrittenPremium.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenPremium.hql" )
 
     // Act //
     line.registerTempTable( "line" )
@@ -85,7 +85,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // in the transform due to the LEFT join on line_risk_code and layer_trust_fund tables.
     val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "policytransaction_AmountAndSettlementCalculation.csv" )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransaction_WrittenPremium.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenPremium.hql" )
 
     // Act //
     line.registerTempTable( "line" )
@@ -115,7 +115,38 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // in the transform due to the LEFT join on line_risk_code and layer_trust_fund tables.
     val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "policytransaction_PrimaryKeyMissingFields.csv" )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransaction_WrittenPremium.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenPremium.hql" )
+
+    // Act //
+    line.registerTempTable( "line" )
+    layer.registerTempTable( "layer" )
+    line_risk_code.registerTempTable( "line_risk_code" )
+    layer_trust_fund.registerTempTable( "layer_trust_fund" )
+
+    val result = SQLRunner.runStatement( hqlStatement, sqlc )
+
+    // Assert //
+    assertDataFrameEquals( expectedPolicyTransaction, result )
+
+  }
+
+  test( "PolicyTransaction_WP_Transformation testing the settlementamount and originalamount calculations when layer_trust_fund is null" ){
+
+    // Arrange //
+    implicit val sqlc = sqlContext
+    sqlContext.sparkContext.setLogLevel( "WARN" )
+
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_BusinessTypeOutsideRange.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_risk_code_PrimaryTestData.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_trust_fund_LayerIdNotInLine.csv" )
+
+    // The values for settlementamount and originalamount have been calculated using the ELSE value of 100 for
+    // layer_trust_fund.est_premium_split_pct as this value comes through as null in this case due to the LEFT JOIN to
+    // the layer_trust_fund table
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "policytransaction_CalculationsWithNullLayerTrustFund.csv" )
+
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenPremium.hql" )
 
     // Act //
     line.registerTempTable( "line" )
