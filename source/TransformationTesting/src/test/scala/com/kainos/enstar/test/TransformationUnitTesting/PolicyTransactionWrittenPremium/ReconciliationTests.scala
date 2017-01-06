@@ -1,4 +1,4 @@
-package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransaction
+package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWrittenPremium
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
@@ -6,7 +6,7 @@ import org.scalatest.FunSuite
 
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "PolicyTransaction - Reconciliation over test data" ) {
+  test( "PolicyTransactionWrittenPremium - Reconciliation over test data" ) {
 
     // Arrange //
     implicit val sqlc = sqlContext
@@ -19,7 +19,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_risk_code_PrimaryTestData.csv" )
 
     // Load the hql statements under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransaction_WrittenPremium.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenPremium.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/PolicyTransaction/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/PolicyTransaction/OutputRecordCount.hql" )
 

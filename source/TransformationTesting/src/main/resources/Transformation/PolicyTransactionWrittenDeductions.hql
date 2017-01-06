@@ -1,5 +1,10 @@
 SELECT
-    CAST(CONCAT(settlement_schedule.layer_id, '-', settlement_schedule.endorsement_id, '-', settlement_schedule.row_number, '-', line_risk_code.risk_code, '-', layer_trust_fund.trust_fund_indicator, '-', layer_deduction.deduction_id) AS STRING) AS transactionreference,
+    CONCAT(
+        CAST(layer.layer_id AS STRING), "-",
+        CAST(line.line_id AS STRING), "-",
+        CAST(layer_deduction.deduction_id AS STRING), "-",
+        IF(line_risk_code.risk_code IS NOT NULL, line_risk_code.risk_code, "MISSING"), "-",
+        IF(layer_trust_fund.trust_fund_indicator IS NOT NULL, layer_trust_fund.trust_fund_indicator, "MISSING")) AS transactionreference,
     "NDEX" AS sourcesystemcode,
     CAST(line.line_id AS STRING) AS coveragereference,
     false AS iscashtransactiontype,
@@ -25,19 +30,19 @@ SELECT
     CAST(layer_trust_fund.trust_fund_indicator AS STRING) AS trustfundcode
 FROM
     line
-    JOIN settlement_schedule
+    INNER JOIN settlement_schedule
     ON line.layer_id = settlement_schedule.layer_id
-    JOIN line_risk_code
+    LEFT JOIN line_risk_code
     ON line.line_id = line_risk_code.line_id
-    JOIN layer_trust_fund
+    LEFT JOIN layer_trust_fund
     ON line.layer_id = layer_trust_fund.layer_id
-    JOIN layer_deduction
+    INNER JOIN layer_deduction
     ON line.layer_id = layer_deduction.layer_id
     LEFT JOIN lookup_deduction_type
     ON layer_deduction.deduction_code = lookup_deduction_type.deduction_code
-    JOIN layer
+    INNER JOIN layer
     ON line.layer_id = layer.layer_id
-    JOIN (SELECT
+    INNER JOIN (SELECT
              ld1.deduction_id,
              ld1.layer_id AS layer_id,
              CAST(net_as_pct_of_gross(ld2.sequence_no,CAST(ld2.deduction_pct AS DECIMAL(18,6))) AS STRING) AS net_pct

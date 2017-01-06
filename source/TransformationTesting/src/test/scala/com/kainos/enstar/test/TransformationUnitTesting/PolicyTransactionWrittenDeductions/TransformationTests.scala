@@ -214,4 +214,43 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   }
 
+  test( "PolicyTransactionDeductions Transformation mapping testing missing value when risk code and trust fund indicator are null" ){
+
+    // Arrange //
+    // Use sqlContext from spark-testing-base
+    implicit val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
+
+    // Load test data into dataframe
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_PrimaryTestData.csv" )
+    val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_Null_RiskCode.csv" )
+    val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
+    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_Null_TrustFundIndicator.csv" )
+
+    // Load expected result into dataframe
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_MissingValues.csv" )
+
+    // Load the hql statement under test
+    val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
+
+    // Act //
+    line.registerTempTable( "line" )
+    layer.registerTempTable( "layer" )
+    layer_deduction.registerTempTable( "layer_deduction" )
+    line_risk_code.registerTempTable( "line_risk_code" )
+    lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
+    settlement_schedule.registerTempTable( "settlement_schedule" )
+    layer_trust_fund.registerTempTable( "layer_trust_fund" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
+
+    val result = SQLRunner.runStatement( statement, sqlc )
+
+    // Assert //
+    assertDataFrameEquals( expectedPolicyTransaction, result )
+
+  }
+
 }

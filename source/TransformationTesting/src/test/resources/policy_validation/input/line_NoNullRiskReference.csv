@@ -1,1 +1,2 @@
+line_id[int],layer_id[int],risk_reference[string?],risk_code[string?],profit_centre_code[int?],block[string?],subblock[string?],line_status[string?],business_type[int?],est_signing_down_pct[decimal(12:7)?],signed_order_pct[decimal(12:7)?],signed_line_pct[decimal(12:7)?],written_line_pct[decimal(12:7)?],written_order_pct[decimal(12:7)?]
 1,1,0000PA44004,XP,1301,AA,05,C,10,80.0000000,95.0000000,0.5400000,3.0000000,100.0000000
