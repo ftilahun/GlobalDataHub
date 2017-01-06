@@ -7,7 +7,7 @@ import org.scalatest.FunSuite
 class ValidationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
-  private val testDataInputPath = "/policy_validation/input/"
+  private val testDataInputPath = "/policy/validation/input/"
 
   test( "Validation: When input contains no null values for risk_reference validation script should return count 0" ) {
 
