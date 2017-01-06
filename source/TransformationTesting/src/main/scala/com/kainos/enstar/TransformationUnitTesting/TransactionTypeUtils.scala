@@ -4,10 +4,6 @@ import org.apache.spark.sql.Row
 
 object TransactionTypeUtils {
 
-  def lookupPremiumTypeMapping( cols : Array[String] ) : Row = {
-    Row( cols( 0 ), cols( 1 ) )
-  }
-
   def lookupDeductionTypeMapping( cols : Array[String] ) : Row = {
     Row( cols( 0 ), cols( 1 ) )
   }

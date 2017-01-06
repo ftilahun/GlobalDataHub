@@ -14,21 +14,11 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
     val utils = new TransformationUnitTestingUtils
 
-    val lookup_premium_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/transactiontype/input/lookup_premium_type.csv" ).toString,
-      getClass.getResource( "/transactiontype/schemas/lookup_premium_type.avro" ).toString,
-      _.split( "," ),
-      TransactionTypeUtils.lookupPremiumTypeMapping,
-      sqlContext
-    )
-
     val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TransactionTypeWrittenPremium.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/TransactionTypeWrittenPremium/InputRecordCounts.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/TransactionTypeWrittenPremium/OutputRecordCounts.hql" )
 
     // Act //
-    lookup_premium_type.registerTempTable( "lookup_premium_type" )
-
     val output = SQLRunner.runStatement( hqlStatement, sqlc )
     output.registerTempTable( "transactiontype" )
 
@@ -50,7 +40,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
       getClass.getResource( "/transactiontype_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" ).toString,
       getClass.getResource( "/transactiontype_writtendeductions/schemas/lookup_deduction_type.avro" ).toString,
       _.split( "," ),
-      TransactionTypeUtils.lookupPremiumTypeMapping,
+      TransactionTypeUtils.lookupDeductionTypeMapping,
       sqlContext
     )
 

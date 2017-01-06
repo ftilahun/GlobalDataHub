@@ -5,22 +5,6 @@ import org.scalatest.{ FlatSpec, Matchers }
 
 class TransactionTypeUtilsTests extends FlatSpec with Matchers {
 
-  "lookupPremiumTypeMapping" should "generate a Row" in {
-
-    // Arrange
-    val column1 = "A"
-    val column2 = "B"
-
-    // Act
-    val row = TransactionTypeUtils.lookupPremiumTypeMapping( Array( column1, column2 ) )
-
-    // Assert
-    assert( row.size == 2 )
-    assert( row.get( 0 ).equals( "A" ) )
-    assert( row.get( 1 ).equals( "B" ) )
-
-  }
-
   "lookupDeductionTypeMapping" should "generate a Row given 2 inputs" in {
 
     // Arrange

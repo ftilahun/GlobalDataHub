@@ -7,40 +7,25 @@ import org.scalatest.FunSuite
 
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
+  val utils = new TransformationUnitTestingUtils
+
   test( "TransactionType-WrittenPremium transformation mapping test" ) {
 
     // Arrange
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
-    val lookup_premium_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/transactiontype/input/lookup_premium_type.csv" ).toString,
-      getClass.getResource( "/transactiontype/schemas/lookup_premium_type.avro" ).toString,
-      _.split( "," ),
-      TransactionTypeUtils.lookupPremiumTypeMapping,
-      sqlc
-    )
-
-    val expectedTransactionType : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/transactiontype/output/transactiontype.csv" ).toString,
-      getClass.getResource( "/transactiontype/schemas/transactiontype.avro" ).toString,
-      _.split( "," ),
-      TransactionTypeUtils.transactionTypeMapping,
-      sqlc
+    val expectedTransactionType : DataFrame = utils.populateDataFrameFromCsvWithHeader(
+      "/transactiontype/output/transactiontype.csv"
     )
 
     val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TransactionTypeWrittenPremium.hql" )
 
     // Act
-    lookup_premium_type.registerTempTable( "lookup_premium_type" )
     val result = SQLRunner.runStatement( hqlStatement, sqlc )
 
     // Assert
     assertDataFrameEquals( expectedTransactionType, result )
-
-    val expectedRowCount = 5
-    assert( expectedTransactionType.count() == expectedRowCount )
 
   }
 
@@ -49,7 +34,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange
     val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
     val lookup_deduction_type : DataFrame = utils.populateDataFrameFromFile(
       getClass.getResource( "/transactiontype_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" ).toString,
@@ -75,9 +59,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Assert
     assertDataFrameEquals( expectedTransactionType, result )
-
-    val expectedRowCount = 5
-    assert( expectedTransactionType.count() == expectedRowCount )
 
   }
 }
