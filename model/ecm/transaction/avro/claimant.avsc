@@ -1,9 +1,21 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+    "namespace": "enstar.datahub.ecm",
  	"type": "record",
  	"name": "claimant",
     "doc": "The claimant associated with the claim",
  	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },
     	{
     		"name": "claimantreference", 
     		"type": "string",
