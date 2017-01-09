@@ -60,4 +60,22 @@ trait UserFunctions extends Serializable {
    */
   def closeRecords(dataFrame: DataFrame,
                    properties: CDCProperties): DataFrame
+
+  /**
+    * Add an 'active' column to the passed in dataframe based on the value of the transaction timestamp
+    * @param dataFrame the dataframe to add the column to
+    * @param properties the properties object
+    * @return a dataframe
+    */
+  def addActiveColumn(dataFrame: DataFrame,
+                      properties: CDCProperties): DataFrame
+
+  /**
+    * drop the active column from the passed in dataframe
+    * @param dataFrame the dataframe to operate on
+    * @param properties the properties object
+    * @return a dataframe
+    */
+  def dropActiveColumn(dataFrame: DataFrame,
+                       properties: CDCProperties): DataFrame
 }
