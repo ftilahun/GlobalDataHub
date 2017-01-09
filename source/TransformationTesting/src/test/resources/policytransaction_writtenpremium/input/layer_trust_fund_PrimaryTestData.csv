@@ -1,2 +1,2 @@
 layer_id[int],trust_fund_indicator[string],est_premium_split_pct[decimal(5:2)]
-1,SL,100.00
+1,SL,50.00

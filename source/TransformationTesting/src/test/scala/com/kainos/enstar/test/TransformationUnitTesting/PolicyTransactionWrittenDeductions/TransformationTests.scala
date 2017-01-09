@@ -306,7 +306,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_LayerIdNotInLine.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_CalculationsWithNullLayerTrustFundAndLineRiskCode.csv" )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_CalculationsWithNullLineRiskCodeAndLayerTrustFund.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
