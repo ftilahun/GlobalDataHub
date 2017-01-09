@@ -34,7 +34,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
     val groupedData =
       userFunctions.groupByTransactionAndKey(changeData, properties)
 
-    logInfo("Droping attunity columns")
+    logInfo("Dropping attunity columns")
     userFunctions.dropAttunityColumns(groupedData, properties)
   }
 
