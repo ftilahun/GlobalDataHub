@@ -341,12 +341,19 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito.when(properties.operationColumnName).thenReturn("header__operation")
     Mockito.when(properties.activeColumnName).thenReturn("active")
 
+    Given("a Dataframe")
     val noBeforeRows = userFunctions.filterBeforeRecords(TestContexts.changeDummyData(10).unionAll(TestContexts.changeDummyData(10)), properties)
+    When("The active column exists")
     val data = userFunctions.addActiveColumn(userFunctions.closeRecords(noBeforeRows, properties), properties)
-
+    Then("The column should be dropped")
     an[AnalysisException] should be thrownBy {
       userFunctions.dropActiveColumn(data, properties).select("active")
     }
+
+    Given("a Dataframe")
+    When("The active column does not exist")
+    Then("No error should occur")
+    userFunctions.dropActiveColumn(TestContexts.dummyData(10), properties)
   }
 
 }
