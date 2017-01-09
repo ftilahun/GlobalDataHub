@@ -4,6 +4,7 @@ import enstar.cdcprocessor.properties.CDCProperties
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.sql.functions._
+import org.joda.time
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 
@@ -163,5 +164,24 @@ class CDCUserFunctions extends UserFunctions {
           col(properties.transactionTimeStampColumnName)
         ))
       .drop(properties.validToColumnName + "old")
+  }
+
+  /**
+    * Filter a dataframe based on a time window, this method filters the passed in DF based on the
+    * value in the transaction timestamp column.
+    * @param dataFrame the dataframe to filter
+    * @param properties the properties object
+    * @param returnMature set to true to only return data that is older than the time window
+    * @return a dataframe
+    */
+  def filterOnTimeWindow(dataFrame: DataFrame, properties: CDCProperties, returnMature: Boolean = true): DataFrame = {
+    val filterBeforeTimeWindow = udf(
+      (timeStampString: String) => {
+        val currentTime = new time.DateTime().minusHours(properties.timeWindowInHours)
+        val timeStamp = DateTimeFormat.forPattern(properties.attunityDateFormat).parseDateTime(timeStampString)
+        timeStamp.isBefore(currentTime) == returnMature
+      }
+    )
+    dataFrame.filter(filterBeforeTimeWindow(dataFrame(properties.transactionTimeStampColumnName)))
   }
 }

@@ -105,6 +105,18 @@ class CommandLinePropertyParser extends PropertyParser[Array[String]] with Loggi
           (a, p) => p.copy(activeColumnName = a)
         )
         .text("the name of the 'active' column")
+      opt[Int]("timeWindowInHours")
+        .required()
+        .action(
+          (t, p) => p.copy(timeWindowInHours = t)
+        )
+        .text("The time window to apply to change data before processing")
+      opt[String]("attunityDateFormat")
+        .required()
+        .action(
+          (a, p) => p.copy(attunityDateFormat = a)
+        )
+        .text("The time format for the attuntiy timestamp column (e.g. YYYY/MM/DD HH:mm:ss.SSS)")
     }
 
   def parse(commandLineArgs: Array[String]): CDCProperties = {

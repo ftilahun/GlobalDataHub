@@ -54,6 +54,10 @@ class CDCProcessorModuleSpec
       "--transactionTimeStampColumnName",
       "A",
       "--activeColumnName",
+      "A",
+      "--timeWindowInHours",
+      "2",
+      "--attunityDateFormat",
       "A"
     )
 

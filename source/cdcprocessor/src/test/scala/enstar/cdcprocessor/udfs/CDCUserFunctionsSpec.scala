@@ -1,18 +1,19 @@
 package enstar.cdcprocessor.udfs
 
-import enstar.cdcprocessor.{ GeneratedData, TestContexts }
+import enstar.cdcprocessor.{GeneratedData, TestContexts}
 import enstar.cdcprocessor.properties.CDCProperties
-import org.apache.spark.sql.{ AnalysisException, Row }
+import org.apache.spark.SparkException
+import org.apache.spark.sql.{AnalysisException, Row}
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.{ DateTime, DateTimeUtils }
+import org.joda.time.{DateTime, DateTimeUtils}
 import org.mockito.Mockito
 import org.mockito.mock.SerializableMode
-import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
+import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
 import org.apache.spark.sql.functions._
 
 /**
- * Unit tests for CDCUserFunctions
- */
+  * Unit tests for CDCUserFunctions
+  */
 class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
   "CDCUserFunctions" should "Return the current time in hive format" in {
@@ -32,9 +33,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     val userFunctions = new CDCUserFunctions
     val properties =
       Mockito.mock(classOf[CDCProperties],
-        Mockito
-          .withSettings()
-          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
 
     Mockito
       .when(properties.transactionIdColumnName)
@@ -97,7 +98,8 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     When("The attunity columns are not present")
     Then("An exception should be raised")
     an[AnalysisException] should be thrownBy {
-      userFunctions.groupByTransactionAndKey(TestContexts.dummyData(10), properties)
+      userFunctions.groupByTransactionAndKey(TestContexts.dummyData(10),
+                                             properties)
     }
   }
 
@@ -105,9 +107,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
     val properties =
       Mockito.mock(classOf[CDCProperties],
-        Mockito
-          .withSettings()
-          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
     Mockito.when(properties.attunityColumnPrefix).thenReturn("header__")
     Given("a user functions object")
     val userFunctions = new CDCUserFunctions
@@ -123,9 +125,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     }
 
     userFunctions
-      .dropAttunityColumns(data, properties).
-      drop("validfrom").
-      drop("validto")
+      .dropAttunityColumns(data, properties)
+      .drop("validfrom")
+      .drop("validto")
       .collect()
       .map {
         case Row(id: Int, value: String) => GeneratedData(id, value)
@@ -147,9 +149,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   "CDCUserFunctions" should "sort a dataframe by business key" in {
     val properties =
       Mockito.mock(classOf[CDCProperties],
-        Mockito
-          .withSettings()
-          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
 
     Mockito.when(properties.idColumnName).thenReturn("header__id")
     val userFunctions = new CDCUserFunctions
@@ -177,9 +179,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   "CDCUserFunctions" should "filter beforeimage rows" in {
     val properties =
       Mockito.mock(classOf[CDCProperties],
-        Mockito
-          .withSettings()
-          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
 
     Mockito.when(properties.idColumnName).thenReturn("header__id")
     Mockito
@@ -199,9 +201,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   "CDCUserFunctions" should "set dates correctly" in {
     val properties =
       Mockito.mock(classOf[CDCProperties],
-        Mockito
-          .withSettings()
-          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
     val userFunctions = new CDCUserFunctions
 
     Mockito.when(properties.operationColumnValueInsert).thenReturn("I")
@@ -212,57 +214,57 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     When("The record has been superseded")
     Then("The record should be closed")
     userFunctions.updateClosedRecord("I",
-      "2016-07-12 12:12:12.0000",
-      "2015-07-12 12:12:12.0000",
-      properties) should be(
-        "2016-07-12 12:12:12.0000")
+                                     "2016-07-12 12:12:12.0000",
+                                     "2015-07-12 12:12:12.0000",
+                                     properties) should be(
+      "2016-07-12 12:12:12.0000")
     When("The record has not been superseded")
     Then("The record should be open")
     userFunctions.updateClosedRecord("I",
-      null,
-      "2015-07-12 12:12:12.0000",
-      properties) should be(
-        "9999-12-31 23:59:59.000")
+                                     null,
+                                     "2015-07-12 12:12:12.0000",
+                                     properties) should be(
+      "9999-12-31 23:59:59.000")
 
     Given("An Update operation")
     When("The record has been superseded")
     Then("The record should be closed")
     userFunctions.updateClosedRecord("U",
-      "2016-07-12 12:12:12.0000",
-      "2015-07-12 12:12:12.0000",
-      properties) should be(
-        "2016-07-12 12:12:12.0000")
+                                     "2016-07-12 12:12:12.0000",
+                                     "2015-07-12 12:12:12.0000",
+                                     properties) should be(
+      "2016-07-12 12:12:12.0000")
     When("The record has not been superseded")
     Then("The record should be open")
     userFunctions.updateClosedRecord("U",
-      null,
-      "2015-07-12 12:12:12.0000",
-      properties) should be(
-        "9999-12-31 23:59:59.000")
+                                     null,
+                                     "2015-07-12 12:12:12.0000",
+                                     properties) should be(
+      "9999-12-31 23:59:59.000")
 
     Given("An delete operation")
     When("The record has been superseded")
     Then("The record should be closed")
     userFunctions.updateClosedRecord("D",
-      "2016-07-12 12:12:12.0000",
-      "2015-07-12 12:12:12.0000",
-      properties) should be(
-        "2015-07-12 12:12:12.0000")
+                                     "2016-07-12 12:12:12.0000",
+                                     "2015-07-12 12:12:12.0000",
+                                     properties) should be(
+      "2015-07-12 12:12:12.0000")
     When("The record has not been superseded")
     Then("The record should be closed")
     userFunctions.updateClosedRecord("D",
-      null,
-      "2015-07-12 12:12:12.0000",
-      properties) should be(
-        "2015-07-12 12:12:12.0000")
+                                     null,
+                                     "2015-07-12 12:12:12.0000",
+                                     properties) should be(
+      "2015-07-12 12:12:12.0000")
   }
 
   "CDCUserFunctions" should "close records" in {
     val properties =
       Mockito.mock(classOf[CDCProperties],
-        Mockito
-          .withSettings()
-          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
     val userFunctions = new CDCUserFunctions
 
     Mockito.when(properties.operationColumnValueInsert).thenReturn("I")
@@ -270,24 +272,34 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito.when(properties.operationColumnValueDelete).thenReturn("D")
     Mockito.when(properties.operationColumnValueBefore).thenReturn("B")
     Mockito.when(properties.idColumnName).thenReturn("id")
-    Mockito.when(properties.transactionTimeStampColumnName).thenReturn("header__timeStamp")
+    Mockito
+      .when(properties.transactionTimeStampColumnName)
+      .thenReturn("header__timeStamp")
     Mockito.when(properties.validToColumnName).thenReturn("validto")
     Mockito.when(properties.validFromColumnName).thenReturn("validfrom")
-    Mockito.when(properties.operationColumnName).thenReturn("header__operation")
+    Mockito
+      .when(properties.operationColumnName)
+      .thenReturn("header__operation")
 
-    val noBeforeRows = userFunctions.filterBeforeRecords(TestContexts.changeDummyData(10).unionAll(TestContexts.changeDummyData(10)), properties)
+    val noBeforeRows = userFunctions.filterBeforeRecords(
+      TestContexts
+        .changeDummyData(10)
+        .unionAll(TestContexts.changeDummyData(10)),
+      properties)
     val data = userFunctions.closeRecords(noBeforeRows, properties).collect()
 
     for (i <- 0 until data.length - 1) {
       //updates
-      if (data(i).getString(2).contains("U") && data(i).getInt(0) == data(i + 1).getInt(0)) {
-        data(i).getString(8) should be (data(i + 1).getString(7))
+      if (data(i).getString(2).contains("U") && data(i).getInt(0) == data(
+            i + 1).getInt(0)) {
+        data(i).getString(8) should be(data(i + 1).getString(7))
       } //inserts
-      else if (data(i).getString(2).contains("I") && data(i).getInt(0) == data(i + 1).getInt(0)) {
-        data(i).getString(8) should be (data(i + 1).getString(7))
+      else if (data(i).getString(2).contains("I") && data(i).getInt(0) == data(
+                 i + 1).getInt(0)) {
+        data(i).getString(8) should be(data(i + 1).getString(7))
       } //deletes
       else if (data(i).getString(2).contains("D")) {
-        data(i).getString(8) should be (data(i).getString(3))
+        data(i).getString(8) should be(data(i).getString(3))
       }
     }
   }
@@ -295,9 +307,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   "CDCUserFunctions" should "Add an active column to a dataframe" in {
     val properties =
       Mockito.mock(classOf[CDCProperties],
-        Mockito
-          .withSettings()
-          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
     val userFunctions = new CDCUserFunctions
 
     Mockito.when(properties.operationColumnValueInsert).thenReturn("I")
@@ -305,19 +317,31 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito.when(properties.operationColumnValueDelete).thenReturn("D")
     Mockito.when(properties.operationColumnValueBefore).thenReturn("B")
     Mockito.when(properties.idColumnName).thenReturn("id")
-    Mockito.when(properties.transactionTimeStampColumnName).thenReturn("header__timeStamp")
+    Mockito
+      .when(properties.transactionTimeStampColumnName)
+      .thenReturn("header__timeStamp")
     Mockito.when(properties.validToColumnName).thenReturn("validto")
     Mockito.when(properties.validFromColumnName).thenReturn("validfrom")
-    Mockito.when(properties.operationColumnName).thenReturn("header__operation")
+    Mockito
+      .when(properties.operationColumnName)
+      .thenReturn("header__operation")
     Mockito.when(properties.activeColumnName).thenReturn("active")
 
-    val noBeforeRows = userFunctions.filterBeforeRecords(TestContexts.changeDummyData(10).unionAll(TestContexts.changeDummyData(10)), properties)
-    val data = userFunctions.addActiveColumn(userFunctions.closeRecords(noBeforeRows, properties), properties)
-    data.collect().foreach{ row =>
-      if (row.getAs[String]("validto").equalsIgnoreCase(userFunctions.activeDate)) {
-        row.getAs[Boolean]("active") should be (true)
+    val noBeforeRows = userFunctions.filterBeforeRecords(
+      TestContexts
+        .changeDummyData(10)
+        .unionAll(TestContexts.changeDummyData(10)),
+      properties)
+    val data = userFunctions.addActiveColumn(
+      userFunctions.closeRecords(noBeforeRows, properties),
+      properties)
+    data.collect().foreach { row =>
+      if (row
+            .getAs[String]("validto")
+            .equalsIgnoreCase(userFunctions.activeDate)) {
+        row.getAs[Boolean]("active") should be(true)
       } else {
-        row.getAs[Boolean]("active") should be (false)
+        row.getAs[Boolean]("active") should be(false)
       }
     }
   }
@@ -325,9 +349,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   "CDCUserFunctions" should "drop the active column from a dataframe" in {
     val properties =
       Mockito.mock(classOf[CDCProperties],
-        Mockito
-          .withSettings()
-          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
     val userFunctions = new CDCUserFunctions
 
     Mockito.when(properties.operationColumnValueInsert).thenReturn("I")
@@ -335,16 +359,26 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito.when(properties.operationColumnValueDelete).thenReturn("D")
     Mockito.when(properties.operationColumnValueBefore).thenReturn("B")
     Mockito.when(properties.idColumnName).thenReturn("id")
-    Mockito.when(properties.transactionTimeStampColumnName).thenReturn("header__timeStamp")
+    Mockito
+      .when(properties.transactionTimeStampColumnName)
+      .thenReturn("header__timeStamp")
     Mockito.when(properties.validToColumnName).thenReturn("validto")
     Mockito.when(properties.validFromColumnName).thenReturn("validfrom")
-    Mockito.when(properties.operationColumnName).thenReturn("header__operation")
+    Mockito
+      .when(properties.operationColumnName)
+      .thenReturn("header__operation")
     Mockito.when(properties.activeColumnName).thenReturn("active")
 
     Given("a Dataframe")
-    val noBeforeRows = userFunctions.filterBeforeRecords(TestContexts.changeDummyData(10).unionAll(TestContexts.changeDummyData(10)), properties)
+    val noBeforeRows = userFunctions.filterBeforeRecords(
+      TestContexts
+        .changeDummyData(10)
+        .unionAll(TestContexts.changeDummyData(10)),
+      properties)
     When("The active column exists")
-    val data = userFunctions.addActiveColumn(userFunctions.closeRecords(noBeforeRows, properties), properties)
+    val data = userFunctions.addActiveColumn(
+      userFunctions.closeRecords(noBeforeRows, properties),
+      properties)
     Then("The column should be dropped")
     an[AnalysisException] should be thrownBy {
       userFunctions.dropActiveColumn(data, properties).select("active")
@@ -356,4 +390,111 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     userFunctions.dropActiveColumn(TestContexts.dummyData(10), properties)
   }
 
+  "CDCUserFunctions" should "filter data on a time Window" in {
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+                   Mockito
+                     .withSettings()
+                     .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+    val userFunctions = new CDCUserFunctions
+
+    Mockito.when(properties.timeWindowInHours).thenReturn(1)
+    Mockito
+      .when(properties.attunityDateFormat)
+      .thenReturn("YYYY-MM-DD HH:mm:ss.SSS")
+    Mockito
+      .when(properties.transactionTimeStampColumnName)
+      .thenReturn("header__timeStamp")
+
+    val afterTime = udf(
+      () =>
+        DateTimeFormat
+          .forPattern(properties.attunityDateFormat)
+          .print(new DateTime()))
+    val beforeTime = udf(
+      () =>
+        DateTimeFormat
+          .forPattern(properties.attunityDateFormat)
+          .print(new DateTime().minusHours(1)))
+    val beforeTime1 = udf(
+      () =>
+        DateTimeFormat
+          .forPattern(properties.attunityDateFormat)
+          .print(new DateTime().minusHours(properties.timeWindowInHours + 1)))
+    val beforeTime2 = udf(
+      () =>
+        DateTimeFormat
+          .forPattern(properties.attunityDateFormat)
+          .print(new DateTime().minusHours(properties.timeWindowInHours + 2)))
+    val beforeTime3 = udf(
+      () =>
+        DateTimeFormat
+          .forPattern(properties.attunityDateFormat)
+          .print(new DateTime().minusHours(properties.timeWindowInHours + 3)))
+    val beforeTime4 = udf(
+      () =>
+        DateTimeFormat
+          .forPattern(properties.attunityDateFormat)
+          .print(new DateTime().minusHours(properties.timeWindowInHours + 4)))
+    val beforeTime5 = udf(
+      () =>
+        DateTimeFormat
+          .forPattern(properties.attunityDateFormat)
+          .print(new DateTime().minusHours(properties.timeWindowInHours + 5)))
+    val junkTime = udf(() => "VertWuzEre")
+
+    Given("A Dataframe")
+    val data = TestContexts
+      .changeDummyData(12)
+      .drop("header__timeStamp")
+      .withColumn("header__timeStamp", afterTime())
+      .unionAll(
+        TestContexts
+          .changeDummyData(2)
+          .drop("header__timeStamp")
+          .withColumn("header__timeStamp", beforeTime()))
+      .unionAll(
+        TestContexts
+          .changeDummyData(2)
+          .drop("header__timeStamp")
+          .withColumn("header__timeStamp", beforeTime1()))
+      .unionAll(
+        TestContexts
+          .changeDummyData(2)
+          .drop("header__timeStamp")
+          .withColumn("header__timeStamp", beforeTime2()))
+      .unionAll(TestContexts
+        .changeDummyData(2)
+        .drop("header__timeStamp")
+        .withColumn("header__timeStamp", beforeTime3()))
+      .unionAll(TestContexts
+        .changeDummyData(2)
+        .drop("header__timeStamp")
+        .withColumn("header__timeStamp", beforeTime4()))
+      .unionAll(TestContexts
+        .changeDummyData(2)
+        .drop("header__timeStamp")
+        .withColumn("header__timeStamp", beforeTime5()))
+
+    When("returnMature is true")
+    Then("New records should be filtered")
+    userFunctions.filterOnTimeWindow(data, properties).count() should be(10)
+    When("returnMature is false")
+    Then("Old records should be filtered")
+    userFunctions
+      .filterOnTimeWindow(data, properties, returnMature = false)
+      .count() should be(14)
+
+    Given("A Dataframe")
+    When("The date cannot be parsed")
+    Then("An error should be raised")
+    an[SparkException] should be thrownBy {
+      userFunctions.filterOnTimeWindow(
+        TestContexts
+          .changeDummyData(2)
+          .drop("header__timeStamp")
+          .withColumn("header__timeStamp", junkTime()),
+        properties).count()
+    }
+  }
 }

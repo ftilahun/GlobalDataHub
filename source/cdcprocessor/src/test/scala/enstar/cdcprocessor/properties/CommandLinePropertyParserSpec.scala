@@ -43,6 +43,10 @@ class CommandLinePropertyParserSpec
       "--transactionTimeStampColumnName",
       "A",
       "--activeColumnName",
+      "A",
+      "--timeWindowInHours",
+      "2",
+      "--attunityDateFormat",
       "A"
     )
     When("The argument list is complete")
