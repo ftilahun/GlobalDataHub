@@ -30,7 +30,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
       properties.changeInputDir,
       Some(StorageLevel.MEMORY_AND_DISK_SER))
 
-    logInfo("Getting net changes")
+    logInfo("Getting transaction change records")
     val groupedData =
       userFunctions.groupByTransactionAndKey(changeData, properties)
 
