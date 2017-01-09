@@ -33,10 +33,10 @@ class CommandLinePropertyParser extends PropertyParser[Array[String]] with Loggi
           (i, p) => p.copy(idColumnName = i)
         )
         .text("The name of the id column")
-      opt[String]("transactionColumnName")
+      opt[String]("transactionIdColumnName")
         .required()
         .action(
-          (t, p) => p.copy(transactionColumnName = t)
+          (t, p) => p.copy(transactionIdColumnName = t)
         )
         .text("The name of the transaction column")
       opt[String]("changeSequenceColumnName")

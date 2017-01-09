@@ -5,7 +5,10 @@ SELECT
     "NDEX" AS sourcesystemcode,
     "RiskCode" AS analysiscodetype,
     line_risk_code.risk_code AS analysiscode,
-    line_risk_code.risk_code_pct AS splitpercent
+    lookup_risk_code.risk_code_desc AS analysiscodedescription,
+    CAST(line_risk_code.risk_code_pct AS DECIMAL(12,7)) AS splitpercent
 FROM line
     JOIN line_risk_code
     ON line.line_id = line_risk_code.line_id
+    JOIN lookup_risk_code
+    ON line_risk_code.risk_code = lookup_risk_code.risk_code

@@ -1,0 +1,6 @@
+policynumber[string],sectionreference[string],coveragereference[string],sourcesystemcode[string],analysiscodetype[string],analysiscode[string],analysiscodedescription[string?],splitpercent[decimal(12:7)?]
+0004PAA,1,123,NDEX,RiskCode,XA,Cash in Transit,70.00
+0004PAA,1,123,NDEX,RiskCode,XC,Mortgage Indemnity,90.00
+0004PAA,1,123,NDEX,RiskCode,XD,Armoured Carriers,80.00
+0004PAA,1,123,NDEX,RiskCode,XO,Computer Crime,60.00
+0004PAA,1,123,NDEX,RiskCode,XP,Terrorism Pool,100.00

@@ -1,8 +1,8 @@
 package enstar.cdcprocessor.udfs
 
-import enstar.cdcprocessor.{ Data, TestContexts }
+import enstar.cdcprocessor.{ GeneratedData, TestContexts }
 import enstar.cdcprocessor.properties.CDCProperties
-import org.apache.spark.sql.Row
+import org.apache.spark.sql.{ AnalysisException, Row }
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.{ DateTime, DateTimeUtils }
 import org.mockito.Mockito
@@ -29,7 +29,6 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
   }
 
   "CDCUserFunctions" should "Group changes by transaction" in {
-
     val userFunctions = new CDCUserFunctions
     val properties =
       Mockito.mock(classOf[CDCProperties],
@@ -38,7 +37,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
           .serializable(SerializableMode.ACROSS_CLASSLOADERS))
 
     Mockito
-      .when(properties.transactionColumnName)
+      .when(properties.transactionIdColumnName)
       .thenReturn("header__transaction")
 
     Mockito
@@ -93,6 +92,13 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
           .withColumn("newid", id2(data("id"))),
         properties)
       .count should be(2)
+
+    Given("a user functions object")
+    When("The attunity columns are not present")
+    Then("An exception should be raised")
+    an[AnalysisException] should be thrownBy {
+      userFunctions.groupByTransactionAndKey(TestContexts.dummyData(10), properties)
+    }
   }
 
   "CDCUserFunctions" should "Drop attunity columns" in {
@@ -112,7 +118,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Then("attunity columns should be dropped")
     an[scala.MatchError] should be thrownBy {
       data.collect().map {
-        case Row(id: Int, value: String) => Data(id, value)
+        case Row(id: Int, value: String) => GeneratedData(id, value)
       }
     }
 
@@ -122,7 +128,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       drop("validto")
       .collect()
       .map {
-        case Row(id: Int, value: String) => Data(id, value)
+        case Row(id: Int, value: String) => GeneratedData(id, value)
       }
       .length should be(10)
 
@@ -133,7 +139,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       .dropAttunityColumns(nodata, properties)
       .collect()
       .map {
-        case Row(id: Int, value: String) => Data(id, value)
+        case Row(id: Int, value: String) => GeneratedData(id, value)
       }
       .length should be(0)
   }

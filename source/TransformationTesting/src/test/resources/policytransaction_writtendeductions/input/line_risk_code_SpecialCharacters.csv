@@ -1,0 +1,2 @@
+risk_code[string?],line_id[int],risk_code_pct[decimal(18:2)]
+X!@3,1,15.0

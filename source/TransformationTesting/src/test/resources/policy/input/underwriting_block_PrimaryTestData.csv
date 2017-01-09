@@ -1,1 +1,2 @@
+block[string],subblock[string],description[string?]
 AA,05,Affinity

@@ -31,7 +31,7 @@ class CDCProcessorModuleSpec
       "a",
       "--idColumnName",
       "i",
-      "--transactionColumnName",
+      "--transactionIdColumnName",
       "t",
       "--changeSequenceColumnName",
       "c",

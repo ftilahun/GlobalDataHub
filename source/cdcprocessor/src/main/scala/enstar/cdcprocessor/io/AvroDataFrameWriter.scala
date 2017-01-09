@@ -22,11 +22,13 @@ class AvroDataFrameWriter extends Logging with DataFrameWriter {
             path: String,
             data: DataFrame,
             storageLevel: Option[StorageLevel]): Long = {
+
     if (storageLevel.isDefined) {
       logInfo(
         s"Persisting dataframe at storage level ${storageLevel.toString}")
       data.persist(storageLevel.get)
     }
+
     logInfo(s"Saving to path: $path")
     import com.databricks.spark.avro._
     data.write.avro(new Path(path).toString)

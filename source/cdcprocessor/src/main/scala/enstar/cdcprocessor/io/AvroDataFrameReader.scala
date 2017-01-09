@@ -24,6 +24,7 @@ class AvroDataFrameReader extends Logging with DataFrameReader {
     logInfo(s"reading from path: $path")
     import com.databricks.spark.avro._
     val data = sqlContext.read.avro(new Path(path).toString)
+
     if (storageLevel.isDefined) {
       logInfo(
         s"Persisting dataframe at storage level ${storageLevel.toString}")

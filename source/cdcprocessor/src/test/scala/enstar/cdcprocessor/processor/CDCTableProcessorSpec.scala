@@ -1,13 +1,13 @@
 package enstar.cdcprocessor.processor
 
 import enstar.cdcprocessor.TestContexts
-import enstar.cdcprocessor.io.{DataFrameReader, DataFrameWriter}
+import enstar.cdcprocessor.io.{ DataFrameReader, DataFrameWriter }
 import enstar.cdcprocessor.properties.CDCProperties
 import enstar.cdcprocessor.udfs.UserFunctions
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito
-import org.scalatest.{FlatSpec, GivenWhenThen, Matchers}
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CDCTableProcessor
@@ -23,7 +23,7 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Given("A table processor")
     val tableProcessor = new CDCTableProcessor
     When("process is called")
-    tableProcessor.processChangeData(TestContexts.changeDummyData(10),properties, userFunctions)
+    tableProcessor.processChangeData(TestContexts.changeDummyData(10), properties, userFunctions)
 
     Then("Transactions should be grouped for net changes")
     Mockito

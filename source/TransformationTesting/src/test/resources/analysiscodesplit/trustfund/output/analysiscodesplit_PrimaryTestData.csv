@@ -1,0 +1,6 @@
+policynumber[string],sectionreference[string],coveragereference[string],sourcesystemcode[string],analysiscodetype[string],analysiscode[string],analysiscodedescription[string],splitpercent[decimal(12:7)?]
+0004PAA,11,1,NDEX,TrustFund,SL,Surplus Lines,100.00
+0004PAA,12,2,NDEX,TrustFund,NR,Non Regulated,90.00
+0004PAA,13,3,NDEX,TrustFund,SL,Surplus Lines,80.00
+0004PAA,14,4,NDEX,TrustFund,KY,Kentucky & Other,70.00
+0004PAA,15,5,NDEX,TrustFund,SL,Surplus Lines,60.00

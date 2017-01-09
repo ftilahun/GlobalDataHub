@@ -1,6 +1,6 @@
 package enstar.cdcprocessor.io
 
-import org.apache.hadoop.fs.PathNotFoundException
+import enstar.cdcprocessor.exceptions.DataFrameReadException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.Logging
 import org.apache.spark.sql.{ DataFrame, SQLContext }
@@ -34,7 +34,7 @@ class CDCDataFrameReader(reader: DataFrameReader)
       //a more readable exception
       case e: InvalidInputException =>
         logError(e.getMessage)
-        throw new PathNotFoundException(path)
+        throw new DataFrameReadException(path)
     }
   }
 

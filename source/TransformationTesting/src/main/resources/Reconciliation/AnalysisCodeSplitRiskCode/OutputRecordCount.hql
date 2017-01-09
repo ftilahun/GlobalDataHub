@@ -1,4 +1,6 @@
 SELECT
-    COUNT(*)
+    COUNT(policynumber) AS recordcount
 FROM
     analysiscodesplit
+WHERE
+    analysiscodetype = "RiskCode"

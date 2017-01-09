@@ -20,7 +20,7 @@ class CommandLinePropertyParserSpec
       "a",
       "--idColumnName",
       "i",
-      "--transactionColumnName",
+      "--transactionIdColumnName",
       "t",
       "--changeSequenceColumnName",
       "c",
@@ -52,7 +52,7 @@ class CommandLinePropertyParserSpec
     props.changeInputDir should be("c")
     props.changeSequenceColumnName should be("c")
     props.idColumnName should be("i")
-    props.transactionColumnName should be("t")
+    props.transactionIdColumnName should be("t")
   }
 
   "CommandLinePropertyParser" should "Throw when unable to parse command line options" in {
@@ -64,7 +64,7 @@ class CommandLinePropertyParserSpec
       "a",
       "--idColumnName",
       "i",
-      "--transactionColumnName",
+      "--transactionIdColumnName",
       "t"
     )
     When("The argument list is incomplete")

@@ -23,15 +23,17 @@ class CDCTableProcessor extends TableProcessor with Logging {
   def processChangeData(changeData: DataFrame,
                         properties: CDCProperties,
                         userFunctions: UserFunctions): DataFrame = {
-    logInfo("Getting net changes")
-    val newVals = userFunctions.filterBeforeRecords(changeData, properties)
-    logInfo("Dropping attunity columns")
-    val groupedData =
-      userFunctions.groupByTransactionAndKey(newVals, properties)
+    logInfo("Removing before image records")
+    val filteredBeforeRecords = userFunctions.filterBeforeRecords(changeData, properties)
+
+    logInfo("Getting transaction change records")
+    val groupedRecords =
+      userFunctions.groupByTransactionAndKey(filteredBeforeRecords, properties)
+
     logInfo("Closing records")
-    val groupedWithDates = userFunctions.closeRecords(groupedData, properties)
+    val openAndClosedRecords = userFunctions.closeRecords(groupedRecords, properties)
     logInfo("Dropping attunity columns")
-    userFunctions.dropAttunityColumns(groupedWithDates, properties)
+    userFunctions.dropAttunityColumns(openAndClosedRecords, properties)
   }
 
   /**
@@ -54,7 +56,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
   }
 
   /**
-   * Process an source table
+   * Process a source table
    *
    * @param sqlContext    the sql context
    * @param properties    the properties object
@@ -72,6 +74,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
     val changeData = reader.read(sqlContext,
       properties.changeInputDir,
       Some(StorageLevel.MEMORY_AND_DISK_SER))
+    logInfo("Processing changes")
     val processed = processChangeData(changeData, properties, userFunctions)
     logInfo("Saving table")
     save(sqlContext, writer, properties, processed)

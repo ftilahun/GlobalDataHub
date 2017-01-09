@@ -1,0 +1,6 @@
+transactionreference[string?],sourcesystemcode[string],coveragereference[string?],iscashtransactiontype[boolean],originalamount[decimal(18:6)?],originalcurrencycode[string?],policynumber[string?],sectionreference[string?],settlementamount[decimal(18:6)?],settlementcurrencycode[string?],transactiondate[string?],transactiontypecode[string],transactiontypedescription[string],transactionsubtypecode[string?],transactionsubtypedescription[string?],filcode[string?],riskcode[string?],trustfundcode[string?]
+2-1-1-XP-SL,NDEX,1,false,1000.0000,AAA1,00PA15,2,1000.0000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,IDA,% IDA,AUD,XP,SL
+2-1-3-XP-SL,NDEX,1,false,1800.0000,AAA1,00PA15,2,1800.0000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,BKR,Brokerage,AUD,XP,SL
+2-1-6-XP-SL,NDEX,1,false,1458.0000,AAA1,00PA15,2,1458.0000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,SFE,Survey Fees,AUD,XP,SL
+2-1-4-XP-SL,NDEX,1,false,1800.0000,AAA1,00PA15,2,1800.0000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,OTH,Other,AUD,XP,SL
+2-1-7-XP-SL,NDEX,1,false,1103.7600,AAA1,00PA15,2,1103.7600,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,LVY,Levy,AUD,XP,SL
