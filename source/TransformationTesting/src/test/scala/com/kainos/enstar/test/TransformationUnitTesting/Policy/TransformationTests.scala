@@ -29,7 +29,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val underwriting_block = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "underwriting_block_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicy = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "policy_PrimaryTestData.csv")
+    val expectedPolicy = utils.populateDataFrameFromCsvWithHeader( testDataOutputPath + "policy_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( policyTransformation )
@@ -61,8 +61,8 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     // Load test data into dataframe
     val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_PrimaryTestData.csv" )
     val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_NullInceptionDate.csv" )
-    val submission = utils.populateDataFrameFromCsvWithHeader ( testDataInputPath + "submission_PrimaryTestData.csv")
-    val risk = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "risk_PrimaryTestData.csv")
+    val submission = utils.populateDataFrameFromCsvWithHeader ( testDataInputPath + "submission_PrimaryTestData.csv" )
+    val risk = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "risk_PrimaryTestData.csv" )
     val organisation = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "organisation_PrimaryTestData.csv" )
     val lookup_block = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_block_PrimaryTestData.csv" )
     val lookup_business_type = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_business_type_PrimaryTestData.csv" )
