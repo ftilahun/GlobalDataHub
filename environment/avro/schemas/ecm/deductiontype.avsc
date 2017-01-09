@@ -1,0 +1,23 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+    "type": "record",
+    "name": "deductiontype",
+    "fields": [
+        {
+            "name": "deductiontypecode",
+            "type": "string"
+        },
+        {
+            "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "deductiontypedescription",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "group",
+            "type": ["null", "string"]
+        }
+    ]
+}

@@ -1,0 +1,143 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.ecm ",
+ 	"type": "record",
+ 	"name": "policy",
+ 	"fields": [
+    	{
+    		"name": "policynumber", 
+    		"type": "string"
+    	},
+    	{
+    		"name": "coveragereference",  
+    		"type": "string"
+    	},
+        {
+            "name": "sectionreference",  
+            "type": "string"
+        },
+        {
+            "name": "sourcesystemcode",  
+            "type": "string"
+        },
+        {
+            "name": "branchcode",  
+            "type": ["null", "string"]
+        },
+        {
+            "name": "branchdescription",  
+            "type": ["null", "string"]
+        },
+        {
+            "name": "cancellationdate",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "coverageeffectivefromdate",  
+            "type": ["string","null"]
+        },
+        {
+            "name": "coverageeffectivetodate",  
+            "type": ["string","null"]
+        },
+        {
+            "name": "expirydate",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "filcode",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "inceptiondate",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "insureddomicilecode",
+            "type": ["string","null"]
+        },
+        {
+            "name": "legacypolicynumber",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "legalentitycode",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "lineofbusinesscode",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "lineofbusinessdescription",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "linkedmasterreference",  
+            "type": ["string","null"]
+        },
+        {
+            "name": "majorriskcode",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "majortrustfundcode",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "methodofplacementcode",
+            "type": ["string","null"]
+        },
+        {
+            "name": "methodofplacementdescription",
+            "type": ["string", "null"]
+        },
+        {
+            "name": "risklocationcode",
+            "type": ["string","null"]
+        },
+        {
+            "name": "sourcesystempolicynumber",  
+            "type": ["string","null"]
+        },
+        {
+            "name": "sublineofbusinesscode",  
+            "type": ["string","null"]
+        },
+        {
+            "name": "sublineofbusinessdescription",  
+            "type": ["string","null"]
+        },
+        {
+            "name": "uniquemarketreference",  
+            "type": ["string", "null"]
+        },
+        {
+            "name": "yearofaccount",  
+            "type": ["int", "null"]
+        },
+        {
+            "name": "policystatuscode",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "estimatedsignedpercent",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "signedorderpercent",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "signedlinepercent",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "writtenlinepercent",
+            "type": ["null", "string"]
+        },
+        {
+             "name": "writtenorderpercent",
+             "type": ["null", "string"]
+        }
+ 	]
+}
