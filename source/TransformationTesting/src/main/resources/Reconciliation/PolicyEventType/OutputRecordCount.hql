@@ -1,3 +1,3 @@
 SELECT
-    COUNT(policyeventtypeCode) AS recordcount
+    COUNT(policyeventtypecode) AS recordcount
 FROM policyeventtype
