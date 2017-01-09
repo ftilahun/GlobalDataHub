@@ -1,0 +1,4 @@
+policyeventtypecode[string],sourcesystemcode[string],policyeventtypedescription[string]
+A,NDEX,Assd declined to renew
+D,NDEX,Declined to Quote
+N,NDEX,Not Seen
