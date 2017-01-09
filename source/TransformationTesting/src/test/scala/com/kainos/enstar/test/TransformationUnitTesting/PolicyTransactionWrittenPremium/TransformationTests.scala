@@ -2,7 +2,6 @@ package com.kainos.enstar.test.TransformationUnitTesting.PolicyTransactionWritte
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
-import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
