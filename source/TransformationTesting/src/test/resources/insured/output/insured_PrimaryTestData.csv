@@ -1,4 +1,4 @@
-insuredcode[string],sourcesystemcode[string],insuredlegalname[string],insuredname[string]
+insuredcode[string],sourcesystemcode[string],insuredlegalname[string?],insuredname[string?]
 1,NDEX,INSURANCE COMPANY LTD,INSURANCE COMPANY LTD
 123,NDEX,WESTCOAST INSURANCE 2000,WESTCOAST INSURANCE 2000
 99999,NDEX,A.R.H INSURANCE,A.R.H INSURANCE
