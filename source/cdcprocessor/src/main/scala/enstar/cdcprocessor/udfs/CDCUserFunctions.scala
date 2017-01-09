@@ -28,6 +28,7 @@ class CDCUserFunctions extends UserFunctions {
    */
   def groupByTransactionAndKey(df: DataFrame,
                                properties: CDCProperties): DataFrame = {
+    val changeNumberColName = "changeNumber"
     val changeNumber = udf(
       (s: String) => {
         //the length of the date string in the attunity change sequence
@@ -36,16 +37,16 @@ class CDCUserFunctions extends UserFunctions {
       }
     )
     val grouped = df
-      .withColumn(properties.attunityColumnPrefix + "changeNumber",
+      .withColumn(properties.attunityColumnPrefix + changeNumberColName,
         changeNumber(df(properties.changeSequenceColumnName)))
       .groupBy(
         df(properties.transactionIdColumnName),
         df(properties.idColumnName)
       )
-      .max(properties.attunityColumnPrefix + "changeNumber")
+      .max(properties.attunityColumnPrefix + changeNumberColName)
     df.join(grouped,
       changeNumber(df(properties.changeSequenceColumnName)) === grouped(
-        s"max(${properties.attunityColumnPrefix}changeNumber)") &&
+        s"max(${properties.attunityColumnPrefix}$changeNumberColName)") &&
         df(properties.transactionIdColumnName) === grouped(
           properties.transactionIdColumnName),
       "inner")
