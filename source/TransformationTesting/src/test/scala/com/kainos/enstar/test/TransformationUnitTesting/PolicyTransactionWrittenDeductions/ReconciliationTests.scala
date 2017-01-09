@@ -6,9 +6,6 @@ import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUn
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
-/**
- * Created by sionam on 07/12/2016.
- */
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   test( "Reconciliation over test data" ) {
