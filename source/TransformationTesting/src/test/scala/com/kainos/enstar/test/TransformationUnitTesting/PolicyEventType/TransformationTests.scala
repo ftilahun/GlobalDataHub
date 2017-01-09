@@ -6,22 +6,26 @@ import org.scalatest.FunSuite
 
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
-  test( "PolicyEventTypeTransformation tes with Primary data" ){
+  private val utils = new TransformationUnitTestingUtils
+  private val testDataInputDirPath = "/policyeventtype/input/"
+  private val testDataOutputDirPath = "/policyeventtype/output/"
+  private val policyEventTypeTransformationPath = "Transformation/PolicyEventType.hql"
+
+  test( "PolicyEventTypeTransformation test with Primary data" ){
 
     // Arrange //
     // Use sqlContext from spark-testing-base
     implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
-    val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val lookup_renewal_status = utils.populateDataFrameFromCsvWithHeader( "/policyeventtype/input/lookup_renewal_status_PrimaryTestData.csv" )
+    val lookup_renewal_status = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_renewal_status_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyEventType = utils.populateDataFrameFromCsvWithHeader( "/policyeventtype/output/policyeventtype_PrimaryTestData.csv" )
+    val expectedPolicyEventType = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policyeventtype_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyEventType.hql" )
+    val statement = utils.loadHQLStatementFromResource( policyEventTypeTransformationPath )
 
     // Act //
     lookup_renewal_status.registerTempTable( "lookup_renewal_status" )
