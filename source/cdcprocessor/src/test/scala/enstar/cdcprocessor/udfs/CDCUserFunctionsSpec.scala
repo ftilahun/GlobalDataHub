@@ -38,7 +38,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
           .serializable(SerializableMode.ACROSS_CLASSLOADERS))
 
     Mockito
-      .when(properties.transactionColumnName)
+      .when(properties.transactionIdColumnName)
       .thenReturn("header__transaction")
 
     Mockito

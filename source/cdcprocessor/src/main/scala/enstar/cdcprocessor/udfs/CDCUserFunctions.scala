@@ -39,15 +39,15 @@ class CDCUserFunctions extends UserFunctions {
       .withColumn(properties.attunityColumnPrefix + "changeNumber",
         changeNumber(df(properties.changeSequenceColumnName)))
       .groupBy(
-        df(properties.transactionColumnName),
+        df(properties.transactionIdColumnName),
         df(properties.idColumnName)
       )
       .max(properties.attunityColumnPrefix + "changeNumber")
     df.join(grouped,
       changeNumber(df(properties.changeSequenceColumnName)) === grouped(
         s"max(${properties.attunityColumnPrefix}changeNumber)") &&
-        df(properties.transactionColumnName) === grouped(
-          properties.transactionColumnName),
+        df(properties.transactionIdColumnName) === grouped(
+          properties.transactionIdColumnName),
       "inner")
 
   }

@@ -14,7 +14,7 @@ class CDCProcessorModuleSpec
     with GivenWhenThen
     with Matchers {
 
-  "CDCLoaderModuleSpec" should "Return correct tyoes" in {
+  "CDCProcessorModuleSpec" should "Return correct tyoes" in {
       def typeCheck[T](value: T) = value match {
 
         case _: DataFrameReader => "DataFrameReader"
@@ -31,7 +31,7 @@ class CDCProcessorModuleSpec
       "a",
       "--idColumnName",
       "i",
-      "--transactionColumnName",
+      "--transactionIdColumnName",
       "t",
       "--changeSequenceColumnName",
       "c",

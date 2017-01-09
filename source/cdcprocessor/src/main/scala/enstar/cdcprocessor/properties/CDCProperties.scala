@@ -4,7 +4,7 @@ package enstar.cdcprocessor.properties
  * Properties class
  */
 case class CDCProperties(idColumnName: String = "",
-                         transactionColumnName: String = "",
+                         transactionIdColumnName: String = "",
                          changeSequenceColumnName: String = "",
                          changeInputDir: String = "",
                          activeOutput: String = "",
