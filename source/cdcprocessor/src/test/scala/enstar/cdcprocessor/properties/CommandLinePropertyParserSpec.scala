@@ -41,6 +41,8 @@ class CommandLinePropertyParserSpec
       "--validToColumnName",
       "A",
       "--transactionTimeStampColumnName",
+      "A",
+      "--activeColumnName",
       "A"
     )
     When("The argument list is complete")

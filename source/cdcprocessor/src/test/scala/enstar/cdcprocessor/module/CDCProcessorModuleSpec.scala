@@ -52,6 +52,8 @@ class CDCProcessorModuleSpec
       "--validToColumnName",
       "A",
       "--transactionTimeStampColumnName",
+      "A",
+      "--activeColumnName",
       "A"
     )
 

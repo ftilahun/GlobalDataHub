@@ -12,6 +12,8 @@ import org.joda.time.format.DateTimeFormat
  */
 class CDCUserFunctions extends UserFunctions {
 
+  val activeDate = "9999-12-31 23:59:59.000"
+
   /**
    * * Provides a string representation of the current time in the specified
    * format
@@ -45,7 +47,8 @@ class CDCUserFunctions extends UserFunctions {
         df(properties.idColumnName)
       )
       .max(properties.attunityColumnPrefix + changeNumberColName)
-    df.join(grouped,
+    df.join(
+      grouped,
       changeNumber(df(properties.changeSequenceColumnName)) === grouped(
         s"max(${properties.attunityColumnPrefix}$changeNumberColName)") &&
         df(properties.transactionIdColumnName) === grouped(
@@ -107,9 +110,34 @@ class CDCUserFunctions extends UserFunctions {
     } else if (validTo != null) {
       validTo
     } else {
-      "9999-12-31 23:59:59.000"
+      activeDate
     }
   }
+
+  /**
+   * Add an 'active' column to the passed in dataframe based on the value of the transaction timestamp
+   * @param dataFrame the dataframe to add the column to
+   * @param properties the properties object
+   * @return a dataframe
+   */
+  def addActiveColumn(dataFrame: DataFrame,
+                      properties: CDCProperties): DataFrame = {
+    val setActive = udf(
+      (validTo: String) => validTo.equalsIgnoreCase(activeDate))
+
+    dataFrame.withColumn(properties.activeColumnName,
+      setActive(dataFrame(properties.validToColumnName)))
+  }
+
+  /**
+   * drop the active column from the passed in dataframe
+   * @param dataFrame the dataframe to operate on
+   * @param properties the properties object
+   * @return a dataframe
+   */
+  def dropActiveColumn(dataFrame: DataFrame,
+                       properties: CDCProperties): DataFrame =
+    dataFrame.drop(properties.activeColumnName)
 
   /**
    * Close records that have been superseded in the dataframe

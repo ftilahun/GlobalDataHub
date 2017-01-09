@@ -99,6 +99,12 @@ class CommandLinePropertyParser extends PropertyParser[Array[String]] with Loggi
           (o, p) => p.copy(transactionTimeStampColumnName = o)
         )
         .text("The name of the header timestamp column")
+      opt[String]("activeColumnName")
+        .required()
+        .action(
+          (a, p) => p.copy(activeColumnName = a)
+        )
+        .text("the name of the 'active' column")
     }
 
   def parse(commandLineArgs: Array[String]): CDCProperties = {

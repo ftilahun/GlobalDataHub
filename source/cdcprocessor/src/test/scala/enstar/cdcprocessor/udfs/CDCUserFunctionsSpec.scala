@@ -291,4 +291,62 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       }
     }
   }
+
+  "CDCUserFunctions" should "Add an active column to a dataframe" in {
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+    val userFunctions = new CDCUserFunctions
+
+    Mockito.when(properties.operationColumnValueInsert).thenReturn("I")
+    Mockito.when(properties.operationColumnValueUpdate).thenReturn("U")
+    Mockito.when(properties.operationColumnValueDelete).thenReturn("D")
+    Mockito.when(properties.operationColumnValueBefore).thenReturn("B")
+    Mockito.when(properties.idColumnName).thenReturn("id")
+    Mockito.when(properties.transactionTimeStampColumnName).thenReturn("header__timeStamp")
+    Mockito.when(properties.validToColumnName).thenReturn("validto")
+    Mockito.when(properties.validFromColumnName).thenReturn("validfrom")
+    Mockito.when(properties.operationColumnName).thenReturn("header__operation")
+    Mockito.when(properties.activeColumnName).thenReturn("active")
+
+    val noBeforeRows = userFunctions.filterBeforeRecords(TestContexts.changeDummyData(10).unionAll(TestContexts.changeDummyData(10)), properties)
+    val data = userFunctions.addActiveColumn(userFunctions.closeRecords(noBeforeRows, properties), properties)
+    data.collect().foreach{ row =>
+      if (row.getAs[String]("validto").equalsIgnoreCase(userFunctions.activeDate)) {
+        row.getAs[Boolean]("active") should be (true)
+      } else {
+        row.getAs[Boolean]("active") should be (false)
+      }
+    }
+  }
+
+  "CDCUserFunctions" should "drop the active column from a dataframe" in {
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+    val userFunctions = new CDCUserFunctions
+
+    Mockito.when(properties.operationColumnValueInsert).thenReturn("I")
+    Mockito.when(properties.operationColumnValueUpdate).thenReturn("U")
+    Mockito.when(properties.operationColumnValueDelete).thenReturn("D")
+    Mockito.when(properties.operationColumnValueBefore).thenReturn("B")
+    Mockito.when(properties.idColumnName).thenReturn("id")
+    Mockito.when(properties.transactionTimeStampColumnName).thenReturn("header__timeStamp")
+    Mockito.when(properties.validToColumnName).thenReturn("validto")
+    Mockito.when(properties.validFromColumnName).thenReturn("validfrom")
+    Mockito.when(properties.operationColumnName).thenReturn("header__operation")
+    Mockito.when(properties.activeColumnName).thenReturn("active")
+
+    val noBeforeRows = userFunctions.filterBeforeRecords(TestContexts.changeDummyData(10).unionAll(TestContexts.changeDummyData(10)), properties)
+    val data = userFunctions.addActiveColumn(userFunctions.closeRecords(noBeforeRows, properties), properties)
+
+    an[AnalysisException] should be thrownBy {
+      userFunctions.dropActiveColumn(data, properties).select("active")
+    }
+  }
+
 }
