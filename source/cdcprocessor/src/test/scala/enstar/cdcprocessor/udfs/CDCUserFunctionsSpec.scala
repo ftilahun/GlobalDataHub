@@ -1,6 +1,6 @@
 package enstar.cdcprocessor.udfs
 
-import enstar.cdcprocessor.{ Data, TestContexts }
+import enstar.cdcprocessor.{ GeneratedData, TestContexts }
 import enstar.cdcprocessor.properties.CDCProperties
 import org.apache.spark.sql.Row
 import org.joda.time.format.DateTimeFormat
@@ -112,7 +112,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Then("attunity columns should be dropped")
     an[scala.MatchError] should be thrownBy {
       data.collect().map {
-        case Row(id: Int, value: String) => Data(id, value)
+        case Row(id: Int, value: String) => GeneratedData(id, value)
       }
     }
 
@@ -120,7 +120,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       .dropAttunityColumns(data, properties)
       .collect()
       .map {
-        case Row(id: Int, value: String) => Data(id, value)
+        case Row(id: Int, value: String) => GeneratedData(id, value)
       }
       .length should be(10)
 
@@ -131,7 +131,7 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       .dropAttunityColumns(nodata, properties)
       .collect()
       .map {
-        case Row(id: Int, value: String) => Data(id, value)
+        case Row(id: Int, value: String) => GeneratedData(id, value)
       }
       .length should be(0)
   }

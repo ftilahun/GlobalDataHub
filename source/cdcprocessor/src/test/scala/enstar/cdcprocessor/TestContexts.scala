@@ -7,7 +7,7 @@ import org.apache.spark.{ SparkConf, SparkContext }
 /**
  * Provides spark and hive contexts to be shared by all test cases.
  */
-case class Data(id: Int, value: String)
+case class GeneratedData(id: Int, value: String)
 
 object TestContexts {
 
@@ -23,7 +23,7 @@ object TestContexts {
 
   def dummyData(numItems: Int): DataFrame = {
     val list = (1 to numItems).map { number =>
-      Data(number, "value" + number)
+      GeneratedData(number, "value" + number)
     }
     TestContexts.sqlContext.createDataFrame(
       TestContexts.sparkContext.parallelize(list))
