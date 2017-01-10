@@ -5,8 +5,7 @@ package com.kainos.enstar.test.TransformationUnitTesting.Geography
  */
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ GeographyUtils, SQLRunner, TransformationUnitTestingUtils }
-import org.apache.spark.sql.DataFrame
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.scalatest.FunSuite
 
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
@@ -14,23 +13,21 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
   test( "Geography Mapping reconciliation over test data" ) {
 
     // Arrange //
-    val sqlc = sqlContext
+    // Use sqlContext from spark-testing-base
+    implicit val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
     val utils = new TransformationUnitTestingUtils
 
-    val lookup_country : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/geography/input/lookup_country_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/geography/schemas/lookup_country.avro" ).toString,
-      _.split( "," ),
-      GeographyUtils.lookupCountryMapping,
-      sqlContext
-    )
+    // Load test data into dataframes
+    val lookupCountry = utils.populateDataFrameFromCsvWithHeader( "/geography/input/lookup_country_PrimaryTestData.csv" )
 
+    // Load the hql statement under test
     val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/Geography.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Geography/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Geography/OutputRecordCount.hql" )
 
     // Act //
-    lookup_country.registerTempTable( "lookup_country" )
+    lookupCountry.registerTempTable( "lookup_country" )
 
     val output = SQLRunner.runStatement( hqlStatement, sqlc )
     output.registerTempTable( "geography" )

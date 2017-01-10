@@ -1,3 +1,4 @@
-Syndicate 1301,NDEX,Syndicate 1301,,,false
-TIE,NDEX,TIE,,,false
-TIUK,NDEX,TIUK,,,false
+legalentitycode[string],sourcesystemcode[string],sourcesystemdescription[string],legalentitydescription[string],parentlegalentitycode[string?],parentlegalentitysourcesystemcode[string?],isconformed[boolean]
+Syndicate 1301,NDEX,NDEX,Syndicate 1301,[NULL],[NULL],false
+TIE,NDEX,NDEX,TIE,[NULL],[NULL],false
+TIUK,NDEX,NDEX,TIUK,[NULL],[NULL],false

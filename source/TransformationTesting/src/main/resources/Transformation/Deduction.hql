@@ -5,6 +5,7 @@ SELECT
     CAST(line.layer_id AS STRING) AS sectionreference,
     CAST(line.line_id AS STRING) AS coveragereference,
     "NDEX" AS sourcesystemcode,
+    "NDEX" AS sourcesystemdescription,
     layer.premium_ccy AS currencycode,
     layer_deduction.deduction_code AS deductiontypecode,
     CAST(
