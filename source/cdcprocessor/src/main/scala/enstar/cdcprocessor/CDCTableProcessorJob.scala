@@ -7,7 +7,7 @@ import org.apache.spark.{ Logging, SparkConf, SparkContext }
 /**
  * Main class for CDCTableProcessor
  */
-class CDCTableProcessorJob extends Logging {
+object CDCTableProcessorJob extends Logging {
 
   def main(args: Array[String]): Unit = {
 
