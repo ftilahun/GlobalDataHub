@@ -19,6 +19,8 @@ case class CDCProperties(idColumnName: String = "",
                          validToColumnName: String = "",
                          activeColumnName: String = "",
                          timeWindowInHours: Int = 0,
-                         attunityDateFormat: String = "")
-    extends Serializable {
-}
+                         attunityDateFormat: String = "",
+                         historyInput: String = "",
+                         immatureChangesOutput: String = "",
+                         historyOutput: String = "")
+    extends Serializable {}

@@ -47,6 +47,12 @@ class CommandLinePropertyParserSpec
       "--timeWindowInHours",
       "2",
       "--attunityDateFormat",
+      "A",
+      "--historyInput",
+      "A",
+      "--immatureChangesOutput",
+      "A",
+      "--historyOutput",
       "A"
     )
     When("The argument list is complete")

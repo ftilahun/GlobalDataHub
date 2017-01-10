@@ -7,7 +7,9 @@ import scopt.OptionParser
 /**
  * Parses command line properties.
  */
-class CommandLinePropertyParser extends PropertyParser[Array[String]] with Logging {
+class CommandLinePropertyParser
+    extends PropertyParser[Array[String]]
+    with Logging {
 
   val parser: OptionParser[CDCProperties] =
     new scopt.OptionParser[CDCProperties]("cdcprocessor") {
@@ -117,6 +119,24 @@ class CommandLinePropertyParser extends PropertyParser[Array[String]] with Loggi
           (a, p) => p.copy(attunityDateFormat = a)
         )
         .text("The time format for the attuntiy timestamp column (e.g. YYYY/MM/DD HH:mm:ss.SSS)")
+      opt[String]("historyInput")
+        .required()
+        .action(
+          (h, p) => p.copy(historyInput = h)
+        )
+        .text("The input directory for history data")
+      opt[String]("immatureChangesOutput")
+        .required()
+        .action(
+          (i, p) => p.copy(immatureChangesOutput = i)
+        )
+        .text("The output directory for changes too young to process")
+      opt[String]("historyOutput")
+        .required()
+        .action(
+          (h, p) => p.copy(historyOutput = h)
+        )
+        .text("The output directory for closed records")
     }
 
   def parse(commandLineArgs: Array[String]): CDCProperties = {
