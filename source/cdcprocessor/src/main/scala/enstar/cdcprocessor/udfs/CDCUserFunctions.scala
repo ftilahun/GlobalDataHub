@@ -40,13 +40,16 @@ class CDCUserFunctions extends UserFunctions {
         s.substring(changeSeqDateLength).toLong
       }
     )
+
+    val colList = properties.idColumnName
+      .split(",")
+      .map(df(_))
+      .toList
+      .::(df(properties.transactionIdColumnName))
     val grouped = df
       .withColumn(properties.attunityColumnPrefix + changeNumberColName,
         changeNumber(df(properties.changeSequenceColumnName)))
-      .groupBy(
-        df(properties.transactionIdColumnName),
-        df(properties.idColumnName)
-      )
+      .groupBy(colList: _*)
       .max(properties.attunityColumnPrefix + changeNumberColName)
     df.join(
       grouped,
