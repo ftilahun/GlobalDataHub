@@ -5,9 +5,6 @@ import com.kainos.enstar.transformation.udf.NetAsPctOfGross
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.scalatest.FunSuite
 
-/**
- * Created by sionam on 05/12/2016.
- */
 class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
@@ -72,7 +69,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_MonotonicSeqMultipleSeqGroupscsv" )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_MonotonicSeqMultipleSeqGroups.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
@@ -214,7 +211,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   }
 
-  test( "PolicyTransactionDeductions Transformation mapping testing missing value when risk code and trust fund indicator are null" ){
+  test( "PolicyTransactionDeductions Transformation mapping testing no corresponding layer_trust_fund for a line" ){
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -225,13 +222,91 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
     val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_PrimaryTestData.csv" )
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
-    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_Null_RiskCode.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
     val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
-    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_Null_TrustFundIndicator.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_LayerIdNotInLine.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_MissingValues.csv" )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_CalculationsWithNullLayerTrustFund.csv" )
+
+    // Load the hql statement under test
+    val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
+
+    // Act //
+    line.registerTempTable( "line" )
+    layer.registerTempTable( "layer" )
+    layer_deduction.registerTempTable( "layer_deduction" )
+    line_risk_code.registerTempTable( "line_risk_code" )
+    lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
+    settlement_schedule.registerTempTable( "settlement_schedule" )
+    layer_trust_fund.registerTempTable( "layer_trust_fund" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
+
+    val result = SQLRunner.runStatement( statement, sqlc )
+
+    // Assert //
+    assertDataFrameEquals( expectedPolicyTransaction, result )
+
+  }
+
+  test( "PolicyTransactionDeductions Transformation mapping testing no corresponding line_risk_code for a line" ){
+
+    // Arrange //
+    // Use sqlContext from spark-testing-base
+    implicit val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
+
+    // Load test data into dataframe
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_PrimaryTestData.csv" )
+    val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_LineIdNotInLine.csv" )
+    val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
+    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
+
+    // Load expected result into dataframe
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_CalculationsWithNullLineRiskCode.csv" )
+
+    // Load the hql statement under test
+    val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
+
+    // Act //
+    line.registerTempTable( "line" )
+    layer.registerTempTable( "layer" )
+    layer_deduction.registerTempTable( "layer_deduction" )
+    line_risk_code.registerTempTable( "line_risk_code" )
+    lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
+    settlement_schedule.registerTempTable( "settlement_schedule" )
+    layer_trust_fund.registerTempTable( "layer_trust_fund" )
+    sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
+
+    val result = SQLRunner.runStatement( statement, sqlc )
+
+    // Assert //
+    assertDataFrameEquals( expectedPolicyTransaction, result )
+
+  }
+
+  test( "PolicyTransactionDeductions Transformation mapping testing no corresponding layer_trust_fund or line_risk_code for a line" ){
+
+    // Arrange //
+    // Use sqlContext from spark-testing-base
+    implicit val sqlc = sqlContext
+    sqlc.sparkContext.setLogLevel( "WARN" )
+
+    // Load test data into dataframe
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_PrimaryTestData.csv" )
+    val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_LineIdNotInLine.csv" )
+    val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
+    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_LayerIdNotInLine.csv" )
+
+    // Load expected result into dataframe
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_CalculationsWithNullLineRiskCodeAndLayerTrustFund.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )

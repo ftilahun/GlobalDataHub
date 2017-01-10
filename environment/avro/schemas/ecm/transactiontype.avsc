@@ -1,0 +1,38 @@
+{
+	"namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+ 	"type": "record",
+ 	"name": "transactiontype",
+ 	"fields": [
+    	{
+    		"name": "transactiontypecode",
+    		"type": "string",
+    		"doc": "The code for the transaction type"
+    	},
+    	{
+    	    "name": "transactionsubtypecode",
+            "type": "string",
+            "doc": "The code for the transaction subtype"
+        },
+        {
+            "name": "sourcesystemcode",
+            "type": "string",
+            "doc": "The code for the source system"
+        },
+        {
+            "name": "transactiontypedescription",
+            "type": ["string","null"]
+        },
+        {
+            "name": "transactionsubtypedescription",
+            "type": ["string","null"]
+        },
+        {
+            "name": "group",
+            "type": ["string","null"]
+        },
+        {
+            "name": "iscashtransactiontype",
+            "type": ["boolean","null"]
+        }
+ 	]
+}

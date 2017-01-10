@@ -1,0 +1,19 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+    "type": "record",
+    "name": "currency",
+    "fields": [
+        {
+            "name": "currencycode",
+            "type": "string"            
+        },        
+        {
+            "name": "sourcesystemcode",
+            "type": "string"            
+        },
+        {
+            "name": "currencydescription",
+            "type": ["null", "string"]            
+        }
+    ]
+}
