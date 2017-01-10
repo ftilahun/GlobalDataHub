@@ -15,29 +15,15 @@ trait TableProcessor {
    *
    * @param sqlContext    the sql context
    * @param properties    the properties object
-   * @param reader        a dataframe reader
-   * @param writer        a dataframe writer
-   * @param userFunctions a udfs object
-   * @return a dataframe of the source table
+   * @param reader        a DataFrame reader
+   * @param writer        a DataFrame writer
+   * @param userFunctions a UDFs object
+   * @return a DataFrame of the source table
    */
   def process(sqlContext: SQLContext,
               properties: CDCProperties,
               reader: DataFrameReader,
               writer: DataFrameWriter,
               userFunctions: UserFunctions): Unit
-
-  /**
-   * Save source table dataframe to disk
-   *
-   * @param sqlContext the sql context
-   * @param writer a dataframe writer
-   * @param properties the properties object
-   * @param dataFrame the dataframe to save
-   * @return the number of rows written.
-   */
-  def save(sqlContext: SQLContext,
-           writer: DataFrameWriter,
-           properties: CDCProperties,
-           dataFrame: DataFrame): Long
 
 }
