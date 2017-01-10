@@ -28,8 +28,8 @@ class CDCDataFrameReaderSpec
     Given("The input \"/some/path/\"")
     val df =
       cdcDataFrameReader.read(TestContexts.sqlContext, "/some/path/", None)
-    When("The dataset contains 5 rows")
-    Then("Then a Dataframe should be returned with 5 rows")
+    When("The data set contains 5 rows")
+    Then("Then a DataFrame should be returned with 5 rows")
     df.count should be(5)
 
     Given("The input \"/some/invalid/path/\"")

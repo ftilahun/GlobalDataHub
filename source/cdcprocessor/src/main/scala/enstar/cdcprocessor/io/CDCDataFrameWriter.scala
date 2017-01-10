@@ -14,11 +14,11 @@ class CDCDataFrameWriter(writer: DataFrameWriter)
     with Logging {
 
   /**
-   * Write a dataframe to the filesystem.
+   * Write a DataFrame to the filesystem.
    *
    * @param sqlContext the sql context
    * @param path the path to write to
-   * @param dataFrame the dataframe to write
+   * @param dataFrame the DataFrame to write
    * @param storageLevel a storage level to persist at
    * @return a count ot the rows written.
    */

@@ -22,7 +22,7 @@ class CDCDataFrameWriterSpec
     Given("The input \"/some/path\"")
 
     val data = TestContexts.dummyData(10)
-    When("The dataset contains 10 rows")
+    When("The data set contains 10 rows")
     data.count should be(10)
     Then("10 rows should be persisted to disk")
     Mockito
@@ -47,7 +47,7 @@ class CDCDataFrameWriterSpec
           data,
           Some(StorageLevel.MEMORY_ONLY)))
       .thenThrow(classOf[AnalysisException])
-    Then("An exception should be rasied")
+    Then("An exception should be raised")
     an[DataFrameWriteException] should be thrownBy {
       cdcDataFrameWriter.write(TestContexts.sqlContext,
         "/some/existing/path",

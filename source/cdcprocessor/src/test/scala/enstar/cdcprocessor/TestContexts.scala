@@ -35,7 +35,7 @@ object TestContexts {
     val transactions = List("ONE", "TWO", "THREE", "FOUR")
     val changeOperation = udf(
       (num: Int) => operations(num % operations.length))
-    val changeTransacion = udf(
+    val changeTransaction = udf(
       (num: Int) => transactions(num % operations.length)
     )
     val toTime = udf(() => "9999-12-31 23:59:59.000")
@@ -47,7 +47,7 @@ object TestContexts {
       .withColumn("header__operation", changeOperation(data("id")))
       .withColumn("header__timeStamp", dateTime())
       .withColumn("header__changesequence", changeSeq(data("id")))
-      .withColumn("header__transaction", changeTransacion(data("id")))
+      .withColumn("header__transaction", changeTransaction(data("id")))
       .withColumn("header__id", data("id"))
       .withColumn("validfrom", dateTime())
       .withColumn("validto", toTime())
