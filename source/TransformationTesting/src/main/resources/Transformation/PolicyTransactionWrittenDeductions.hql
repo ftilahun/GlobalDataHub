@@ -6,6 +6,7 @@ SELECT
         IF(line_risk_code.risk_code IS NOT NULL, line_risk_code.risk_code, "MISSING"), "-",
         IF(layer_trust_fund.trust_fund_indicator IS NOT NULL, layer_trust_fund.trust_fund_indicator, "MISSING")) AS transactionreference,
     "NDEX" AS sourcesystemcode,
+    "NDEX" AS sourcesystemdescription,
     CAST(line.line_id AS STRING) AS coveragereference,
     false AS iscashtransactiontype,
     CAST(
@@ -24,7 +25,7 @@ SELECT
         (IF(line_risk_code.risk_code_pct IS NOT NULL, line_risk_code.risk_code_pct, CAST(100.00 AS DECIMAL(18,2))) / 100) *
         (IF(layer_trust_fund.est_premium_split_pct IS NOT NULL, layer_trust_fund.est_premium_split_pct, CAST(100.00 AS DECIMAL(5,2))) / 100))) AS DECIMAL(18,6)) AS settlementamount,
     CAST(line.epi_settlement_ccy AS STRING) AS settlementcurrencycode,
-    CAST(settlement_schedule.settlement_due_date AS STRING) AS transactiondate,
+    CAST(layer.inception_date AS STRING) AS transactiondate,
     "WrittenDeductionsOurShare" AS transactiontypecode,
     "WrittenDeductionsOurShare" AS transactiontypedescription,
     layer_deduction.deduction_code AS transactionsubtypecode,
@@ -34,8 +35,6 @@ SELECT
     CAST(layer_trust_fund.trust_fund_indicator AS STRING) AS trustfundcode
 FROM
     line
-    INNER JOIN settlement_schedule
-    ON line.layer_id = settlement_schedule.layer_id
     LEFT JOIN line_risk_code
     ON line.line_id = line_risk_code.line_id
     LEFT JOIN layer_trust_fund

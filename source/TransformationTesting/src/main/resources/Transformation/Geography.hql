@@ -1,6 +1,7 @@
 SELECT
     CONCAT("[Missing][Missing][Missing][", country_code, "]") AS geographycode,
     "NDEX" AS sourcesystemcode,
+    "NDEX" AS sourcesystemdescription,
     "Missing" AS zipcode,
     "Missing" AS city,
     "Missing" AS statecode,

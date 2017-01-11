@@ -4,6 +4,7 @@ SELECT
     CAST(line.line_id AS STRING) AS coveragereference,
     CAST(line.layer_id AS STRING) AS sectionreference,
     "NDEX" AS sourcesystemcode,
+    "NDEX" AS sourcesystemdescription,
     ltrim(CASE regexp_extract(profit_centre_desc, '((?:Syndicate 1301)|(?:TIE)|(?:TIUK))(.*)', 2)
             WHEN '' THEN 'London'
             ELSE regexp_extract(profit_centre_desc, '((?:Syndicate 1301)|(?:TIE)|(?:TIUK))(.*)', 2)

@@ -1,2 +1,2 @@
-layer_id[int],premium_ccy[string?],fil_code[string?],premium_roe[decimal(18:7)?]
-6,BB12,AUD/*£,1
+layer_id[int],premium_ccy[string?],fil_code[string?],premium_roe[decimal(18:7)?],inception_date[string?]
+6,BB12,AUD/*£,1,1900-01-01 00:00:00
