@@ -25,11 +25,10 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
-    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions.csv" )
+    val expectedPolicyTransaction = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "policytransactionwrittendeductions_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( policyTransactionWrittenDeductionsTransformationPath )
@@ -40,7 +39,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layer_deduction.registerTempTable( "layer_deduction" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
@@ -65,7 +63,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_MonotonicSeqMultipleSeqGroups.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
-    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
@@ -80,7 +77,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layer_deduction.registerTempTable( "layer_deduction" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
@@ -105,7 +101,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_NonMonotonicSeqMultipleSeqGroups.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
-    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
@@ -120,7 +115,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layer_deduction.registerTempTable( "layer_deduction" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
@@ -145,7 +139,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_DeductionCode_SpecialCharacters.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_SpecialCharacters.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_DeductionDescription_SpecialCharacters.csv" )
-    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_SpecialCharacters.csv" )
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_Trustfundindicator_SpecialCharacters.csv" )
 
     // Load expected result into dataframe
@@ -160,7 +153,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layer_deduction.registerTempTable( "layer_deduction" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
@@ -171,7 +163,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
   }
 
-  test( "PolicyTransactionDeductions Transformation mapping with null settlement_due_date and FIL_code input values" ){
+  test( "PolicyTransactionDeductions Transformation mapping with null inception_date and FIL_code input values" ){
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -181,11 +173,10 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
-    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_Null_FILCode.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_NullFilCodeAndInceptionDate.csv" )
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
-    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_Null_SettlementDueDate.csv" )
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
@@ -200,7 +191,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layer_deduction.registerTempTable( "layer_deduction" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
@@ -224,7 +214,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
-    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_LayerIdNotInLine.csv" )
 
     // Load expected result into dataframe
@@ -239,7 +228,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layer_deduction.registerTempTable( "layer_deduction" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
@@ -263,7 +251,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_LineIdNotInLine.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
-    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
@@ -278,7 +265,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layer_deduction.registerTempTable( "layer_deduction" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
@@ -302,7 +288,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val layer_deduction = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_deduction_PrimaryTestData.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_LineIdNotInLine.csv" )
     val lookup_deduction_type = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_deduction_type_PrimaryTestData.csv" )
-    val settlement_schedule = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "settlement_schedule_PrimaryTestData.csv" )
     val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_LayerIdNotInLine.csv" )
 
     // Load expected result into dataframe
@@ -317,7 +302,6 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layer_deduction.registerTempTable( "layer_deduction" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 

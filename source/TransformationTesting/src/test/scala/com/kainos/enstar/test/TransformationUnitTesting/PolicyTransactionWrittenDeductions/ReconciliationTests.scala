@@ -18,18 +18,11 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Load test data into dataframe
     val layer : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/layer_PrimaryTestData.csv" )
-
     val layer_deduction : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/layer_deduction_PrimaryTestData.csv" )
-
     val layer_trust_fund : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/layer_trust_fund_PrimaryTestData.csv" )
-
     val line : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/line_PrimaryTestData.csv" )
-
     val line_risk_code : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/line_risk_code_PrimaryTestData.csv" )
-
     val lookup_deduction_type : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" )
-
-    val settlement_schedule : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/settlement_schedule_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
@@ -43,7 +36,6 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     layer_trust_fund.registerTempTable( "layer_trust_fund" )
     line_risk_code.registerTempTable( "line_risk_code" )
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )
-    settlement_schedule.registerTempTable( "settlement_schedule" )
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     val output = SQLRunner.runStatement( statement, sqlc )
