@@ -1,1 +1,2 @@
-[Missing][Missing][Missing][USA],NDEX,Missing,Missing,Missing,Missing,USA,United States of America
+geographycode[string],sourcesystemcode[string],sourcesystemdescription[string],zipcode[string],city[string],statecode[string],statedescription[string],countrycode[string],countrydescription[string]
+[Missing][Missing][Missing][USA],NDEX,NDEX,Missing,Missing,Missing,Missing,USA,United States of America

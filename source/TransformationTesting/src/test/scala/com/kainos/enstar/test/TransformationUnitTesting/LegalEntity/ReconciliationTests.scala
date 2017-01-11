@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.LegalEntity
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ LegalEntityUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -14,18 +14,12 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/legalentity/input/lookup_profit_centre_PrimaryTestData.csv" ).toString,
-      getClass.getResource( "/legalentity/schemas/lookup_profit_centre.avro" ).toString,
-      _.split( "," ),
-      LegalEntityUtils.lookupProfitCentreMapping,
-      sqlContext
-    )
+    val lookup_profit_centre : DataFrame = utils.populateDataFrameFromCsvWithHeader("/legalentity/input/lookup_profit_centre_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/LegalEntity.hql" )
