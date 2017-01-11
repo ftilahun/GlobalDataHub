@@ -88,7 +88,7 @@ class CommandLinePropertyParser
         .action(
           (o, p) => p.copy(validToColumnName = o)
         )
-        .text("The name of the valid to column")
+        .text("The name of the valid from column")
       opt[String]("validFromColumnName")
         .required()
         .action(
