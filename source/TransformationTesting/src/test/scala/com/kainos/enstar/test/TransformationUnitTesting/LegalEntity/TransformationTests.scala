@@ -22,10 +22,10 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val lookup_profit_centre = utils.populateDataFrameFromCsvWithHeader(testDataInputDirPath + "lookup_profit_centre_PrimaryTestData.csv" )
+    val lookup_profit_centre = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_profit_centre_PrimaryTestData.csv" )
 
     // Load expected result into dataframe
-    val expectedLegalEntity = utils.populateDataFrameFromCsvWithHeader(testDataOutputDirPath + "legalentity_PrimaryTestData.csv" )
+    val expectedLegalEntity = utils.populateDataFrameFromCsvWithHeader( testDataOutputDirPath + "legalentity_PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( legalEntityTransformationPath )
