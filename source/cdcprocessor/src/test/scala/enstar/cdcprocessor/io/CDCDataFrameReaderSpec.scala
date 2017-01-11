@@ -2,7 +2,6 @@ package enstar.cdcprocessor.io
 
 import enstar.cdcprocessor.TestContexts
 import enstar.cdcprocessor.exceptions.DataFrameReadException
-import org.apache.hadoop.fs.PathNotFoundException
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.storage.StorageLevel

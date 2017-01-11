@@ -64,6 +64,8 @@ class CDCProcessorModuleSpec
       "--immatureChangesOutput",
       "A",
       "--historyOutput",
+      "A",
+      "--attunityDateFormatShort",
       "A"
     )
 

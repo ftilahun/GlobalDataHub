@@ -213,14 +213,14 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Given("An insert operation")
     When("The record has been superseded")
     Then("The record should be closed")
-    userFunctions.updateClosedRecord("I",
+    userFunctions.updateClosedRecord(isDeleted = false,
       "2016-07-12 12:12:12.0000",
       "2015-07-12 12:12:12.0000",
       properties) should be(
         "2016-07-12 12:12:12.0000")
     When("The record has not been superseded")
     Then("The record should be open")
-    userFunctions.updateClosedRecord("I",
+    userFunctions.updateClosedRecord(isDeleted = false,
       null,
       "2015-07-12 12:12:12.0000",
       properties) should be(
@@ -229,14 +229,14 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Given("An Update operation")
     When("The record has been superseded")
     Then("The record should be closed")
-    userFunctions.updateClosedRecord("U",
+    userFunctions.updateClosedRecord(isDeleted = false,
       "2016-07-12 12:12:12.0000",
       "2015-07-12 12:12:12.0000",
       properties) should be(
         "2016-07-12 12:12:12.0000")
     When("The record has not been superseded")
     Then("The record should be open")
-    userFunctions.updateClosedRecord("U",
+    userFunctions.updateClosedRecord(isDeleted = false,
       null,
       "2015-07-12 12:12:12.0000",
       properties) should be(
@@ -245,14 +245,14 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     Given("An delete operation")
     When("The record has been superseded")
     Then("The record should be closed")
-    userFunctions.updateClosedRecord("D",
+    userFunctions.updateClosedRecord(isDeleted = true,
       "2016-07-12 12:12:12.0000",
       "2015-07-12 12:12:12.0000",
       properties) should be(
         "2015-07-12 12:12:12.0000")
     When("The record has not been superseded")
     Then("The record should be closed")
-    userFunctions.updateClosedRecord("D",
+    userFunctions.updateClosedRecord(isDeleted = true,
       null,
       "2015-07-12 12:12:12.0000",
       properties) should be(
@@ -281,25 +281,30 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       .when(properties.operationColumnName)
       .thenReturn("header__operation")
 
-    val noBeforeRows = userFunctions.filterBeforeRecords(
-      TestContexts
-        .changeDummyData(10)
-        .unionAll(TestContexts.changeDummyData(10)),
+    val noBeforeRows = userFunctions.addDeleteFlagColumn(
+      userFunctions.filterBeforeRecords(
+        TestContexts
+          .changeDummyData(10)
+          .unionAll(TestContexts.changeDummyData(10)),
+        properties),
+      "isDeleted",
       properties)
-    val data = userFunctions.closeRecords(noBeforeRows, properties).collect()
+    val data = userFunctions
+      .closeRecords(noBeforeRows, properties, "isDeleted", "header__timeStamp")
+      .collect()
 
     for (i <- 0 until data.length - 1) {
       //updates
       if (data(i).getString(2).contains("U") && data(i).getInt(0) == data(
         i + 1).getInt(0)) {
-        data(i).getString(8) should be(data(i + 1).getString(7))
+        data(i).getString(9) should be(data(i + 1).getString(7))
       } //inserts
       else if (data(i).getString(2).contains("I") && data(i).getInt(0) == data(
         i + 1).getInt(0)) {
-        data(i).getString(8) should be(data(i + 1).getString(7))
+        data(i).getString(9) should be(data(i + 1).getString(7))
       } //deletes
       else if (data(i).getString(2).contains("D")) {
-        data(i).getString(8) should be(data(i).getString(3))
+        data(i).getString(9) should be(data(i).getString(3))
       }
     }
   }
@@ -333,7 +338,13 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         .unionAll(TestContexts.changeDummyData(10)),
       properties)
     val data = userFunctions.addActiveColumn(
-      userFunctions.closeRecords(noBeforeRows, properties),
+      userFunctions.closeRecords(
+        userFunctions.addDeleteFlagColumn(noBeforeRows,
+          "isDeleted",
+          properties),
+        properties,
+        "isDeleted",
+        "header__timeStamp"),
       properties)
     data.collect().foreach { row =>
       if (row
@@ -376,18 +387,25 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         .unionAll(TestContexts.changeDummyData(10)),
       properties)
     When("The active column exists")
+
     val data = userFunctions.addActiveColumn(
-      userFunctions.closeRecords(noBeforeRows, properties),
+      userFunctions.closeRecords(
+        userFunctions.addDeleteFlagColumn(noBeforeRows,
+          "isDeleted",
+          properties),
+        properties,
+        "isDeleted",
+        "header__timeStamp"),
       properties)
     Then("The column should be dropped")
     an[AnalysisException] should be thrownBy {
-      userFunctions.dropActiveColumn(data, properties).select("active")
+      userFunctions.dropColumn(data, properties.activeColumnName).select("active")
     }
 
     Given("a DataFrame")
     When("The active column does not exist")
     Then("No error should occur")
-    userFunctions.dropActiveColumn(TestContexts.dummyData(10), properties)
+    userFunctions.dropColumn(TestContexts.dummyData(10), properties.activeColumnName)
   }
 
   "CDCUserFunctions" should "filter data on a time Window" in {
@@ -406,41 +424,43 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       .when(properties.transactionTimeStampColumnName)
       .thenReturn("header__timeStamp")
 
+    val time = new DateTime()
+
     val afterTime = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(new DateTime()))
+          .print(time))
     val beforeTime = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(new DateTime().minusHours(1)))
+          .print(time.minusHours(1)))
     val beforeTime1 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(new DateTime().minusHours(properties.timeWindowInHours + 1)))
+          .print(time.minusHours(properties.timeWindowInHours + 1)))
     val beforeTime2 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(new DateTime().minusHours(properties.timeWindowInHours + 2)))
+          .print(time.minusHours(properties.timeWindowInHours + 2)))
     val beforeTime3 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(new DateTime().minusHours(properties.timeWindowInHours + 3)))
+          .print(time.minusHours(properties.timeWindowInHours + 3)))
     val beforeTime4 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(new DateTime().minusHours(properties.timeWindowInHours + 4)))
+          .print(time.minusHours(properties.timeWindowInHours + 4)))
     val beforeTime5 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(new DateTime().minusHours(properties.timeWindowInHours + 5)))
+          .print(time.minusHours(properties.timeWindowInHours + 5)))
     val junkTime = udf(() => "VertWuzEre")
 
     Given("A DataFrame")
@@ -555,5 +575,79 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     val res2 = userFunctions.unionAll(df1, TestContexts.changeDummyData(0))
     Then("The DataFrames should be unioned")
     res2.count() should be(10)
+  }
+
+  "CDCUserFunctions" should "Add a delete flag to a DataFrame" in {
+    val userFunctions = new CDCUserFunctions
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+
+    Mockito
+      .when(properties.operationColumnName)
+      .thenReturn("header__operation")
+    Mockito.when(properties.operationColumnValueDelete).thenReturn("D")
+
+    Given("A DataFrame")
+    When("The override has been set")
+    val data = userFunctions
+      .addDeleteFlagColumn(TestContexts.changeDummyData(10),
+        "isDeleted",
+        properties,
+        doNotSetFlag = true)
+      .collect()
+    Then("the delete flag should be unset for all records")
+    data.foreach(row => row.getBoolean(9) should be(false))
+
+    Given("A DataFrame")
+    When("The override has not been set")
+    val data2 = userFunctions
+      .addDeleteFlagColumn(TestContexts.changeDummyData(10),
+        "isDeleted",
+        properties)
+      .collect()
+    Then(
+      "the delete flag should be set for any records that have been deleted")
+    data2.foreach { row =>
+      if (row.getString(2).equalsIgnoreCase("D")) {
+        row.getBoolean(9) should be(true)
+      } else {
+        row.getBoolean(9) should be(false)
+      }
+    }
+  }
+
+  "CDCUserFunctions" should "Drop a delete flag to from a DataFrame" in {
+    val userFunctions = new CDCUserFunctions
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+
+    Given("A DataFrame")
+    When("The delete flag column exists")
+    val data =
+      userFunctions.addDeleteFlagColumn(TestContexts.changeDummyData(10),
+        "isDeleted",
+        properties,
+        doNotSetFlag = true)
+    Then("The column should be dropped")
+    an[AnalysisException] should be thrownBy {
+      userFunctions.dropColumn(data, "isDeleted").select("isDeleted")
+    }
+
+    Given("A DataFrame")
+    val data2 = TestContexts.changeDummyData(10)
+    When("The delete flag column does not exist")
+    an[AnalysisException] should be thrownBy {
+      userFunctions
+        .dropColumn(data2, "isDeleted")
+        .select("isDeleted")
+    }
+    Then("No error should occur")
+    userFunctions.dropColumn(data2, "isDeleted")
   }
 }

@@ -3,9 +3,7 @@ package enstar.cdcprocessor.processor
 import enstar.cdcprocessor.TestContexts
 import enstar.cdcprocessor.io.{
   AvroDataFrameReader,
-  AvroDataFrameWriter,
-  DataFrameReader,
-  DataFrameWriter
+  AvroDataFrameWriter
 }
 import enstar.cdcprocessor.properties.CDCProperties
 import enstar.cdcprocessor.udfs.UserFunctions
@@ -63,6 +61,16 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       .verify(userFunctions, Mockito.times(1))
       .closeRecords(
         org.mockito.Matchers.any(classOf[DataFrame]),
+        org.mockito.Matchers.any(classOf[CDCProperties]),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.anyString()
+      )
+
+    Then("Records should be flagged as active")
+    Mockito
+      .verify(userFunctions, Mockito.times(1))
+      .addActiveColumn(
+        org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.any(classOf[CDCProperties])
       )
 
@@ -76,10 +84,19 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
 
     Then("Attunity columns should be dropped")
     Mockito
-      .verify(userFunctions, Mockito.times(1))
+      .verify(userFunctions, Mockito.times(2))
       .dropAttunityColumns(
         org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.any(classOf[CDCProperties])
+      )
+
+    Then("A Delete flag should be added to columns")
+    Mockito.verify(userFunctions, Mockito.times(2))
+      .addDeleteFlagColumn(
+        org.mockito.Matchers.any(classOf[DataFrame]),
+        org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any(classOf[CDCProperties]),
+        org.mockito.Matchers.any(classOf[Boolean])
       )
 
     Then("New changes should be merged with active records from history")
@@ -97,6 +114,13 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
         org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.any(classOf[CDCProperties]),
         org.mockito.Matchers.any(classOf[Boolean])
+      )
+
+    Then("Temp columns should be removed")
+    Mockito.verify(userFunctions, Mockito.times(5))
+      .dropColumn(
+        org.mockito.Matchers.any(classOf[DataFrame]),
+        org.mockito.Matchers.anyString()
       )
 
     Then("Outputs should be persisted to disk")

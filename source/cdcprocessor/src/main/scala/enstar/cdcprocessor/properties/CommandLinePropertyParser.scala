@@ -119,6 +119,13 @@ class CommandLinePropertyParser
           (a, p) => p.copy(attunityDateFormat = a)
         )
         .text("The time format for the attuntiy timestamp column (e.g. YYYY/MM/DD HH:mm:ss.SSS)")
+      opt[String]("attunityDateFormatShort")
+        .required()
+        .action(
+          (a, p) => p.copy(attunityDateFormatShort = a)
+        )
+        .text("The time format for the attuntiy timestamp column without milliseconds" +
+          " (e.g. YYYY/MM/DD HH:mm:ss)")
       opt[String]("historyInput")
         .required()
         .action(
@@ -137,6 +144,11 @@ class CommandLinePropertyParser
           (h, p) => p.copy(historyOutput = h)
         )
         .text("The output directory for closed records")
+      opt[Boolean]("printStatistics")
+        .action(
+          (s, p) => p.copy(printStatistics = s)
+        )
+        .text("print statistics about this run to the yarn logs (warning: performance)")
     }
 
   def parse(commandLineArgs: Array[String]): CDCProperties = {

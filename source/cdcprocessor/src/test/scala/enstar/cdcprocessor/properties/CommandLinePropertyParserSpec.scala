@@ -53,6 +53,8 @@ class CommandLinePropertyParserSpec
       "--immatureChangesOutput",
       "A",
       "--historyOutput",
+      "A",
+      "--attunityDateFormatShort",
       "A"
     )
     When("The argument list is complete")
