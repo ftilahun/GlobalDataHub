@@ -8,7 +8,7 @@ import org.joda.time.{ DateTime, DateTimeUtils }
 import org.mockito.Mockito
 import org.mockito.mock.SerializableMode
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
-import org.apache.spark.sql.functions.udf
+import org.apache.spark.sql.functions._
 
 /**
  * Unit tests for CDCUserFunctions
@@ -123,7 +123,9 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     }
 
     userFunctions
-      .dropAttunityColumns(data, properties)
+      .dropAttunityColumns(data, properties).
+      drop("validfrom").
+      drop("validto")
       .collect()
       .map {
         case Row(id: Int, value: String) => GeneratedData(id, value)
@@ -140,5 +142,153 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         case Row(id: Int, value: String) => GeneratedData(id, value)
       }
       .length should be(0)
+  }
+
+  "CDCUserFunctions" should "sort a dataframe by business key" in {
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+
+    Mockito.when(properties.idColumnName).thenReturn("header__id")
+    val userFunctions = new CDCUserFunctions
+
+    Given("A dataframe")
+    val data = TestContexts.changeDummyData(10)
+    When("The dataframe is sorted")
+    val sorted = userFunctions.sortByKey(data, properties).collect()
+    Then("THe order should be preserved")
+    for (i <- sorted.indices) {
+      sorted(i).getInt(0) should be(i + 1)
+    }
+
+    Given("A dataframe")
+    val data2 =
+      TestContexts.changeDummyData(10).sort(desc(properties.idColumnName))
+    When("The dataframe is unsorted")
+    val sorted2 = userFunctions.sortByKey(data, properties).collect()
+    Then("The dataframe should be sorted")
+    for (i <- sorted2.indices) {
+      sorted2(i).getInt(0) should be(i + 1)
+    }
+  }
+
+  "CDCUserFunctions" should "filter beforeimage rows" in {
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+
+    Mockito.when(properties.idColumnName).thenReturn("header__id")
+    Mockito
+      .when(properties.operationColumnName)
+      .thenReturn("header__operation")
+    Mockito.when(properties.operationColumnValueBefore).thenReturn("B")
+    val userFunctions = new CDCUserFunctions
+
+    Given("A dataframe")
+    When("The dataframe contains beforeimage records")
+    val data = TestContexts.changeDummyData(10)
+    Then("The beforeimage records should be filtered")
+    val result = userFunctions.filterBeforeRecords(data, properties).collect()
+    result.length should be(8)
+  }
+
+  "CDCUserFunctions" should "set dates correctly" in {
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+    val userFunctions = new CDCUserFunctions
+
+    Mockito.when(properties.operationColumnValueInsert).thenReturn("I")
+    Mockito.when(properties.operationColumnValueUpdate).thenReturn("U")
+    Mockito.when(properties.operationColumnValueDelete).thenReturn("D")
+
+    Given("An insert operation")
+    When("The record has been superseded")
+    Then("The record should be closed")
+    userFunctions.updateClosedRecord("I",
+      "2016-07-12 12:12:12.0000",
+      "2015-07-12 12:12:12.0000",
+      properties) should be(
+        "2016-07-12 12:12:12.0000")
+    When("The record has not been superseded")
+    Then("The record should be open")
+    userFunctions.updateClosedRecord("I",
+      null,
+      "2015-07-12 12:12:12.0000",
+      properties) should be(
+        "9999-12-31 23:59:59.000")
+
+    Given("An Update operation")
+    When("The record has been superseded")
+    Then("The record should be closed")
+    userFunctions.updateClosedRecord("U",
+      "2016-07-12 12:12:12.0000",
+      "2015-07-12 12:12:12.0000",
+      properties) should be(
+        "2016-07-12 12:12:12.0000")
+    When("The record has not been superseded")
+    Then("The record should be open")
+    userFunctions.updateClosedRecord("U",
+      null,
+      "2015-07-12 12:12:12.0000",
+      properties) should be(
+        "9999-12-31 23:59:59.000")
+
+    Given("An delete operation")
+    When("The record has been superseded")
+    Then("The record should be closed")
+    userFunctions.updateClosedRecord("D",
+      "2016-07-12 12:12:12.0000",
+      "2015-07-12 12:12:12.0000",
+      properties) should be(
+        "2015-07-12 12:12:12.0000")
+    When("The record has not been superseded")
+    Then("The record should be closed")
+    userFunctions.updateClosedRecord("D",
+      null,
+      "2015-07-12 12:12:12.0000",
+      properties) should be(
+        "2015-07-12 12:12:12.0000")
+  }
+
+  "CDCUserFunctions" should "close records" in {
+    val properties =
+      Mockito.mock(classOf[CDCProperties],
+        Mockito
+          .withSettings()
+          .serializable(SerializableMode.ACROSS_CLASSLOADERS))
+    val userFunctions = new CDCUserFunctions
+
+    Mockito.when(properties.operationColumnValueInsert).thenReturn("I")
+    Mockito.when(properties.operationColumnValueUpdate).thenReturn("U")
+    Mockito.when(properties.operationColumnValueDelete).thenReturn("D")
+    Mockito.when(properties.operationColumnValueBefore).thenReturn("B")
+    Mockito.when(properties.idColumnName).thenReturn("id")
+    Mockito.when(properties.transactionTimeStampColumnName).thenReturn("header__timeStamp")
+    Mockito.when(properties.validToColumnName).thenReturn("validto")
+    Mockito.when(properties.validFromColumnName).thenReturn("validfrom")
+    Mockito.when(properties.operationColumnName).thenReturn("header__operation")
+
+    val noBeforeRows = userFunctions.filterBeforeRecords(TestContexts.changeDummyData(10).unionAll(TestContexts.changeDummyData(10)), properties)
+    val data = userFunctions.closeRecords(noBeforeRows, properties).collect()
+
+    for (i <- 0 until data.length - 1) {
+      //updates
+      if (data(i).getString(2).contains("U") && data(i).getInt(0) == data(i + 1).getInt(0)) {
+        data(i).getString(8) should be (data(i + 1).getString(7))
+      } //inserts
+      else if (data(i).getString(2).contains("I") && data(i).getInt(0) == data(i + 1).getInt(0)) {
+        data(i).getString(8) should be (data(i + 1).getString(7))
+      } //deletes
+      else if (data(i).getString(2).contains("D")) {
+        data(i).getString(8) should be (data(i).getString(3))
+      }
+    }
   }
 }

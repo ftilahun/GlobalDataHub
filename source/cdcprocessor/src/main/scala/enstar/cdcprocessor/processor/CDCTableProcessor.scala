@@ -13,29 +13,27 @@ import org.apache.spark.storage.StorageLevel
 class CDCTableProcessor extends TableProcessor with Logging {
 
   /**
-   * Process an source table
+   * Process change data  an source table
    *
-   * @param sqlContext the sql context
+   * @param changeData the sql context
    * @param properties the properties object
-   * @param reader a dataframe reader
    * @param userFunctions a udfs object
    * @return a dataframe of the source table
    */
-  def process(sqlContext: SQLContext,
-              properties: CDCProperties,
-              reader: DataFrameReader,
-              userFunctions: UserFunctions): DataFrame = {
-    logInfo("Reading change data")
-    val changeData = reader.read(sqlContext,
-      properties.changeInputDir,
-      Some(StorageLevel.MEMORY_AND_DISK_SER))
+  def processChangeData(changeData: DataFrame,
+                        properties: CDCProperties,
+                        userFunctions: UserFunctions): DataFrame = {
+    logInfo("Removing before image records")
+    val filteredBeforeRecords = userFunctions.filterBeforeRecords(changeData, properties)
 
     logInfo("Getting transaction change records")
-    val groupedData =
-      userFunctions.groupByTransactionAndKey(changeData, properties)
+    val groupedRecords =
+      userFunctions.groupByTransactionAndKey(filteredBeforeRecords, properties)
 
+    logInfo("Closing records")
+    val openAndClosedRecords = userFunctions.closeRecords(groupedRecords, properties)
     logInfo("Dropping attunity columns")
-    userFunctions.dropAttunityColumns(groupedData, properties)
+    userFunctions.dropAttunityColumns(openAndClosedRecords, properties)
   }
 
   /**
@@ -55,5 +53,30 @@ class CDCTableProcessor extends TableProcessor with Logging {
       properties.activeOutput,
       dataFrame,
       Some(StorageLevel.MEMORY_AND_DISK_SER))
+  }
+
+  /**
+   * Process a source table
+   *
+   * @param sqlContext    the sql context
+   * @param properties    the properties object
+   * @param reader        a dataframe reader
+   * @param writer        a dataframe writer
+   * @param userFunctions a udfs object
+   * @return a dataframe of the source table
+   */
+  override def process(sqlContext: SQLContext,
+                       properties: CDCProperties,
+                       reader: DataFrameReader,
+                       writer: DataFrameWriter,
+                       userFunctions: UserFunctions): Unit = {
+    logInfo("Reading change data")
+    val changeData = reader.read(sqlContext,
+      properties.changeInputDir,
+      Some(StorageLevel.MEMORY_AND_DISK_SER))
+    logInfo("Processing changes")
+    val processed = processChangeData(changeData, properties, userFunctions)
+    logInfo("Saving table")
+    save(sqlContext, writer, properties, processed)
   }
 }

@@ -1,5 +1,6 @@
 package enstar.cdcprocessor.processor
 
+import enstar.cdcprocessor.TestContexts
 import enstar.cdcprocessor.io.{ DataFrameReader, DataFrameWriter }
 import enstar.cdcprocessor.properties.CDCProperties
 import enstar.cdcprocessor.udfs.UserFunctions
@@ -22,21 +23,28 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Given("A table processor")
     val tableProcessor = new CDCTableProcessor
     When("process is called")
-    tableProcessor.process(sqlContext, properties, reader, userFunctions)
-
-    Then("A dataframe should be read from disk")
-    Mockito
-      .verify(reader, Mockito.times(1))
-      .read(
-        org.mockito.Matchers.any(classOf[SQLContext]),
-        org.mockito.Matchers.any(classOf[String]),
-        org.mockito.Matchers.any(classOf[Some[StorageLevel]])
-      )
+    tableProcessor.processChangeData(TestContexts.changeDummyData(10), properties, userFunctions)
 
     Then("Transactions should be grouped for net changes")
     Mockito
       .verify(userFunctions, Mockito.times(1))
       .groupByTransactionAndKey(
+        org.mockito.Matchers.any(classOf[DataFrame]),
+        org.mockito.Matchers.any(classOf[CDCProperties])
+      )
+
+    Then("Records should be closed")
+    Mockito
+      .verify(userFunctions, Mockito.times(1)).
+      closeRecords(
+        org.mockito.Matchers.any(classOf[DataFrame]),
+        org.mockito.Matchers.any(classOf[CDCProperties])
+      )
+
+    Then("Before image rows should be filtered")
+    Mockito
+      .verify(userFunctions, Mockito.times(1)).
+      filterBeforeRecords(
         org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.any(classOf[CDCProperties])
       )

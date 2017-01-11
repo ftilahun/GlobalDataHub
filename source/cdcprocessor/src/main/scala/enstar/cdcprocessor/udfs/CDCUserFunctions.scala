@@ -1,7 +1,8 @@
 package enstar.cdcprocessor.udfs
 
 import enstar.cdcprocessor.properties.CDCProperties
-import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.expressions.Window
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.sql.functions._
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -60,11 +61,79 @@ class CDCUserFunctions extends UserFunctions {
    * @return a dataframe
    */
   def dropAttunityColumns(df: DataFrame,
+                          properties: CDCProperties): DataFrame =
+    df.select(
+      df.columns
+        .filter(!_.contains(properties.attunityColumnPrefix))
+        .map(col): _*)
+
+  /**
+   * Sort a dataframe by the business key
+   * @param dataFrame the dataframe to sort
+   * @param properties the properties object
+   * @return a dataframe
+   */
+  def sortByKey(dataFrame: DataFrame, properties: CDCProperties): DataFrame =
+    dataFrame.sort(asc(properties.idColumnName))
+
+  /**
+   * Filter before image records from the dataframe
+   * @param dataFrame the dataframe to filter
+   * @param properties the properties object
+   * @return
+   */
+  def filterBeforeRecords(dataFrame: DataFrame,
                           properties: CDCProperties): DataFrame = {
-    val selection = df.columns.filter { colName =>
-      !colName.contains(properties.attunityColumnPrefix)
-    }.map(col)
-    df.select(selection: _*)
+    dataFrame.filter(
+      !col(properties.operationColumnName)
+        .contains(properties.operationColumnValueBefore))
   }
 
+  /**
+   * Update the valid to date for a given row
+   * @param changeOperation the change operation value
+   * @param validTo the valid from date of the subsequent row
+   * @param transactionTimeStamp the transaction timestamp
+   * @param properties the properties object
+   * @return the valid to date for this row (as a string)
+   */
+  def updateClosedRecord(changeOperation: String,
+                         validTo: String,
+                         transactionTimeStamp: String,
+                         properties: CDCProperties): String = {
+    if (changeOperation.equalsIgnoreCase(
+      properties.operationColumnValueDelete)) {
+      transactionTimeStamp
+    } else if (validTo != null) {
+      validTo
+    } else {
+      "9999-12-31 23:59:59.000"
+    }
+  }
+
+  /**
+   * Close records that have been superseded in the dataframe
+   * @param dataFrame the dataframe to process
+   * @param properties the properties object
+   * @return a dataframe
+   */
+  def closeRecords(dataFrame: DataFrame,
+                   properties: CDCProperties): DataFrame = {
+
+    val byBusinessKey = Window.partitionBy(properties.idColumnName)
+    val setValidTo = udf(
+      (changeOp: String, validTo: String, transactionTimeStamp: String) =>
+        updateClosedRecord(changeOp, validTo, transactionTimeStamp, properties)
+    )
+    dataFrame
+      .withColumnRenamed(properties.validToColumnName,
+        properties.validToColumnName + "old")
+      .withColumn(properties.validToColumnName,
+        setValidTo(
+          col(properties.operationColumnName),
+          lead(properties.validFromColumnName, 1) over byBusinessKey,
+          col(properties.transactionTimeStampColumnName)
+        ))
+      .drop(properties.validToColumnName + "old")
+  }
 }

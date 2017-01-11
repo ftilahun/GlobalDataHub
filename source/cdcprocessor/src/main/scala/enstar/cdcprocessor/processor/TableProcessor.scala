@@ -13,16 +13,18 @@ trait TableProcessor {
   /**
    * Process an source table
    *
-   * @param sqlContext the sql context
-   * @param properties the properties object
-   * @param reader a dataframe reader
+   * @param sqlContext    the sql context
+   * @param properties    the properties object
+   * @param reader        a dataframe reader
+   * @param writer        a dataframe writer
    * @param userFunctions a udfs object
    * @return a dataframe of the source table
    */
   def process(sqlContext: SQLContext,
               properties: CDCProperties,
               reader: DataFrameReader,
-              userFunctions: UserFunctions): DataFrame
+              writer: DataFrameWriter,
+              userFunctions: UserFunctions): Unit
 
   /**
    * Save source table dataframe to disk
