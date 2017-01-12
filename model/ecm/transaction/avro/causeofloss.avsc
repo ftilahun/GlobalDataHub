@@ -28,7 +28,7 @@
     	},
     	{
     		"name": "causeoflossdescription", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The description associated with the cause of loss"
     	}
  	]

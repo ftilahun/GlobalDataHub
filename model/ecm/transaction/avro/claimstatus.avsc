@@ -28,7 +28,7 @@
     	},
     	{
     		"name": "claimstatusdescription", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The full description of the Claim Status"
     	}
  	]

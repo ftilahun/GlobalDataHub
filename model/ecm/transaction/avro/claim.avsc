@@ -28,37 +28,37 @@
     	},
     	{
     		"name": "causeoflosscode", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The code associated with the cause of loss for a claim"
     	},
     	{
     		"name": "claimstatuscode", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The status of the claim (e.g. open, closed, re-opened, re-closed)."
     	},
     	{
     		"name": "coveragereference", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Unique source system reference for the Coverage - This might be a 1:1 with the section and in this case will be the same as the SectionReference"
     	},
     	{
     		"name": "losslocationcode", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "FK lookup to Geography table"
     	},
     	{
     		"name": "losstypecode", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Code associated with the type of loss incurred (e.g. Material Damage, Goods in Transit, Injury). This can be further split out into Loss Causes."
     	},
     	{
     		"name": "sectionreference", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Unique source system reference for the Section"
     	},
     	{
     		"name": "policynumber", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The policy number as the underwriters sees it on the source system"
     	},
     	{
@@ -72,27 +72,27 @@
     	},
     	{
     		"name": "liveorlegacy", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Determines whether the Claim is Live or Legacy"
     	},
     	{
     		"name": "lossdatefrom", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Date from when the Loss occurred"
     	},
     	{
     		"name": "lossdateto", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Date up to when the Loss occurred"
     	},
     	{
     		"name": "originalclaimreference", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Original System driven Claim Reference"
     	},
     	{
     		"name": "reporteddate", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Date the claim was reported"
     	},
     	{

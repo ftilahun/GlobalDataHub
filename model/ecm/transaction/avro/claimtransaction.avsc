@@ -1,9 +1,21 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+    "namespace": "enstar.datahub.ecm",
  	"type": "record",
  	"name": "claimtransaction",
     "doc": "This table relates the transaction to the claim",
  	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },
     	{
     		"name": "transactionreference", 
     		"type": "string",
@@ -16,32 +28,32 @@
     	},
     	{
     		"name": "claimreference", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Unique source system reference for Claim"
     	},
     	{
     		"name": "claimantreference", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The unique reference identifying the claimant in a source system"
     	},
     	{
     		"name": "transactiontypecode", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Code given for the transaction type"
     	},
     	{
     		"name": "originalcurrencycode", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Foreign key - reference Currency"
     	},
     	{
     		"name": "settlementcurrencycode", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Foreign key - reference Currency"
     	},
     	{
     		"name": "accountingcurrencycode", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Foreign key - reference Currency"
     	},
     	{
@@ -76,7 +88,7 @@
     	},
     	{
     		"name": "transactiondate", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "Date of the transaction"
     	}
  	]

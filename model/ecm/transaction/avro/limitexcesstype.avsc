@@ -1,9 +1,21 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+    "namespace": "enstar.datahub.ecm",
  	"type": "record",
  	"name": "limitexcesstype",
     "doc": "LimitExcessType table with all the possible limits/excess/attachments that the framework currently accepts.",
  	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
     	{
     		"name": "limitexcesstypecode", 
     		"type": "string",
@@ -16,7 +28,7 @@
     	},
     	{
     		"name": "limitexcesstypedescription", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The description of the limit excess type"
     	}
  	]

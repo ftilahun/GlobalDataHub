@@ -28,7 +28,7 @@
     	},
     	{
     		"name": "claimantname", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The name of the claimant party"
     	}
  	]

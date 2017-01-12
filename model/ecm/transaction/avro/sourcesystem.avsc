@@ -1,9 +1,21 @@
 {
-	"namespace": "com.kainos.enstar.avro.schemas.ecm ",
+    "namespace": "enstar.datahub.ecm",
  	"type": "record",
  	"name": "sourcesystem",
     "doc": "Identifies the source system that data comes from / is loaded into this model",
  	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
     	{
     		"name": "sourcesystemcode",  
     		"type": "string",
@@ -11,7 +23,7 @@
     	},
     	{
     		"name": "sourcesystemdescription", 
-    		"type": ["string", "null"],
+    		"type": ["null", "string"],
     		"doc": "The description associated with the source system"
     	}
  	]
