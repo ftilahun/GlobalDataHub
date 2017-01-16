@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version='1.0' encoding='UTF-8'?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>cdcprocessor</artifactId>
-    <version>0.3</version>
+    <artifactId>cdcprocessmanager</artifactId>
+    <packaging>jar</packaging>
+    <description>cdcprocessmanager</description>
+    <version>0.1</version>
+    <name>cdcprocessmanager</name>
 
     <parent>
         <groupId>enstar</groupId>
@@ -16,53 +17,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_${scala.major.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>provided</scope>
+            <groupId>org.scalactic</groupId>
+            <artifactId>scalactic_${scala.major.version}</artifactId>
+            <version>${scalatic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_${scala.major.version}</artifactId>
+            <version>${akka.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_${scala.major.version}</artifactId>
+            <artifactId>spark-launcher_${scala.major.version}</artifactId>
             <version>${spark.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_${scala.major.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>${hadoop.client.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.databricks</groupId>
-            <artifactId>spark-avro_${scala.major.version}</artifactId>
-            <version>${spark.avro.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.xerial.snappy</groupId>
-            <artifactId>snappy-java</artifactId>
-            <version>${snappy.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.joda</groupId>
-            <artifactId>joda-convert</artifactId>
-            <version>${joda.convert.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>enstar</groupId>
-            <artifactId>propertyparsers</artifactId>
-            <version>0.1</version>
         </dependency>
     </dependencies>
 

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>enstar</groupId>
+    <artifactId>GlobalDataHub</artifactId>
+    <version>0.1</version>
+    <packaging>pom</packaging>
+    <name>GlobalDataHub</name>
+
+    <modules>
+        <module>cdcprocessor</module>
+        <module>cdcprocessmanager</module>
+        <module>propertyparsers</module>
+        <module>mailclient</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <scala.version>2.10.5</scala.version>
+        <scala.major.version>2.10</scala.major.version>
+        <spark.version>1.6.0-cdh5.7.4</spark.version>
+        <spark.avro.version>2.0.1</spark.avro.version>
+        <scalatest.maven.version>1.0</scalatest.maven.version>
+        <surefire.version>2.7</surefire.version>
+        <scalatest.version>2.2.4</scalatest.version>
+        <scalatest.maven.plugin.version>1.0</scalatest.maven.plugin.version>
+        <scalamaven.version>3.2.1</scalamaven.version>
+        <maven.assembly.plugin.version>2.5.5</maven.assembly.plugin.version>
+        <hadoop.client.version>2.6.0-mr1-cdh5.7.4</hadoop.client.version>
+        <snappy.version>1.1.2.6</snappy.version>
+        <mockito.version>1.10.19</mockito.version>
+        <scoverage.version>1.1.1</scoverage.version>
+        <joda.convert.version>1.8.1</joda.convert.version>
+        <scopt.version>3.5.0</scopt.version>
+        <scalatic.version>2.2.6</scalatic.version>
+        <akka.version>2.3.16</akka.version>
+        <scalariform.version>0.1.4</scalariform.version>
+        <enstar.propertyparsers.version>0.1</enstar.propertyparsers.version>
+        <javamail.version>1.4.7</javamail.version>
+        <mock.javamail.version>1.9</mock.javamail.version>
+
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>maven-hadoop</id>
+            <name>Hadoop Releases</name>
+            <url>https://repository.cloudera.com/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>cloudera-repos</id>
+            <name>Cloudera Repos</name>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+        <repository>
+            <id>typesafereleases</id>
+            <name>typesafe-releases</name>
+            <url>http://repo.typesafe.com/typesafe/releases/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>searchmaven</id>
+            <name>search-maven</name>
+            <url>http://search.maven.org/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>maven2</id>
+            <name>maven-2</name>
+            <url>http://repo.maven.apache.org/maven2/</url>
+            <layout>default</layout>
+        </repository>
+
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.major.version}</artifactId>
+            <version>${scalatest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

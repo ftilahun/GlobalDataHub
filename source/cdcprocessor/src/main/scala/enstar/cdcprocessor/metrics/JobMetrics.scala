@@ -4,17 +4,17 @@ package enstar.cdcprocessor.metrics
  * Job Metrics Object
  */
 case class JobMetrics(
-                      startTime: String,
-                      completeTime: String,
-                      changeData: Long,
-                      immatureChanges: Long,
-                      matureChanges: Long,
-                      processedChanges: Long,
-                      history: Long,
-                      allRecords: Long,
-                      openAndClosedRecords: Long,
-                      activeRecords: Long,
-                      newHistory: Long) {
+    startTime: String,
+    completeTime: String,
+    changeData: Long,
+    immatureChanges: Long,
+    matureChanges: Long,
+    processedChanges: Long,
+    history: Long,
+    allRecords: Long,
+    openAndClosedRecords: Long,
+    activeRecords: Long,
+    newHistory: Long) {
   override def toString: String =
     "==========================================================================" +
       "\nStatistics for this run" +

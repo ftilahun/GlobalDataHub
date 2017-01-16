@@ -1,11 +1,11 @@
 package enstar.cdcprocessor.processor
 
-import enstar.cdcprocessor.io.{DataFrameReader, DataFrameWriter}
+import enstar.cdcprocessor.io.{ DataFrameReader, DataFrameWriter }
 import enstar.cdcprocessor.metrics.JobMetrics
 import enstar.cdcprocessor.properties.CDCProperties
 import enstar.cdcprocessor.udfs.UserFunctions
 import org.apache.spark.Logging
-import org.apache.spark.sql.{DataFrame, SQLContext}
+import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 
 /**
