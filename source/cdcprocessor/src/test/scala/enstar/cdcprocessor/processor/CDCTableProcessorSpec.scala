@@ -3,7 +3,8 @@ package enstar.cdcprocessor.processor
 import enstar.cdcprocessor.TestContexts
 import enstar.cdcprocessor.io.{
   AvroDataFrameReader,
-  AvroDataFrameWriter
+  AvroDataFrameWriter,
+  DataFrameWriter
 }
 import enstar.cdcprocessor.properties.CDCProperties
 import enstar.cdcprocessor.udfs.UserFunctions
@@ -28,6 +29,8 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     val tableProcessor = new CDCTableProcessor
 
     When("process is called")
+
+    Mockito.when(properties.metricsOutputDir).thenReturn(None)
 
     tableProcessor
       .process(sqlContext, properties, reader, writer, userFunctions)
@@ -91,7 +94,8 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       )
 
     Then("A Delete flag should be added to columns")
-    Mockito.verify(userFunctions, Mockito.times(2))
+    Mockito
+      .verify(userFunctions, Mockito.times(2))
       .addDeleteFlagColumn(
         org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.anyString(),
@@ -117,7 +121,8 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
       )
 
     Then("Temp columns should be removed")
-    Mockito.verify(userFunctions, Mockito.times(5))
+    Mockito
+      .verify(userFunctions, Mockito.times(5))
       .dropColumn(
         org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.anyString()
@@ -125,11 +130,14 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
 
     Then("Outputs should be persisted to disk")
     Mockito
-      .verify(writer, Mockito.times(3))
-      .write(org.mockito.Matchers.any(classOf[SQLContext]),
+      .verify(userFunctions, Mockito.times(3))
+      .countAndSave(
+        org.mockito.Matchers.any(classOf[SQLContext]),
         org.mockito.Matchers.anyString(),
+        org.mockito.Matchers.any(classOf[DataFrameWriter]),
         org.mockito.Matchers.any(classOf[DataFrame]),
-        org.mockito.Matchers.any(classOf[Some[StorageLevel]]))
+        org.mockito.Matchers.any(classOf[StorageLevel])
+      )
   }
 
   "CDCTableProcessor" should "Process changes to a table" in {

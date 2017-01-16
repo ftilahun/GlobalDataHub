@@ -1,6 +1,7 @@
 package enstar.cdcprocessor.processor
 
 import enstar.cdcprocessor.io.{ DataFrameReader, DataFrameWriter }
+import enstar.cdcprocessor.metrics.JobMetrics
 import enstar.cdcprocessor.properties.CDCProperties
 import enstar.cdcprocessor.udfs.UserFunctions
 import org.apache.spark.Logging
@@ -32,6 +33,25 @@ class CDCTableProcessor extends TableProcessor with Logging {
   }
 
   /**
+   * Write the metrics about this job to disk
+   * @param metrics the metrics object to write
+   * @param sqlContext the sql context
+   * @param properties the properties object
+   * @param writer a DataFrame Writer
+   */
+  def saveJobMetrics(metrics: JobMetrics,
+                     sqlContext: SQLContext,
+                     properties: CDCProperties,
+                     writer: DataFrameWriter): Unit = {
+    val metricsDF = sqlContext.createDataFrame(
+      sqlContext.sparkContext.parallelize(List(metrics)))
+    writer.write(sqlContext,
+      properties.metricsOutputDir.get,
+      metricsDF,
+      Some(StorageLevel.MEMORY_AND_DISK))
+  }
+
+  /**
    * Process a source table
    *
    * @param sqlContext    the sql context
@@ -51,7 +71,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
     val changeData = reader.read(sqlContext,
       properties.changeInputDir,
       Some(StorageLevel.MEMORY_AND_DISK_SER))
-    userFunctions.persistForStatistics(changeData,
+    userFunctions.persistForMetrics(changeData,
       StorageLevel.MEMORY_ONLY,
       properties)
 
@@ -61,14 +81,14 @@ class CDCTableProcessor extends TableProcessor with Logging {
 
     val matureChanges =
       userFunctions.filterOnTimeWindow(changeData, properties)
-    userFunctions.persistForStatistics(matureChanges,
+    userFunctions.persistForMetrics(matureChanges,
       StorageLevel.MEMORY_ONLY,
       properties)
 
     logInfo("Processing changes")
     val processedChanges =
       processChangeData(matureChanges, properties, userFunctions)
-    userFunctions.persistForStatistics(processedChanges,
+    userFunctions.persistForMetrics(processedChanges,
       StorageLevel.MEMORY_ONLY,
       properties)
 
@@ -76,7 +96,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
     val history = reader.read(sqlContext,
       properties.historyInput,
       Some(StorageLevel.MEMORY_AND_DISK_SER))
-    userFunctions.persistForStatistics(history,
+    userFunctions.persistForMetrics(history,
       StorageLevel.MEMORY_ONLY,
       properties)
 
@@ -94,18 +114,12 @@ class CDCTableProcessor extends TableProcessor with Logging {
 
     val processedChangesWithDeleteFlag = userFunctions
       .addDeleteFlagColumn(processedChanges, deleteColumnName, properties)
-    userFunctions.persistForStatistics(processedChangesWithDeleteFlag,
-      StorageLevel.MEMORY_ONLY,
-      properties)
 
     val historyWithDeleteFlag = userFunctions.addDeleteFlagColumn(
       history,
       deleteColumnName,
       properties,
       doNotSetFlag = true)
-    userFunctions.persistForStatistics(historyWithDeleteFlag,
-      StorageLevel.MEMORY_ONLY,
-      properties)
 
     /**
      * Timestamp is the transaction timestamp for changes
@@ -121,18 +135,12 @@ class CDCTableProcessor extends TableProcessor with Logging {
       userFunctions.getColumn(processedChangesWithDeleteFlag,
         properties.transactionTimeStampColumnName)
     )
-    userFunctions.persistForStatistics(processedChangesWithTimeStamp,
-      StorageLevel.MEMORY_ONLY,
-      properties)
 
     val historyWithTimeStamp = userFunctions.addColumn(
       historyWithDeleteFlag,
       tempTimeStampColumnName,
       userFunctions.getColumn(historyWithDeleteFlag,
         properties.validFromColumnName))
-    userFunctions.persistForStatistics(historyWithTimeStamp,
-      StorageLevel.MEMORY_ONLY,
-      properties)
 
     logInfo("Dropping attunity columns")
     val processedChangesRemovedMetaData = userFunctions
@@ -141,20 +149,11 @@ class CDCTableProcessor extends TableProcessor with Logging {
       userFunctions.dropAttunityColumns(historyWithTimeStamp, properties)
     val historyNoActive =
       userFunctions.dropColumn(historyNoMetadata, properties.activeColumnName)
-    userFunctions.persistForStatistics(processedChangesRemovedMetaData,
-      StorageLevel.MEMORY_ONLY,
-      properties)
-    userFunctions.persistForStatistics(historyNoMetadata,
-      StorageLevel.MEMORY_ONLY,
-      properties)
-    userFunctions.persistForStatistics(historyNoActive,
-      StorageLevel.MEMORY_ONLY,
-      properties)
 
     logInfo("Joining history and changes")
     val allRecords =
       userFunctions.unionAll(processedChangesRemovedMetaData, historyNoActive)
-    userFunctions.persistForStatistics(allRecords,
+    userFunctions.persistForMetrics(allRecords,
       StorageLevel.MEMORY_ONLY,
       properties)
 
@@ -164,20 +163,17 @@ class CDCTableProcessor extends TableProcessor with Logging {
         properties,
         deleteColumnName,
         tempTimeStampColumnName)
-    userFunctions.persistForStatistics(openAndClosedRecords,
+    userFunctions.persistForMetrics(openAndClosedRecords,
       StorageLevel.MEMORY_ONLY,
       properties)
 
     val flaggedRecords =
       userFunctions.addActiveColumn(openAndClosedRecords, properties)
-    userFunctions.persistForStatistics(flaggedRecords,
-      StorageLevel.MEMORY_ONLY,
-      properties)
 
     logInfo("Filtering active records")
     val activeRecords =
       userFunctions.filterOnActive(flaggedRecords, properties)
-    userFunctions.persistForStatistics(activeRecords,
+    userFunctions.persistForMetrics(activeRecords,
       StorageLevel.MEMORY_ONLY,
       properties)
 
@@ -185,7 +181,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
     val newHistory =
       userFunctions
         .filterOnActive(flaggedRecords, properties, returnActive = false)
-    userFunctions.persistForStatistics(newHistory,
+    userFunctions.persistForMetrics(newHistory,
       StorageLevel.MEMORY_ONLY,
       properties)
 
@@ -194,10 +190,10 @@ class CDCTableProcessor extends TableProcessor with Logging {
       userFunctions.dropColumn(newHistory, deleteColumnName)
     val activeRecordsWithoutDeleteFlag =
       userFunctions.dropColumn(activeRecords, deleteColumnName)
-    userFunctions.persistForStatistics(newHistoryWithoutDeleteFlag,
+    userFunctions.persistForMetrics(newHistoryWithoutDeleteFlag,
       StorageLevel.MEMORY_ONLY,
       properties)
-    userFunctions.persistForStatistics(activeRecordsWithoutDeleteFlag,
+    userFunctions.persistForMetrics(activeRecordsWithoutDeleteFlag,
       StorageLevel.MEMORY_ONLY,
       properties)
 
@@ -210,73 +206,40 @@ class CDCTableProcessor extends TableProcessor with Logging {
         tempTimeStampColumnName)
 
     logInfo("Persisting young data to disk")
-    countAndSave(sqlContext,
+    userFunctions.countAndSave(sqlContext,
       properties.immatureChangesOutput,
       writer,
       immatureChanges,
       StorageLevel.MEMORY_AND_DISK_SER)
 
     logInfo("Saving inactive records")
-    countAndSave(sqlContext,
+    userFunctions.countAndSave(sqlContext,
       properties.historyOutput,
       writer,
       newHistoryWithoutTimestamp,
       StorageLevel.MEMORY_AND_DISK_SER)
 
     logInfo("Saving active records")
-    countAndSave(sqlContext,
+    userFunctions.countAndSave(sqlContext,
       properties.activeOutput,
       writer,
       activeRecordsWithoutTimestamp,
       StorageLevel.MEMORY_AND_DISK_SER)
 
-    if (properties.printStatistics) {
-      val statisticsString = "==========================================================================" +
-        "\nStatistics for this run" +
-        "\n==========================================================================" +
-        s"\nChanges read: ${userFunctions.getCount(changeData)}" +
-        s"\nRejected Changes: ${userFunctions.getCount(immatureChanges)}" +
-        s"\nAccepted Changes: ${userFunctions.getCount(matureChanges)}" +
-        s"\nDistinct Transactions: ${userFunctions.getCount(processedChanges)}" +
-        s"\n\t(with delete flag): ${userFunctions.getCount(processedChangesWithDeleteFlag)}" +
-        s"\n\t(with timestamp): ${userFunctions.getCount(processedChangesWithTimeStamp)}" +
-        s"\n\t(with metadata removed): ${userFunctions.getCount(processedChangesRemovedMetaData)}" +
-        s"\nBase Records: ${userFunctions.getCount(history)}" +
-        s"\n\t(with delete flag):${userFunctions.getCount(historyWithDeleteFlag)}" +
-        s"\n\t(with timestamp): ${userFunctions.getCount(historyWithTimeStamp)}" +
-        s"\n\t(with metadata removed): ${userFunctions.getCount(historyNoMetadata)}" +
-        s"\n\t(with active removed): ${userFunctions.getCount(historyNoActive)}" +
-        s"\nTotal Records (unioned): ${userFunctions.getCount(allRecords)}" +
-        s"\n\t(After setting validTo): ${userFunctions.getCount(openAndClosedRecords)}" +
-        s"\n\t(After Adding active flag): ${userFunctions.getCount(flaggedRecords)}" +
-        s"\nActive Records: ${userFunctions.getCount(activeRecords)}" +
-        s"\n\t(with delete flag removed): ${userFunctions.getCount(activeRecordsWithoutDeleteFlag)}" +
-        s"\n\t(with timestamp removed): ${userFunctions.getCount(activeRecordsWithoutTimestamp)}" +
-        s"\nInactive Records: ${userFunctions.getCount(newHistory)}" +
-        s"\n\t(with delete flag removed): ${userFunctions.getCount(newHistoryWithoutDeleteFlag)}" +
-        s"\n\t(with timestamp removed): ${userFunctions.getCount(newHistoryWithoutTimestamp)}" +
-        "\n=========================================================================="
-      logInfo(statisticsString)
-    }
-
-  }
-
-  /**
-   * Count the number of records in a DataFrame and if >0 save it to disk
-   * @param sqlContext the sql context
-   * @param path the path to save to
-   * @param writer a DataFrame writer
-   * @param dataFrame the DataFrame to save
-   * @param storageLevel the storage level to persist at
-   */
-  def countAndSave(sqlContext: SQLContext,
-                   path: String,
-                   writer: DataFrameWriter,
-                   dataFrame: DataFrame,
-                   storageLevel: StorageLevel): Unit = {
-    dataFrame.persist(storageLevel)
-    if (dataFrame.count() > 0) {
-      writer.write(sqlContext, path, dataFrame, Some(storageLevel))
+    if (properties.metricsOutputDir.isDefined) {
+      val metrics = JobMetrics(
+        changeData = userFunctions.getCount(changeData),
+        immatureChanges = userFunctions.getCount(immatureChanges),
+        matureChanges = userFunctions.getCount(matureChanges),
+        processedChanges = userFunctions.getCount(processedChanges),
+        history = userFunctions.getCount(history),
+        allRecords = userFunctions.getCount(allRecords),
+        openAndClosedRecords = userFunctions.getCount(openAndClosedRecords),
+        activeRecords = userFunctions.getCount(activeRecords),
+        newHistory = userFunctions.getCount(newHistory)
+      )
+      logInfo(metrics.toString)
+      saveJobMetrics(metrics, sqlContext, properties, writer)
     }
   }
 

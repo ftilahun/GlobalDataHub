@@ -1,9 +1,10 @@
 package enstar.cdcprocessor.udfs
 
+import enstar.cdcprocessor.io.DataFrameWriter
 import enstar.cdcprocessor.properties.CDCProperties
 import org.apache.spark.Logging
 import org.apache.spark.sql.expressions.Window
-import org.apache.spark.sql.{ Column, DataFrame }
+import org.apache.spark.sql.{ Column, DataFrame, SQLContext }
 import org.apache.spark.sql.functions._
 import org.apache.spark.storage.StorageLevel
 import org.joda.time.DateTime
@@ -294,10 +295,10 @@ class CDCUserFunctions extends UserFunctions with Logging {
    * @param storageLevel the StorageLevel to persist at
    * @return
    */
-  def persistForStatistics(dataFrame: DataFrame,
-                           storageLevel: StorageLevel,
-                           properties: CDCProperties): Unit = {
-    if (properties.printStatistics) {
+  def persistForMetrics(dataFrame: DataFrame,
+                        storageLevel: StorageLevel,
+                        properties: CDCProperties): Unit = {
+    if (properties.metricsOutputDir.isDefined) {
       dataFrame.persist(storageLevel)
     }
   }
@@ -309,4 +310,23 @@ class CDCUserFunctions extends UserFunctions with Logging {
    * @return the number of rows
    */
   override def getCount(dataFrame: DataFrame): Long = dataFrame.count()
+
+  /**
+   * Count the number of records in a DataFrame and if >0 save it to disk
+   * @param sqlContext the sql context
+   * @param path the path to save to
+   * @param writer a DataFrame writer
+   * @param dataFrame the DataFrame to save
+   * @param storageLevel the storage level to persist at
+   */
+  def countAndSave(sqlContext: SQLContext,
+                   path: String,
+                   writer: DataFrameWriter,
+                   dataFrame: DataFrame,
+                   storageLevel: StorageLevel): Unit = {
+    dataFrame.persist(storageLevel)
+    if (dataFrame.count() > 0) {
+      writer.write(sqlContext, path, dataFrame, Some(storageLevel))
+    }
+  }
 }

@@ -5,8 +5,8 @@ import org.apache.spark.Logging
 import scopt.OptionParser
 
 /**
-  * Parses command line properties.
-  */
+ * Parses command line properties.
+ */
 class CommandLinePropertyParser
     extends PropertyParser[Array[String]]
     with Logging {
@@ -162,18 +162,17 @@ class CommandLinePropertyParser
         )
         .text("The output directory for closed records")
 
-      opt[Boolean]("printStatistics")
+      opt[String]("metricsOutputDir")
         .action(
-          (s, p) => p.copy(printStatistics = s)
+          (s, p) => p.copy(metricsOutputDir = Some(s))
         )
-        .text(
-          "print statistics about this run to the yarn logs (warning: performance)")
+        .text("Directory to save job metrics to")
     }
 
   def parse(commandLineArgs: Array[String]): CDCProperties = {
     parser.parse(commandLineArgs, CDCProperties()) match {
       case Some(properties) => properties
-      case None => throw new PropertyNotSetException()
+      case None             => throw new PropertyNotSetException()
     }
   }
 }

@@ -27,18 +27,4 @@ trait TableProcessor {
               writer: DataFrameWriter,
               userFunctions: UserFunctions): Unit
 
-  /**
-   * Count the number of records in a DataFrame and if >0 save it to disk
-   * @param sqlContext the sql context
-   * @param path the path to save to
-   * @param writer a DataFrame writer
-   * @param dataFrame the DataFrame to save
-   * @param storageLevel the storage level to persist at
-   */
-  def countAndSave(sqlContext: SQLContext,
-                   path: String,
-                   writer: DataFrameWriter,
-                   dataFrame: DataFrame,
-                   storageLevel: StorageLevel): Unit
-
 }

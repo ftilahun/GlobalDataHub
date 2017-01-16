@@ -24,5 +24,5 @@ case class CDCProperties(idColumnName: String = "",
                          historyInput: String = "",
                          immatureChangesOutput: String = "",
                          historyOutput: String = "",
-                         printStatistics: Boolean = false)
+                         metricsOutputDir: Option[String] = None)
     extends Serializable
