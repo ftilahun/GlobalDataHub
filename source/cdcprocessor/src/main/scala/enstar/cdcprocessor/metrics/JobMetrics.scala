@@ -3,7 +3,10 @@ package enstar.cdcprocessor.metrics
 /**
  * Job Metrics Object
  */
-case class JobMetrics(changeData: Long,
+case class JobMetrics(
+                      startTime: String,
+                      completeTime: String,
+                      changeData: Long,
                       immatureChanges: Long,
                       matureChanges: Long,
                       processedChanges: Long,

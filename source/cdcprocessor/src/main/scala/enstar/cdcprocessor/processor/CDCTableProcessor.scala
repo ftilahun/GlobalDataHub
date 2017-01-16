@@ -1,11 +1,11 @@
 package enstar.cdcprocessor.processor
 
-import enstar.cdcprocessor.io.{ DataFrameReader, DataFrameWriter }
+import enstar.cdcprocessor.io.{DataFrameReader, DataFrameWriter}
 import enstar.cdcprocessor.metrics.JobMetrics
 import enstar.cdcprocessor.properties.CDCProperties
 import enstar.cdcprocessor.udfs.UserFunctions
 import org.apache.spark.Logging
-import org.apache.spark.sql.{ DataFrame, SQLContext }
+import org.apache.spark.sql.{DataFrame, SQLContext}
 import org.apache.spark.storage.StorageLevel
 
 /**
@@ -66,6 +66,8 @@ class CDCTableProcessor extends TableProcessor with Logging {
                        reader: DataFrameReader,
                        writer: DataFrameWriter,
                        userFunctions: UserFunctions): Unit = {
+
+    val startTime = userFunctions.getCurrentTime(properties.attunityDateFormat)
 
     logInfo("Reading change data")
     val changeData = reader.read(sqlContext,
@@ -226,8 +228,12 @@ class CDCTableProcessor extends TableProcessor with Logging {
       activeRecordsWithoutTimestamp,
       StorageLevel.MEMORY_AND_DISK_SER)
 
+    val completeTime = userFunctions.getCurrentTime(properties.attunityDateFormat)
+
     if (properties.metricsOutputDir.isDefined) {
       val metrics = JobMetrics(
+        startTime = startTime,
+        completeTime = completeTime,
         changeData = userFunctions.getCount(changeData),
         immatureChanges = userFunctions.getCount(immatureChanges),
         matureChanges = userFunctions.getCount(matureChanges),
