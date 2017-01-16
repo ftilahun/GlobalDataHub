@@ -8,39 +8,14 @@
     <artifactId>mailclient</artifactId>
     <version>0.1</version>
 
-    <properties>
-        <scala.version>2.10.5</scala.version>
-        <scala.major.version>2.10</scala.major.version>
-        <scalatest.maven.version>1.0</scalatest.maven.version>
-        <surefire.version>2.7</surefire.version>
-        <scalatest.version>2.2.4</scalatest.version>
-        <scalatest.maven.plugin.version>1.0</scalatest.maven.plugin.version>
-        <scalamaven.version>3.2.1</scalamaven.version>
-        <maven.assembly.plugin.version>2.5.5</maven.assembly.plugin.version>
-        <mockito.version>1.10.19</mockito.version>
-        <scoverage.version>1.1.1</scoverage.version>
-        <javamail.version>1.4.7</javamail.version>
-        <mock.javamail.version>1.9</mock.javamail.version>
-    </properties>
+    <parent>
+        <groupId>enstar</groupId>
+        <artifactId>GlobalDataHub</artifactId>
+        <version>0.1</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
     <dependencies>
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>${scala.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_${scala.major.version}</artifactId>
-            <version>${scalatest.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
