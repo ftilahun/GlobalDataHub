@@ -1,12 +1,12 @@
 package enstar.cdcprocessor.properties
 
-import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 import enstar.cdcprocessor.exceptions.PropertyNotSetException
+import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 
 /**
  * Unit tests for CommandLinePropertyParser
  */
-class CDCProcessorCommandLinePropertyParserSpec
+class CommandLinePropertyParserSpec
     extends FlatSpec
     with GivenWhenThen
     with Matchers {

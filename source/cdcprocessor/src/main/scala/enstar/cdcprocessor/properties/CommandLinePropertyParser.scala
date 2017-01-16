@@ -1,13 +1,15 @@
 package enstar.cdcprocessor.properties
 
 import enstar.cdcprocessor.exceptions.PropertyNotSetException
+import org.apache.spark.Logging
 import scopt.OptionParser
 
 /**
  * Parses command line properties.
  */
 class CommandLinePropertyParser
-    extends PropertyParser[Array[String]] {
+    extends PropertyParser[Array[String]]
+    with Logging {
 
   val parser: OptionParser[CDCProperties] =
     new scopt.OptionParser[CDCProperties]("cdcprocessor") {
