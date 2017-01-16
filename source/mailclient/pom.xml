@@ -45,6 +45,7 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>${javamail.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>de.saly</groupId>
@@ -93,7 +94,7 @@
             <plugin>
                 <groupId>org.scalariform</groupId>
                 <artifactId>scalariform-maven-plugin</artifactId>
-                <version>0.1.4</version>
+                <version>${scalariform.version}</version>
                 <executions>
                     <execution>
                         <phase>process-sources</phase>
