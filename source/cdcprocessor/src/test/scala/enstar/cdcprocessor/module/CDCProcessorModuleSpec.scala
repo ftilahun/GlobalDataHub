@@ -55,7 +55,7 @@ class CDCProcessorModuleSpec
       "A",
       "--activeColumnName",
       "A",
-      "--timeWindowInHours",
+      "--attunityCutoff",
       "2",
       "--attunityDateFormat",
       "A",
