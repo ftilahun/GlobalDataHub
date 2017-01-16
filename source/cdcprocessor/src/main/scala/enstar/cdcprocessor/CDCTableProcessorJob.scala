@@ -7,7 +7,7 @@ import org.apache.spark.{ Logging, SparkConf, SparkContext }
 /**
  * Main class for CDCTableProcessor
  */
-class CDCTableProcessorJob extends Logging {
+object CDCTableProcessorJob extends Logging {
 
   def main(args: Array[String]): Unit = {
 
@@ -27,8 +27,8 @@ class CDCTableProcessorJob extends Logging {
     val tableProcessor = CDCProcessorModule.tableProcessor
 
     logInfo("Processing table")
-    val tableData =
-      tableProcessor.process(sqlContext, properties, reader, writer, userFunctions)
+    tableProcessor
+      .process(sqlContext, properties, reader, writer, userFunctions)
     logInfo("Done!")
   }
 }

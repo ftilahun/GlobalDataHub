@@ -4,6 +4,7 @@ import enstar.cdcprocessor.io.{ DataFrameReader, DataFrameWriter }
 import enstar.cdcprocessor.properties.CDCProperties
 import enstar.cdcprocessor.udfs.UserFunctions
 import org.apache.spark.sql.{ DataFrame, SQLContext }
+import org.apache.spark.storage.StorageLevel
 
 /**
  * Expected behaviour for a table processor
@@ -15,10 +16,10 @@ trait TableProcessor {
    *
    * @param sqlContext    the sql context
    * @param properties    the properties object
-   * @param reader        a dataframe reader
-   * @param writer        a dataframe writer
-   * @param userFunctions a udfs object
-   * @return a dataframe of the source table
+   * @param reader        a DataFrame reader
+   * @param writer        a DataFrame writer
+   * @param userFunctions a UDFs object
+   * @return a DataFrame of the source table
    */
   def process(sqlContext: SQLContext,
               properties: CDCProperties,
@@ -27,17 +28,17 @@ trait TableProcessor {
               userFunctions: UserFunctions): Unit
 
   /**
-   * Save source table dataframe to disk
-   *
+   * Count the number of records in a DataFrame and if >0 save it to disk
    * @param sqlContext the sql context
-   * @param writer a dataframe writer
-   * @param properties the properties object
-   * @param dataFrame the dataframe to save
-   * @return the number of rows written.
+   * @param path the path to save to
+   * @param writer a DataFrame writer
+   * @param dataFrame the DataFrame to save
+   * @param storageLevel the storage level to persist at
    */
-  def save(sqlContext: SQLContext,
-           writer: DataFrameWriter,
-           properties: CDCProperties,
-           dataFrame: DataFrame): Long
+  def countAndSave(sqlContext: SQLContext,
+                   path: String,
+                   writer: DataFrameWriter,
+                   dataFrame: DataFrame,
+                   storageLevel: StorageLevel): Unit
 
 }

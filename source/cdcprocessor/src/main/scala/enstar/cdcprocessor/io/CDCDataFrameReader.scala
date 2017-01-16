@@ -8,7 +8,7 @@ import org.apache.spark.storage.StorageLevel
 
 /**
  * CDCDataFrameReader: reads from filesystem
- * reading from filesystem is defered to the passed in GDHDataFrameReader
+ * reading from filesystem is deferred to the passed in DataFrameReader
  *
  * @param reader filesystem reader
  */
@@ -21,8 +21,8 @@ class CDCDataFrameReader(reader: DataFrameReader)
    *
    * @param sqlContext the sql context.
    * @param path the path to read from
-   * @param storageLevel an optional storagelevel
-   * @return a dataframe
+   * @param storageLevel an optional StorageLevel
+   * @return a DataFrame
    */
   def read(sqlContext: SQLContext,
            path: String,

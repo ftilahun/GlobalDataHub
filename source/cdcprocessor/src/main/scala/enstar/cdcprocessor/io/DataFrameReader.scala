@@ -9,12 +9,12 @@ import org.apache.spark.storage.StorageLevel
 trait DataFrameReader {
 
   /**
-   * read a dataframe from hdfs
+   * read a DataFrame from hdfs
    *
    * @param sqlContext   the hive context
    * @param path         the path to read from
-   * @param storageLevel an optional storagelevel to persist the dataframe
-   * @return a dataframe
+   * @param storageLevel an optional StorageLevel to persist the DataFrame
+   * @return a DataFrame
    */
   def read(sqlContext: SQLContext,
            path: String,

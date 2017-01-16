@@ -9,12 +9,12 @@ import org.apache.spark.storage.StorageLevel
 trait DataFrameWriter {
 
   /**
-   * write a dataframe to disk
+   * write a DataFrame to disk
    *
    * @param sqlContext   the hive context
    * @param path         the HDFS path to write to
-   * @param data         the dataframe
-   * @param storageLevel an optional storagelevel to persist the dataframe
+   * @param data         the DataFrame
+   * @param storageLevel an optional StorageLevel to persist the DataFrame
    */
   def write(sqlContext: SQLContext,
             path: String,

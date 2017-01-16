@@ -41,6 +41,20 @@ class CommandLinePropertyParserSpec
       "--validToColumnName",
       "A",
       "--transactionTimeStampColumnName",
+      "A",
+      "--activeColumnName",
+      "A",
+      "--attunityCutoff",
+      "2",
+      "--attunityDateFormat",
+      "A",
+      "--historyInput",
+      "A",
+      "--immatureChangesOutput",
+      "A",
+      "--historyOutput",
+      "A",
+      "--attunityDateFormatShort",
       "A"
     )
     When("The argument list is complete")

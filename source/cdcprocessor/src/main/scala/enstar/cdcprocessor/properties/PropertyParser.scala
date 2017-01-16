@@ -6,8 +6,8 @@ package enstar.cdcprocessor.properties
 trait PropertyParser[T] {
 
   /**
-   * parse any arguments passed to the applicatin to create
-   * the Properies object
+   * parse any arguments passed to the application to create
+   * the Properties object
    * @param args arguments to program
    * @return the properties object
    */

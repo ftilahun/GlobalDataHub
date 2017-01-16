@@ -6,17 +6,17 @@ import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 
 /**
- * Helper class for reading dataframes from HDFS
+ * Helper class for reading DataFrames from HDFS
  */
 class AvroDataFrameReader extends Logging with DataFrameReader {
 
   /**
-   * read a dataframe from hdfs
+   * read a DataFrame from HDFS
    *
    * @param sqlContext   the hive context
    * @param path         the path to read from
-   * @param storageLevel an optional storagelevel to persist the dataframe
-   * @return a dataframe
+   * @param storageLevel an optional StorageLevel to persist the DataFrame
+   * @return a DataFrame
    */
   def read(sqlContext: SQLContext,
            path: String,
@@ -27,7 +27,7 @@ class AvroDataFrameReader extends Logging with DataFrameReader {
 
     if (storageLevel.isDefined) {
       logInfo(
-        s"Persisting dataframe at storage level ${storageLevel.toString}")
+        s"Persisting DataFrame at storage level ${storageLevel.toString}")
       data.persist(storageLevel.get)
     }
     data
