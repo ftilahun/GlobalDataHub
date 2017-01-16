@@ -1,8 +1,8 @@
 package enstar.cdcprocessor.udfs
 
+import enstar.cdcprocessor.io.DataFrameWriter
 import enstar.cdcprocessor.properties.CDCProperties
-import org.apache.spark.sql.DataFrame
-import org.apache.spark.sql.Column
+import org.apache.spark.sql.{ Column, DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 
 trait UserFunctions extends Serializable {
@@ -137,7 +137,9 @@ trait UserFunctions extends Serializable {
    * @param column the column to add
    * @return a DataFrame
    */
-  def addColumn(dataFrame: DataFrame, columnName: String, column: Column): DataFrame
+  def addColumn(dataFrame: DataFrame,
+                columnName: String,
+                column: Column): DataFrame
 
   /**
    * Return a specific column from a DataFrame
@@ -154,7 +156,9 @@ trait UserFunctions extends Serializable {
    * @param properties the properties object
    * @return
    */
-  def persistForStatistics(dataFrame: DataFrame, storageLevel: StorageLevel, properties: CDCProperties): Unit
+  def persistForMetrics(dataFrame: DataFrame,
+                        storageLevel: StorageLevel,
+                        properties: CDCProperties): Unit
 
   /**
    * Get a count of the rows in a DataFrame
@@ -162,4 +166,18 @@ trait UserFunctions extends Serializable {
    * @return the number of rows
    */
   def getCount(dataFrame: DataFrame): Long
+
+  /**
+   * Count the number of records in a DataFrame and if >0 save it to disk
+   * @param sqlContext the sql context
+   * @param path the path to save to
+   * @param writer a DataFrame writer
+   * @param dataFrame the DataFrame to save
+   * @param storageLevel the storage level to persist at
+   */
+  def countAndSave(sqlContext: SQLContext,
+                   path: String,
+                   writer: DataFrameWriter,
+                   dataFrame: DataFrame,
+                   storageLevel: StorageLevel): Unit
 }

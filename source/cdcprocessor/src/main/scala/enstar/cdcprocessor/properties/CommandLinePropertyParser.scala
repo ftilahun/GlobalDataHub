@@ -162,12 +162,11 @@ class CommandLinePropertyParser
         )
         .text("The output directory for closed records")
 
-      opt[Boolean]("printStatistics")
+      opt[String]("metricsOutputDir")
         .action(
-          (s, p) => p.copy(printStatistics = s)
+          (s, p) => p.copy(metricsOutputDir = Some(s))
         )
-        .text(
-          "print statistics about this run to the yarn logs (warning: performance)")
+        .text("Directory to save job metrics to")
     }
 
   def parse(commandLineArgs: Array[String]): CDCProperties = {
