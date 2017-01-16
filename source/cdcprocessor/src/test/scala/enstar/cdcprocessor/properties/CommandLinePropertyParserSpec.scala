@@ -44,7 +44,7 @@ class CommandLinePropertyParserSpec
       "A",
       "--activeColumnName",
       "A",
-      "--timeWindowInHours",
+      "--attunityCutoff",
       "2",
       "--attunityDateFormat",
       "A",

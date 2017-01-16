@@ -5,8 +5,8 @@ import org.apache.spark.Logging
 import scopt.OptionParser
 
 /**
-  * Parses command line properties.
-  */
+ * Parses command line properties.
+ */
 class CommandLinePropertyParser
     extends PropertyParser[Array[String]]
     with Logging {
@@ -118,12 +118,12 @@ class CommandLinePropertyParser
           (a, p) => p.copy(activeColumnName = a)
         )
         .text("The name of the active column e.g. 'active'")
-      opt[Int]("timeWindowInHours")
+      opt[String]("attunityCutoff")
         .required()
         .action(
-          (t, p) => p.copy(timeWindowInHours = t)
+          (t, p) => p.copy(attunityCutoff = t)
         )
-        .text("The time window to apply to change data before processing (in hours)")
+        .text("The timestamp prior to which changes will not be processed (must be in attunityDateFormat)")
 
       opt[String]("attunityDateFormat")
         .required()
@@ -173,7 +173,7 @@ class CommandLinePropertyParser
   def parse(commandLineArgs: Array[String]): CDCProperties = {
     parser.parse(commandLineArgs, CDCProperties()) match {
       case Some(properties) => properties
-      case None => throw new PropertyNotSetException()
+      case None             => throw new PropertyNotSetException()
     }
   }
 }

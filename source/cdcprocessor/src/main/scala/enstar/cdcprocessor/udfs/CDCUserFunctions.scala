@@ -15,7 +15,6 @@ import org.joda.time.format.DateTimeFormat
 class CDCUserFunctions extends UserFunctions with Logging {
 
   val activeDate = "9999-12-31 23:59:59.000"
-  val currentTime = new DateTime()
 
   /**
    * * Provides a string representation of the current time in the specified
@@ -187,8 +186,9 @@ class CDCUserFunctions extends UserFunctions with Logging {
                          returnMature: Boolean = true): DataFrame = {
     val filterBeforeTimeWindow = udf(
       (timeStampString: String) => {
-        val cutOff =
-          currentTime.minusHours(properties.timeWindowInHours)
+        val cutOff = DateTimeFormat
+          .forPattern(properties.attunityDateFormat)
+          .parseDateTime(properties.attunityCutoff)
         val timeStamp = try {
           DateTimeFormat
             .forPattern(properties.attunityDateFormat)

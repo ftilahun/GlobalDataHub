@@ -10,6 +10,7 @@ import org.mockito.Mockito
 import org.mockito.mock.SerializableMode
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 import org.apache.spark.sql.functions._
+import org.joda
 
 /**
  * Unit tests for CDCUserFunctions
@@ -416,7 +417,8 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
           .serializable(SerializableMode.ACROSS_CLASSLOADERS))
     val userFunctions = new CDCUserFunctions
 
-    Mockito.when(properties.timeWindowInHours).thenReturn(1)
+    Mockito.when(properties.attunityCutoff).
+      thenReturn(DateTimeFormat.forPattern("YYYY-MM-DD HH:mm:ss.SSS").print(new joda.time.DateTime().minus(2)))
     Mockito
       .when(properties.attunityDateFormat)
       .thenReturn("YYYY-MM-DD HH:mm:ss.SSS")
@@ -430,42 +432,42 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(time))
+          .print(time.minus(3)))
     val beforeTime = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(time.minusHours(1)))
+          .print(time))
     val beforeTime1 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(time.minusHours(properties.timeWindowInHours + 1)))
+          .print(time.plusHours(1)))
     val beforeTime2 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(time.minusHours(properties.timeWindowInHours + 2)))
+          .print(time.plusHours(2)))
     val beforeTime3 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(time.minusHours(properties.timeWindowInHours + 3)))
+          .print(time.plusHours(3)))
     val beforeTime4 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(time.minusHours(properties.timeWindowInHours + 4)))
+          .print(time.plusHours(4)))
     val beforeTime5 = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(time.minusHours(properties.timeWindowInHours + 5)))
+          .print(time.plusHours(5)))
     val junkTime = udf(() => "VertWuzEre")
 
     Given("A DataFrame")
     val data = TestContexts
-      .changeDummyData(12)
+      .changeDummyData(20)
       .drop("header__timeStamp")
       .withColumn("header__timeStamp", afterTime())
       .unionAll(
@@ -498,12 +500,12 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
     When("returnMature is true")
     Then("New records should be filtered")
-    userFunctions.filterOnTimeWindow(data, properties).count() should be(10)
+    userFunctions.filterOnTimeWindow(data, properties).count() should be(20)
     When("returnMature is false")
     Then("Old records should be filtered")
     userFunctions
       .filterOnTimeWindow(data, properties, returnMature = false)
-      .count() should be(14)
+      .count() should be(12)
 
     Given("A DataFrame")
     When("The date cannot be parsed")
