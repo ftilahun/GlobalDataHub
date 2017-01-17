@@ -28,18 +28,17 @@ case class CDCProperties(idColumnName: String = "",
     extends Serializable with PropertiesToMap {
 
   /**
-    * Covert the properties object to an array of strings
-    *
-    * @return
-    */
-  override def toStringArray: Map[String,String] = {
-    val optionalArgs : Map[String,String] = if (metricsOutputDir.isDefined) {
-      Map[String,String]("--metricsOutputDir" -> metricsOutputDir.get)
+   * Covert the properties object to a Map of String -> String
+   * @return a map of property values
+   */
+  def toStringArray: Map[String, String] = {
+    val optionalArgs: Map[String, String] = if (metricsOutputDir.isDefined) {
+      Map[String, String]("--metricsOutputDir" -> metricsOutputDir.get)
     } else {
-      Map[String,String]()
+      Map[String, String]()
     }
 
-    Map[String,String](
+    Map[String, String](
       "--transactionTimeStampColumnName" -> transactionTimeStampColumnName,
       "--operationColumnName" -> operationColumnName,
       "--operationColumnValueBefore" -> operationColumnValueBefore,
@@ -57,7 +56,7 @@ case class CDCProperties(idColumnName: String = "",
       "--attunityCutoff" -> attunityCutoff,
       "--attunityDateFormat" -> attunityDateFormat,
       "--attunityDateFormatShort" -> attunityDateFormatShort,
-      "--historyInput"-> historyInput,
+      "--historyInput" -> historyInput,
       "--immatureChangesOutput" -> immatureChangesOutput,
       "--historyOutput" -> historyOutput) ++ optionalArgs
   }

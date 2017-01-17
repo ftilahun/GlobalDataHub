@@ -14,7 +14,7 @@ class CDCProcessorCommandLinePropertyParserSpec
   "CommandLinePropertyParser" should "Parse the command line arguments" in {
     Given("A set of command line args")
     val argsArray = Array[String](
-      "--changeInput",
+      "--changeInputDir",
       "c",
       "--activeOutput",
       "a",
