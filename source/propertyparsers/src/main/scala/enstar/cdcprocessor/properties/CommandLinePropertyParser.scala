@@ -13,7 +13,7 @@ class CommandLinePropertyParser
     new scopt.OptionParser[CDCProperties]("cdcprocessor") {
       head("cdcprocessor", "0.3")
 
-      opt[String]("changeInput")
+      opt[String]("changeInputDir")
         .required()
         .action(
           (i, p) => p.copy(changeInputDir = i)
