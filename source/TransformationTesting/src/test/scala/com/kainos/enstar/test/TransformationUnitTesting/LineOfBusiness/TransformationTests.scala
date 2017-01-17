@@ -44,7 +44,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/LineOfBusiness.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/LineOfBusiness.hql" )
 
     // Act //
     lookup_block.registerTempTable( "lookup_block" )

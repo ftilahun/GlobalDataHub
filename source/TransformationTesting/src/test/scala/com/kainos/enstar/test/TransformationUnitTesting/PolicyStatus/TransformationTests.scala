@@ -43,7 +43,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_line_status = this.populateDataFrameWithLookupLineStatusTestData( "lookup_line_status_PrimaryTestData.csv", sqlc )
     val expectedPolicyStatus = this.populateDataFrameWithPolicyStatusTestData( "policystatus_PrimaryTestData.csv", sqlc )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyStatus.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/PolicyStatus.hql" )
 
     // Act
     lookup_line_status.registerTempTable( "lookup_line_status" )

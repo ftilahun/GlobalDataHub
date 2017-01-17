@@ -24,7 +24,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
       sqlc
     )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/DeductionType.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/DeductionType.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/DeductionType/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/DeductionType/OutputRecordCount.hql" )
 

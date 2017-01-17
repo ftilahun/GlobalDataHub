@@ -22,7 +22,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_risk_code_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/AnalysisCodeSplitRiskCode.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/AnalysisCodeSplitRiskCode.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitRiskCode/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitRiskCode/OutputRecordCount.hql" )
 
@@ -54,7 +54,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_risk_code_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/AnalysisCodeSplitRiskCode.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/AnalysisCodeSplitRiskCode.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitRiskCode/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/AnalysisCodeSplitRiskCode/OutputRecordCount.hql" )
 

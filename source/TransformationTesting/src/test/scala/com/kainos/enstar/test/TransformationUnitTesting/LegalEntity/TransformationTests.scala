@@ -12,7 +12,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputDirPath = "/legalentity/input/"
   private val testDataOutputDirPath = "/legalentity/output/"
-  private val legalEntityTransformationPath = "Transformation/LegalEntity.hql"
+  private val legalEntityTransformationPath = "Transformation/ndex/LegalEntity.hql"
 
   test( "LegalEntity transformation mapping test with primary test data" ){
 

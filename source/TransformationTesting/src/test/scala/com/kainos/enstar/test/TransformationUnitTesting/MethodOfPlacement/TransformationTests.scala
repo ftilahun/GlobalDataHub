@@ -43,7 +43,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_business_type = this.populateDataFrameWithLookupBusinessTypeTestData( "lookup_business_type_PrimaryTestData.csv", sqlc )
     val expectedMethodOfPlacement = this.populateDataFrameWithMethodOfPlacementTestData( "methodofplacement_PrimaryTestData.csv", sqlc )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/MethodOfPlacement.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/MethodOfPlacement.hql" )
 
     // Act
     lookup_business_type.registerTempTable( "lookup_business_type" )

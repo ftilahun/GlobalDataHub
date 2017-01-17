@@ -8,5 +8,5 @@ class TransformationTests extends TransformationTestBase(
     "lookup_profit_centre" -> "/branch/input/lookup_profit_centre_PrimaryTestData.csv"
   ),
   "/branch/output/branch_PriamryTestData.csv",
-  "Transformation/Branch.hql"
+  "Transformation/ndex/Branch.hql"
 )

@@ -8,7 +8,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputDirPath = "/analysiscodesplit/trustfund/input/"
-  private val analysisCodeSplitTrustFundTransformationPath = "Transformation/AnalysisCodeSplitTrustFund.hql"
+  private val analysisCodeSplitTrustFundTransformationPath = "Transformation/ndex/AnalysisCodeSplitTrustFund.hql"
 
   test( "Reconciliation on primary input test data for AnalysisCodeSplit TrustFund" ) {
 

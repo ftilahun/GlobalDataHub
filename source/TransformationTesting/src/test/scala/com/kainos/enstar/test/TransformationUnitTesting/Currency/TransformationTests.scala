@@ -30,7 +30,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
       sqlc
     )
 
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Currency.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Currency.hql" )
 
     lookup_currency.registerTempTable( "lookup_currency" )
     val result = SQLRunner.runStatement( statement, sqlc )

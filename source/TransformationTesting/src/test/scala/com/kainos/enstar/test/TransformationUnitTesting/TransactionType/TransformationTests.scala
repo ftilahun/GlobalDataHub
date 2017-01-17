@@ -19,7 +19,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
       "/transactiontype/output/transactiontype.csv"
     )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TransactionTypeWrittenPremium.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/TransactionTypeWrittenPremium.hql" )
 
     // Act
     val result = SQLRunner.runStatement( hqlStatement, sqlc )
@@ -51,7 +51,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
       sqlc
     )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TransactionTypeWrittenDeduction.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/TransactionTypeWrittenDeduction.hql" )
 
     // Act
     lookup_deduction_type.registerTempTable( "lookup_deduction_type" )

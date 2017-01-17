@@ -31,7 +31,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     val lookup_trust_fund = this.populateDataFrameWithLookupTrustFundTestData( "lookup_trust_fund_PrimaryTestData.csv", sqlc )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TrustFund.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/TrustFund.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/TrustFund/InputRecordCounts.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/TrustFund/OutputRecordCounts.hql" )
 

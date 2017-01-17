@@ -31,7 +31,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
@@ -60,7 +60,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     layerDeduction.registerTempTable( "layer_deduction" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
@@ -89,7 +89,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
@@ -119,7 +119,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
@@ -149,7 +149,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
@@ -179,7 +179,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
@@ -209,7 +209,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
@@ -239,7 +239,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )

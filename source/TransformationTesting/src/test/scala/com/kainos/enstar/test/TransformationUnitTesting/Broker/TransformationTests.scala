@@ -21,7 +21,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedBroker = utils.populateDataFrameFromCsvWithHeader( "/broker/output/broker_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Broker.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Broker.hql" )
 
     // Act //
     brokingCompany.registerTempTable( "broking_company" )

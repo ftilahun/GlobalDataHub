@@ -29,7 +29,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
       sqlc
     )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/FILCode.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/FILCode.hql" )
 
     // Act
     lookup_fil_code.registerTempTable( "lookup_fil_code" )

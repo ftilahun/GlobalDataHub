@@ -29,7 +29,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Deduction/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Deduction/OutputRecordCount.hql" )
 
@@ -63,7 +63,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.udf.register( "net_as_pct_of_gross", NetAsPctOfGross )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Deduction.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Deduction.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Deduction/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Deduction/OutputRecordCount.hql" )
 

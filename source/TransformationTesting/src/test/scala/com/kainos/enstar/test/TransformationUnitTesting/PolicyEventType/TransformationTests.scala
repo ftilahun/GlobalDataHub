@@ -9,7 +9,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputDirPath = "/policyeventtype/input/"
   private val testDataOutputDirPath = "/policyeventtype/output/"
-  private val policyEventTypeTransformationPath = "Transformation/PolicyEventType.hql"
+  private val policyEventTypeTransformationPath = "Transformation/ndex/PolicyEventType.hql"
 
   test( "PolicyEventTypeTransformation test with Primary data" ){
 

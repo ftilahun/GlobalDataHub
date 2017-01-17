@@ -21,7 +21,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
     val expectedUnderwriter = utils.populateDataFrameFromCsvWithHeader( "/underwriter/output/underwriter_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Underwriter.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Underwriter.hql" )
 
     // Act //
     underwriter.registerTempTable( "underwriter" )

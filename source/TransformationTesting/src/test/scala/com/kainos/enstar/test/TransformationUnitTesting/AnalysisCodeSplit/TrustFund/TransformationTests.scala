@@ -9,7 +9,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputDirPath = "/analysiscodesplit/trustfund/input/"
   private val testDataOutputDirPath = "/analysiscodesplit/trustfund/output/"
-  private val analysisCodeSplitTrustFundTransformationPath = "Transformation/AnalysisCodeSplitTrustFund.hql"
+  private val analysisCodeSplitTrustFundTransformationPath = "Transformation/ndex/AnalysisCodeSplitTrustFund.hql"
 
   test( "AnalysisCodeSplitTrustFundTransformation mapping test one line row to one layer_trust_fund row" ){
 

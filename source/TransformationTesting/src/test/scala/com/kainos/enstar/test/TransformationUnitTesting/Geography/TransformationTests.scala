@@ -12,7 +12,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputDirPath = "/geography/input/"
   private val testDataOutputDirPath = "/geography/output/"
-  private val geographyTransformationPath = "Transformation/Geography.hql"
+  private val geographyTransformationPath = "Transformation/ndex/Geography.hql"
 
   test( "Geography Transformation with Primary data" ){
 

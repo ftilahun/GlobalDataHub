@@ -22,7 +22,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val lookupCountry = utils.populateDataFrameFromCsvWithHeader( "/geography/input/lookup_country_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/Geography.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/Geography.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Geography/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Geography/OutputRecordCount.hql" )
 

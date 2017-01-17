@@ -25,7 +25,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val lookup_deduction_type : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/policytransaction_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/PolicyTransactionWrittenDeductions.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/PolicyTransactionWrittenDeductions.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/PolicyTransactionWrittenDeductions/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/PolicyTransactionWrittenDeductions/OutputRecordCount.hql" )
 

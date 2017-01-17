@@ -9,7 +9,7 @@ class TransformationTests extends FunSuite with DataFrameSuiteBase {
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputPath = "/policy/input/"
   private val testDataOutputPath = "/policy/output/"
-  private val policyTransformation = "Transformation/Policy.hql"
+  private val policyTransformation = "Transformation/ndex/Policy.hql"
 
   test( "Policy Transformation mapping happy path data" ) {
 
