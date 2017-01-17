@@ -9,5 +9,5 @@ trait PropertiesToMap {
    * Covert the properties object to a Map of String -> String
    * @return a map of property values
    */
-  def toStringArray: Map[String, String]
+  def toMap: Map[String, String]
 }
