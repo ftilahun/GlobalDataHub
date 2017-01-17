@@ -25,7 +25,7 @@ class CDCProcessorModuleSpec
       }
 
     val argsArray = Array[String](
-      "--changeInput",
+      "--changeInputDir",
       "c",
       "--activeOutput",
       "a",
