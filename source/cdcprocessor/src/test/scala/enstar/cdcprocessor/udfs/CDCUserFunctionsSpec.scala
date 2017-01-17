@@ -417,22 +417,22 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
           .serializable(SerializableMode.ACROSS_CLASSLOADERS))
     val userFunctions = new CDCUserFunctions
 
+    val time = new DateTime()
+
     Mockito.when(properties.attunityCutoff).
-      thenReturn(DateTimeFormat.forPattern("YYYY-MM-DD HH:mm:ss.SSS").print(new joda.time.DateTime().minus(2)))
-    Mockito
-      .when(properties.attunityDateFormat)
+      thenReturn(DateTimeFormat.forPattern("YYYY-MM-DD HH:mm:ss.SSS").print(time.minusHours(1)))
+
+    Mockito.when(properties.attunityDateFormat)
       .thenReturn("YYYY-MM-DD HH:mm:ss.SSS")
     Mockito
       .when(properties.transactionTimeStampColumnName)
       .thenReturn("header__timeStamp")
 
-    val time = new DateTime()
-
     val afterTime = udf(
       () =>
         DateTimeFormat
           .forPattern(properties.attunityDateFormat)
-          .print(time.minus(3)))
+          .print(time.minusHours(3)))
     val beforeTime = udf(
       () =>
         DateTimeFormat
@@ -497,15 +497,15 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         .changeDummyData(2)
         .drop("header__timeStamp")
         .withColumn("header__timeStamp", beforeTime5()))
-
+    println(time)
+    println(time.minus(3))
     When("returnMature is true")
     Then("New records should be filtered")
     userFunctions.filterOnTimeWindow(data, properties).count() should be(20)
     When("returnMature is false")
     Then("Old records should be filtered")
     userFunctions
-      .filterOnTimeWindow(data, properties, returnMature = false)
-      .count() should be(12)
+      .filterOnTimeWindow(data, properties, returnMature = false).count() should be(12)
 
     Given("A DataFrame")
     When("The date cannot be parsed")
