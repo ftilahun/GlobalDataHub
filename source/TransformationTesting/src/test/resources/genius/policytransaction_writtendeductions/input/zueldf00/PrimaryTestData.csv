@@ -1,2 +1,2 @@
-ELDTSE[string],ELMANU[string],ELMASE[string],ELEDNO[string]
+ELDTSE[decimal(7:0)],ELMANU[string],ELMASE[string],ELEDNO[string]
 1090303,00001E,001,000

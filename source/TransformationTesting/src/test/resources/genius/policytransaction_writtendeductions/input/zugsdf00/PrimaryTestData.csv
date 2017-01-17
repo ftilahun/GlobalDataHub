@@ -1,2 +1,2 @@
-GSMANU[string],GSMASE[string],GSGSGN[string]
+GSMANU[string],GSMASE[string],GSGSGN[decimal(11:0)]
 00001E,001,100000000010

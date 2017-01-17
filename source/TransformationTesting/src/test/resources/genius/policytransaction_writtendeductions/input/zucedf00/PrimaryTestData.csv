@@ -1,2 +1,2 @@
-CEMANU[string],CEMASE[string],CERKRS[string],CESDSQ[string],CECVSQ[string],CEEDNO[string],CEDGSQ[string],CECVA1[string],CEOGCU[string],CEEAEA[string],CECVAC[string]
+CEMANU[string],CEMASE[string],CERKRS[string],CESDSQ[string],CECVSQ[string],CEEDNO[string],CEDGSQ[string],CECVA1[decimal(15:2)],CEOGCU[string],CEEAEA[decimal(15:8)],CECVAC[string]
 00001E,001,15,001,001,000,001,2000000.00,USD,1.00000000,USD
