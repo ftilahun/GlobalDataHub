@@ -18,9 +18,9 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlContext.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframes
-    val line = utils.populateDataFrameFromCsvWithHeader( "/deduction/input/line_PrimaryTestData.csv" )
-    val layer = utils.populateDataFrameFromCsvWithHeader( "/deduction/input/layer_PrimaryTestData.csv" )
-    val layerDeduction = utils.populateDataFrameFromCsvWithHeader( "/deduction/input/layer_deduction_MultipleDeductionNonMonotonicSeqOutOfOrder.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/line/PrimaryTestData.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/layer/PrimaryTestData.csv" )
+    val layerDeduction = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/layer_deduction/MultipleDeductionNonMonotonicSeqOutOfOrder.csv" )
 
     line.registerTempTable( "line" )
     layer.registerTempTable( "layer" )
@@ -35,7 +35,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
-    result.registerTempTable( "deduction" )
+    result.registerTempTable( "ndex/deduction" )
 
     val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
     val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )
@@ -52,9 +52,9 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlContext.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframes
-    val line = utils.populateDataFrameFromCsvWithHeader( "/deduction/input/line_MultipleLines.csv" )
-    val layer = utils.populateDataFrameFromCsvWithHeader( "/deduction/input/layer_MultipleLines.csv" )
-    val layerDeduction = utils.populateDataFrameFromCsvWithHeader( "/deduction/input/layer_deduction_MultipleDeductionMonotonicSeqMultipleLines.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/line/MultipleLines.csv" )
+    val layer = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/layer/MultipleLines.csv" )
+    val layerDeduction = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/layer_deduction/MultipleDeductionMonotonicSeqMultipleLines.csv" )
 
     line.registerTempTable( "line" )
     layer.registerTempTable( "layer" )
@@ -69,7 +69,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Act
     val result = SQLRunner.runStatement( statement, sqlc )
-    result.registerTempTable( "deduction" )
+    result.registerTempTable( "ndex/deduction" )
 
     val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
     val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )

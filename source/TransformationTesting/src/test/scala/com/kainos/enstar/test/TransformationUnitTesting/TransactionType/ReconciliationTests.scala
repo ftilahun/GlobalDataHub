@@ -2,7 +2,6 @@ package com.kainos.enstar.test.TransformationUnitTesting.TransactionType
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{
-  TransactionTypeUtils,
   SQLRunner,
   TransformationUnitTestingUtils
 }
@@ -36,23 +35,11 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
   test( "TransactionType-Written Deductions reconciliation over test data" ) {
 
     // Arrange //
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     sqlc.sparkContext.setLogLevel( "WARN" )
     val utils = new TransformationUnitTestingUtils
 
-    val lookup_premium_type : DataFrame = utils.populateDataFrameFromFile(
-      getClass
-        .getResource(
-          "/transactiontype_writtendeductions/input/lookup_deduction_type_PrimaryTestData.csv" )
-        .toString,
-      getClass
-        .getResource(
-          "/transactiontype_writtendeductions/schemas/lookup_deduction_type.avro" )
-        .toString,
-      _.split( "," ),
-      TransactionTypeUtils.lookupDeductionTypeMapping,
-      sqlContext
-    )
+    val lookup_premium_type : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/ndex/transactiontype/writtendeductions/input/lookup_deduction_type/PrimaryTestData.csv" )
 
     val hqlStatement = utils.loadHQLStatementFromResource(
       "Transformation/ndex/TransactionTypeWrittenDeduction.hql" )

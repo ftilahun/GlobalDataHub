@@ -1,0 +1,3 @@
+deduction_code[string],deduction_description[string],reporting_group[string?]
+xyz,Lump Sum Deductable,ss
+xyz,Lump Sum Deductable,[NULL]

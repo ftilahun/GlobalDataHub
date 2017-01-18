@@ -7,7 +7,7 @@ import org.scalatest.FunSuite
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
-  private val testDataInputDirPath = "/analysiscodesplit/trustfund/input/"
+  private val testDataInputDirPath = "/ndex/analysiscodesplit/trustfund/input/"
   private val analysisCodeSplitTrustFundTransformationPath = "Transformation/ndex/AnalysisCodeSplitTrustFund.hql"
 
   test( "Reconciliation on primary input test data for AnalysisCodeSplit TrustFund" ) {
@@ -18,9 +18,9 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
-    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_PrimaryTestData.csv" )
-    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_trust_fund_PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "PrimaryTestData.csv" )
+    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "PrimaryTestData.csv" )
+    val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( analysisCodeSplitTrustFundTransformationPath )
@@ -49,8 +49,8 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_ManyTrustFundToOneLayer.csv" )
-    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "layer_trust_fund_ManyTrustFundToOneLayer.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "ManyTrustFundToOneLayer.csv" )
+    val layerTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "ManyTrustFundToOneLayer.csv" )
     val lookupTrustFund = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_trust_fund_ManyTrustFundToOneLayer.csv" )
 
     // Load the hql statement under test

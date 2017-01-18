@@ -1,3 +1,3 @@
 SELECT
     COUNT(*) AS recordcount
-FROM filcode
+FROM ndex.filcode

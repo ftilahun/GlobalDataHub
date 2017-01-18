@@ -6,7 +6,7 @@ import org.scalatest.FunSuite
 
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
-  private val testDataInputPath = "/policy/input/"
+  private val testDataInputPath = "/ndex/policy/input/"
 
   test( "Reconciliation over test data" ) {
 
@@ -21,11 +21,11 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_ReconciliationPrimary.csv" )
     val submission = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "submission_ReconciliationPrimary.csv" )
     val risk = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "risk_ReconciliationPrimary.csv" )
-    val organisation = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "organisation_PrimaryTestData.csv" )
-    val lookup_block = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_block_PrimaryTestData.csv" )
-    val lookup_business_type = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_business_type_PrimaryTestData.csv" )
-    val lookup_profit_centre = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "lookup_profit_centre_PrimaryTestData.csv" )
-    val underwriting_block = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "underwriting_block_PrimaryTestData.csv" )
+    val organisation = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "PrimaryTestData.csv" )
+    val lookup_block = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "PrimaryTestData.csv" )
+    val lookup_business_type = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "PrimaryTestData.csv" )
+    val lookup_profit_centre = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "PrimaryTestData.csv" )
+    val underwriting_block = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Policy.hql" )

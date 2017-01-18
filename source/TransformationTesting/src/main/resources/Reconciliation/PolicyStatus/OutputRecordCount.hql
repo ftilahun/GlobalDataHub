@@ -1,3 +1,3 @@
 SELECT
     COUNT(policystatuscode) AS recordcount
-FROM policystatus
+FROM ndex.policystatus

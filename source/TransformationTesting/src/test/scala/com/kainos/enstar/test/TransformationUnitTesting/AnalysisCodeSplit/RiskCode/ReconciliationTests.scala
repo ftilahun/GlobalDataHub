@@ -7,7 +7,7 @@ import org.scalatest.FunSuite
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
-  private val testDataInputDirPath = "/analysiscodesplit/riskcode/input/"
+  private val testDataInputDirPath = "/ndex/analysiscodesplit/riskcode/input/"
 
   test( "Reconciliation on primary input test data for AnalysisCodeSplit RiskCode" ) {
 
@@ -17,9 +17,9 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_PrimaryTestData.csv" )
-    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_PrimaryTestData.csv" )
-    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_risk_code_PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "PrimaryTestData.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "PrimaryTestData.csv" )
+    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/AnalysisCodeSplitRiskCode.hql" )
@@ -49,9 +49,9 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
 
     // Load test data into dataframe
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_ManyLineRiskToOneLine.csv" )
-    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "line_risk_code_ManyLineRiskToOneLine.csv" )
-    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "lookup_risk_code_PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "ManyLineRiskToOneLine.csv" )
+    val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "ManyLineRiskToOneLine.csv" )
+    val lookup_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputDirPath + "PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/AnalysisCodeSplitRiskCode.hql" )

@@ -11,11 +11,11 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     // Arrange //
     implicit val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
-    val testDataInputPath = "/policytransaction_writtenpremium/input/"
+    val testDataInputPath = "/ndex/policytransaction/writtenpremium/input/"
 
     val layer = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_PrimaryTestData.csv" )
-    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "layer_trust_fund_PrimaryTestData.csv" )
-    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_PrimaryTestData.csv" )
+    val layer_trust_fund = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "PrimaryTestData.csv" )
+    val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "PrimaryTestData.csv" )
     val line_risk_code = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_risk_code_PrimaryTestData.csv" )
 
     // Load the hql statements under test

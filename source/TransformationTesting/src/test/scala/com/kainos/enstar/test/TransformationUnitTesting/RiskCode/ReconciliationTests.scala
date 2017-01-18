@@ -5,7 +5,7 @@ package com.kainos.enstar.test.TransformationUnitTesting.RiskCode
  */
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ RiskCodeUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -14,16 +14,10 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
   test( "RiskCode Mapping reconciliation over test data" ) {
 
     // Arrange //
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
 
-    val lookup_risk_code : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/riskcode/input/lookup_riskcode_test1.csv" ).toString,
-      getClass.getResource( "/riskcode/schemas/lookup_riskcode.avro" ).toString,
-      _.split( "," ),
-      RiskCodeUtils.lookupRiskCodeMapping,
-      sqlContext
-    )
+    val lookup_risk_code : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/ndex/riskcode/input/lookup_risk_code/PrimaryTestData.csv" )
 
     val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/RiskCode.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/RiskCode/InputRecordCount.hql" )

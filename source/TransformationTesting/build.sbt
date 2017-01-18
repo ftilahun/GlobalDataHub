@@ -72,9 +72,13 @@ libraryDependencies += "com.databricks" %% "spark-avro" % "2.0.1"
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
 
 // testing
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
-
-libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.2" % "test"
+libraryDependencies ++= Seq(
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+  "org.scalacheck" %% "scalacheck" % "1.12.2" % "test",
+  "com.holdenkarau" %% "spark-testing-base" % "1.6.0_0.3.3" % "test",
+  "org.mockito" % "mockito-all" % "1.10.19" % "test",
+  "org.reflections" % "reflections" % "0.9.10" % "test"
+)
 
 
 /// Compiler plugins
@@ -134,3 +138,5 @@ scalacOptions in (Compile,doc) ++= Seq("-groups", "-implicits",
 )
 
 autoAPIMappings := true
+
+parallelExecution in Test := false

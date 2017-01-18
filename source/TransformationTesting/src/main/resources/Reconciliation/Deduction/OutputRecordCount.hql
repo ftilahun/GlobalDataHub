@@ -1,3 +1,3 @@
 SELECT
     COUNT(deductionreference)
-FROM deduction
+FROM ndex.deduction

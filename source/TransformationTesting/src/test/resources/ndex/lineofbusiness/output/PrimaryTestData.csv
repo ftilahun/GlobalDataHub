@@ -1,0 +1,5 @@
+lineofbusinesscode[string],sublineofbusinesscode[string],sourcesystemcode[string],lineofbusinessdescription[string?],sublineofbusinessdescription[string?]
+AA,00,NDEX,Facultative Property,Affinity
+BD,16,NDEX,[NULL],Misc PA/Travel
+Qw,1,NDEX,Power & Utilities*&,BI Only
+BB,98,NDEX,PA CAT,[NULL]

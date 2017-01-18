@@ -1,0 +1,3 @@
+deductiontypecode[string],sourcesystemcode[string],deductiontypedescription[string],group[string?]
+xyz,NDEX,Lump Sum Deductable,ss
+xyz,NDEX,Lump Sum Deductable,[NULL]

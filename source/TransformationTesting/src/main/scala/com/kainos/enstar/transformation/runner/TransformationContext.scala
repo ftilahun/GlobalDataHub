@@ -16,7 +16,7 @@ class TransformationContext() {
   hc.setConf( "spark.sql.avro.compression.codec", "uncompressed" )
 
   TransformationUdfRegistry.registerUdfs( hc )
-  
+
   def setSourceDB( sourceDB : String ) = {
     val setDBStatement = "USE " + sourceDB
     SQLRunner.runStatement( setDBStatement, hc )

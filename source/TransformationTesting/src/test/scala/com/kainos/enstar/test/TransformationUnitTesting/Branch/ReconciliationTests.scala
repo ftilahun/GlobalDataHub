@@ -14,7 +14,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val lookup_profit_centre = utils.populateDataFrameFromCsvWithHeader( "/branch/input/lookup_profit_centre_PrimaryTestData.csv" )
+    val lookup_profit_centre = utils.populateDataFrameFromCsvWithHeader( "/ndex/branch/input/lookup_profit_centre/PrimaryTestData.csv" )
 
     // Load the hql statement under test
     val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Branch.hql" )
