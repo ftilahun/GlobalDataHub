@@ -2,16 +2,16 @@
 // http://www.scala-sbt.org/0.13/docs/index.html
 
 // Project name
-name := """spark-udf-scratch"""
+name := """transformation"""
 
 // Don't forget to set the version
-version := "0.1.0-SNAPSHOT"
+version := "0.1-SNAPSHOT"
 
 // All Spark Packages need a license
 licenses := Seq("Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0"))
 
 // scala version to be used
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.8"
 // force scalaVersion
 //ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 
@@ -66,7 +66,11 @@ libraryDependencies ++= Seq(
 )
 
 // spark-avro
-libraryDependencies += "com.databricks" %% "spark-avro" % "2.0.1"
+libraryDependencies ++= Seq(
+  "com.databricks" %% "spark-avro" % "2.0.1",
+  "org.reflections" % "reflections" % "0.9.10",
+  "com.github.scopt" %% "scopt" % "3.5.0"
+)
 
 // logging
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
@@ -74,10 +78,10 @@ libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
 // testing
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.12.2" % "test",
-  "com.holdenkarau" %% "spark-testing-base" % "1.6.0_0.3.3" % "test",
-  "org.mockito" % "mockito-all" % "1.10.19" % "test",
-  "org.reflections" % "reflections" % "0.9.10" % "test"
+  "org.scalactic" %% "scalactic" % "2.2.4" % "test",
+  // exclude scalacheck here because sbt defaults to using it to run tests
+  "com.holdenkarau" %% "spark-testing-base" % "1.6.0_0.3.3" % "test" exclude("org.scalacheck", "scalacheck_2.11"),
+  "org.mockito" % "mockito-all" % "1.10.19" % "test"
 )
 
 
@@ -127,15 +131,6 @@ cleanupCommands in console :=
   s"""
      |sc.stop()
    """.stripMargin
-
-
-/// scaladoc
-scalacOptions in (Compile,doc) ++= Seq("-groups", "-implicits",
-  // NOTE: remember to change the JVM path that works on your system.
-  // Current setting should work for JDK7 on OSX and Linux (Ubuntu)
-  "-doc-external-doc:/Library/Java/JavaVirtualMachines/jdk1.7.0_60.jdk/Contents/Home/jre/lib/rt.jar#http://docs.oracle.com/javase/7/docs/api",
-  "-doc-external-doc:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar#http://docs.oracle.com/javase/7/docs/api"
-)
 
 autoAPIMappings := true
 
