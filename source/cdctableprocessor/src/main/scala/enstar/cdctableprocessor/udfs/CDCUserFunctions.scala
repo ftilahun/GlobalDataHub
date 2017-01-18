@@ -230,6 +230,8 @@ class CDCUserFunctions extends UserFunctions with Logging {
   override def unionAll(df1: DataFrame, df2: DataFrame): DataFrame = {
     logInfo(
       s"union (${df1.columns.mkString(",")}) with (${df1.columns.mkString(",")})")
+    logInfo(s"first schema: ${df1.schema}")
+    logInfo(s"second schema: ${df2.schema}")
     df1.unionAll(df2)
   }
 

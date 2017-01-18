@@ -16,30 +16,29 @@
     </modules>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <scala.version>2.10.5</scala.version>
-        <scala.major.version>2.10</scala.major.version>
-        <spark.version>1.6.0-cdh5.7.4</spark.version>
-        <spark.avro.version>2.0.1</spark.avro.version>
-        <scalatest.maven.version>1.0</scalatest.maven.version>
-        <surefire.version>2.7</surefire.version>
-        <scalatest.version>2.2.4</scalatest.version>
-        <scalatest.maven.plugin.version>1.0</scalatest.maven.plugin.version>
-        <scalamaven.version>3.2.1</scalamaven.version>
-        <maven.assembly.plugin.version>2.5.5</maven.assembly.plugin.version>
-        <hadoop.client.version>2.6.0-mr1-cdh5.7.4</hadoop.client.version>
-        <snappy.version>1.1.2.6</snappy.version>
-        <mockito.version>1.10.19</mockito.version>
-        <scoverage.version>1.1.1</scoverage.version>
-        <joda.convert.version>1.8.1</joda.convert.version>
-        <scopt.version>3.5.0</scopt.version>
-        <scalatic.version>2.2.6</scalatic.version>
         <akka.version>2.3.16</akka.version>
-        <scalariform.version>0.1.4</scalariform.version>
         <enstar.propertyparsers.version>0.1</enstar.propertyparsers.version>
+        <hadoop.client.version>2.6.0-mr1-cdh5.7.4</hadoop.client.version>
         <javamail.version>1.4.7</javamail.version>
+        <joda.convert.version>1.8.1</joda.convert.version>
+        <maven.assembly.plugin.version>2.5.5</maven.assembly.plugin.version>
         <mock.javamail.version>1.9</mock.javamail.version>
-
+        <mockito.version>1.10.19</mockito.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <scala.major.version>2.10</scala.major.version>
+        <scala.version>2.10.5</scala.version>
+        <scalamaven.version>3.2.1</scalamaven.version>
+        <scalariform.version>0.1.4</scalariform.version>
+        <scalatest.maven.plugin.version>1.0</scalatest.maven.plugin.version>
+        <scalatest.maven.version>1.0</scalatest.maven.version>
+        <scalatest.version>2.2.4</scalatest.version>
+        <scalatic.version>2.2.6</scalatic.version>
+        <scopt.version>3.5.0</scopt.version>
+        <scoverage.version>1.1.1</scoverage.version>
+        <snappy.version>1.1.2.6</snappy.version>
+        <spark.avro.version>v2.0.1-kainos-preview</spark.avro.version>
+        <spark.version>1.6.0-cdh5.7.4</spark.version>
+        <surefire.version>2.7</surefire.version>
     </properties>
 
     <repositories>
@@ -71,7 +70,10 @@
             <url>http://repo.maven.apache.org/maven2/</url>
             <layout>default</layout>
         </repository>
-
+            <repository>
+                <id>jitpack.io</id>
+                <url>https://jitpack.io</url>
+            </repository>
     </repositories>
 
     <dependencies>

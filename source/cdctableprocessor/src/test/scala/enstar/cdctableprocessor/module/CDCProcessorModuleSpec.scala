@@ -59,7 +59,7 @@ class CDCProcessorModuleSpec
       "2",
       "--attunityDateFormat",
       "A",
-      "--historyInput",
+      "--activeInput",
       "A",
       "--immatureChangesOutput",
       "A",

@@ -5,6 +5,7 @@ import org.apache.spark.Logging
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 
+
 /**
  * Helper class for reading DataFrames from HDFS
  */
@@ -22,8 +23,11 @@ class AvroDataFrameReader extends Logging with DataFrameReader {
            path: String,
            storageLevel: Option[StorageLevel]): DataFrame = {
     logInfo(s"reading from path: $path")
+    //include avro files without extension
+    sqlContext.sparkContext.hadoopConfiguration.setBoolean("avro.mapred.ignore.inputs.without.extension",false)
     import com.databricks.spark.avro._
-    val data = sqlContext.read.avro(new Path(path).toString)
+    val data = sqlContext.read.
+      avro(new Path(path).toString)
 
     if (storageLevel.isDefined) {
       logInfo(
