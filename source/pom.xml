@@ -9,7 +9,7 @@
     <name>GlobalDataHub</name>
 
     <modules>
-        <module>cdcprocessor</module>
+        <module>cdctableprocessor</module>
         <module>cdcprocessmanager</module>
         <module>propertyparsers</module>
         <module>mailclient</module>
