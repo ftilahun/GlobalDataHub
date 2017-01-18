@@ -1,9 +1,11 @@
 package enstar.cdctableprocessor.properties
 
 /**
- * Properties class
- */
-case class CDCProperties(idColumnName: String = "",
+  * Properties class
+  */
+case class CDCProperties(
+                         //common properties for all tables
+                         idColumnName: String = "",
                          transactionTimeStampColumnName: String = "",
                          operationColumnName: String = "",
                          operationColumnValueBefore: String = "B",
@@ -12,8 +14,6 @@ case class CDCProperties(idColumnName: String = "",
                          operationColumnValueDelete: String = "D",
                          transactionIdColumnName: String = "",
                          changeSequenceColumnName: String = "",
-                         changeInputDir: String = "",
-                         activeOutput: String = "",
                          attunityColumnPrefix: String = "",
                          validFromColumnName: String = "",
                          validToColumnName: String = "",
@@ -21,16 +21,20 @@ case class CDCProperties(idColumnName: String = "",
                          attunityCutoff: String = "",
                          attunityDateFormat: String = "",
                          attunityDateFormatShort: String = "",
-                         historyInput: String = "",
+                         //per table properties
+                         changeInputDir: String = "",
+                         activeInput: String = "",
+                         activeOutput: String = "",
                          immatureChangesOutput: String = "",
                          historyOutput: String = "",
                          metricsOutputDir: Option[String] = None)
-    extends Serializable with PropertiesToMap {
+    extends Serializable
+    with PropertiesToMap {
 
   /**
-   * Covert the properties object to a Map of String -> String
-   * @return a map of property values
-   */
+    * Covert the properties object to a Map of String -> String
+    * @return a map of property values
+    */
   def toMap: Map[String, String] = {
     val optionalArgs: Map[String, String] = if (metricsOutputDir.isDefined) {
       Map[String, String]("--metricsOutputDir" -> metricsOutputDir.get)
@@ -56,8 +60,35 @@ case class CDCProperties(idColumnName: String = "",
       "--attunityCutoff" -> attunityCutoff,
       "--attunityDateFormat" -> attunityDateFormat,
       "--attunityDateFormatShort" -> attunityDateFormatShort,
-      "--historyInput" -> historyInput,
+      "--historyInput" -> activeInput,
       "--immatureChangesOutput" -> immatureChangesOutput,
-      "--historyOutput" -> historyOutput) ++ optionalArgs
+      "--historyOutput" -> historyOutput
+    ) ++ optionalArgs
+  }
+
+  /**
+    * Create a new CDCProperties object with the supplied input/output directories
+    *
+    * @param changeInputDir The directory to read new changes from
+    * @param activeInput The directory to read the previously active records from
+    * @param activeOutput the diretory to write active records to
+    * @param immatureChangesOutput the directory to write rejected changes to
+    * @param historyOutput the directory to write closed records to
+    * @param metricsOutputDir the optional directory to write metrics to
+    * @return
+    */
+  def updateDirectories(changeInputDir: String,
+                 activeInput: String,
+                 activeOutput: String,
+                 immatureChangesOutput: String,
+                 historyOutput: String,
+                 metricsOutputDir: Option[String]): CDCProperties = {
+    this.copy(
+      changeInputDir = changeInputDir,
+      activeInput = activeInput,
+      immatureChangesOutput = immatureChangesOutput,
+      historyOutput = historyOutput,
+      metricsOutputDir = metricsOutputDir
+    )
   }
 }

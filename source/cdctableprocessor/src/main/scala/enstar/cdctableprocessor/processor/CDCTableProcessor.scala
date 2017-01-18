@@ -96,7 +96,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
 
     logInfo("Reading history data")
     val history = reader.read(sqlContext,
-      properties.historyInput,
+      properties.activeInput,
       Some(StorageLevel.MEMORY_AND_DISK_SER))
     userFunctions.persistForMetrics(history,
       StorageLevel.MEMORY_ONLY,
