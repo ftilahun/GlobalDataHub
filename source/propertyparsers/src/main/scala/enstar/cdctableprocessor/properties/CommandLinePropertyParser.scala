@@ -11,7 +11,7 @@ class CommandLinePropertyParser
 
   val parser: OptionParser[CDCProperties] =
     new scopt.OptionParser[CDCProperties]("CDCTableProcessor") {
-      head("CDCTableProcessor", "0.3")
+      head("spark-submit --class enstar.cdctableprocessor.CDCTableProcessorJob", "0.3")
 
       //ignore unknown options
       override def errorOnUnknownArgument = false
