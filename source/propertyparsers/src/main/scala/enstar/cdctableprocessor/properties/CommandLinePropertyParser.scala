@@ -13,6 +13,9 @@ class CommandLinePropertyParser
     new scopt.OptionParser[CDCProperties]("CDCTableProcessor") {
       head("spark-submit --class enstar.cdctableprocessor.CDCTableProcessorJob", "0.3")
 
+      //ignore unknown options
+      override def errorOnUnknownArgument = false
+
       opt[String]("changeInputDir")
         .required()
         .action(
@@ -139,12 +142,12 @@ class CommandLinePropertyParser
           "The time format for the attuntiy timestamp column without milliseconds" +
             " (e.g. YYYY/MM/DD HH:mm:ss)")
 
-      opt[String]("historyInput")
+      opt[String]("activeInput")
         .required()
         .action(
-          (h, p) => p.copy(historyInput = h)
+          (h, p) => p.copy(activeInput = h)
         )
-        .text("The input directory for history data")
+        .text("The input directory for active data")
 
       opt[String]("immatureChangesOutput")
         .required()

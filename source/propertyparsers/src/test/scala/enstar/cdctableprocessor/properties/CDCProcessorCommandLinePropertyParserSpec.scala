@@ -48,14 +48,16 @@ class CDCProcessorCommandLinePropertyParserSpec
       "2",
       "--attunityDateFormat",
       "A",
-      "--historyInput",
+      "--activeInput",
       "A",
       "--immatureChangesOutput",
       "A",
       "--historyOutput",
       "A",
       "--attunityDateFormatShort",
-      "A"
+      "A",
+      "--dave",
+      "a"
     )
     When("The argument list is complete")
     val parser = new CommandLinePropertyParser

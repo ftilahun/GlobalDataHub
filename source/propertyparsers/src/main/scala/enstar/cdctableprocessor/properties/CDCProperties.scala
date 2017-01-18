@@ -3,29 +3,33 @@ package enstar.cdctableprocessor.properties
 /**
  * Properties class
  */
-case class CDCProperties(idColumnName: String = "",
-                         transactionTimeStampColumnName: String = "",
-                         operationColumnName: String = "",
-                         operationColumnValueBefore: String = "B",
-                         operationColumnValueInsert: String = "I",
-                         operationColumnValueUpdate: String = "U",
-                         operationColumnValueDelete: String = "D",
-                         transactionIdColumnName: String = "",
-                         changeSequenceColumnName: String = "",
-                         changeInputDir: String = "",
-                         activeOutput: String = "",
-                         attunityColumnPrefix: String = "",
-                         validFromColumnName: String = "",
-                         validToColumnName: String = "",
-                         activeColumnName: String = "",
-                         attunityCutoff: String = "",
-                         attunityDateFormat: String = "",
-                         attunityDateFormatShort: String = "",
-                         historyInput: String = "",
-                         immatureChangesOutput: String = "",
-                         historyOutput: String = "",
-                         metricsOutputDir: Option[String] = None)
-    extends Serializable with PropertiesToMap {
+case class CDCProperties(
+  //common properties for all tables
+  idColumnName: String = "",
+  transactionTimeStampColumnName: String = "",
+  operationColumnName: String = "",
+  operationColumnValueBefore: String = "B",
+  operationColumnValueInsert: String = "I",
+  operationColumnValueUpdate: String = "U",
+  operationColumnValueDelete: String = "D",
+  transactionIdColumnName: String = "",
+  changeSequenceColumnName: String = "",
+  attunityColumnPrefix: String = "",
+  validFromColumnName: String = "",
+  validToColumnName: String = "",
+  activeColumnName: String = "",
+  attunityCutoff: String = "",
+  attunityDateFormat: String = "",
+  attunityDateFormatShort: String = "",
+  //per table properties
+  changeInputDir: String = "",
+  activeInput: String = "",
+  activeOutput: String = "",
+  immatureChangesOutput: String = "",
+  historyOutput: String = "",
+  metricsOutputDir: Option[String] = None)
+    extends Serializable
+    with PropertiesToMap {
 
   /**
    * Covert the properties object to a Map of String -> String
@@ -56,8 +60,35 @@ case class CDCProperties(idColumnName: String = "",
       "--attunityCutoff" -> attunityCutoff,
       "--attunityDateFormat" -> attunityDateFormat,
       "--attunityDateFormatShort" -> attunityDateFormatShort,
-      "--historyInput" -> historyInput,
+      "--historyInput" -> activeInput,
       "--immatureChangesOutput" -> immatureChangesOutput,
-      "--historyOutput" -> historyOutput) ++ optionalArgs
+      "--historyOutput" -> historyOutput
+    ) ++ optionalArgs
+  }
+
+  /**
+   * Create a new CDCProperties object with the supplied input/output directories
+   *
+   * @param changeInputDir The directory to read new changes from
+   * @param activeInput The directory to read the previously active records from
+   * @param activeOutput the diretory to write active records to
+   * @param immatureChangesOutput the directory to write rejected changes to
+   * @param historyOutput the directory to write closed records to
+   * @param metricsOutputDir the optional directory to write metrics to
+   * @return
+   */
+  def updateDirectories(changeInputDir: String,
+                        activeInput: String,
+                        activeOutput: String,
+                        immatureChangesOutput: String,
+                        historyOutput: String,
+                        metricsOutputDir: Option[String]): CDCProperties = {
+    this.copy(
+      changeInputDir = changeInputDir,
+      activeInput = activeInput,
+      immatureChangesOutput = immatureChangesOutput,
+      historyOutput = historyOutput,
+      metricsOutputDir = metricsOutputDir
+    )
   }
 }
