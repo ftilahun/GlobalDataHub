@@ -11,7 +11,7 @@ class CommandLinePropertyParser
 
   val parser: OptionParser[CDCProperties] =
     new scopt.OptionParser[CDCProperties]("CDCTableProcessor") {
-      head("cdcprocessor", "0.3")
+      head("CDCTableProcessor", "0.3")
 
       opt[String]("changeInputDir")
         .required()
