@@ -13,6 +13,9 @@ class CommandLinePropertyParser
     new scopt.OptionParser[CDCProperties]("CDCTableProcessor") {
       head("CDCTableProcessor", "0.3")
 
+      //ignore unknown options
+      override def errorOnUnknownArgument = false
+
       opt[String]("changeInputDir")
         .required()
         .action(
