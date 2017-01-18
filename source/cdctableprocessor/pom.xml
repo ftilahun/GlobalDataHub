@@ -47,8 +47,9 @@
         <!--</dependency>-->
         <dependency>
             <groupId>com.github.KainosSoftwareLtd</groupId>
-            <artifactId>spark-avro_2.10</artifactId>
+            <artifactId>spark-avro_${scala.major.version}</artifactId>
             <version>${spark.avro.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
