@@ -10,7 +10,7 @@ class CommandLinePropertyParser
     extends PropertyParser[Array[String]] {
 
   val parser: OptionParser[CDCProperties] =
-    new scopt.OptionParser[CDCProperties]("cdcprocessor") {
+    new scopt.OptionParser[CDCProperties]("CDCTableProcessor") {
       head("cdcprocessor", "0.3")
 
       opt[String]("changeInputDir")
