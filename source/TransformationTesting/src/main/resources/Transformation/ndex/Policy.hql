@@ -27,7 +27,7 @@ SELECT
     regexp_extract(lookup_profit_centre.profit_centre_desc, '(^(TIE)|(TIUK)|(Syndicate 1301))', 0) AS legalentitycode,
     line.block AS lineofbusinesscode,
     lookup_block.description AS lineofbusinessdescription,
-    line.risk_reference AS linkedmasterreference,
+    masterreference.risk_reference AS linkedmasterreference,
     line.risk_code AS majorriskcode,
     CAST(NULL AS STRING) AS majortrustfundcode,
     CAST(line.business_type AS STRING) AS methodofplacementcode,
@@ -67,3 +67,5 @@ FROM
     AND line.subblock = underwriting_block.subblock
     LEFT JOIN lookup_business_type
     ON lookup_business_type.business_type = line.business_type
+    LEFT JOIN line AS masterreference
+    ON line.lineslip_id = masterreference.line_id
