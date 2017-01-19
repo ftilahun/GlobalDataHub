@@ -1,7 +1,7 @@
 
 val sourceSystems = List("Ndex", "Genius", "Eclipse")
 
-def suiteTemplate(mappingName: String, sourceSystem: String, tableNames: Seq[String]) =
+def suiteTemplate(mappingName: String, sourceSystem: String, feedTableNames: Seq[(String, Seq[String])]) =
   s"""
     |package com.kainos.enstar.transformation.${sourceSystem.toLowerCase}
     |
@@ -14,23 +14,29 @@ def suiteTemplate(mappingName: String, sourceSystem: String, tableNames: Seq[Str
     |  override def testTags = List( tags.${mappingName} )
     |
     |  override def queryTestSets : List[QueryTestSet] = List(
-    |    QueryTestSet(
-    |      "${mappingName}",
-    |      "${mappingName.toLowerCase}",
-    |      "${mappingName}.hql",
-    |      Set(
-    |        QueryTest(
-    |          "Primary",
-    |          Set(
-    |${tableNames map csvSourceDataTemplate mkString(",\n")}
-    |          ),
-    |          CsvSourceData( "${mappingName.toLowerCase}", "PrimaryTestData.csv" )
-    |        )
-    |      )
-    |    )
+    |${feedTableNames.map { case (feedName, feedTables) => queryTestSetTemplate(mappingName, feedName, feedTables) }.mkString(",\n")}
     |  )
     |}
   """.stripMargin.getBytes
+
+def queryTestSetTemplate(mappingName: String, feedName: String, feedTableNames: Seq[String]) =
+  s"""
+     |    QueryTestSet(
+     |      "${mappingName}${ if (feedName != "DEFAULT") feedName else "" }",
+     |      "${mappingName.toLowerCase}${ if (feedName != "DEFAULT") "/" + feedName.toLowerCase else "" }",
+     |      "${mappingName}${ if (feedName != "DEFAULT") feedName else "" }.hql",
+     |      Set(
+     |        QueryTest(
+     |          "Primary",
+     |          Set(
+     |${feedTableNames map csvSourceDataTemplate mkString (",\n")}
+     |          ),
+     |          CsvSourceData( "${mappingName.toLowerCase}", "PrimaryTestData.csv" )
+     |        )
+     |      )
+     |    )
+     |
+   """.stripMargin
 
 def csvSourceDataTemplate(tableName: String) = s"""            CsvSourceData( "${tableName}", "PrimaryTestData.csv" )"""
 
@@ -38,36 +44,52 @@ lazy val createMapping = taskKey[Unit]("Creates boilerplate mapping files and te
 
 createMapping := {
   val log = streams.value.log
+
+  val defaultFeedName = "DEFAULT"
+
+  // read config from input
   val sourceSystem = readSourceSystem
   val mappingName = readMappingName
-  val tableNames = readTableNames
+  val inputFeedNames = readFeedNames
 
+  val feedNames = if (inputFeedNames.isEmpty) Seq(defaultFeedName) else inputFeedNames
+
+  val feedTableNames = feedNames.map { feed =>
+    feed -> readTableNames(feed)
+  }
+
+  // create directories and files
   val src = sourceDirectory.value
   val mappingDir = src / "main" / "resources" / "Transformation" / sourceSystem.toLowerCase
-
   sbt.IO.createDirectory(mappingDir)
-  sbt.IO.touch(mappingDir / s"$mappingName.hql")
 
   val testResourceDir = src / "test" / "resources" / sourceSystem.toLowerCase / mappingName.toLowerCase
-
   sbt.IO.createDirectory(testResourceDir)
-  for (tableName <- tableNames) {
-    sbt.IO.createDirectory(testResourceDir / "input" / tableName)
-    sbt.IO.touch(testResourceDir / "input" / tableName / "PrimaryTestData.csv")
+
+  for ((feed, feedTables) <- feedTableNames.toList) {
+    val queryFileName = if (feed == defaultFeedName) s"$mappingName.hql" else s"$mappingName$feed.hql"
+    val queryFile = mappingDir / queryFileName
+    sbt.IO.touch(queryFile)
+    log.info(s"Created $queryFile")
+
+    val dir = if (feed == defaultFeedName) testResourceDir else testResourceDir / feed.toLowerCase
+    for (tableName <- feedTables) {
+      sbt.IO.createDirectory(dir / "input" / tableName)
+      val inputDataFile = dir / "input" / tableName / "PrimaryTestData.csv"
+      sbt.IO.touch(inputDataFile)
+      log.info(s"Created $inputDataFile")
+    }
+    sbt.IO.createDirectory(dir / "output")
+    val outputDataFile = dir / "output" / "PrimaryTestData.csv"
+    sbt.IO.touch(outputDataFile)
+    log.info(s"Created $outputDataFile")
   }
-  sbt.IO.createDirectory(testResourceDir / "output")
-  sbt.IO.touch(testResourceDir / "output" / "PrimaryTestData.csv")
 
   val testSourceDir = src / "test" / "scala" / "com" / "kainos" / "enstar" / "transformation" / sourceSystem.toLowerCase
   val testSourceFile = testSourceDir / s"${mappingName}QuerySuite.scala"
   if (!testSourceFile.exists) {
-    sbt.IO.write(testSourceFile, suiteTemplate(mappingName, sourceSystem, tableNames))
-  }
-
-  log.info(s"Source System: $sourceSystem")
-  log.info(s"Mapping Name:  $mappingName")
-  for (tableName <- tableNames) {
-    log.info(s"Table:         $tableName")
+    sbt.IO.write(testSourceFile, suiteTemplate(mappingName, sourceSystem, feedTableNames))
+    log.info(s"Created $testSourceFile")
   }
 }
 
@@ -86,14 +108,14 @@ def readMappingName: String = {
   name
 }
 
-def readUnionQueryNames: Seq[String] = {
-  println(s"\nEnter union query names (empty line to finish, leave empty if single query):")
+def readFeedNames: Seq[String] = {
+  println(s"\nEnter feed names (empty line to finish, leave empty if single feed):")
   val names = readList
   names
 }
 
-def readTableNames: Seq[String] = {
-  println(s"\nEnter source table names as they appear in source system (empty line to finish):")
+def readTableNames(feed: String): Seq[String] = {
+  println(s"\nEnter source table names for feed $feed as they appear in source system (empty line to finish):")
   val tables = readList
   tables
 }
