@@ -75,8 +75,8 @@ class CDCUserFunctions extends UserFunctions with Logging {
    */
   def dropAttunityColumns(df: DataFrame,
                           properties: CDCProperties): DataFrame = {
-    logInfo(s"Dropping columns with prefix ${properties.attunityColumnPrefix}")
-    logInfo(s"pre: ${df.columns.mkString(",")}")
+    logDebug(s"Dropping columns with prefix ${properties.attunityColumnPrefix}")
+    logDebug(s"pre: ${df.columns.mkString(",")}")
     val result = df.select(
       df.columns
         .filter(!_.contains(properties.attunityColumnPrefix))
@@ -228,10 +228,10 @@ class CDCUserFunctions extends UserFunctions with Logging {
    * @return a DataFrame
    */
   override def unionAll(df1: DataFrame, df2: DataFrame): DataFrame = {
-    logInfo(
+    logDebug(
       s"union (${df1.columns.mkString(",")}) with (${df1.columns.mkString(",")})")
-    logInfo(s"first schema: ${df1.schema}")
-    logInfo(s"second schema: ${df2.schema}")
+    logDebug(s"first schema: ${df1.schema}")
+    logDebug(s"second schema: ${df2.schema}")
     df1.unionAll(df2)
   }
 
