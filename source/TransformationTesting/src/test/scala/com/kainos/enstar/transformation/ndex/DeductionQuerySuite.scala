@@ -32,7 +32,7 @@ class DeductionQuerySuite extends QuerySuite {
           Set(
             CsvSourceData( "line", "MultipleLines.csv" ),
             CsvSourceData( "layer", "MultipleLines.csv" ),
-            CsvSourceData( "layer_deduction", "MultipleDeductionMonotonicSeqMultipleLines.csv" )
+            CsvSourceData( "layer_deduction", "MultipleDeductionMonotonicSeqMultipleLinesWithContingents.csv" )
           ),
           CsvSourceData( "deduction", "MultipleDeductionMonotonicSeqMultipleLines.csv" )
         )

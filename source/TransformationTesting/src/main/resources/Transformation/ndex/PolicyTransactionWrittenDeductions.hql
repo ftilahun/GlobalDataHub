@@ -53,5 +53,8 @@ FROM
           LEFT JOIN layer_deduction ld2
              ON ld1.layer_id = ld2.layer_id
              AND ld2.sequence_no < ld1.sequence_no
-          GROUP BY ld1.deduction_id, ld1.layer_id) AS deductiontmptable
+             AND ld2.is_contingent <> 'Y'
+          GROUP BY ld1.deduction_id, ld1.layer_id
+          ) AS deductiontmptable
     ON deductiontmptable.deduction_id = layer_deduction.deduction_id
+WHERE layer_deduction.is_contingent <> 'Y'
