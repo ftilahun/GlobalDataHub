@@ -1,7 +1,7 @@
-deduction_id[int],layer_id[int],sequence_no[int],deduction_code[string?],deduction_pct[decimal(12:7)]
-7537,9302,1,GBK,10.00
-7538,9302,2,GBK,5.00
-7539,9302,3,GBK,50.00
-7540,9303,1,GBK,10.00
-7541,9303,2,GBK,5.00
-7542,9303,3,GBK,50.00
+deduction_id[int],layer_id[int],sequence_no[int],deduction_code[string?],deduction_pct[decimal(12:7)],is_contingent[string]
+7537,9302,1,GBK,10.00,N
+7538,9302,2,GBK,5.00,N
+7539,9302,3,GBK,50.00,N
+7540,9303,1,GBK,10.00,N
+7541,9303,2,GBK,5.00,N
+7542,9303,3,GBK,50.00,N
