@@ -60,7 +60,7 @@ SELECT
                 (
                     IF( line_risk_code.risk_code_pct IS NOT NULL,
                         line_risk_code.risk_code_pct,
-                        CAST(100.00 AS DECIMAL(18,2)
+                        CAST(100.00 AS DECIMAL(18,2))
                       )
                     / 100.00
                 )
@@ -68,7 +68,7 @@ SELECT
                 (
                     IF( layer_trust_fund.est_premium_split_pct IS NOT NULL,
                         layer_trust_fund.est_premium_split_pct,
-                        CAST(100.00 AS DECIMAL(5,2)
+                        CAST(100.00 AS DECIMAL(5,2))
                        )
                     / 100.00
                 )
