@@ -12,20 +12,20 @@ SELECT
     CAST(
         IF (line.business_type IN (1,17),
             0,
-            (line.slip_income_amount * (line.reporting_line_pct / 100) )
+            (line.slip_income_amount * ( line.reporting_line_pct / 100.00) )
             *
             (
-                (deductiontmptable.net_pct/100)
+                ( deductiontmptable.net_pct / 100.00 )
                 *
-                (layer_deduction.deduction_pct/100)
+                ( layer_deduction.deduction_pct / 100.00 )
                 *
                 (
                     IF( line_risk_code.risk_code_pct IS NOT NULL,
                         line_risk_code.risk_code_pct,
-                         CAST(100.00 AS DECIMAL(18,2))
+                        CAST(100.00 AS DECIMAL(18,2))
                       )
                     /
-                    100
+                    100.00
                 )
                 *
                 (
@@ -34,9 +34,10 @@ SELECT
                         CAST(100.00 AS DECIMAL(5,2))
                       )
                     /
-                    100)
+                    100.00
                 )
             )
+        )
         AS DECIMAL(18,6)
     ) AS originalamount,
     CAST(layer.premium_ccy AS STRING) AS originalcurrencycode,
@@ -59,7 +60,7 @@ SELECT
                 (
                     IF( line_risk_code.risk_code_pct IS NOT NULL,
                         line_risk_code.risk_code_pct,
-                        100.00
+                        CAST(100.00 AS DECIMAL(18,2)
                       )
                     / 100.00
                 )
@@ -67,7 +68,7 @@ SELECT
                 (
                     IF( layer_trust_fund.est_premium_split_pct IS NOT NULL,
                         layer_trust_fund.est_premium_split_pct,
-                        100.00
+                        CAST(100.00 AS DECIMAL(5,2)
                        )
                     / 100.00
                 )
