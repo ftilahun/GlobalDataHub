@@ -1,0 +1,4 @@
+gpgsgn[decimal(11:0)],gpgpms[string],gpgpmt[string],gpgpsq[string]
+10000000002,2,1,01
+10000000003,2,1,01
+10000000004,2,1,01

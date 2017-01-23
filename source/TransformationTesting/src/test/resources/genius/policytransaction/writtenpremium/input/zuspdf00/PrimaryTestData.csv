@@ -1,0 +1,4 @@
+spgsgn[decimal(11:0)],spgpmt[string],spgpsq[string],spspsq[string],spspsp[decimal(11:7)]
+10000000002,1,01,01,5.0000000
+10000000003,1,01,01,5.0000000
+10000000004,1,01,01,5.0000000
