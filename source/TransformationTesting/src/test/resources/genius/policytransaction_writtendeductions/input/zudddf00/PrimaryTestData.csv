@@ -1,2 +1,2 @@
-DDMANU[string],DDMASE[string],DDDGSQ[string],DDDGVS[string],DDDDSQ[decimal(3:0)],DDDDCD[string],DDDDPC[decimal(11:7)],DDDDAS[decimal(15:2)]
-00001E,001,001,001,2,RIBPCT,7.5000000,0.00
+DDMANU[string],DDMASE[string],DDDGSQ[string],DDDGVS[string],DDDDSQ[decimal(3:0)],DDDDCD[string],DDDDPC[decimal(11:7)],DDDDAS[string]
+00001E,001,2,001,2,ORCFLT,7.5000000,0.00
