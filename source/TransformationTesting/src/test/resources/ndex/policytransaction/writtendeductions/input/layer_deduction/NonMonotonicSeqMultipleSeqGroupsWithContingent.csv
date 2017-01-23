@@ -1,6 +1,12 @@
 deduction_id[int],layer_id[int],deduction_code[string?],sequence_no[int],deduction_pct[decimal(12:7)],is_contingent[string]
 1,2,IDA,1,10,N
+8,2,IDA,1,10,Y
+9,2,IDA,1,10,Y
 3,2,BKR,3,20,N
+13,2,BKR,3,20,Y
+12,2,BKR,3,20,Y
 6,2,SFE,6,27,N
+10,2,SFE,6,27,Y
+11,2,SFE,6,27,Y
 4,2,OTH,5,25,N
 7,2,LVY,8,28,N

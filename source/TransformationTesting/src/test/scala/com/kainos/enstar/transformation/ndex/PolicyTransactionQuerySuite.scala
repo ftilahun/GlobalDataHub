@@ -55,6 +55,19 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           order = List( "transactionreference" )
         ),
         QueryTest(
+          "mapping non-monotonic sequence number multiple sequence groups with contingent deductions",
+          Set(
+            CsvSourceData( "line", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer_deduction", "NonMonotonicSeqMultipleSeqGroupsWithContingent.csv" ),
+            CsvSourceData( "line_risk_code", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" )
+          ),
+          CsvSourceData( "policytransaction", "NonMonotonicSeqMultipleSeqGroups.csv" ),
+          order = List( "transactionreference" )
+        ),
+        QueryTest(
           "mapping special characters in all input data",
           Set(
             CsvSourceData( "line", "RiskReference_SpecialCharacters.csv" ),
