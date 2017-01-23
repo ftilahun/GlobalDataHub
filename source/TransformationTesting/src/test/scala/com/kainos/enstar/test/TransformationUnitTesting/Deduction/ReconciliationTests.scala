@@ -54,7 +54,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     // Load test data into dataframes
     val line = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/line/MultipleLines.csv" )
     val layer = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/layer/MultipleLines.csv" )
-    val layerDeduction = utils.populateDataFrameFromCsvWithHeader("/ndex/deduction/input/layer_deduction/MultipleDeductionMonotonicSeqMultipleLinesWithContingents.csv")
+    val layerDeduction = utils.populateDataFrameFromCsvWithHeader( "/ndex/deduction/input/layer_deduction/MultipleDeductionMonotonicSeqMultipleLinesWithContingents.csv" )
 
     line.registerTempTable( "line" )
     layer.registerTempTable( "layer" )

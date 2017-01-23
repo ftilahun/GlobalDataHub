@@ -31,7 +31,7 @@ class AllTransformationTests extends FunSuite with DataFrameSuiteBase {
 
     val testTags = querySuite.testTags ++ querySuite.sourceType.testTags
 
-    test( s"${queryTestSet.name} - ${queryTest.name}", testTags.toArray : _* ) {
+    test( s"Transformation - ${querySuite.sourceType.packageName} - ${queryTestSet.name} - ${queryTest.name}", testTags.toArray : _* ) {
       sqlContext.sparkContext.setLogLevel( "WARN" )
 
       // Arrange
