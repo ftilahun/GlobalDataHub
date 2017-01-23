@@ -13,13 +13,13 @@ object NetAsPctOfGross extends UserDefinedAggregateFunction {
 
   val grossValue = java.math.BigDecimal.valueOf( 100 )
 
-  val DeductionPctType = new StructType().add( "ded_seq", IntegerType ).add( "ded_pc", DecimalType( 10, 2 ) )
+  val DeductionPctType = new StructType().add( "ded_seq", IntegerType ).add( "ded_pc", DecimalType( 12, 7 ) )
 
   override def inputSchema : StructType = DeductionPctType
 
   override def bufferSchema : StructType = new StructType().add( "deductions", ArrayType( DeductionPctType ) )
 
-  override def dataType : DataType = DecimalType( 10, 2 )
+  override def dataType : DataType = DecimalType( 12, 7 )
 
   override def deterministic : Boolean = true
 

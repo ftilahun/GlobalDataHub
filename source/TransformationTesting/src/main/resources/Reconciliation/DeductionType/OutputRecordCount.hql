@@ -1,4 +1,4 @@
 SELECT
     COUNT(*) as recordcount
 FROM
-    deductiontype
+    ndex.deductiontype

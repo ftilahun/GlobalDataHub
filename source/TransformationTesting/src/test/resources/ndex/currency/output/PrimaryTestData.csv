@@ -1,0 +1,7 @@
+currencycode[string],sourcesystemcode[string],currencydescription[string?]
+GBP,NDEX,Sterling
+USD,NDEX,[NULL]
+&&&,NDEX,[NULL]
+USDB,NDEX,Dollar
+USD,NDEX,$
+£££,NDEX,£££

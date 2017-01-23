@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.TrustFund
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils, TrustFundUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
@@ -12,26 +12,19 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
 
-  def populateDataFrameWithLookupTrustFundTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/trustfund/input/" + dataFileName ).toString,
-      getClass.getResource( "/trustfund/schemas/lookup_trust_fund.avro" ).toString,
-      _.split( "," ),
-      TrustFundUtils.lookupTrustFundMapping,
-      sqlc
-    )
+  def populateDataFrameWithLookupTrustFundTestData( dataFileName : String )( implicit sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromCsvWithHeader( "/ndex/trustfund/input/" + dataFileName )
   }
 
   test( "TrustFund reconciliation over test data" ) {
 
     // Arrange //
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
 
-    val lookup_trust_fund = this.populateDataFrameWithLookupTrustFundTestData( "lookup_trust_fund_PrimaryTestData.csv", sqlc )
+    val lookup_trust_fund = this.populateDataFrameWithLookupTrustFundTestData( "PrimaryTestData.csv" )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/TrustFund.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/TrustFund.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/TrustFund/InputRecordCounts.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/TrustFund/OutputRecordCounts.hql" )
 

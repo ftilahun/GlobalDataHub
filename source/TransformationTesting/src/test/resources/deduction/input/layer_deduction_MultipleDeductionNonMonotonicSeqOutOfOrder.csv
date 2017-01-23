@@ -1,4 +1,0 @@
-deduction_id[int],layer_id[int],sequence_no[int],deduction_code[string?],deduction_pct[decimal(12:7)]
-7539,9302,5,GBK,50.00
-7537,9302,1,GBK,10.00
-7538,9302,3,GBK,5.00

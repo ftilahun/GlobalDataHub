@@ -1,1 +1,1 @@
-SELECT COUNT(*) AS lineofbusiness_count FROM lineofbusiness
+SELECT COUNT(*) AS lineofbusiness_count FROM ndex.lineofbusiness

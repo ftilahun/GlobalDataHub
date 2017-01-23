@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.LineOfBusiness
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ LineOfBusinessUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
@@ -14,28 +14,16 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val lookup_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/lineofbusiness/input/lookup_block_test1.csv" ).toString,
-      getClass.getResource( "/lineofbusiness/schemas/lookup_block.avro" ).toString,
-      _.split( "," ),
-      LineOfBusinessUtils.lookupBlockMapping,
-      sqlc
-    )
+    val lookup_block : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/ndex/lineofbusiness/input/lookup_block/PrimaryTestData.csv" )
 
-    val underwriting_block : DataFrame = utils.populateDataFrameFromFile(
-      getClass.getResource( "/lineofbusiness/input/underwriting_block_test1.csv" ).toString,
-      getClass.getResource( "/lineofbusiness/schemas/underwriting_block.avro" ).toString,
-      _.split( "," ),
-      LineOfBusinessUtils.underwritingBlockMapping,
-      sqlc
-    )
+    val underwriting_block : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/ndex/lineofbusiness/input/underwriting_block/PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/LineOfBusiness.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/LineOfBusiness.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/LineOfBusiness/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/LineOfBusiness/OutputRecordCount.hql" )
 
@@ -43,7 +31,7 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     lookup_block.registerTempTable( "lookup_block" )
     underwriting_block.registerTempTable( "underwriting_block" )
     val output = SQLRunner.runStatement( statement, sqlc )
-    output.registerTempTable( "lineofbusiness" )
+    output.registerTempTable( "ndex/lineofbusiness" )
 
     val reconInput = SQLRunner.runStatement( reconStatementInput, sqlc )
     val reconOutput = SQLRunner.runStatement( reconStatementOutput, sqlc )

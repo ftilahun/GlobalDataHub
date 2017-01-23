@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coordinator-app
+	name='${oozie.job.name}'
+	frequency='${oozie.coordinator.frequency}'
+	start='${oozie.coordinator.starttime}'
+	end='9999-12-31T23:59Z'
+	timezone='Europe/London'
+	xmlns='uri:oozie:coordinator:0.4'>
+	<controls>
+		<concurrency>1</concurrency>
+	</controls>
+	<action>
+		<workflow>
+			<app-path>${oozie.application.path}</app-path>
+		</workflow>
+	</action>
+</coordinator-app>

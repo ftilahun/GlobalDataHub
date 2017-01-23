@@ -1,7 +1,7 @@
 package com.kainos.enstar.test.TransformationUnitTesting.PolicyStatus
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ PolicyStatusUtils, SQLRunner, TransformationUnitTestingUtils }
+import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 import org.scalatest.FunSuite
 
@@ -12,26 +12,19 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
 
   private val utils = new TransformationUnitTestingUtils
 
-  def populateDataFrameWithLookupLineStatusTestData( dataFileName : String, sqlc : SQLContext ) : DataFrame = {
-
-    utils.populateDataFrameFromFile(
-      getClass.getResource( "/policystatus/input/" + dataFileName ).toString,
-      getClass.getResource( "/policystatus/schemas/lookup_line_status.avro" ).toString,
-      _.split( "," ),
-      PolicyStatusUtils.lookupLineStatusMapping,
-      sqlc
-    )
+  def populateDataFrameWithLookupLineStatusTestData( dataFileName : String )( implicit sqlc : SQLContext ) : DataFrame = {
+    utils.populateDataFrameFromCsvWithHeader( "/ndex/policystatus/input/" + dataFileName )
   }
 
   test( "PolicyStatus reconciliation over test data" ) {
 
     // Arrange //
-    val sqlc = sqlContext
+    implicit val sqlc = sqlContext
     val utils = new TransformationUnitTestingUtils
 
-    val lookup_line_status = this.populateDataFrameWithLookupLineStatusTestData( "lookup_line_status_PrimaryTestData.csv", sqlc )
+    val lookup_line_status = this.populateDataFrameWithLookupLineStatusTestData( "PrimaryTestData.csv" )
 
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/PolicyStatus.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/PolicyStatus.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/PolicyStatus/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/PolicyStatus/OutputRecordCount.hql" )
 

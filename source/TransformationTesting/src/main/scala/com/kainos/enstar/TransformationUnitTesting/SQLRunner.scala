@@ -1,7 +1,5 @@
 package com.kainos.enstar.TransformationUnitTesting
 
-import java.io.InputStream
-
 import org.apache.spark.sql.{ DataFrame, SQLContext }
 
 /**

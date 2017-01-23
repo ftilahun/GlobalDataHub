@@ -6,6 +6,7 @@ package com.kainos.enstar.test.TransformationUnitTesting.Geography
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
 import com.kainos.enstar.TransformationUnitTesting.{ SQLRunner, TransformationUnitTestingUtils }
+import org.apache.spark.sql.DataFrame
 import org.scalatest.FunSuite
 
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
@@ -18,16 +19,15 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase {
     sqlc.sparkContext.setLogLevel( "WARN" )
     val utils = new TransformationUnitTestingUtils
 
-    // Load test data into dataframes
-    val lookupCountry = utils.populateDataFrameFromCsvWithHeader( "/geography/input/lookup_country_PrimaryTestData.csv" )
+    val lookup_country : DataFrame = utils.populateDataFrameFromCsvWithHeader( "/ndex/geography/input/lookup_country/PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/Geography.hql" )
+    val hqlStatement = utils.loadHQLStatementFromResource( "Transformation/ndex/Geography.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Geography/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Geography/OutputRecordCount.hql" )
 
     // Act //
-    lookupCountry.registerTempTable( "lookup_country" )
+    lookup_country.registerTempTable( "lookup_country" )
 
     val output = SQLRunner.runStatement( hqlStatement, sqlc )
     output.registerTempTable( "geography" )

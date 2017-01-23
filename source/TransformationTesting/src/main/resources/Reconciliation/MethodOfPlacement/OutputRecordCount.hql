@@ -1,3 +1,3 @@
 SELECT
     COUNT(methodofplacementcode) AS recordcount
-FROM methodofplacement
+FROM ndex.methodofplacement

@@ -7,7 +7,7 @@ import org.scalatest.FunSuite
 
 class ReconciliationTests extends FunSuite with DataFrameSuiteBase with Matchers {
 
-  test( "underwriter Mapping reconciliation over test data" ) {
+  test( "ndex.underwriter Mapping reconciliation over test data" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -15,10 +15,10 @@ class ReconciliationTests extends FunSuite with DataFrameSuiteBase with Matchers
     val utils = new TransformationUnitTestingUtils
 
     // Load test data into dataframe
-    val ndex_underwriter = utils.populateDataFrameFromCsvWithHeader( "/underwriter/input/underwriter_ndex_PrimaryTestData.csv" )
+    val ndex_underwriter = utils.populateDataFrameFromCsvWithHeader( "/ndex/underwriter/input/underwriter/PrimaryTestData.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Transformation/Underwriter.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Transformation/ndex/Underwriter.hql" )
     val reconStatementInput = utils.loadHQLStatementFromResource( "Reconciliation/Underwriter/InputRecordCount.hql" )
     val reconStatementOutput = utils.loadHQLStatementFromResource( "Reconciliation/Underwriter/OutputRecordCount.hql" )
 

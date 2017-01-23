@@ -1,3 +1,3 @@
 SELECT
     COUNT(policyeventtypecode) AS recordcount
-FROM policyeventtype
+FROM ndex.policyeventtype

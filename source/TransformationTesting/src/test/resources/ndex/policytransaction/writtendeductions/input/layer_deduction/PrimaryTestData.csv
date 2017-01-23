@@ -1,0 +1,2 @@
+deduction_id[int],layer_id[int],deduction_code[string?],sequence_no[int],deduction_pct[decimal(12:7)],is_contingent[string]
+1,2,BKR,1,10.0,N
