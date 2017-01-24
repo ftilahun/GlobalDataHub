@@ -1,6 +1,5 @@
 /app
 /app/arcadia
-/app/oozie
 /app/cdcloader
 /app/cdcloader/oozie
 /app/cdcloader/oozie/workflows
