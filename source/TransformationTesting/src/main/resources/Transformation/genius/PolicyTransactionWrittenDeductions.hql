@@ -1,90 +1,90 @@
 SELECT
     CONCAT(
-        CAST(ZUCEDF00.CEMANU AS STRING),".",
-        CAST(ZUCEDF00.CEMASE AS STRING),".",
-        CAST(ZUCEDF00.CERKRS AS STRING),".",
-        CAST(ZUCEDF00.CESDSQ AS STRING),".",
-        CAST(ZUCEDF00.CECVSQ AS STRING),".",
-        CAST(ZUCEDF00.CEEDNO AS STRING),
-        CAST(ZUCEDF00.CEDGSQ AS STRING),".",
-        CAST(ZUDDDF00.DDDDSQ AS STRING)) AS transactionreference,
+        CAST(zucedf00.cemanu AS STRING),".",
+        CAST(zucedf00.cemase AS STRING),".",
+        CAST(zucedf00.cerkrs AS STRING),".",
+        CAST(zucedf00.cesdsq AS STRING),".",
+        CAST(zucedf00.cecvsq AS STRING),".",
+        CAST(zucedf00.ceedno AS STRING),
+        CAST(zucedf00.cedgsq AS STRING),".",
+        CAST(zudddf00.ddddsq AS STRING)) AS transactionreference,
 	"GENIUS" as sourcesystemcode,
 	"GENIUS" as sourcesystemdescription,
-	CONCAT(ZUCODF00.COMANU, ZUCODF00.COMASE, ZUCODF00.CORKRS, ZUCODF00.COSDSQ, ZUCODF00.COCVSQ) AS coveragereference,
+	CONCAT(zucodf00.comanu, zucodf00.comase, zucodf00.corkrs, zucodf00.cosdsq, zucodf00.cocvsq) AS coveragereference,
     false AS iscashtransactiontype,
 	CAST(
-	CASE (ICDCREP.IAVYPG)
+	CASE (icdcrep.iavypg)
 	    WHEN "PERCNT" THEN
 	        ROUND(
-                IF(ZUCEDF00.CECVA1 IS NOT NULL,ZUCEDF00.CECVA1,0) *
-                (IF(ZUSPDF00.SPSPSP IS NOT NULL,ZUSPDF00.SPSPSP, CAST(0 AS DECIMAL(11,7))) / 100.00) *
-                IF(ZUDDDF00.DDDDPC IS NOT NULL,ZUDDDF00.DDDDPC,CAST(0 AS DECIMAL(11,7))) / 100.00, 2)
+                IF(zucedf00.cecva1 IS NOT NULL,zucedf00.cecva1,0) *
+                (IF(zuspdf00.spspsp IS NOT NULL,zuspdf00.spspsp, CAST(0 AS DECIMAL(11,7))) / 100.00) *
+                IF(zudddf00.ddddpc IS NOT NULL,zudddf00.ddddpc,CAST(0 AS DECIMAL(11,7))) / 100.00, 2)
 	    WHEN "FLAT" THEN
-            IF(ZUDDDF00.DDDDAS IS NOT NULL,ZUDDDF00.DDDDAS,0) *
-               IF(SIGN(ZUCEDF00.CECVA1) == 0,1,SIGN(ZUCEDF00.CECVA1))
+            IF(zudddf00.ddddas IS NOT NULL,zudddf00.ddddas,0) *
+               IF(SIGN(zucedf00.cecva1) == 0,1,SIGN(zucedf00.cecva1))
         ELSE NULL
 	END AS DECIMAL(18,6)) AS originalamount,
-    ZUCEDF00.CEOGCU AS originalcurrencycode,
-	ZUMADF00.MAPORF AS policynumber,
-	CONCAT(ZUCODF00.COMANU, ZUCODF00.COMASE, ZUCODF00.CORKRS, ZUCODF00.COSDSQ) AS sectionreference,
+    zucedf00.ceogcu AS originalcurrencycode,
+	zumadf00.maporf AS policynumber,
+	CONCAT(zucodf00.comanu, zucodf00.comase, zucodf00.corkrs, zucodf00.cosdsq) AS sectionreference,
 	CAST(
-	CASE (ICDCREP.IAVYPG)
+	CASE (icdcrep.iavypg)
 	    WHEN "PERCNT" THEN
 	        ROUND(
 	            CAST(
-	            IF((ZUCEDF00.CECVA1 / ZUCEDF00.CEEAEA) IS NOT NULL,(ZUCEDF00.CECVA1 / ZUCEDF00.CEEAEA), 0) *
-                (IF(ZUSPDF00.SPSPSP IS NOT NULL,ZUSPDF00.SPSPSP, CAST(0 AS DECIMAL(11,7))) / 100.00) *
-                IF(ZUDDDF00.DDDDPC IS NOT NULL,ZUDDDF00.DDDDPC, CAST(0 AS DECIMAL(11,7))) / 100.00 AS DECIMAL(18,6)), 2)
+	            IF((zucedf00.cecva1 / zucedf00.ceeaea) IS NOT NULL,(zucedf00.cecva1 / zucedf00.ceeaea), 0) *
+                (IF(zuspdf00.spspsp IS NOT NULL,zuspdf00.spspsp, CAST(0 AS DECIMAL(11,7))) / 100.00) *
+                IF(zudddf00.ddddpc IS NOT NULL,zudddf00.ddddpc, CAST(0 AS DECIMAL(11,7))) / 100.00 AS DECIMAL(18,6)), 2)
 	    WHEN "FLAT" THEN
 	        CAST(
-	        IF((ZUDDDF00.DDDDAS/ZUCEDF00.CEEAEA) IS NOT NULL,(ZUDDDF00.DDDDAS/ZUCEDF00.CEEAEA), 0) * IF(SIGN(ZUCEDF00.CECVA1) == 0,1,SIGN(ZUCEDF00.CECVA1)) AS DECIMAL(18,6))
+	        IF((zudddf00.ddddas/zucedf00.ceeaea) IS NOT NULL,(zudddf00.ddddas/zucedf00.ceeaea), 0) * IF(SIGN(zucedf00.cecva1) == 0,1,SIGN(zucedf00.cecva1)) AS DECIMAL(18,6))
 	    ELSE NULL
 	END AS DECIMAL(18,6)) AS settlementamount,
-	ZUCEDF00.CECVAC AS settlementcurrencycode,
-	CAST(CAST(ZUELDF00.ELDTSE + 19000000 AS INT) AS STRING) AS transactiondate,
+	zucedf00.cecvac AS settlementcurrencycode,
+	CAST(CAST(zueldf00.eldtse + 19000000 AS INT) AS STRING) AS transactiondate,
 	"WrittenDeductionsOurShare" AS transactiontypecode,
     "WrittenDeductionsOurShare" AS transactiontypedescription,
-	SUBSTRING(ICDCREP.IADDCD,1,3) AS transactionsubtypecode,
-    ICDCREP.IADDDS AS transactionsubtypedescription,
+	SUBSTRING(icdcrep.iaddcd,1,3) AS transactionsubtypecode,
+    icdcrep.iaddds AS transactionsubtypedescription,
 	"N/A" AS filcode,
 	"N/A" AS riskcode,
 	"N/A" AS trustfundcode
-FROM ZUCEDF00
-INNER JOIN ZUELDF00 ON ZUCEDF00.CEMANU = ZUELDF00.ELMANU
-	AND ZUCEDF00.CEMASE = ZUELDF00.ELMASE
-	AND ZUCEDF00.CEEDNO = ZUELDF00.ELEDNO
-INNER JOIN ZUCODF00 ON ZUCEDF00.CEMANU = ZUCODF00.COMANU
-	AND ZUCEDF00.CEMASE = ZUCODF00.COMASE
-	AND ZUCEDF00.CERKRS = ZUCODF00.CORKRS
-	AND ZUCEDF00.CESDSQ = ZUCODF00.COSDSQ
-	AND ZUCEDF00.CECVSQ = ZUCODF00.COCVSQ
-INNER JOIN ZUMADF00 ON ZUCEDF00.CEMANU = ZUMADF00.MAMANU
-	AND ZUCEDF00.CEMASE = ZUMADF00.MAMASE
-	AND ZUMADF00.MAPORF NOT LIKE 'X%' and ZUMADF00.MAPORF NOT LIKE '9%'
-INNER JOIN ZUDGDF00 ON ZUCEDF00.CEMANU = ZUDGDF00.DGMANU
-	AND ZUCEDF00.CEMASE = ZUDGDF00.DGMASE
-	AND ZUCEDF00.CEDGSQ = ZUDGDF00.DGDGSQ
-INNER JOIN ZUDVDF00 ON ZUDGDF00.DGMANU = ZUDVDF00.DVMANU
-	AND ZUDGDF00.DGMASE = ZUDVDF00.DVMASE
-	AND ZUDGDF00.DGDGSQ = ZUDVDF00.DVDGSQ
-INNER JOIN ZUDDDF00 ON ZUDVDF00.DVMANU = ZUDDDF00.DDMANU
-	AND ZUDVDF00.DVMASE = ZUDDDF00.DDMASE
-	AND ZUDVDF00.DVDGSQ = ZUDDDF00.DDDGSQ
-	AND ZUDVDF00.DVDGVS = ZUDDDF00.DDDGVS
-INNER JOIN ICDCREP ON ZUDDDF00.DDDDCD = ICDCREP.IADDCD
-LEFT JOIN ZUSFDF00 ON ZUSFDF00.SFMANU = ZUCEDF00.CEMANU
-	AND ZUSFDF00.SFMASE = ZUCEDF00.CEMASE
-	AND ZUSFDF00.SFRKRS = ZUCEDF00.CERKRS
-	AND ZUSFDF00.SFSDSQ = ZUCEDF00.CESDSQ
-LEFT JOIN ZUSKDF00 ON ZUSKDF00.SKMANU = ZUSFDF00.SFMANU
-	AND ZUSKDF00.SKMASE = ZUSFDF00.SFMASE
-	AND ZUSKDF00.SKRKRS = ZUSFDF00.SFRKRS
-LEFT JOIN ZUGSDF00 ON ZUCEDF00.CEMANU = ZUGSDF00.GSMANU
-	AND ZUCEDF00.CEMASE = ZUGSDF00.GSMASE
-	AND ZUGSDF00.GSGSGN = ZUSKDF00.SKGSGN
-LEFT JOIN ZUGPDF00 ON ZUGSDF00.GSGSGN = ZUGPDF00.GPGSGN
-	AND ZUGPDF00.GPGPMS = 1
-LEFT JOIN ZUSPDF00 ON ZUGSDF00.GSGSGN = ZUSPDF00.SPGSGN
-	AND ZUGPDF00.GPGPMT = ZUSPDF00.SPGPMT
-	AND ZUGPDF00.GPGPSQ = ZUSPDF00.SPGPSQ
-	AND ZUSPDF00.SPSPSQ = '01'
+FROM zucedf00
+INNER JOIN zueldf00 ON zucedf00.cemanu = zueldf00.elmanu
+	AND zucedf00.cemase = zueldf00.elmase
+	AND zucedf00.ceedno = zueldf00.eledno
+INNER JOIN zucodf00 ON zucedf00.cemanu = zucodf00.comanu
+	AND zucedf00.cemase = zucodf00.comase
+	AND zucedf00.cerkrs = zucodf00.corkrs
+	AND zucedf00.cesdsq = zucodf00.cosdsq
+	AND zucedf00.cecvsq = zucodf00.cocvsq
+INNER JOIN zumadf00 ON zucedf00.cemanu = zumadf00.mamanu
+	AND zucedf00.cemase = zumadf00.mamase
+	AND zumadf00.maporf NOT LIKE 'X%' and zumadf00.maporf NOT LIKE '9%'
+INNER JOIN zudgdf00 ON zucedf00.cemanu = zudgdf00.dgmanu
+	AND zucedf00.cemase = zudgdf00.dgmase
+	AND zucedf00.cedgsq = zudgdf00.dgdgsq
+INNER JOIN zudvdf00 ON zudgdf00.dgmanu = zudvdf00.dvmanu
+	AND zudgdf00.dgmase = zudvdf00.dvmase
+	AND zudgdf00.dgdgsq = zudvdf00.dvdgsq
+INNER JOIN zudddf00 ON zudvdf00.dvmanu = zudddf00.ddmanu
+	AND zudvdf00.dvmase = zudddf00.ddmase
+	AND zudvdf00.dvdgsq = zudddf00.dddgsq
+	AND zudvdf00.dvdgvs = zudddf00.dddgvs
+INNER JOIN icdcrep ON zudddf00.ddddcd = icdcrep.iaddcd
+LEFT JOIN zusfdf00 ON zusfdf00.sfmanu = zucedf00.cemanu
+	AND zusfdf00.sfmase = zucedf00.cemase
+	AND zusfdf00.sfrkrs = zucedf00.cerkrs
+	AND zusfdf00.sfsdsq = zucedf00.cesdsq
+LEFT JOIN zuskdf00 ON zuskdf00.skmanu = zusfdf00.sfmanu
+	AND zuskdf00.skmase = zusfdf00.sfmase
+	AND zuskdf00.skrkrs = zusfdf00.sfrkrs
+LEFT JOIN zugsdf00 ON zucedf00.cemanu = zugsdf00.gsmanu
+	AND zucedf00.cemase = zugsdf00.gsmase
+	AND zugsdf00.gsgsgn = zuskdf00.skgsgn
+LEFT JOIN zugpdf00 ON zugsdf00.gsgsgn = zugpdf00.gpgsgn
+	AND zugpdf00.gpgpms = 1
+LEFT JOIN zuspdf00 ON zugsdf00.gsgsgn = zuspdf00.spgsgn
+	AND zugpdf00.gpgpmt = zuspdf00.spgpmt
+	AND zugpdf00.gpgpsq = zuspdf00.spgpsq
+	AND zuspdf00.spspsq = '01'

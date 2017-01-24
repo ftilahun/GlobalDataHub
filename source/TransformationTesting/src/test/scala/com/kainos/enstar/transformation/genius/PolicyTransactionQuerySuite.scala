@@ -36,105 +36,121 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "icdcrep", "PrimaryTestData.csv" )
           ),
           CsvSourceData( "policytransaction_writtendeductions", "PrimaryTestData.csv" )
-        ) /*,
-        QueryTest(
-          "mapping monotonic sequence number multiple sequence groups",
-          Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "MonotonicSeqMultipleSeqGroups.csv" ),
-            CsvSourceData( "line_risk_code", "PrimaryTestData.csv" ),
-            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" )
-          ),
-          CsvSourceData( "policytransaction", "MonotonicSeqMultipleSeqGroups.csv" )
         ),
         QueryTest(
-          "mapping non-monotonic sequence number multiple sequence groups",
+          "mapping testing no match for left join to zusfdf00 for flat has no effect",
           Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "NonMonotonicSeqMultipleSeqGroups.csv" ),
-            CsvSourceData( "line_risk_code", "PrimaryTestData.csv" ),
-            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" )
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudddf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudgdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudvdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugsdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "icdcrep", "PrimaryTestData.csv" )
           ),
-          CsvSourceData( "policytransaction", "NonMonotonicSeqMultipleSeqGroups.csv" ),
-          order = List( "transactionreference" )
+          CsvSourceData( "policytransaction_writtendeductions", "PrimaryTestData.csv" )
         ),
         QueryTest(
-          "mapping non-monotonic sequence number multiple sequence groups with contingent deductions",
+          "mapping testing no match for left join to zusfdf00 for percent",
           Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "NonMonotonicSeqMultipleSeqGroupsWithContingent.csv" ),
-            CsvSourceData( "line_risk_code", "PrimaryTestData.csv" ),
-            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" )
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudddf00", "Percent.csv" ),
+            CsvSourceData( "zudgdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudvdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugsdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction", "NonMonotonicSeqMultipleSeqGroups.csv" ),
-          order = List( "transactionreference" )
+          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
         ),
         QueryTest(
-          "mapping special characters in all input data",
+          "mapping testing no match for left join to zuskdf00 for percent",
           Set(
-            CsvSourceData( "line", "RiskReference_SpecialCharacters.csv" ),
-            CsvSourceData( "layer", "FILCode_SpecialCharacters.csv" ),
-            CsvSourceData( "layer_deduction", "DeductionCode_SpecialCharacters.csv" ),
-            CsvSourceData( "line_risk_code", "SpecialCharacters.csv" ),
-            CsvSourceData( "lookup_deduction_type", "DeductionDescription_SpecialCharacters.csv" ),
-            CsvSourceData( "layer_trust_fund", "Trustfundindicator_SpecialCharacters.csv" )
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudddf00", "Percent.csv" ),
+            CsvSourceData( "zudgdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudvdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugsdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction", "SpecialCharacters.csv" )
+          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
         ),
         QueryTest(
-          "mapping with null settlement_due_date and FIL_code input values",
+          "mapping testing no match for left join to zugsdf00 for percent",
           Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "NullFilCodeAndInceptionDate.csv" ),
-            CsvSourceData( "layer_deduction", "PrimaryTestData.csv" ),
-            CsvSourceData( "line_risk_code", "PrimaryTestData.csv" ),
-            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" )
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudddf00", "Percent.csv" ),
+            CsvSourceData( "zudgdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudvdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugsdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction", "NullValues.csv" )
+          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
         ),
         QueryTest(
-          "mapping testing no corresponding layer_trust_fund for a line",
+          "mapping testing no match for left join to zugpdf00 for percent",
           Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "PrimaryTestData.csv" ),
-            CsvSourceData( "line_risk_code", "PrimaryTestData.csv" ),
-            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_trust_fund", "LayerIdNotInLine.csv" )
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudddf00", "Percent.csv" ),
+            CsvSourceData( "zudgdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudvdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zugsdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction", "CalculationsWithNullLayerTrustFund.csv" )
+          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
         ),
         QueryTest(
-          "mapping testing no corresponding line_risk_code for a line",
+          "mapping testing no match for left join to zuspdf00 for percent",
           Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "PrimaryTestData.csv" ),
-            CsvSourceData( "line_risk_code", "LineIdNotInLine.csv" ),
-            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" )
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudddf00", "Percent.csv" ),
+            CsvSourceData( "zudgdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudvdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zugsdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction", "CalculationsWithNullLineRiskCode.csv" )
-        ),
-        QueryTest(
-          "mapping testing no corresponding layer_trust_fund or line_risk_code for a line",
-          Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "PrimaryTestData.csv" ),
-            CsvSourceData( "line_risk_code", "LineIdNotInLine.csv" ),
-            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_trust_fund", "LayerIdNotInLine.csv" )
-          ),
-          CsvSourceData( "policytransaction", "CalculationsWithNullLineRiskCodeAndLayerTrustFund.csv" )
-        )*/
+          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
+        )
       )
     )
   )

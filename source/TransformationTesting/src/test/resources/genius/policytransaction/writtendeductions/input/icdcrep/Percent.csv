@@ -1,2 +1,2 @@
 iavypg[string],iaddcd[string?],iaddds[string?]
-FLAT,ORCFLT,Overriding Commission: Flat
+PERCNT,ORCPT,Overriding Commission: Percent
