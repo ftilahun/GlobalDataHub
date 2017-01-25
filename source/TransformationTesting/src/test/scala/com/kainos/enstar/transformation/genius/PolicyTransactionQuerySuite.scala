@@ -32,7 +32,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
             CsvSourceData( "icdcrep", "PrimaryTestData.csv" )
           ),
-          CsvSourceData( "policytransaction_writtendeductions", "PrimaryTestData.csv" )
+          CsvSourceData( "policytransaction", "PrimaryTestData.csv" )
         ),
         QueryTest(
           "mapping testing no match for left join to zusfdf00 for flat has no effect",
@@ -51,7 +51,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
             CsvSourceData( "icdcrep", "PrimaryTestData.csv" )
           ),
-          CsvSourceData( "policytransaction_writtendeductions", "PrimaryTestData.csv" )
+          CsvSourceData( "policytransaction", "PrimaryTestData.csv" )
         ),
         QueryTest(
           "mapping testing no match for left join to zusfdf00 for percent",
@@ -70,7 +70,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
             CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
+          CsvSourceData( "policytransaction", "NoMatchForLeftJoin.csv" )
         ),
         QueryTest(
           "mapping testing no match for left join to zuskdf00 for percent",
@@ -89,7 +89,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
             CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
+          CsvSourceData( "policytransaction", "NoMatchForLeftJoin.csv" )
         ),
         QueryTest(
           "mapping testing no match for left join to zugsdf00 for percent",
@@ -108,7 +108,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
             CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
+          CsvSourceData( "policytransaction", "NoMatchForLeftJoin.csv" )
         ),
         QueryTest(
           "mapping testing no match for left join to zugpdf00 for percent",
@@ -127,7 +127,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "zuspdf00", "PrimaryTestData.csv" ),
             CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
+          CsvSourceData( "policytransaction", "NoMatchForLeftJoin.csv" )
         ),
         QueryTest(
           "mapping testing no match for left join to zuspdf00 for percent",
@@ -146,7 +146,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "zuspdf00", "NoMatchForLeftJoin.csv" ),
             CsvSourceData( "icdcrep", "Percent.csv" )
           ),
-          CsvSourceData( "policytransaction_writtendeductions", "NoMatchForLeftJoin.csv" )
+          CsvSourceData( "policytransaction", "NoMatchForLeftJoin.csv" )
         )
       )
     ),

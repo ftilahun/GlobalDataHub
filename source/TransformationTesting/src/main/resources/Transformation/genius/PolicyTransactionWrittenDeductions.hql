@@ -5,7 +5,7 @@ SELECT
         CAST(zucedf00.cerkrs AS STRING),".",
         CAST(zucedf00.cesdsq AS STRING),".",
         CAST(zucedf00.cecvsq AS STRING),".",
-        CAST(zucedf00.ceedno AS STRING),
+        CAST(zucedf00.ceedno AS STRING),".",
         CAST(zucedf00.cedgsq AS STRING),".",
         CAST(zudddf00.ddddsq AS STRING)) AS transactionreference,
 	"GENIUS" as sourcesystemcode,
@@ -41,14 +41,14 @@ SELECT
 	    ELSE NULL
 	END AS DECIMAL(18,6)) AS settlementamount,
 	zucedf00.cecvac AS settlementcurrencycode,
-	CAST(CAST(zueldf00.eldtse + 19000000 AS INT) AS STRING) AS transactiondate,
+	CAST(CAST(zueldf00.eldtse AS INT) + 19000000 AS STRING) AS transactiondate,
 	"WrittenDeductionsOurShare" AS transactiontypecode,
     "WrittenDeductionsOurShare" AS transactiontypedescription,
 	SUBSTRING(icdcrep.iaddcd,1,3) AS transactionsubtypecode,
     icdcrep.iaddds AS transactionsubtypedescription,
-	"N/A" AS filcode,
-	"N/A" AS riskcode,
-	"N/A" AS trustfundcode
+	CAST(NULL AS STRING) AS filcode,
+	CAST(NULL AS STRING) AS riskcode,
+	CAST(NULL AS STRING) AS trustfundcode
 FROM zucedf00
 INNER JOIN zueldf00 ON zucedf00.cemanu = zueldf00.elmanu
 	AND zucedf00.cemase = zueldf00.elmase
