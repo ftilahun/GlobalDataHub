@@ -145,8 +145,11 @@ class CDCTableProcessor extends TableProcessor with Logging {
         properties.validFromColumnName))
 
     logInfo("Dropping attunity columns")
-    val processedChangesRemovedMetaData = userFunctions
-      .dropAttunityColumns(processedChangesWithTimeStamp, properties)
+    val processedChangesRemovedMetaData = userFunctions.dropColumn(
+      userFunctions
+        .dropAttunityColumns(processedChangesWithTimeStamp, properties),
+      properties.activeColumnName
+    )
     val historyNoMetadata =
       userFunctions.dropAttunityColumns(historyWithTimeStamp, properties)
     val historyNoActive =

@@ -10,7 +10,6 @@ import org.mockito.Mockito
 import org.mockito.mock.SerializableMode
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
 import org.apache.spark.sql.functions._
-import org.joda
 
 /**
  * Unit tests for CDCUserFunctions

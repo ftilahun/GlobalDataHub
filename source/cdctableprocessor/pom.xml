@@ -40,7 +40,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.databricks</groupId>
+            <groupId>com.github.KainosSoftwareLtd</groupId>
             <artifactId>spark-avro_${scala.major.version}</artifactId>
             <version>${spark.avro.version}</version>
             <scope>compile</scope>
