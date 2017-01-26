@@ -36,7 +36,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "policyline", "PrimaryTestData.csv" ),
             CsvSourceData( "policyprem", "PrimaryTestData.csv" )
           ),
-          CsvSourceData( "policytransaction", "PrimaryTestData.csv" ),
+          CsvSourceData( "policytransaction", "NoMatchForObjcodeLeftJoin.csv" ),
           order = List( "transactionreference" )
         ),
         QueryTest(
@@ -48,7 +48,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "policyline", "PrimaryTestData.csv" ),
             CsvSourceData( "policyprem", "PrimaryTestData.csv" )
           ),
-          CsvSourceData( "policytransaction", "PrimaryTestData.csv" ),
+          CsvSourceData( "policytransaction", "NoMatchForPolicyendorsmntLeftJoin.csv" ),
           order = List( "transactionreference" )
         )
 
