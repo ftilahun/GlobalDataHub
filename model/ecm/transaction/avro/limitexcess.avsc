@@ -1,0 +1,56 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "limitexcess",
+    "doc": "Associates Limits/Excess/Deductibles with a policy. The type is determined by the LimitExcessType value.",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "limitexcessreference", 
+    		"type": "string",
+    		"doc": "Unique reference for a limit excess record"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system associated with a limit excess"
+    	},
+    	{
+    		"name": "currencycode", 
+    		"type": ["null", "string"],
+    		"doc": "The currency of the limit excess"
+    	},
+    	{
+    		"name": "amount",  
+    		"type": ["double", "null"],
+    		"doc": "The amount of the limit excess"
+    	},
+    	{
+    		"name": "limitexcesstypecode", 
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "policynumber", 
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "sectionreference", 
+    		"type": ["string", "null"]
+    	},
+        {
+            "name": "coveragereference", 
+            "type": ["string", "null"]
+        }
+ 	]
+}

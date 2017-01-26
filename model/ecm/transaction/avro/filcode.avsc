@@ -1,0 +1,35 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "filcode",
+    "doc": "",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },  
+        {
+            "name": "filcode", 
+            "type": "string",
+            "doc": ""
+        },
+        {
+            "name": "sourcesystemcode",  
+            "type": "string",
+            "doc": "The source system code associated with the insured"
+        },
+        {
+            "name": "filcodedescription",  
+            "type": [ "null", "string" ],
+            "doc": "The source system code associated with the insured"
+        }
+ 	]
+}

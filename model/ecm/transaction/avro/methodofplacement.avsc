@@ -1,0 +1,35 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "methodofplacement",
+    "doc": "The description of how the business was placed  1. Declaration  2. Open Market Direct  3. Facultative RI  4. MGA  5. Lineslip Master  6. Cat  7. Treaty X/L  8. Master Policy  9. Stop Loss  10. Proportional Treaty  11. LineSlip Declaration  12. Binding Master  13. Service Company",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "methodofplacementcode", 
+    		"type": "string",
+    		"doc": "The code associated with the Method of Placement"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code that the method of placement record is loaded from"
+    	},
+    	{
+    		"name": "methodofplacementdescription", 
+            "type": [ "null", "string" ],
+    		"doc": "The description associated with the Method of Placement"
+    	}
+ 	]
+}

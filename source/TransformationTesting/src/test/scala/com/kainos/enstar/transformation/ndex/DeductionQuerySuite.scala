@@ -36,6 +36,30 @@ class DeductionQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "deduction", "MultipleDeductionMonotonicSeqMultipleLines.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Reconciliation over test data",
+          Set(
+            CsvSourceData( "line", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer_deduction", "PrimaryTestData.csv" )
+          ),
+          "deduction",
+          "Deduction/RecordCount.hql",
+          "Deduction/RecordCount.hql"
+        ),
+        ReconciliationTest(
+          "Reconciliation over test data with multiple lines",
+          Set(
+            CsvSourceData( "line", "MultipleLines.csv" ),
+            CsvSourceData( "layer", "MultipleLines.csv" ),
+            CsvSourceData( "layer_deduction", "MultipleDeductionMonotonicSeqMultipleLinesWithContingents.csv" )
+          ),
+          "deduction",
+          "Deduction/RecordCount.hql",
+          "Deduction/RecordCount.hql"
+        )
       )
     )
   )

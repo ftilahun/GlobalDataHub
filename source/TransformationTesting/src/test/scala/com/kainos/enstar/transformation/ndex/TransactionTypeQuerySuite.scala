@@ -25,6 +25,17 @@ class TransactionTypeQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "transactiontype", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" )
+          ),
+          "transactiontype",
+          "TransactionType/WrittenDeductionsRecordCount.hql",
+          "TransactionType/WrittenDeductionsRecordCount.hql"
+        )
       )
     ),
     QueryTestSet(

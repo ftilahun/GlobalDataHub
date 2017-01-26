@@ -25,6 +25,17 @@ class MethodOfPlacementQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "methodofplacement", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_business_type", "PrimaryTestData.csv" )
+          ),
+          "methodofplacement",
+          "MethodOfPlacement/RecordCount.hql",
+          "MethodOfPlacement/RecordCount.hql"
+        )
       )
     )
   )

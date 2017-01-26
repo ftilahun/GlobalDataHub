@@ -3,7 +3,7 @@ transactionreference[string?],sourcesystemcode[string],sourcesystemdescription[s
 2-1-2-XP-SL,NDEX,NDEX,1,false,.100000,AAA1,00PA15,2,.100000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,IPT,IPT,AUD,XP,SL
 2-1-3-XP-SL,NDEX,NDEX,1,false,.102000,AAA1,00PA15,2,.102000,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,COM,Commission,AUD,XP,SL
 2-1-4-XP-SL,NDEX,NDEX,1,false,.104720,AAA1,00PA15,2,.104720,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,LVY,Levy,AUD,XP,SL
-2-1-5-XP-SL,NDEX,NDEX,1,false,.102928,AAA1,00PA15,2,.102928,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,OTH,Other,AUD,XP,SL
-2-1-6-XP-SL,NDEX,NDEX,1,false,.115794,AAA1,00PA15,2,.115794,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,SFE,Survey Fees,AUD,XP,SL
-2-1-7-XP-SL,NDEX,NDEX,1,false,.128660,AAA1,00PA15,2,.128660,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,BKR,Brokerage,AUD,XP,SL
-2-1-8-XP-SL,NDEX,NDEX,1,false,.073975,AAA1,00PA15,2,.073975,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,IDA,% IDA,AUD,XP,SL
+2-1-5-XP-SL,NDEX,NDEX,1,false,.102925,AAA1,00PA15,2,.102925,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,OTH,Other,AUD,XP,SL
+2-1-6-XP-SL,NDEX,NDEX,1,false,.115790,AAA1,00PA15,2,.115790,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,SFE,Survey Fees,AUD,XP,SL
+2-1-7-XP-SL,NDEX,NDEX,1,false,.128656,AAA1,00PA15,2,.128656,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,BKR,Brokerage,AUD,XP,SL
+2-1-8-XP-SL,NDEX,NDEX,1,false,.073977,AAA1,00PA15,2,.073977,AU,1900-01-01 00:00:00,WrittenDeductionsOurShare,WrittenDeductionsOurShare,IDA,% IDA,AUD,XP,SL
