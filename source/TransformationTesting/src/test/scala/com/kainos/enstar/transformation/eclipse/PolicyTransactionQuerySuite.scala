@@ -15,18 +15,18 @@ class PolicyTransactionQuerySuite extends QuerySuite {
       "policytransaction/writtenpremium",
       "PolicyTransactionWrittenPremium.hql",
       Set(
-          QueryTest(
-            "mapping happy path data",
-            Set(
-              CsvSourceData( "objcode", "PrimaryTestData.csv" ),
-              CsvSourceData( "policy", "PrimaryTestData.csv" ),
-              CsvSourceData( "policyendorsmnt", "PrimaryTestData.csv" ),
-              CsvSourceData( "policyline", "PrimaryTestData.csv" ),
-              CsvSourceData( "policyprem", "PrimaryTestData.csv" )
-            ),
-            CsvSourceData( "policytransaction", "PrimaryTestData.csv" ),
-            order = List( "transactionreference" )
+        QueryTest(
+          "mapping happy path data",
+          Set(
+            CsvSourceData( "objcode", "PrimaryTestData.csv" ),
+            CsvSourceData( "policy", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyendorsmnt", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyline", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyprem", "PrimaryTestData.csv" )
           ),
+          CsvSourceData( "policytransaction", "PrimaryTestData.csv" ),
+          order = List( "transactionreference" )
+        ),
         QueryTest(
           "mapping testing no match for left join to objcode",
           Set(

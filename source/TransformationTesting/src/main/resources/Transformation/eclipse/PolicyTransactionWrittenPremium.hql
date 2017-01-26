@@ -4,11 +4,13 @@ SELECT
     "ECLIPSE" AS sourcesystemdescription,
     CAST(policyline.policylineid AS STRING) AS coveragereference,
     false AS iscashtransactiontype,
-    CAST(policyprem.policypremincome * objcode.premsplit(riskcode) * objcode.premsplit(trustfundcode) * shareofwholepercent AS DECIMAL(18:6)) AS originalamount,
+    --CAST(policyprem.policypremincome * objcode.premsplit(riskcode) * objcode.premsplit(trustfundcode) * shareofwholepercent AS DECIMAL(18:6)) AS originalamount,
+    "..." AS originalamount
     CAST(policyprem.premccyiso AS STRING) AS originalcurrencycode,
     CAST(policyline.policylineref AS STRING) AS policynumber,
     CAST(policyline.policylineid AS STRING) AS sectionreference,
-    CAST(policyprem.policypremincome * objcode.premsplit (RiskCode) * objcode.premsplit (TrustFundCode) / policyprem.premccyroe * policyprem.premsettsccyroe * ShareOfWholePercent(in ECM) AS DECIMAL(18:6)) AS settlementamount,
+    --CAST(policyprem.policypremincome * objcode.premsplit (RiskCode) * objcode.premsplit (TrustFundCode) / policyprem.premccyroe * policyprem.premsettsccyroe * ShareOfWholePercent(in ECM) AS DECIMAL(18:6)) AS settlementamount,
+    "..." as settlementamount
     CAST(policyprem.premsettccyiso AS STRING) AS settlementcurrencycode,
     CAST(IF(policyendorsmnt.effectivedate IS NOT NULL, policyendorsmnt.effectivedate, policy.inceptiondate) AS STRING) AS transactiondate,
     "WrittenPremiumShare" AS transactiontypecode,
