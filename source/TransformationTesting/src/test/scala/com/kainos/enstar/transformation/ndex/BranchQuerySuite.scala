@@ -25,6 +25,17 @@ class BranchQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "branch", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_profit_centre", "PrimaryTestData.csv" )
+          ),
+          "branch",
+          "Branch/RecordCount.hql",
+          "Branch/RecordCount.hql"
+        )
       )
     )
   )

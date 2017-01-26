@@ -24,6 +24,17 @@ class PolicyEventTypeQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "policyeventtype", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_renewal_status", "PrimaryTestData.csv" )
+          ),
+          "policyeventtype",
+          "PolicyEventType/RecordCount.hql",
+          "PolicyEventType/RecordCount.hql"
+        )
       )
     )
   )
