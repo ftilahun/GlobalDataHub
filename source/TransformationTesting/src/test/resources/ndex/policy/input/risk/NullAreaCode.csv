@@ -1,0 +1,2 @@
+risk_id[int],programme_year[int],sequence_no[int],assured_id[int],area_code[string?]
+11,2000,123,1,

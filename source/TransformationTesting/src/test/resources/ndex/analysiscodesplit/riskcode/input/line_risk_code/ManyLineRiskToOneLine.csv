@@ -1,0 +1,6 @@
+line_id[int],risk_code[string],risk_code_pct[decimal(18:2)]
+123,XP,100.00
+123,XC,90.00
+123,XD,80.00
+123,XA,70.00
+123,XO,60.00

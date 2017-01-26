@@ -1,0 +1,4 @@
+renewal_status_id[string],renewal_status_desc[string]
+A,Assd declined to renew
+D,Declined to Quote
+N,Not Seen

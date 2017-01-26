@@ -1,0 +1,3 @@
+business_type[int],type_description[string]
+1,Declaration
+10,Stop & Loss

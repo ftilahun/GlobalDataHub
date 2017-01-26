@@ -1,0 +1,55 @@
+{
+    "namespace": "com.kainos.enstar.test.avro.schemas.ecm",
+    "type": "record",
+    "name": "deduction",
+    "fields": [
+        {
+            "name": "deductionreference",
+            "type": "string"
+        },
+        {
+            "name": "deductionsequence",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "policynumber",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "sectionreference",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "coveragereference",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "sourcesystemcode",
+            "type": "string"
+        },
+        {
+            "name": "currencycode",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "deductiontypecode",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "calculateddeductionamount",
+            "type": ["null","string"]
+        },
+        {
+            "name": "value",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "ispercentage",
+            "type": ["null", "boolean"]
+        },
+        {
+            "name": "isnetofprevious",
+            "type": ["null", "boolean"]
+        }
+    ]
+}

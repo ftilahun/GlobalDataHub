@@ -1,0 +1,8 @@
+deduction_code[string],deduction_description[string]
+BKR,Brokerage
+COM,Commission
+IDA,% IDA
+IPT,IPT
+LVY,Levy
+OTH,Other
+SFE,Survey Fees

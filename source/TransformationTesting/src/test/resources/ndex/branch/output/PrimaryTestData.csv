@@ -1,0 +1,5 @@
+sourcesystemcode[string],branchcode[string],branchdescription[string],branchlocationcode[string?]
+NDEX,London,London,[NULL]
+NDEX,Rotterdam,Rotterdam,[NULL]
+NDEX,&(Other),&(Other),[NULL]
+NDEX,Cologne,Cologne,[NULL]

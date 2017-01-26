@@ -1,0 +1,7 @@
+currency_code[string],currency_desc[string?]
+GBP,Sterling
+USD,[NULL]
+&&&,[NULL]
+USDB,Dollar
+USD,$
+£££,£££

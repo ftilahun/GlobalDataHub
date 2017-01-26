@@ -4,6 +4,8 @@
 
 # User-specific stuff:
 .idea/*
+.idea
+derby.log
 
 ## File-based project format:
 *.iws
@@ -85,5 +87,8 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-# Mac OSX
+### Mac ###
 .DS_Store
+*.log
+metastore_db
+>>>>>>> develop

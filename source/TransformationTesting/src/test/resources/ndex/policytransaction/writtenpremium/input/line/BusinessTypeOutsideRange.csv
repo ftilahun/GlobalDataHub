@@ -1,0 +1,2 @@
+line_id[int],layer_id[int],risk_reference[string?],epi_settlement_ccy[string?],business_type[int?],reporting_line_pct[decimal(12:7)],slip_income_amount[decimal(18:2)]
+1,1,00013T0000,USD,20,0.5130000,5520.00

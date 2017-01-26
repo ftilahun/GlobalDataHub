@@ -1,0 +1,5 @@
+policystatuscode[string],sourcesystemcode[string],policystatusdescription[string]
+C,NDEX,Cancelled
+N,NDEX,NTU
+ ,NDEX,BlankCode
+S,NDEX,One & Another

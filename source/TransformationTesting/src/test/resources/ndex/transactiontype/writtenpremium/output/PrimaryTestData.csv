@@ -1,0 +1,2 @@
+transactiontypecode[string],transactionsubtypecode[string],sourcesystemcode[string],transactiontypedescription[string],transactionsubtypedescription[string],group[string],iscashtransactiontype[boolean]
+WrittenPremiumOurShare,WrittenPremiumOurShare,NDEX,WrittenPremiumOurShare,WrittenPremiumOurShare,Premium,False

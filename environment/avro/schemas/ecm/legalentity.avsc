@@ -1,0 +1,33 @@
+{
+	"namespace": "com.kainos.enstar.avro.schemas.ecm",
+ 	"type": "record",
+ 	"name": "legalentity",
+ 	"fields": [
+    	{
+    		"name": "legalentitycode",
+    		"type": "string",
+    		"doc": "The code associated with the Legal Entity stored on the policy"
+    	},
+    	{
+    		"name": "sourcesystemcode",
+    		"type": "string",
+    		"doc": "The source system code associated with the Legal Entity record from the policy admin system"
+    	},
+    	{
+    		"name": "legalentitydescription",
+    		"type": ["null", "string"]
+    	},
+    	{
+    		"name": "parentlegalentitycode",
+    		"type": ["null", "string"]
+    	},
+    	{
+    		"name": "parentlegalentitysourcesystemcode",
+    		"type": ["null", "string"]
+    	},
+    	{
+    	    "name": "isconformed",
+    	    "type": ["null", "boolean"]
+    	}
+ 	]
+}

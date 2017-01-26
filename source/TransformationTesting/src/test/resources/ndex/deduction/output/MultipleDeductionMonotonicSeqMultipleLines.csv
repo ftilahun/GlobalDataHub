@@ -1,0 +1,7 @@
+deductionreference[string],deductionsequence[string],policynumber[string?],sectionreference[string],coveragereference[string],sourcesystemcode[string],sourcesystemdescription[string],currencycode[string],deductiontypecode[string?],value[decimal(18:6)?],ispercentage[boolean],isnetofprevious[boolean]
+9302-9302-7537,1,077004S05AA,9302,9302,NDEX,NDEX,CLF,GBK,10.00,true,true
+9302-9302-7538,2,077004S05AA,9302,9302,NDEX,NDEX,CLF,GBK,5.00,true,true
+9302-9302-7539,3,077004S05AA,9302,9302,NDEX,NDEX,CLF,GBK,50.00,true,true
+9303-9303-7540,1,077004S05AA,9303,9303,NDEX,NDEX,CLF,GBK,10.00,true,true
+9303-9303-7541,2,077004S05AA,9303,9303,NDEX,NDEX,CLF,GBK,5.00,true,true
+9303-9303-7542,3,077004S05AA,9303,9303,NDEX,NDEX,CLF,GBK,50.00,true,true
