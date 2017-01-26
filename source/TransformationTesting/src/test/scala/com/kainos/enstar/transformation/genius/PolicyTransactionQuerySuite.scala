@@ -170,6 +170,27 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           "policytransaction",
           "PolicyTransaction/WrittenDeductionsRecordCount.hql",
           "PolicyTransaction/RecordCount.hql"
+        ),
+        ReconciliationTest(
+          "No match for left joins",
+          Set(
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudddf00", "Percent.csv" ),
+            CsvSourceData( "zudgdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zudvdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zugsdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "icdcrep", "Percent.csv" )
+          ),
+          "policytransaction",
+          "PolicyTransaction/WrittenDeductionsRecordCount.hql",
+          "PolicyTransaction/RecordCount.hql"
         )
       )
     ),

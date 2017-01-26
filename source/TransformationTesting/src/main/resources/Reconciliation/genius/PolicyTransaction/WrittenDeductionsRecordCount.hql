@@ -1,4 +1,4 @@
-SELECT COUNT(zucedf00.cemanu) AS policytransaction_count
+SELECT COUNT(zucedf00.cemanu) AS recordcount
 FROM zucedf00
 INNER JOIN zueldf00 ON zucedf00.cemanu = zueldf00.elmanu
 	AND zucedf00.cemase = zueldf00.elmase
