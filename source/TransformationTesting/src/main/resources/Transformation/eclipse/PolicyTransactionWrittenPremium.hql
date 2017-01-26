@@ -2,22 +2,22 @@ SELECT
     CONCAT("WrittenPremiumShare", CAST(policyprem.policypremid AS STRING)) AS transactionreference,
     "ECLIPSE" AS sourcesystemcode,
     "ECLIPSE" AS sourcesystemdescription,
-    policyline.policylineid AS coveragereference,
+    CAST(policyline.policylineid AS STRING) AS coveragereference,
     false AS iscashtransactiontype,
-    AS originalamount,
-    policyprem.premccyiso AS originalcurrencycode,
-    policyline.policylineref AS policynumber,
-    policyline.policylineid AS sectionreference,
-    AS settlementamount,
-    policyprem.premsettccyiso AS settlementcurrencycode,
-    AS transactiondate,
+    CAST(policyprem.policypremincome * objcode.premsplit(riskcode) * objcode.premsplit(trustfundcode) * shareofwholepercent AS DECIMAL(18:6)) AS originalamount,
+    CAST(policyprem.premccyiso AS STRING) AS originalcurrencycode,
+    CAST(policyline.policylineref AS STRING) AS policynumber,
+    CAST(policyline.policylineid AS STRING) AS sectionreference,
+    CAST(policyprem.policypremincome * objcode.premsplit (RiskCode) * objcode.premsplit (TrustFundCode) / policyprem.premccyroe * policyprem.premsettsccyroe * ShareOfWholePercent(in ECM) AS DECIMAL(18:6)) AS settlementamount,
+    CAST(policyprem.premsettccyiso AS STRING) AS settlementcurrencycode,
+    CAST(IF(policyendorsmnt.effectivedate IS NOT NULL, policyendorsmnt.effectivedate, policy.inceptiondate) AS STRING) AS transactiondate,
     "WrittenPremiumShare" AS transactiontypecode,
     "WrittenPremiumShare" AS transactiontypedescription,
     CAST(NULL AS STRING) AS transactionsubtypecode,
     CAST(NULL AS STRING) AS transactionsubtypedescription,
-    policy.filcode AS filcode,
-    objcode.codevalue AS riskcode,
-    not in the doc - need to check AS trustfundcode
+    CAST(policy.filcode AS STRING) AS filcode,
+    CAST(objcode.codevalue AS STRING) AS riskcode,
+    CAST(objcode.codevalue AS STRING) AS trustfundcode
 FROM
     policyprem
     INNER JOIN policyline ON policyprem.policyid = policyline.policyid

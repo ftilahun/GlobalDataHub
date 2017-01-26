@@ -1,0 +1,2 @@
+policypremid[int],policyid[int],premccyiso[string?],premsettccyiso[string?],policypremincome[decimal(19:2)?],premccyroe[decimal(15:7)?],premsettccyroe[decimal(15:7)?]
+1,1,AUD,GBP,500000.00,2.0000000,1.0000000
