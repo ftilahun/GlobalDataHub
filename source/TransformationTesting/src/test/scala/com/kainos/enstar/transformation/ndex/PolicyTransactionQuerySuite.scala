@@ -127,6 +127,21 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "policytransaction", "CalculationsWithNullLineRiskCodeAndLayerTrustFund.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "line", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer_deduction", "PrimaryTestData.csv" ),
+            CsvSourceData( "line_risk_code", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" ) ),
+          "policytransaction",
+          "PolicyTransaction/WrittenDeductionsRecordCount.hql",
+          "PolicyTransaction/RecordCount.hql"
+        )
       )
     ),
     QueryTestSet(
@@ -203,6 +218,20 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "layer_trust_fund", "LayerIdNotInLine.csv" )
           ),
           CsvSourceData( "policytransaction", "CalculationsWithNullLineRiskCodeAndLayerTrustFund.csv" )
+        )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "line", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer", "PrimaryTestData.csv" ),
+            CsvSourceData( "line_risk_code", "PrimaryTestData.csv" ),
+            CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" )
+          ),
+          "policytransaction",
+          "PolicyTransaction/WrittenPremiumRecordCount.hql",
+          "PolicyTransaction/RecordCount.hql"
         )
       )
     )

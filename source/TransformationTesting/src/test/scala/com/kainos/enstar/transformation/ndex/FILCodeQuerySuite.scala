@@ -25,6 +25,17 @@ class FILCodeQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "filcode", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_fil_code", "PrimaryTestData.csv" )
+          ),
+          "filcode",
+          "FILCode/RecordCount.hql",
+          "FILCode/RecordCount.hql"
+        )
       )
     )
   )

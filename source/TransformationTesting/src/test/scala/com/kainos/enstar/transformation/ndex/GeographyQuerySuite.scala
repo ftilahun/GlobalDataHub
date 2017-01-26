@@ -24,6 +24,17 @@ class GeographyQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "geography", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_country", "PrimaryTestData.csv" )
+          ),
+          "geography",
+          "Geography/RecordCount.hql",
+          "Geography/RecordCount.hql"
+        )
       )
     )
   )

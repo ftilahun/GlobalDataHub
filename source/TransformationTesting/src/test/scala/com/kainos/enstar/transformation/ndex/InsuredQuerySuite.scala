@@ -24,6 +24,17 @@ class InsuredQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "insured", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "organisation", "PrimaryTestData.csv" )
+          ),
+          "insured",
+          "Insured/RecordCount.hql",
+          "Insured/RecordCount.hql"
+        )
       )
     )
   )

@@ -243,6 +243,25 @@ class PolicyQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "policy", "NullLinkedMasterReference.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "line", "ReconciliationPrimary.csv" ),
+            CsvSourceData( "layer", "ReconciliationPrimary.csv" ),
+            CsvSourceData( "submission", "ReconciliationPrimary.csv" ),
+            CsvSourceData( "risk", "ReconciliationPrimary.csv" ),
+            CsvSourceData( "organisation", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_block", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_business_type", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_profit_centre", "PrimaryTestData.csv" ),
+            CsvSourceData( "underwriting_block", "PrimaryTestData.csv" )
+          ),
+          "policy",
+          "Policy/RecordCount.hql",
+          "Policy/RecordCount.hql"
+        )
       )
     )
   )

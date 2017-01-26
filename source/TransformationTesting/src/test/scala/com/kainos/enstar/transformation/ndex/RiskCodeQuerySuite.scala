@@ -24,6 +24,17 @@ class RiskCodeQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "riskcode", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_risk_code", "PrimaryTestData.csv" )
+          ),
+          "riskcode",
+          "RiskCode/RecordCount.hql",
+          "RiskCode/RecordCount.hql"
+        )
       )
     )
   )

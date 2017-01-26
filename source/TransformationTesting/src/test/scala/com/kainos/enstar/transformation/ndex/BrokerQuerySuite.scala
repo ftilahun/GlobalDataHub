@@ -25,6 +25,17 @@ class BrokerQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "broker", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "broking_company", "PrimaryTestData.csv" )
+          ),
+          "broker",
+          "Broker/RecordCount.hql",
+          "Broker/RecordCount.hql"
+        )
       )
     )
   )

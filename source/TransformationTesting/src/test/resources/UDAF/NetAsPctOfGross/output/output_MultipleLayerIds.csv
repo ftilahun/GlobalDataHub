@@ -1,4 +1,4 @@
-id[int],grouping_id[string],net_pct[decimal(10:2)?]
+id[int],grouping_id[string],net_pct[decimal(12:7)?]
 1,1,100.00
 2,1,100.00
 3,1,75.00
@@ -10,7 +10,7 @@ id[int],grouping_id[string],net_pct[decimal(10:2)?]
 9,3,100.00
 10,3,85.00
 11,3,74.80
-12,3,64.33
-13,3,64.33
-14,3,64.33
-15,3,29.59
+12,3,64.328
+13,3,64.328
+14,3,64.328
+15,3,29.59088
