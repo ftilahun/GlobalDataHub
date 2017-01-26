@@ -1,0 +1,40 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "insured",
+    "doc": "The organisation/person/persons who is the subject of the insurance policy",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "insuredcode", 
+    		"type": "string",
+    		"doc": "The code used to identify an organisation/person/persons who is the subject of the direct insurance policy"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the insured"
+    	},
+    	{
+    		"name": "insuredlegalname", 
+            "type": [ "null", "string" ],
+    		"doc": "The name under which the insured is incorporated or chartered"
+    	},
+        {
+            "name": "insuredname", 
+            "type": [ "null", "string" ],
+            "doc": "The name used to identify an organisation/person/persons who is the subject of the direct insurance policy"
+        }
+ 	]
+}

@@ -1,0 +1,35 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "geographytype",
+    "doc": "Describing the level of the Geography Code i.e. State, Country, Region",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "geographytypecode", 
+    		"type": "string",
+    		"doc": "Unique code for the Geography Type"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier"
+    	},
+    	{
+    		"name": "geographytypedescription", 
+    		"type": ["null", "string"],
+    		"doc": "Full Description of the Geography Type"
+    	}
+ 	]
+}

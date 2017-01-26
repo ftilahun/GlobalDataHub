@@ -1,0 +1,35 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "underwriter",
+    "doc": "The underwriter that originally underwrote the risk (or is responsible for the risk)",
+ 	"fields": [
+         {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "underwritercode", 
+    		"type": "string",
+    		"doc": "The code associated with the underwriter that underwrote the risk"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the underwriter record"
+    	},
+    	{
+    		"name": "underwritername", 
+            "type": [ "null", "string" ],
+    		"doc": "The name associated with the underwriter that underwrote the risk"
+    	}
+ 	]
+}

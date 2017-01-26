@@ -1,0 +1,103 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "deduction",
+    "doc": "Allows the policy record to be associated with many different types of Deductions. These might include:   - Broker Fee - Commission - Charges - Interest.   These can be specified  as a percentage value or an amount and can also be a positive or negative deduction",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },
+    	{
+    		"name": "deductionreference", 
+    		"type": "string",
+    		"doc": "Unique deduction reference from the source system"
+    	},
+    	{
+    		"name": "policynumber",  
+    		"type": "string",
+    		"doc": "Unique policy number, also known Policy Reference or Underwriting Reference"
+    	},
+        {
+            "name": "sectionreference", 
+            "type": "string",
+            "doc": "Section reference identifies a unique section on a policy, a policy may contain multiple sections"
+        },
+
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": ["null", "string"],
+    		"doc": "Source System Identifier for the Deduction record"
+    	},
+        {
+            "name": "sourcesystemdescription", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "calculateddeductionamount",  
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
+            "doc": "Transaction original amount"
+        },
+        {
+            "name": "coveragereference", 
+            "type": "string",
+            "doc": "Coverage reference identifies unique coverages on a policy section, a section may contain multiple coverages"
+        },
+        {
+            "name": "currencycode", 
+            "type": [ "null", "string" ],
+            "doc": "FK to Currency"
+        },
+        {
+            "name": "deductionsequence", 
+            "type": [ "null", "int" ]
+        },
+        {
+            "name": "deductiontypecode", 
+            "type": [ "null", "string" ],
+            "doc": "The classification of the type of deduction. Deductions can be grouped into various buckets to represent whether it is an acquisition cost or an underwriting credit."
+        },
+        {
+            "name": "deductiontypedescription", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "deductiontypegroup", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "isnetofprevious", 
+            "type": "boolean"
+        },
+        {
+            "name": "ispercentage", 
+            "type": "boolean",
+            "doc": "Is the deduction value, expressed as a financial amount or a percentage?"
+        },
+    	{
+    		"name": "value", 
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
+    		"doc": "The deduction value, expressed as a financial amount or a percentage"
+    	}
+ 	]
+}
