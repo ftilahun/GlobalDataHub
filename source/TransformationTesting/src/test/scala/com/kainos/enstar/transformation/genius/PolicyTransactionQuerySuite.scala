@@ -112,6 +112,42 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           order = List( "transactionreference" )
         )
 
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugsdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "PrimaryTestData.csv" )
+          ),
+          "policytransaction",
+          "PolicyTransaction/WrittenPremiumRecordCount.hql",
+          "PolicyTransaction/RecordCount.hql"
+        ),
+        ReconciliationTest(
+          "No match for left join",
+          Set(
+            CsvSourceData( "zucedf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zucodf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zueldf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugpdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zugsdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zumadf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zusfdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuskdf00", "PrimaryTestData.csv" ),
+            CsvSourceData( "zuspdf00", "NoMatchForLeftJoin.csv" )
+          ),
+          "policytransaction",
+          "PolicyTransaction/WrittenPremiumRecordCount.hql",
+          "PolicyTransaction/RecordCount.hql"
+        )
       )
     )
   )

@@ -1,5 +1,5 @@
 SELECT
-    COUNT(line.risk_reference) AS policytransaction_count
+    COUNT(line.risk_reference) AS recordcount
 FROM
     line
     JOIN layer

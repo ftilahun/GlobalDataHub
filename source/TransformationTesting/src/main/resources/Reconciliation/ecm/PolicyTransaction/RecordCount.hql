@@ -1,1 +1,3 @@
-SELECT COUNT(transactionreference) AS policytransaction_count FROM policytransaction
+SELECT
+    COUNT(transactionreference) AS recordcount
+FROM policytransaction
