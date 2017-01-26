@@ -9,7 +9,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
   private val utils = new TransformationUnitTestingUtils
   private val testDataInputPath = "/analysiscodesplit/validation/input/"
 
-  test( "Validation: When input contains no null values for risk_reference validation should pass" ) {
+  ignore( "Validation: When input contains no null values for risk_reference validation should pass" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base
@@ -30,7 +30,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     assert( result.count() == 0 )
   }
 
-  test( "Validation: When input contains rows with risk_reference null validation should fail" ) {
+  ignore( "Validation: When input contains rows with risk_reference null validation should fail" ) {
 
     // Arrange //
     // Use sqlContext from spark-testing-base

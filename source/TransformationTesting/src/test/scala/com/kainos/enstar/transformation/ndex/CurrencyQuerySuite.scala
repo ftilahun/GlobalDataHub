@@ -25,7 +25,19 @@ class CurrencyQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "currency", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_currency", "PrimaryTestData.csv" )
+          ),
+          "currency",
+          "Currency/RecordCount.hql",
+          "Currency/RecordCount.hql"
+        )
       )
+
     )
   )
 }

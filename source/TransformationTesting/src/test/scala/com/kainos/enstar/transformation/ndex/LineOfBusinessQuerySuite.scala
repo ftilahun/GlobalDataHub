@@ -27,6 +27,18 @@ class LineOfBusinessQuerySuite extends QuerySuite {
           CsvSourceData( "lineofbusiness", "PrimaryTestData.csv" ),
           order = List( "lineofbusinesscode" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_block", "PrimaryTestData.csv" ),
+            CsvSourceData( "underwriting_block", "PrimaryTestData.csv" )
+          ),
+          "lineofbusiness",
+          "LineOfBusiness/RecordCount.hql",
+          "LineOfBusiness/RecordCount.hql"
+        )
       )
     )
   )
