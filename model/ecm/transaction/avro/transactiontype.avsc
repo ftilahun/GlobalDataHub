@@ -1,0 +1,49 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "transactiontype",
+    "doc": "TransactionType includes   - Premium  - Additional Premium  - Return Premium  - RI Premium  - RI Return Premium etc",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "transactiontypecode", 
+    		"type": "string"
+    	},
+        {
+            "name": "transactionsubtypecode", 
+            "type": "string"
+        },
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string"
+    	},
+        {
+            "name": "transactiontypedescription", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "transactionsubtypedescription", 
+            "type": [ "null", "string" ]
+        },
+    	{
+    		"name": "group", 
+            "type": [ "null", "string" ],
+            "doc": "Allows for basic grouping of transactions, such as 'USM' or 'SCM'"
+    	},
+        {
+            "name": "iscashtransactiontype", 
+            "type": [ "null", "boolean" ]
+        }
+ 	]
+}

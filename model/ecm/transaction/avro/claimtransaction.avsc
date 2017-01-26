@@ -1,0 +1,95 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "claimtransaction",
+    "doc": "This table relates the transaction to the claim",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },
+    	{
+    		"name": "transactionreference", 
+    		"type": "string",
+    		"doc": "Unique source system key for the Transaction"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier"
+    	},
+    	{
+    		"name": "claimreference", 
+    		"type": ["null", "string"],
+    		"doc": "Unique source system reference for Claim"
+    	},
+    	{
+    		"name": "claimantreference", 
+    		"type": ["null", "string"],
+    		"doc": "The unique reference identifying the claimant in a source system"
+    	},
+    	{
+    		"name": "transactiontypecode", 
+    		"type": ["null", "string"],
+    		"doc": "Code given for the transaction type"
+    	},
+    	{
+    		"name": "originalcurrencycode", 
+    		"type": ["null", "string"],
+    		"doc": "Foreign key - reference Currency"
+    	},
+    	{
+    		"name": "settlementcurrencycode", 
+    		"type": ["null", "string"],
+    		"doc": "Foreign key - reference Currency"
+    	},
+    	{
+    		"name": "accountingcurrencycode", 
+    		"type": ["null", "string"],
+    		"doc": "Foreign key - reference Currency"
+    	},
+    	{
+    		"name": "settlementrateofexchange", 
+    		"type": ["double", "null"],
+    		"doc": "ROE between original and settlement currency"
+    	},
+    	{
+    		"name": "accountingrateofexchange", 
+    		"type": ["double", "null"],
+    		"doc": "ROE between original and settlement currency"
+    	},
+    	{
+    		"name": "originalamount", 
+    		"type": ["double", "null"],
+            "doc": "Transaction Amount"
+    	},
+    	{
+    		"name": "settlementamount", 
+    		"type": ["double", "null"],
+    		"doc": "Transaction Amount"
+    	},
+    	{
+    		"name": "accountingamount", 
+    		"type": ["double", "null"],
+    		"doc": "Transaction Amount"
+    	},
+    	{
+    		"name": "accountingperiod", 
+    		"type": ["int", "null"],
+    		"doc": "The financial year and month in which the transaction is to be accounted."
+    	},
+    	{
+    		"name": "transactiondate", 
+    		"type": ["null", "string"],
+    		"doc": "Date of the transaction"
+    	}
+ 	]
+}

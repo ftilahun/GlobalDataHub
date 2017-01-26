@@ -1,0 +1,40 @@
+{
+    "namespace": "enstar.datahub.ecm",
+    "type": "record",
+    "name": "branch",
+    "doc": "The company branch through which the business has been placed",
+    "fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },
+        {
+            "name": "branchcode", 
+            "type": "string",
+            "doc": "The code associated with the company branch through which the business has been placed."
+        },
+        {
+            "name": "sourcesystemcode",  
+            "type": "string",
+            "doc": "The source system code associated with the insured"
+        },
+    	{
+    		"name": "branchdescription", 
+            "type": [ "null", "string" ],
+    		"doc": "The description associated with the company branch through which the business has been placed"
+    	},
+    	{
+    		"name": "branchlocationcode", 
+            "type": [ "null", "string" ],
+    		"doc": "FK to geography"
+    	}
+ 	]
+}
