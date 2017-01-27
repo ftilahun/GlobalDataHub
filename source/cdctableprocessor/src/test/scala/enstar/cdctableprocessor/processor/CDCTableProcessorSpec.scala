@@ -122,7 +122,7 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
 
     Then("Temp columns should be removed")
     Mockito
-      .verify(userFunctions, Mockito.times(5))
+      .verify(userFunctions, Mockito.times(6))
       .dropColumn(
         org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.anyString()
