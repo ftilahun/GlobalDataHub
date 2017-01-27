@@ -169,7 +169,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           ),
           "policytransaction",
           "PolicyTransaction/WrittenDeductionsRecordCount.hql",
-          "PolicyTransaction/RecordCount.hql"
+          "PolicyTransaction/WrittenDeductionsRecordCount.hql"
         ),
         ReconciliationTest(
           "No match for left joins",
@@ -190,7 +190,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           ),
           "policytransaction",
           "PolicyTransaction/WrittenDeductionsRecordCount.hql",
-          "PolicyTransaction/RecordCount.hql"
+          "PolicyTransaction/WrittenDeductionsRecordCount.hql"
         )
       )
     ),
