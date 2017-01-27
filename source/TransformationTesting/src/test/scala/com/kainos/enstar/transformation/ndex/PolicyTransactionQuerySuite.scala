@@ -140,7 +140,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
             CsvSourceData( "layer_trust_fund", "PrimaryTestData.csv" ) ),
           "policytransaction",
           "PolicyTransaction/WrittenDeductionsRecordCount.hql",
-          "PolicyTransaction/RecordCount.hql"
+          "PolicyTransaction/WrittenDeductionsRecordCount.hql"
         )
       )
     ),
@@ -231,7 +231,7 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           ),
           "policytransaction",
           "PolicyTransaction/WrittenPremiumRecordCount.hql",
-          "PolicyTransaction/RecordCount.hql"
+          "PolicyTransaction/WrittenPremiumRecordCount.hql"
         )
       )
     )
