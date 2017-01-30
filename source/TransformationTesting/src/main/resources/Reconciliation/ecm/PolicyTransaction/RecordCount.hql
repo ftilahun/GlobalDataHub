@@ -1,1 +1,0 @@
-SELECT COUNT(transactionreference) AS policytransaction_count FROM policytransaction

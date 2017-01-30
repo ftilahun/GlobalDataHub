@@ -1,0 +1,51 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "legalentity",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "legalentitycode", 
+    		"type": "string",
+    		"doc": "The code associated with the Legal Entity stored on the policy"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the Legal Entity record from the policy admin system"
+    	},
+        {
+            "name": "sourcesystemdescription", 
+            "type": [ "null", "string" ]
+        },
+    	{
+    		"name": "legalentitydescription", 
+    		"type": ["null", "string"],
+    		"doc": "The description associated with the Legal Entity stored on the policy"
+    	},
+    	{
+    		"name": "parentlegalentitycode",  
+    		"type": ["string", "null"]
+    	},
+    	{
+    		"name": "parentlegalentitysourcesystemcode", 
+    		"type": ["string", "null"]
+    	},
+        {
+            "name": "isconformed", 
+            "type": "boolean",
+            "doc": "Whether this represents a legal entity from the source system domain or target/conformed model domain."
+        }
+ 	]
+}

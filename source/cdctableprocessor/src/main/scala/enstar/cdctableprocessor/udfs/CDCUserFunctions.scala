@@ -140,10 +140,12 @@ class CDCUserFunctions extends UserFunctions with Logging {
     val setValidTo = udf((isDeleted: Boolean, validTo: String,
       transactionTimeStamp: String) =>
       updateClosedRecord(isDeleted, validTo, transactionTimeStamp, properties))
+    val orderCols: Seq[String] = properties.idColumnName.split(",").toList :+ properties.validFromColumnName
 
     dataFrame
       .withColumnRenamed(properties.validToColumnName,
-        properties.validToColumnName + "old")
+        properties.validToColumnName + "old").
+        orderBy(orderCols.map(dataFrame(_)): _*)
       .withColumn(properties.validToColumnName,
         setValidTo(
           col(deleteFlagColumnName),

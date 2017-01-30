@@ -1,0 +1,40 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "deductiontype",
+    "doc": "The type of deduction - these might include:   - Broker Fee  - Commission  - Charges  - Interest",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },       
+    	{
+    		"name": "deductiontypecode", 
+    		"type": "string",
+    		"doc": "The unique code for the classification of the type of deduction. Deductions can be grouped into various buckets to represent whether it is an acquisition cost or an underwriting credit."
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier for the Deduction Type record"
+    	},
+    	{
+    		"name": "deductiontypedescription", 
+            "type": [ "null", "string" ],
+    		"doc": "Full Description of the type of Deduction"
+    	},
+    	{
+    		"name": "group", 
+            "type": [ "null", "string" ],
+    		"doc": "Allows for basic grouping or to classify the deductions - such as 'Acquisition Costs' or 'Underwriting Costs'"
+    	}
+ 	]
+}

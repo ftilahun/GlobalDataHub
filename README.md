@@ -69,8 +69,7 @@ Note:
 
 
 #### Local Development Environment
-
-Run the createContainers.sh script under `development/docker`  this will create and launch two docker containers for local development.  The containers should restart with your machine so this will only need to be completed once.
+Download and install Docker for Mac from https://docs.docker.com/docker-for-mac/. Run the createContainers.sh script under `development/docker`  this will create and launch two docker containers for local development.  The containers should restart with your machine so this will only need to be completed once.
 
 The quickstart.cloudera image requires **8GB of RAM** allocated to run (this can be set in docker's preferences). 
 
@@ -136,3 +135,7 @@ Service Accounts
 - **gdhetlprocessor**: Runs other ETL process jobs.
 - **gdhpublishprocessor**: Runs the job to load the transformed data into the conformed data model
 		
+Generating Avro Files
+---------------------
+There are a number of open source tools available for viewing and generating avro files from various formats.  You can install csv2avro from here (https://github.com/sspinc/csv2avro) to use as a utility as you develop. 
+Additionally, Cloudera Avro tools have been added to the POM.xml file which provide similar functionality available within our source.        
