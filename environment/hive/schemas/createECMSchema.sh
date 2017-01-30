@@ -12,8 +12,9 @@ dbComment=`echo $4 | sed "s/'//g"`
 dbProperties=$5
 
 declare -a tableNames=(	
-                        "analysiscodesplit" 
+                        "analysiscodesplit"
                 		"branch"
+                		"broker"
                 		"currency"
                 		"deduction"
                 		"deductiontype"
@@ -23,6 +24,7 @@ declare -a tableNames=(
                 		"lineofbusiness"
                 		"methodofplacement"
                 		"policy"
+                		"policyeventtype"
                 		"policystatus"
                 		"policytransaction"
                 		"riskcode"
