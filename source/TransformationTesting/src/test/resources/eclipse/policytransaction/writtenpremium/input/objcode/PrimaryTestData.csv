@@ -1,2 +1,3 @@
 parentid[int],parenttable[string?],codename[string],codevalue[string?],premsplit[decimal(10:7)]
 1,Policy,RiskCode,Direct,100.000000
+2,Policy,TrustFundCode,Transfer,555.000000

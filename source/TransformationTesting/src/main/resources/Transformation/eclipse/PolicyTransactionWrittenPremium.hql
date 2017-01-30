@@ -18,11 +18,12 @@ SELECT
     CAST(NULL AS STRING) AS transactionsubtypecode,
     CAST(NULL AS STRING) AS transactionsubtypedescription,
     CAST(policy.filcode AS STRING) AS filcode,
-    CAST(objcode.codevalue AS STRING) AS riskcode,
-    CAST(objcode.codevalue AS STRING) AS trustfundcode
+    CAST(objcode1.codevalue AS STRING) AS riskcode,
+    CAST(objcode2.codevalue AS STRING) AS trustfundcode
 FROM
     policyprem
     INNER JOIN policyline ON policyprem.policyid = policyline.policyid
     INNER JOIN policy ON policyline.policyid = policy.policyid
-    LEFT JOIN objcode ON objcode.parentid = policyline.policyid AND objcode.codename = 'RiskCode' AND objcode.parenttable = 'Policy'
+    LEFT JOIN objcode objcode1 ON objcode1.parentid = policyline.policyid AND objcode1.codename = 'RiskCode' AND objcode1.parenttable = 'Policy'
+    LEFT JOIN objcode objcode2 ON objcode2.parentid = policyline.policyid AND objcode2.codename = 'TrustFundCode' AND objcode2.parenttable = 'Policy'
     LEFT JOIN policyendorsmnt ON policyline.policyid = policyendorsmnt.policyid
