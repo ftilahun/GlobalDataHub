@@ -92,3 +92,4 @@ buildNumber.properties
 *.log
 metastore_db
 >>>>>>> develop
+source/cdctableprocessor/src/test/resources/cdctestdata/output
