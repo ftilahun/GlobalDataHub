@@ -15,8 +15,8 @@ node{
         stage('Transform') {
             echo 'Running transform on cluster'
             echo env.BRANCH_NAME
-            def matches = (env.BRANCH_NAME =~ /feature\/mapping\/(\w+)/).match[0]
-            echo "Source: $source"
+            def matches = (env.BRANCH_NAME =~ /feature\/mapping\/(\w+)/)[0]
+            echo "Source: $matches"
         }
         stage('Reconcile') {
             echo 'Running reconciliation on cluster'
