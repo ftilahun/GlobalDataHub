@@ -15,6 +15,8 @@ node{
         stage('Transform') {
             echo 'Running transform on cluster'
             echo env.BRANCH_NAME
+            def [match, source] = env.BRANCH_NAME =~ /feature\/mapping\/(\w+)/
+            echo "Source: $source"
         }
         stage('Reconcile') {
             echo 'Running reconciliation on cluster'
