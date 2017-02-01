@@ -29,7 +29,7 @@ SELECT
     CAST(policyprem.premccyiso AS STRING) AS originalcurrencycode,
     CAST(policyline.policylineref AS STRING) AS policynumber,
     CAST(policyline.policylineid AS STRING) AS sectionreference,
-    CAST(policyprem.policypremincome * --Makes null
+    CAST(policyprem.policypremincome *
          CASE COALESCE( objcode1.premsplit, CAST(0 AS DECIMAL(10,7)) )
                     WHEN CAST(0 AS DECIMAL(10,7)) THEN CAST(1.00 AS DECIMAL(10,7))
                     ELSE ( objcode1.premsplit / 100.00 )
@@ -40,8 +40,8 @@ SELECT
                     ELSE ( objcode2.premsplit / 100.00 )
                 END
                 /
-         policyprem.premccyroe *    --- Works
-         policyprem.premsettccyroe * -- works
+         policyprem.premccyroe *
+         policyprem.premsettccyroe *
         (IF(policyline.linestatus = 'Signed',
                 CASE policyline.wholepartorder
                      WHEN 'O' THEN CAST(policyline.signedline / 100 * policyline.signedorder / 100 AS DECIMAL(12,7))
