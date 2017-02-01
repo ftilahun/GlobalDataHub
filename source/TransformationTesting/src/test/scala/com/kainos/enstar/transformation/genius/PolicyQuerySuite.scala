@@ -62,7 +62,7 @@ class PolicyQuerySuite extends QuerySuite {
             CsvSourceData( "ZHAADF00", "PrimaryTestData.csv" ),
             CsvSourceData( "ZNNZDF00", "PrimaryTestData.csv" )
           ),
-          CsvSourceData( "policy", "BrokenJoinZUMAToZUCO.csv" )
+          CsvSourceData( "policy", "BrokenJoinZUMAtoZUCO.csv" )
         ),
         QueryTest(
           "testing left join to branch",
