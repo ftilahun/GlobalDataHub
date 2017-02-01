@@ -24,14 +24,14 @@ class CDCTableProcessorSpec extends FlatSpec
     val attunityCutoff = "2017-02-01 01:00:00.000"
 
     /**
-      * Directories used for IO
-      */
-    val changeInput = "./cdctableprocessor/src/test/resources/cdctestdata/changes"
-    val activeInput = "./cdctableprocessor/src/test/resources/cdctestdata/active"
-    val historyOutput = "./cdctableprocessor/src/test/resources/cdctestdata/output/history"
-    val activeOutput = "./cdctableprocessor/src/test/resources/cdctestdata/output/active"
-    val immatureChangesOutput = "./cdctableprocessor/src/test/resources/cdctestdata/output/unprocessed"
-    val metricsOutput = "./cdctableprocessor/src/test/resources/cdctestdata/output/matrics"
+     * Directories used for IO
+     */
+    val changeInput = "./src/test/resources/cdctestdata/changes"
+    val activeInput = "./src/test/resources/cdctestdata/active"
+    val historyOutput = "./src/test/resources/cdctestdata/output/history"
+    val activeOutput = "./src/test/resources/cdctestdata/output/active"
+    val immatureChangesOutput = "./src/test/resources/cdctestdata/output/unprocessed"
+    val metricsOutput = "./src/test/resources/cdctestdata/output/matrics"
 
     //delete any dirs from last run.
     deleteDir(historyOutput)
@@ -210,32 +210,32 @@ class CDCTableProcessorSpec extends FlatSpec
     And("Three records should exist in the history")
     val history = reader.read(TestContexts.sqlContext, properties.historyOutput, None)
     history.count() should be (3)
-        history.collect.zipWithIndex.foreach{rowWithInt=>
-          val row = rowWithInt._1
-          val iter = rowWithInt._2
-          iter match {
-            case 0 =>
-              row.getInt(0) should be(1001)
-              row.getString(1) should be("Val_1")
-              row.getString(2) should be("2017-01-10 12:12:12.121")
-              row.getString(3) should be("2017-01-20 10:10:10.100")
-              row.getBoolean(4) should be (false)
-            case 1 =>
-              row.getInt(0) should be(1003)
-              row.getString(1) should be("Val_3")
-              row.getString(2) should be("2017-01-10 12:12:12.121")
-              row.getString(3) should be("2017-01-20 10:10:10.100")
-              row.getBoolean(4) should be (false)
-            case 2 =>
-              row.getInt(0) should be(1003)
-              row.getString(1) should be("Val_3")
-              row.getString(2) should be("2017-01-20 10:10:10.100")
-              row.getString(3) should be("2017-01-20 10:10:10.100")
-              row.getBoolean(4) should be (false)
-              And("Delete records should open and close at the same instant")
-              row.getString(2) should equal(row.getString(3))
-          }
-        }
+    history.collect.zipWithIndex.foreach{ rowWithInt =>
+      val row = rowWithInt._1
+      val iter = rowWithInt._2
+      iter match {
+        case 0 =>
+          row.getInt(0) should be(1001)
+          row.getString(1) should be("Val_1")
+          row.getString(2) should be("2017-01-10 12:12:12.121")
+          row.getString(3) should be("2017-01-20 10:10:10.100")
+          row.getBoolean(4) should be (false)
+        case 1 =>
+          row.getInt(0) should be(1003)
+          row.getString(1) should be("Val_3")
+          row.getString(2) should be("2017-01-10 12:12:12.121")
+          row.getString(3) should be("2017-01-20 10:10:10.100")
+          row.getBoolean(4) should be (false)
+        case 2 =>
+          row.getInt(0) should be(1003)
+          row.getString(1) should be("Val_3")
+          row.getString(2) should be("2017-01-20 10:10:10.100")
+          row.getString(3) should be("2017-01-20 10:10:10.100")
+          row.getBoolean(4) should be (false)
+          And("Delete records should open and close at the same instant")
+          row.getString(2) should equal(row.getString(3))
+      }
+    }
 
     /**
      * Validate active
@@ -245,34 +245,34 @@ class CDCTableProcessorSpec extends FlatSpec
     And("All records should be before the cuttoff")
     And("All records should be valid to the end of time!")
     val active = reader.read(TestContexts.sqlContext, properties.activeOutput, None)
-        active.collect.zipWithIndex.foreach{rowWithInt=>
-          val row = rowWithInt._1
-          val iter = rowWithInt._2
+    active.collect.zipWithIndex.foreach{ rowWithInt =>
+      val row = rowWithInt._1
+      val iter = rowWithInt._2
 
-          val formatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss.SSS")
-          formatter.parseDateTime(row.getString(2)).isBefore(formatter.parseDateTime(attunityCutoff)) should be (true)
-          row.getString(3) should be ("9999-12-31 23:59:59.000")
-          iter match {
-            case 0 =>
-              row.getInt(0) should be(1001)
-              row.getString(1) should be("Val_1_v2")
-              row.getString(2) should be("2017-01-20 10:10:10.100")
-              row.getString(3) should be("9999-12-31 23:59:59.000")
-              row.getBoolean(4) should be (true)
-            case 1 =>
-              row.getInt(0) should be(1002)
-              row.getString(1) should be("Val_2")
-              row.getString(2) should be("2017-01-10 12:12:12.121")
-              row.getString(3) should be("9999-12-31 23:59:59.000")
-              row.getBoolean(4) should be (true)
-            case 2 =>
-              row.getInt(0) should be(1004)
-              row.getString(1) should be("Val_4")
-              row.getString(2) should be("2017-01-20 10:10:10.100")
-              row.getString(3) should be("9999-12-31 23:59:59.000")
-              row.getBoolean(4) should be (true)
-          }
-        }
+      val formatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss.SSS")
+      formatter.parseDateTime(row.getString(2)).isBefore(formatter.parseDateTime(attunityCutoff)) should be (true)
+      row.getString(3) should be ("9999-12-31 23:59:59.000")
+      iter match {
+        case 0 =>
+          row.getInt(0) should be(1001)
+          row.getString(1) should be("Val_1_v2")
+          row.getString(2) should be("2017-01-20 10:10:10.100")
+          row.getString(3) should be("9999-12-31 23:59:59.000")
+          row.getBoolean(4) should be (true)
+        case 1 =>
+          row.getInt(0) should be(1002)
+          row.getString(1) should be("Val_2")
+          row.getString(2) should be("2017-01-10 12:12:12.121")
+          row.getString(3) should be("9999-12-31 23:59:59.000")
+          row.getBoolean(4) should be (true)
+        case 2 =>
+          row.getInt(0) should be(1004)
+          row.getString(1) should be("Val_4")
+          row.getString(2) should be("2017-01-20 10:10:10.100")
+          row.getString(3) should be("9999-12-31 23:59:59.000")
+          row.getBoolean(4) should be (true)
+      }
+    }
     active.count should be (3)
 
     /**

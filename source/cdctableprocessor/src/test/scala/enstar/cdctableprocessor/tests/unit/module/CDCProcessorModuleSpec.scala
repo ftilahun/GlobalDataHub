@@ -1,6 +1,7 @@
-package enstar.cdctableprocessor.module
+package enstar.cdctableprocessor.tests.unit.module
 
 import enstar.cdctableprocessor.io.{ DataFrameReader, DataFrameWriter }
+import enstar.cdctableprocessor.module.CDCProcessorModule
 import enstar.cdctableprocessor.processor.TableProcessor
 import enstar.cdctableprocessor.properties.CDCProperties
 import enstar.cdctableprocessor.udfs.UserFunctions

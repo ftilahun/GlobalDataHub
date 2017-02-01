@@ -1,15 +1,16 @@
-package enstar.cdctableprocessor.udfs
+package enstar.cdctableprocessor.tests.unit.udfs
 
-import enstar.cdctableprocessor.{ GeneratedData, TestContexts }
 import enstar.cdctableprocessor.properties.CDCProperties
+import enstar.cdctableprocessor.udfs.CDCUserFunctions
+import enstar.cdctableprocessor.{ GeneratedData, TestContexts }
 import org.apache.spark.SparkException
+import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{ AnalysisException, Row }
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.{ DateTime, DateTimeUtils }
 import org.mockito.Mockito
 import org.mockito.mock.SerializableMode
 import org.scalatest.{ FlatSpec, GivenWhenThen, Matchers }
-import org.apache.spark.sql.functions._
 
 /**
  * Unit tests for CDCUserFunctions
