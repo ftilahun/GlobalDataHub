@@ -497,8 +497,6 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         .changeDummyData(2)
         .drop("header__timeStamp")
         .withColumn("header__timeStamp", beforeTime5()))
-    println(time)
-    println(time.minus(3))
     When("returnMature is true")
     Then("New records should be filtered")
     userFunctions.filterOnTimeWindow(data, properties).count() should be(20)

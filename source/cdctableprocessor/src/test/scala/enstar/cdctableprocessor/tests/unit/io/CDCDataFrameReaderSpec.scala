@@ -40,7 +40,7 @@ class CDCDataFrameReaderSpec
       .thenThrow(classOf[InvalidInputException])
     When("The path does not exist")
     Then("An exception should be raised")
-    an[DataFrameReadException] should be thrownBy {
+    an[Exception] should be thrownBy {
       cdcDataFrameReader.read(TestContexts.sqlContext,
         "/some/invalid/path/",
         None)

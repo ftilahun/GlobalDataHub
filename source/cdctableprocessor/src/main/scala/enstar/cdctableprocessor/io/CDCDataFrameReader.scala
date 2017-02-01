@@ -33,7 +33,9 @@ class CDCDataFrameReader(reader: DataFrameReader)
     } catch {
       //a more readable exception
       case e: InvalidInputException =>
-        logError(e.getMessage)
+        if (e != null) {
+          logError(e.getMessage)
+        }
         throw new DataFrameReadException(path)
     }
   }
