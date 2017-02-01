@@ -9,7 +9,7 @@ node{
         }
         stage('Unit Test') {
             withMaven {
-                sh 'mvn -Dmaven.test.skip=true package'
+                sh 'mvn -DskipTests=true package'
             }
         }
         stage('Transform') {
