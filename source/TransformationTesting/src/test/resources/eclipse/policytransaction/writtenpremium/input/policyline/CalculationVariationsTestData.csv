@@ -1,0 +1,5 @@
+policylineid[int],policyid[int],policylineref[string?],linestatus[string?],wholepartorder[string?],signedline[decimal(10:7)?],signedorder[decimal(10:7)?],writtenline[decimal(20:7)?],writtenorder[decimal(10:7)?],estsigningdown[decimal(10:7)?]
+1,1,L16A1020A001,Signed,O,10.0,10.0,100.00,100.00,100.00
+2,2,F91B1123C002,Signed,W,20.0,100.0,10.00,100.00,100.00
+3,3,A17A1020A052,Written,O,100.0,50.0,20.00,100.00,100.00
+4,4,B51B5678D005,Written,W,50.0,20.0,5.00,100.00,100.00

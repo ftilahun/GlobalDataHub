@@ -50,6 +50,18 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "policytransaction", "NoMatchForPolicyendorsmntLeftJoin.csv" ),
           order = List( "transactionreference" )
+        ),
+        QueryTest(
+          "mapping testing variations of the originalamount and settlementamount calculations",
+          Set(
+            CsvSourceData( "objcode", "CalculationVariationsTestData.csv" ),
+            CsvSourceData( "policy", "CalculationVariationsTestData.csv" ),
+            CsvSourceData( "policyendorsmnt", "CalculationVariationsTestData.csv" ),
+            CsvSourceData( "policyline", "CalculationVariationsTestData.csv" ),
+            CsvSourceData( "policyprem", "CalculationVariationsTestData.csv" )
+          ),
+          CsvSourceData( "policytransaction", "CalculationVariationsTestData.csv" ),
+          order = List( "transactionreference" )
         )
 
       )

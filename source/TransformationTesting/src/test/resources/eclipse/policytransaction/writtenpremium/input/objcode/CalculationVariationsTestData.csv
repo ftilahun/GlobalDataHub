@@ -1,0 +1,9 @@
+parentid[int],parenttable[string?],codename[string],codevalue[string?],premsplit[decimal(10:7)?]
+1,Policy,RiskCode,GAHU,100.0000
+1,Policy,TrustFundCode,CPRO,100.0000
+2,Policy,RiskCode,ASLY,50.0000
+2,Policy,TrustFundCode,HUWR,50.0000
+3,Policy,RiskCode,AVAL,25.0000
+3,Policy,TrustFundCode,ICAS,25.0000
+4,Policy,RiskCode,GEAV,50.0000
+4,Policy,TrustFundCode,AVWR,50.0000
