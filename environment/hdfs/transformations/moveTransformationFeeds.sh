@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 1 ] ; then
-       echo " Useage: $0 DATA_DIRECTORY"
+       echo " Usage: $0 DATA_DIRECTORY"
        exit 1;
 fi
 
