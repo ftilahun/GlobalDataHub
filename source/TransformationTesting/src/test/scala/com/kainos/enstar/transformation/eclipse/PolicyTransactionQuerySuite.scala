@@ -64,6 +64,34 @@ class PolicyTransactionQuerySuite extends QuerySuite {
           order = List( "transactionreference" )
         )
 
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "objcode", "PrimaryTestData.csv" ),
+            CsvSourceData( "policy", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyendorsmnt", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyline", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyprem", "PrimaryTestData.csv" )
+          ),
+          "policytransaction",
+          "PolicyTransaction/WrittenPremiumRecordCount.hql",
+          "PolicyTransaction/WrittenPremiumRecordCount.hql"
+        ),
+        ReconciliationTest(
+          "No match for left join",
+          Set(
+            CsvSourceData( "objcode", "NoMatchForLeftJoin.csv" ),
+            CsvSourceData( "policy", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyendorsmnt", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyline", "PrimaryTestData.csv" ),
+            CsvSourceData( "policyprem", "PrimaryTestData.csv" )
+          ),
+          "policytransaction",
+          "PolicyTransaction/WrittenPremiumRecordCount.hql",
+          "PolicyTransaction/WrittenPremiumRecordCount.hql"
+        )
       )
     )
   )

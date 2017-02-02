@@ -1,5 +1,5 @@
 SELECT
-    CONCAT("WrittenPremiumShare", CAST(policyprem.policypremid AS STRING)) AS transactionreference,
+    CONCAT("WrittenPremiumOurShare", CAST(policyprem.policypremid AS STRING)) AS transactionreference,
     "ECLIPSE" AS sourcesystemcode,
     "ECLIPSE" AS sourcesystemdescription,
     CAST(policyline.policylineid AS STRING) AS coveragereference,
@@ -55,8 +55,8 @@ SELECT
     AS DECIMAL(18,6)) AS settlementamount,
     CAST(policyprem.premsettccyiso AS STRING) AS settlementcurrencycode,
     CAST(IF(policyendorsmnt.effectivedate IS NOT NULL, policyendorsmnt.effectivedate, policy.inceptiondate) AS STRING) AS transactiondate,
-    "WrittenPremiumShare" AS transactiontypecode,
-    "WrittenPremiumShare" AS transactiontypedescription,
+    "WrittenPremiumOurShare" AS transactiontypecode,
+    "WrittenPremiumOurShare" AS transactiontypedescription,
     CAST(NULL AS STRING) AS transactionsubtypecode,
     CAST(NULL AS STRING) AS transactionsubtypedescription,
     CAST(policy.filcode AS STRING) AS filcode,
