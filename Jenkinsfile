@@ -10,19 +10,26 @@ node{
                 sh 'mvn clean test-compile'
             }
         }
-        stage('Unit Test') {
+        stage('Test') {
             withMaven {
                 sh 'mvn -DskipTests=true package'
             }
         }
-        stage('Transform') {
+        stage('Run Transform') {
             echo 'Running transform on cluster'
             echo env.BRANCH_NAME
             def matches = (env.BRANCH_NAME =~ /feature\/mapping\/(\w+)/)[0]
-            echo "Source: $matches"
-            sh "ssh -i $keyFile $masterNodeHost touch /data/jenkins/test"
+            def sourceSystem = matches[1]
+            echo "Source: $sourceSystem"
+            def jarFiles = findFiles('target/*-jar-with-dependencies.jar')
+            assert jarFiles.length == 1
+            def jarFileName = jarFile[0].getName()
+            def jarRandomPath = '/data/jenkins/' + UUID.randomUUID().toString() + '.jar'
+            echo "Copying build artifect $jarFileName to $masterNodeHost:$jarRandomPath"
+            sh "scp -i $keyFile target/$jarFileName $masterNodeHost:$jarRandomPath"
+            // sh "ssh -i $keyFile $masterNodeHost touch /data/jenkins/test"
         }
-        stage('Reconcile') {
+        stage('Run Reconciliation') {
             echo 'Running reconciliation on cluster'
         }
     }
