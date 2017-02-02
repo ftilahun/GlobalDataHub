@@ -21,7 +21,7 @@ node{
             def matches = (env.BRANCH_NAME =~ /feature\/mapping\/(\w+)/)[0]
             def sourceSystem = matches[1]
             echo "Source: $sourceSystem"
-            def jarFiles = findFiles('target/*-jar-with-dependencies.jar')
+            def jarFiles = findFiles(glob: 'target/*-jar-with-dependencies.jar')
             assert jarFiles.length == 1
             def jarFileName = jarFile[0].getName()
             def jarRandomPath = '/data/jenkins/' + UUID.randomUUID().toString() + '.jar'
