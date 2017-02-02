@@ -201,6 +201,7 @@
                     <junitxml>.</junitxml>
                     <filereports>WDF TestSuite.txt</filereports>
                     <parallel>false</parallel>
+                    <argLine>-Xmx2048M</argLine>
                 </configuration>
                 <executions>
                     <execution>
