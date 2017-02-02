@@ -1,11 +1,8 @@
-package enstar.cdctableprocessor.processor
+package enstar.cdctableprocessor.tests.unit.processor
 
 import enstar.cdctableprocessor.TestContexts
-import enstar.cdctableprocessor.io.{
-  AvroDataFrameReader,
-  AvroDataFrameWriter,
-  DataFrameWriter
-}
+import enstar.cdctableprocessor.io.{ AvroDataFrameReader, AvroDataFrameWriter, DataFrameWriter }
+import enstar.cdctableprocessor.processor.CDCTableProcessor
 import enstar.cdctableprocessor.properties.CDCProperties
 import enstar.cdctableprocessor.udfs.UserFunctions
 import org.apache.spark.sql.{ DataFrame, SQLContext }

@@ -27,6 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scala.major.version>2.10</scala.major.version>
         <scala.version>2.10.5</scala.version>
+        <scala.io.version>0.4.3</scala.io.version>
         <scalamaven.version>3.2.1</scalamaven.version>
         <scalariform.version>0.1.4</scalariform.version>
         <scalatest.maven.plugin.version>1.0</scalatest.maven.plugin.version>

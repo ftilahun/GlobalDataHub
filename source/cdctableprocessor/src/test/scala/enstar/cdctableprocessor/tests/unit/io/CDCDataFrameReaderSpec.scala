@@ -1,7 +1,8 @@
-package enstar.cdctableprocessor.io
+package enstar.cdctableprocessor.tests.unit.io
 
 import enstar.cdctableprocessor.TestContexts
 import enstar.cdctableprocessor.exceptions.DataFrameReadException
+import enstar.cdctableprocessor.io.{ AvroDataFrameReader, CDCDataFrameReader }
 import org.apache.hadoop.mapred.InvalidInputException
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.storage.StorageLevel
@@ -39,7 +40,7 @@ class CDCDataFrameReaderSpec
       .thenThrow(classOf[InvalidInputException])
     When("The path does not exist")
     Then("An exception should be raised")
-    an[DataFrameReadException] should be thrownBy {
+    an[Exception] should be thrownBy {
       cdcDataFrameReader.read(TestContexts.sqlContext,
         "/some/invalid/path/",
         None)

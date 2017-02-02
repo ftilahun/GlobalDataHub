@@ -14,6 +14,8 @@ object TestContexts {
 
   private val _sc: SparkContext = new SparkContext(
     new SparkConf()
+      //speed!!!!
+      .set("spark.sql.shuffle.partitions", "1")
       .setMaster("local[1]")
       .setAppName(this.getClass.getSimpleName))
   _sc.setLogLevel("OFF")
