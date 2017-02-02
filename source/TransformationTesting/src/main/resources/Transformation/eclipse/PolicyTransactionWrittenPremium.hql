@@ -1,5 +1,10 @@
 SELECT
-    CONCAT("WrittenPremiumOurShare", CAST(policyprem.policypremid AS STRING)) AS transactionreference,
+    CONCAT(
+        CAST(policyprem.policyid AS STRING),
+        "WrittenPremiumOurShare",
+        CAST(policyprem.policypremid AS STRING),
+        IF(objcode1.codevalue IS NOT NULL, objcode1.codevalue, "MISSING"),
+        IF(objcode2.codevalue IS NOT NULL, objcode2.codevalue, "MISSING")) AS transactionreference,
     "ECLIPSE" AS sourcesystemcode,
     "ECLIPSE" AS sourcesystemdescription,
     CAST(policyline.policylineid AS STRING) AS coveragereference,
