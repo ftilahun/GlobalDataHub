@@ -17,6 +17,6 @@ trait DataFrameReader {
    * @return a DataFrame
    */
   def read(path: String,
-           storageLevel: Option[StorageLevel])(implicit sqlContext: SQLContext): DataFrame
+           storageLevel: Option[StorageLevel] = None)(implicit sqlContext: SQLContext): DataFrame
 
 }

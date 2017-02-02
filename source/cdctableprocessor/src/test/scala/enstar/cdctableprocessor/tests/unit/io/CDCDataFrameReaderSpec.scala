@@ -42,9 +42,7 @@ class CDCDataFrameReaderSpec
     When("The path does not exist")
     Then("An exception should be raised")
     an[Exception] should be thrownBy {
-      cdcDataFrameReader.read(
-        "/some/invalid/path/",
-        None)
+      cdcDataFrameReader.read("/some/invalid/path/", None)
     }
 
     Mockito

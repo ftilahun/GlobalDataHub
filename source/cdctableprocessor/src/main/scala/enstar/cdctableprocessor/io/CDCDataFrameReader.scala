@@ -26,7 +26,7 @@ class CDCDataFrameReader(reader: DataFrameReader)
    */
   def read(
     path: String,
-    storageLevel: Option[StorageLevel])(implicit sqlContext: SQLContext): DataFrame = {
+    storageLevel: Option[StorageLevel] = None)(implicit sqlContext: SQLContext): DataFrame = {
     try {
       logInfo("reading from " + path)
       reader.read(path, storageLevel)

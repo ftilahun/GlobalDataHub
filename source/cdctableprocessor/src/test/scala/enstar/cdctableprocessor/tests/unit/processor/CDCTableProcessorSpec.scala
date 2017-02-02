@@ -1,7 +1,11 @@
 package enstar.cdctableprocessor.tests.unit.processor
 
 import enstar.cdctableprocessor.TestContexts
-import enstar.cdctableprocessor.io.{ AvroDataFrameReader, AvroDataFrameWriter, DataFrameWriter }
+import enstar.cdctableprocessor.io.{
+  AvroDataFrameReader,
+  AvroDataFrameWriter,
+  DataFrameWriter
+}
 import enstar.cdctableprocessor.processor.CDCTableProcessor
 import enstar.cdctableprocessor.properties.CDCProperties
 import enstar.cdctableprocessor.udfs.UserFunctions
@@ -35,8 +39,7 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Then("Both inputs should be read")
     Mockito
       .verify(reader, Mockito.times(2))
-      .read(
-        org.mockito.Matchers.anyString(),
+      .read(org.mockito.Matchers.anyString(),
         org.mockito.Matchers.any(classOf[Some[StorageLevel]]))(
           org.mockito.Matchers.any(classOf[SQLContext]))
 

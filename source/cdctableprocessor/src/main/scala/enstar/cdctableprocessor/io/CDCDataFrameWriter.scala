@@ -24,7 +24,7 @@ class CDCDataFrameWriter(writer: DataFrameWriter)
    */
   def write(path: String,
             dataFrame: DataFrame,
-            storageLevel: Option[StorageLevel])(implicit sqlContext: SQLContext): Long = {
+            storageLevel: Option[StorageLevel] = None)(implicit sqlContext: SQLContext): Long = {
     try {
       logInfo("Writing to: " + path)
 

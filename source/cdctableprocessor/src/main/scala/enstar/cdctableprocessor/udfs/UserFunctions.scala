@@ -175,8 +175,9 @@ trait UserFunctions extends Serializable {
    * @param dataFrame the DataFrame to save
    * @param storageLevel the storage level to persist at
    */
-  def countAndSave(path: String,
-                   writer: DataFrameWriter,
-                   dataFrame: DataFrame,
-                   storageLevel: StorageLevel)(implicit sqlContext: SQLContext): Unit
+  def countAndSave(
+    path: String,
+    writer: DataFrameWriter,
+    dataFrame: DataFrame,
+    storageLevel: StorageLevel)(implicit sqlContext: SQLContext): Unit
 }

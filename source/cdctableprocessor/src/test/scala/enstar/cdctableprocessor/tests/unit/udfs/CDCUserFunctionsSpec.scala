@@ -346,7 +346,8 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         properties,
         "isDeleted",
         "header__timeStamp"),
-      properties)
+      properties
+    )
     data.collect().foreach { row =>
       if (row
         .getAs[String]("validto")
@@ -397,16 +398,20 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
         properties,
         "isDeleted",
         "header__timeStamp"),
-      properties)
+      properties
+    )
     Then("The column should be dropped")
     an[AnalysisException] should be thrownBy {
-      userFunctions.dropColumn(data, properties.activeColumnName).select("active")
+      userFunctions
+        .dropColumn(data, properties.activeColumnName)
+        .select("active")
     }
 
     Given("a DataFrame")
     When("The active column does not exist")
     Then("No error should occur")
-    userFunctions.dropColumn(TestContexts.dummyData(10), properties.activeColumnName)
+    userFunctions.dropColumn(TestContexts.dummyData(10),
+      properties.activeColumnName)
   }
 
   "CDCUserFunctions" should "filter data on a time Window" in {
@@ -419,10 +424,15 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
 
     val time = new DateTime()
 
-    Mockito.when(properties.attunityCutoff).
-      thenReturn(DateTimeFormat.forPattern("YYYY-MM-DD HH:mm:ss.SSS").print(time.minusHours(1)))
+    Mockito
+      .when(properties.attunityCutoff)
+      .thenReturn(
+        DateTimeFormat
+          .forPattern("YYYY-MM-DD HH:mm:ss.SSS")
+          .print(time.minusHours(1)))
 
-    Mockito.when(properties.attunityDateFormat)
+    Mockito
+      .when(properties.attunityDateFormat)
       .thenReturn("YYYY-MM-DD HH:mm:ss.SSS")
     Mockito
       .when(properties.transactionTimeStampColumnName)
@@ -503,7 +513,8 @@ class CDCUserFunctionsSpec extends FlatSpec with GivenWhenThen with Matchers {
     When("returnMature is false")
     Then("Old records should be filtered")
     userFunctions
-      .filterOnTimeWindow(data, properties, returnMature = false).count() should be(12)
+      .filterOnTimeWindow(data, properties, returnMature = false)
+      .count() should be(12)
 
     Given("A DataFrame")
     When("The date cannot be parsed")

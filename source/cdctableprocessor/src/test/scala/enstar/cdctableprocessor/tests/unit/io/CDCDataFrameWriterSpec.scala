@@ -30,13 +30,10 @@ class CDCDataFrameWriterSpec
     Then("10 rows should be persisted to disk")
     Mockito
       .when(
-        dataFrameWriter.write(
-          "/some/path",
-          data,
-          Some(StorageLevel.MEMORY_ONLY)))
+        dataFrameWriter
+          .write("/some/path", data, Some(StorageLevel.MEMORY_ONLY)))
       .thenReturn(10)
-    val outCount = cdcDataFrameWriter.write(
-      "/some/path/",
+    val outCount = cdcDataFrameWriter.write("/some/path/",
       data,
       Some(StorageLevel.MEMORY_ONLY))
     outCount should be(10)
@@ -45,15 +42,12 @@ class CDCDataFrameWriterSpec
     When("The path already exists")
     Mockito
       .when(
-        dataFrameWriter.write(
-          "/some/existing/path",
-          data,
-          Some(StorageLevel.MEMORY_ONLY)))
+        dataFrameWriter
+          .write("/some/existing/path", data, Some(StorageLevel.MEMORY_ONLY)))
       .thenThrow(classOf[AnalysisException])
     Then("An exception should be raised")
     an[DataFrameWriteException] should be thrownBy {
-      cdcDataFrameWriter.write(
-        "/some/existing/path",
+      cdcDataFrameWriter.write("/some/existing/path",
         data,
         Some(StorageLevel.MEMORY_ONLY))
     }
