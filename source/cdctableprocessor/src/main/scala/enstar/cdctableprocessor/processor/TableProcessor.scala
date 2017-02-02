@@ -20,10 +20,10 @@ trait TableProcessor {
    * @param userFunctions a UDFs object
    * @return a DataFrame of the source table
    */
-  def process(sqlContext: SQLContext,
-              properties: CDCProperties,
-              reader: DataFrameReader,
-              writer: DataFrameWriter,
-              userFunctions: UserFunctions): Unit
+  def process(
+    properties: CDCProperties,
+    reader: DataFrameReader,
+    writer: DataFrameWriter,
+    userFunctions: UserFunctions)(implicit sqlContext: SQLContext): Unit
 
 }
