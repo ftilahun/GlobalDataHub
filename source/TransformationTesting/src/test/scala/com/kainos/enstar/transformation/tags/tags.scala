@@ -8,6 +8,7 @@ object Reconciliation extends Tag( "type.Reconciliation" )
 // source system tags
 object Ndex extends Tag( "source.Ndex" )
 object Genius extends Tag( "source.Genius" )
+object Eclipse extends Tag( "source.Eclipse" )
 
 // ECM table tags
 object AnalysisCodeSplit extends Tag( "table.AnalysisCodeSplit" )
