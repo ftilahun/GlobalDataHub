@@ -136,8 +136,12 @@
             "type": ["null", "string"]
         },
         {
-             "name": "writtenorderpercent",
-             "type": ["null", "string"]
+            "name": "writtenorderpercent",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "shareofwholepercent",
+            "type": ["null","string"]
         }
  	]
 }

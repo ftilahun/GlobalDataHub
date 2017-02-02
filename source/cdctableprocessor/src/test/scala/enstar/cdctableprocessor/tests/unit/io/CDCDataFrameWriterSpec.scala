@@ -1,7 +1,8 @@
-package enstar.cdctableprocessor.io
+package enstar.cdctableprocessor.tests.unit.io
 
 import enstar.cdctableprocessor.TestContexts
 import enstar.cdctableprocessor.exceptions.DataFrameWriteException
+import enstar.cdctableprocessor.io.{ AvroDataFrameWriter, CDCDataFrameWriter }
 import org.apache.spark.sql.{ AnalysisException, DataFrame, SQLContext }
 import org.apache.spark.storage.StorageLevel
 import org.mockito.Mockito

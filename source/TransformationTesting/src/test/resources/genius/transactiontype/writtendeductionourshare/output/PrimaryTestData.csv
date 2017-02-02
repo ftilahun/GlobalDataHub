@@ -1,0 +1,4 @@
+transactionsubtypecode[string],transactionsubtypecodedescription[string],transactiontypecode[string],sourcesystemcode[string],transactiontypedescription[string],group[string],iscashtransactiontype[boolean]
+IPT,DO NOT USE,WrittenDeductionsOurShare,GENIUS,WrittenDeductionsOurShare,Deduction,false
+ORC,FL1-Emrgncy Mgmt Pre SurchFlat,WrittenDeductionsOurShare,GENIUS,WrittenDeductionsOurShare,Deduction,false
+COM,MNG 0.256% (fire),WrittenDeductionsOurShare,GENIUS,WrittenDeductionsOurShare,Deduction,false
