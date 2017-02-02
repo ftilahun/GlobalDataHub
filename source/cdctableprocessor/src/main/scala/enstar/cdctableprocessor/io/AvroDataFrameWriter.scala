@@ -18,10 +18,10 @@ class AvroDataFrameWriter extends Logging with DataFrameWriter {
    * @param data         the DataFrame
    * @param storageLevel an optional StorageLevel to persist the DataFrame
    */
-  def write(sqlContext: SQLContext,
-            path: String,
-            data: DataFrame,
-            storageLevel: Option[StorageLevel]): Long = {
+  def write(
+    path: String,
+    data: DataFrame,
+    storageLevel: Option[StorageLevel])(implicit sqlContext: SQLContext): Long = {
 
     if (storageLevel.isDefined) {
       logInfo(

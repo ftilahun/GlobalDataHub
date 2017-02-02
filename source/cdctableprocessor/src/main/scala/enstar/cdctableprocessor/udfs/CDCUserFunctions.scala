@@ -323,14 +323,13 @@ class CDCUserFunctions extends UserFunctions with Logging {
    * @param dataFrame the DataFrame to save
    * @param storageLevel the storage level to persist at
    */
-  def countAndSave(sqlContext: SQLContext,
-                   path: String,
+  def countAndSave(path: String,
                    writer: DataFrameWriter,
                    dataFrame: DataFrame,
-                   storageLevel: StorageLevel): Unit = {
+                   storageLevel: StorageLevel)(implicit sqlContext: SQLContext): Unit = {
     dataFrame.persist(storageLevel)
     if (dataFrame.count() > 0) {
-      writer.write(sqlContext, path, dataFrame, Some(storageLevel))
+      writer.write(path, dataFrame, Some(storageLevel))
     }
   }
 }

@@ -18,16 +18,15 @@ class AvroDataFrameReader extends Logging with DataFrameReader {
    * @param storageLevel an optional StorageLevel to persist the DataFrame
    * @return a DataFrame
    */
-  def read(sqlContext: SQLContext,
-           path: String,
-           storageLevel: Option[StorageLevel]): DataFrame = {
+  def read(
+    path: String,
+    storageLevel: Option[StorageLevel] = None)(implicit sqlContext: SQLContext): DataFrame = {
     logInfo(s"reading from path: $path")
     //include avro files without extension
     sqlContext.sparkContext.hadoopConfiguration.setBoolean("avro.mapred.ignore.inputs.without.extension", false)
     import com.kainos.spark.avro._
     val data = sqlContext.read.
       avro(new Path(path).toString)
-
     if (storageLevel.isDefined) {
       logInfo(
         s"Persisting DataFrame at storage level ${storageLevel.toString}")

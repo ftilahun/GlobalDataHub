@@ -39,6 +39,8 @@ class CDCTableProcessorSpec extends FlatSpec
     deleteDir(immatureChangesOutput)
     deleteDir(metricsOutput)
 
+    implicit val sQLContext = TestContexts.sqlContext
+
     val userFunctions = new CDCUserFunctions
     val writer = new CDCDataFrameWriter(
       new AvroDataFrameWriter)
@@ -70,8 +72,7 @@ class CDCTableProcessorSpec extends FlatSpec
      * READ CURRENT ACTIVE RECORDS
      */
     Given("an existing active partition with 3 records")
-    val baseRecords = reader.read(TestContexts.sqlContext,
-      activeInput,
+    val baseRecords = reader.read(activeInput,
       Some(StorageLevel.MEMORY_ONLY)
     )
 
@@ -99,8 +100,7 @@ class CDCTableProcessorSpec extends FlatSpec
      */
     And("a change partition with 7 changes")
     And("the changes include 2 inserts, 2 updates and a delete operation")
-    val changeRecords = reader.read(TestContexts.sqlContext,
-      changeInput,
+    val changeRecords = reader.read(changeInput,
       Some(StorageLevel.MEMORY_ONLY)
     )
 
@@ -187,7 +187,7 @@ class CDCTableProcessorSpec extends FlatSpec
      * Run the Table processor
      */
     When("the table processor is run")
-    tblProcessor.process(TestContexts.sqlContext, properties, reader, writer, userFunctions)
+    tblProcessor.process(properties, reader, writer, userFunctions)
 
     /**
      * Validate unprocessed changes
@@ -196,7 +196,7 @@ class CDCTableProcessorSpec extends FlatSpec
     Then("an unprocessed partition should be written")
     And("the three immature records should not be processed")
     And("each of the unprocessed records should have a valid from less than the cutoff")
-    val unprocessed = reader.read(TestContexts.sqlContext, properties.immatureChangesOutput, None)
+    val unprocessed = reader.read(properties.immatureChangesOutput, None)
     unprocessed.count() should be (3)
     unprocessed.collect().foreach{ row =>
       val formatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss.SSS")
@@ -208,7 +208,7 @@ class CDCTableProcessorSpec extends FlatSpec
      */
     Then("a history partition should be written")
     And("three records should exist in the history")
-    val history = reader.read(TestContexts.sqlContext, properties.historyOutput, None)
+    val history = reader.read(properties.historyOutput, None)
     history.count() should be (3)
     history.collect.zipWithIndex.foreach{ rowWithInt =>
       val row = rowWithInt._1
@@ -244,7 +244,7 @@ class CDCTableProcessorSpec extends FlatSpec
     And("three records should exist in the active area")
     And("all records should be before the cuttoff")
     And("all records should be valid to the end of time!")
-    val active = reader.read(TestContexts.sqlContext, properties.activeOutput, None)
+    val active = reader.read(properties.activeOutput, None)
     active.collect.zipWithIndex.foreach{ rowWithInt =>
       val row = rowWithInt._1
       val iter = rowWithInt._2
@@ -279,7 +279,7 @@ class CDCTableProcessorSpec extends FlatSpec
      * Validate metrics
      */
     Then("a metrics record should be written")
-    val metrics = reader.read(TestContexts.sqlContext, properties.metricsOutputDir.get, None)
+    val metrics = reader.read(properties.metricsOutputDir.get, None)
     metrics.collect.foreach{ row =>
       println(row)
       And("metrics should show 7 change rows being be read")
@@ -304,7 +304,7 @@ class CDCTableProcessorSpec extends FlatSpec
     metrics.count should be (1)
   }
 
-  def deleteDir(pathString: String) = {
+  private def deleteDir(pathString: String) = {
     println(s"deleting prior test path: $pathString")
     val path: Path = Path.fromString(pathString)
     Try(path.deleteRecursively(continueOnFailure = false))

@@ -18,7 +18,7 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
   "CDCTableProcessor" should "Process a table" in {
     val userFunctions = Mockito.mock(classOf[UserFunctions])
     val properties = Mockito.mock(classOf[CDCProperties])
-    val sqlContext = Mockito.mock(classOf[SQLContext])
+    implicit val sqlContext = Mockito.mock(classOf[SQLContext])
     val reader = Mockito.mock(classOf[AvroDataFrameReader])
     val writer = Mockito.mock(classOf[AvroDataFrameWriter])
 
@@ -30,14 +30,15 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito.when(properties.metricsOutputDir).thenReturn(None)
 
     tableProcessor
-      .process(sqlContext, properties, reader, writer, userFunctions)
+      .process(properties, reader, writer, userFunctions)
 
     Then("Both inputs should be read")
     Mockito
       .verify(reader, Mockito.times(2))
-      .read(org.mockito.Matchers.any(classOf[SQLContext]),
+      .read(
         org.mockito.Matchers.anyString(),
-        org.mockito.Matchers.any(classOf[Some[StorageLevel]]))
+        org.mockito.Matchers.any(classOf[Some[StorageLevel]]))(
+          org.mockito.Matchers.any(classOf[SQLContext]))
 
     Then("Mature changes should be filtered")
     Mockito
@@ -129,12 +130,11 @@ class CDCTableProcessorSpec extends FlatSpec with GivenWhenThen with Matchers {
     Mockito
       .verify(userFunctions, Mockito.times(3))
       .countAndSave(
-        org.mockito.Matchers.any(classOf[SQLContext]),
         org.mockito.Matchers.anyString(),
         org.mockito.Matchers.any(classOf[DataFrameWriter]),
         org.mockito.Matchers.any(classOf[DataFrame]),
         org.mockito.Matchers.any(classOf[StorageLevel])
-      )
+      )(org.mockito.Matchers.any(classOf[SQLContext]))
   }
 
   "CDCTableProcessor" should "Process changes to a table" in {

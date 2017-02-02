@@ -16,8 +16,7 @@ trait DataFrameWriter {
    * @param data         the DataFrame
    * @param storageLevel an optional StorageLevel to persist the DataFrame
    */
-  def write(sqlContext: SQLContext,
-            path: String,
+  def write(path: String,
             data: DataFrame,
-            storageLevel: Option[StorageLevel]): Long
+            storageLevel: Option[StorageLevel])(implicit sqlContext: SQLContext): Long
 }

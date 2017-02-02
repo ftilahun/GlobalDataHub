@@ -24,12 +24,12 @@ class CDCDataFrameReader(reader: DataFrameReader)
    * @param storageLevel an optional StorageLevel
    * @return a DataFrame
    */
-  def read(sqlContext: SQLContext,
-           path: String,
-           storageLevel: Option[StorageLevel]): DataFrame = {
+  def read(
+    path: String,
+    storageLevel: Option[StorageLevel])(implicit sqlContext: SQLContext): DataFrame = {
     try {
       logInfo("reading from " + path)
-      reader.read(sqlContext, path, storageLevel)
+      reader.read(path, storageLevel)
     } catch {
       //a more readable exception
       case e: InvalidInputException =>

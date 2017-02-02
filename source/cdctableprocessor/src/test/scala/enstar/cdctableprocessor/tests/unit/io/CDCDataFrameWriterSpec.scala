@@ -16,6 +16,8 @@ class CDCDataFrameWriterSpec
     with GivenWhenThen
     with Matchers {
 
+  private implicit val sqlContext = TestContexts.sqlContext
+
   "CDCDataFrameWriter" should "Write output data" in {
     val dataFrameWriter = Mockito.mock(classOf[AvroDataFrameWriter])
     val cdcDataFrameWriter = new CDCDataFrameWriter(dataFrameWriter)
@@ -28,12 +30,12 @@ class CDCDataFrameWriterSpec
     Then("10 rows should be persisted to disk")
     Mockito
       .when(
-        dataFrameWriter.write(TestContexts.sqlContext,
+        dataFrameWriter.write(
           "/some/path",
           data,
           Some(StorageLevel.MEMORY_ONLY)))
       .thenReturn(10)
-    val outCount = cdcDataFrameWriter.write(TestContexts.sqlContext,
+    val outCount = cdcDataFrameWriter.write(
       "/some/path/",
       data,
       Some(StorageLevel.MEMORY_ONLY))
@@ -43,14 +45,14 @@ class CDCDataFrameWriterSpec
     When("The path already exists")
     Mockito
       .when(
-        dataFrameWriter.write(TestContexts.sqlContext,
+        dataFrameWriter.write(
           "/some/existing/path",
           data,
           Some(StorageLevel.MEMORY_ONLY)))
       .thenThrow(classOf[AnalysisException])
     Then("An exception should be raised")
     an[DataFrameWriteException] should be thrownBy {
-      cdcDataFrameWriter.write(TestContexts.sqlContext,
+      cdcDataFrameWriter.write(
         "/some/existing/path",
         data,
         Some(StorageLevel.MEMORY_ONLY))
@@ -58,10 +60,10 @@ class CDCDataFrameWriterSpec
 
     Mockito
       .verify(dataFrameWriter, Mockito.times(2))
-      .write(org.mockito.Matchers.any(classOf[SQLContext]),
-        org.mockito.Matchers.anyString(),
+      .write(org.mockito.Matchers.anyString(),
         org.mockito.Matchers.any(classOf[DataFrame]),
-        org.mockito.Matchers.any(classOf[Option[StorageLevel]]))
+        org.mockito.Matchers.any(classOf[Option[StorageLevel]]))(
+          org.mockito.Matchers.any(classOf[SQLContext]))
   }
 
 }
