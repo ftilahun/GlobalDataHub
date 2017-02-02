@@ -1,0 +1,32 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "currency",
+    "doc": "The source system currency code, e.g. GBP or USD.  This will hold conformed and unconformed currency",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },
+	    {
+    		"name": "currencycode", 
+    		"type": "string"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string"
+    	},
+    	{
+    		"name": "currencydescription", 
+            "type": [ "null", "string" ]
+    	}
+ 	]
+}

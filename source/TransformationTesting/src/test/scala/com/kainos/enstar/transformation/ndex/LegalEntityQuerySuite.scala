@@ -25,6 +25,17 @@ class LegalEntityQuerySuite extends QuerySuite {
           CsvSourceData( "legalentity", "PrimaryTestData.csv" ),
           order = List( "legalentitycode" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_profit_centre", "PrimaryTestData.csv" )
+          ),
+          "legalentity",
+          "LegalEntity/RecordCount.hql",
+          "LegalEntity/RecordCount.hql"
+        )
       )
     )
   )

@@ -23,6 +23,17 @@ class PolicyStatusQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "policystatus", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_line_status", "PrimaryTestData.csv" )
+          ),
+          "policystatus",
+          "PolicyStatus/RecordCount.hql",
+          "PolicyStatus/RecordCount.hql"
+        )
       )
     )
   )

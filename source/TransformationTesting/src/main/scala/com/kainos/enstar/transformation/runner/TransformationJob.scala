@@ -42,7 +42,7 @@ object TransformationJob extends App {
     val fileNamePattern = "Transformation/[a-zA-Z0-9]+/([a-zA-Z0-9]+).hql".r
 
     fileName match {
-      case fileNamePattern( tableName ) => tableName
+      case fileNamePattern( tableName ) => tableName.toLowerCase
     }
   }
 

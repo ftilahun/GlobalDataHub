@@ -22,8 +22,11 @@ class AvroDataFrameReader extends Logging with DataFrameReader {
            path: String,
            storageLevel: Option[StorageLevel]): DataFrame = {
     logInfo(s"reading from path: $path")
-    import com.databricks.spark.avro._
-    val data = sqlContext.read.avro(new Path(path).toString)
+    //include avro files without extension
+    sqlContext.sparkContext.hadoopConfiguration.setBoolean("avro.mapred.ignore.inputs.without.extension", false)
+    import com.kainos.spark.avro._
+    val data = sqlContext.read.
+      avro(new Path(path).toString)
 
     if (storageLevel.isDefined) {
       logInfo(

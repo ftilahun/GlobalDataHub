@@ -24,6 +24,17 @@ class UnderwriterQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "underwriter", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "underwriter", "PrimaryTestData.csv" )
+          ),
+          "underwriter",
+          "Underwriter/RecordCount.hql",
+          "Underwriter/RecordCount.hql"
+        )
       )
     )
   )

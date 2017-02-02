@@ -1,0 +1,193 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "policytransaction",
+    "doc": "Transaction table will contain all forms of transactions at policy / section level. These will be at the atomic level and may differ in type from source to source. However the conformed TransactionType values should be used to group them appropriately and allow them to be used correctly in measure calculations. The signage of the amount must be consistently mapped across all the source systems transactions loaded into here",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "transactionreference", 
+    		"type": "string",
+    		"doc": "Unique transaction reference, part of the PK"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "FK to Source system and part of PK"
+    	},
+        {
+            "name" : "accountingamount",
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
+            "doc": "Transaction accounting amount"
+        },
+        {
+            "name": "accountingcurrencycode",  
+            "type": [ "null", "string" ],
+            "doc": "FK to Currency"
+        },
+        {
+            "name": "accountingcurrencycodedescription",  
+            "type": [ "null", "string" ],
+            "doc": "FK to Currency"
+        },
+        {
+            "name": "accountingperiod",  
+            "type": [ "null", "int" ],
+            "doc": "The period the transaction will be recognized in the general ledger"
+        },
+        {
+            "name": "accountingrateofexchange",  
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
+            "doc": "ROE for conversion from original to accounting if present"
+        },
+        {
+            "name": "coveragereference", 
+            "type": [ "null", "string" ],
+            "doc": "FK to Policy"
+        },
+        {
+            "name": "filcode", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "filcodedescription", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "iscashtransaction", 
+            "type": [ "null", "boolean" ]
+        },
+        {
+            "name": "originalamount",  
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
+            "doc": "Transaction original amount"
+        },
+        {
+            "name": "originalcurrencycode", 
+            "type": [ "null", "string" ],
+            "doc": "FK to Currency"
+        },
+        {
+            "name": "originalcurrencycodedescription", 
+            "type": [ "null", "string" ]
+        },
+    	{
+    		"name": "policynumber", 
+            "type": [ "null", "string" ],
+    		"doc": "FK to Policy"
+    	},
+        {
+            "name": "riskcode", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "riskcodedescription", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "sectionreference",  
+            "type": [ "null", "string" ],
+            "doc": "FK to Policy"
+        },
+        {
+            "name": "settlementamount",  
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
+            "doc": "Transaction settlement amount"
+        },
+        {
+            "name": "settlementcurrencycode",  
+            "type": [ "null", "string" ],
+            "doc": "FK to Currency"
+        },
+        {
+            "name": "settlementcurrencydescription",  
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "settlementrateofexchange",  
+            "type" :    [ "null", {
+                                "type" : "bytes",
+                                "logicalType" : "decimal",
+                                "precision" : 18,
+                                "scale" : 6
+                                } 
+                        ],
+            "doc": "ROE for conversion from original to settlement if present"
+        },
+        {
+            "name": "sourcesystemdescription", 
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "transactiondate",  
+            "type": [ "null", "string" ],
+            "doc": "Date of the transaction, usually provided by the source system"
+        },
+        {
+            "name": "transactionsubtypecode",  
+            "type": [ "null", "string" ],
+            "doc": "Date of the transaction, usually provided by the source system"
+        },
+        {
+            "name": "transactionsubtypedescription",  
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "transactiontypecode",  
+            "type": [ "null", "string" ],
+            "doc": "Date of the transaction, usually provided by the source system"
+        },
+        {
+            "name": "transactiontypedescription",  
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "transactiontypegroup",  
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "trustfundcode",  
+            "type": [ "null", "string" ]
+        },
+        {
+            "name": "trustfundcodedescription",  
+            "type": [ "null", "string" ]
+        }
+ 	]
+}
+

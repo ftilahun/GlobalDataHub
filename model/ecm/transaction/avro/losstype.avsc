@@ -1,0 +1,35 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "losstype",
+    "doc": "Describes the type of loss incurred (e.g. Material Damage, Goods in Transit, Injury). This can be further split out into Loss Causes.",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "losstypecode", 
+    		"type": "string",
+    		"doc": "Code associated with the type of loss incurred (e.g. Material Damage, Goods in Transit, Injury). This can be further split out into Loss Causes."
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "Source System Identifier"
+    	},
+    	{
+    		"name": "losstypedescription", 
+    		"type": ["null", "string"],
+    		"doc": "Describes the type of loss incurred (e.g. Material Damage, Goods in Transit, Injury). This can be further split out into Loss Causes."
+    	}
+ 	]
+}

@@ -2,6 +2,9 @@ package com.kainos.enstar.transformation.tags
 
 import org.scalatest.Tag
 
+object Transformation extends Tag( "type.Transformation" )
+object Reconciliation extends Tag( "type.Reconciliation" )
+
 // source system tags
 object Ndex extends Tag( "source.Ndex" )
 object Genius extends Tag( "source.Genius" )

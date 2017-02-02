@@ -25,6 +25,17 @@ class DeductionTypeQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "deductiontype", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_deduction_type", "PrimaryTestData.csv" )
+          ),
+          "deductiontype",
+          "DeductionType/RecordCount.hql",
+          "DeductionType/RecordCount.hql"
+        )
       )
     )
   )

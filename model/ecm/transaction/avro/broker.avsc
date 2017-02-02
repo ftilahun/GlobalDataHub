@@ -1,0 +1,35 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "broker",
+    "doc": "The broker company placing the risk",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        },
+        {
+            "name": "sourcesystemcode",  
+            "type": "string",
+            "doc": "The source system code of the broker."
+        },
+    	{
+    		"name": "brokercode", 
+    		"type": "string",
+    		"doc": "The code associated with the broker"
+    	},
+    	{
+    		"name": "brokerdescription", 
+            "type": [ "null", "string" ],
+    		"doc": "The description of the broker"
+    	}
+ 	]
+}

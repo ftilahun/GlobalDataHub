@@ -30,7 +30,7 @@ class AvroDataFrameWriter extends Logging with DataFrameWriter {
     }
 
     logInfo(s"Saving to path: $path")
-    import com.databricks.spark.avro._
+    import com.kainos.spark.avro._
     data.write.avro(new Path(path).toString)
     data.count
   }

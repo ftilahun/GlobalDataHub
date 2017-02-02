@@ -212,6 +212,55 @@ class PolicyQuerySuite extends QuerySuite {
             CsvSourceData( "underwriting_block", "PrimaryTestData.csv" )
           ),
           CsvSourceData( "policy", "NullDomicileCode.csv" )
+        ),
+        QueryTest(
+          "Line left joined to line - linkedmasterref from parent line record",
+          Set(
+            CsvSourceData( "line", "LineLeftJoinToLine.csv" ),
+            CsvSourceData( "layer", "PrimaryTestData.csv" ),
+            CsvSourceData( "submission", "PrimaryTestData.csv" ),
+            CsvSourceData( "risk", "PrimaryTestData.csv" ),
+            CsvSourceData( "organisation", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_block", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_business_type", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_profit_centre", "PrimaryTestData.csv" ),
+            CsvSourceData( "underwriting_block", "PrimaryTestData.csv" )
+          ),
+          CsvSourceData( "policy", "LinkedMasterRefFromParentLine.csv" )
+        ),
+        QueryTest(
+          "Line left joined to line - linkedmasterref null as no parent line record",
+          Set(
+            CsvSourceData( "line", "LineNotLeftJoinableToLine.csv" ),
+            CsvSourceData( "layer", "PrimaryTestData.csv" ),
+            CsvSourceData( "submission", "PrimaryTestData.csv" ),
+            CsvSourceData( "risk", "PrimaryTestData.csv" ),
+            CsvSourceData( "organisation", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_block", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_business_type", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_profit_centre", "PrimaryTestData.csv" ),
+            CsvSourceData( "underwriting_block", "PrimaryTestData.csv" )
+          ),
+          CsvSourceData( "policy", "NullLinkedMasterReference.csv" )
+        )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "line", "ReconciliationPrimary.csv" ),
+            CsvSourceData( "layer", "ReconciliationPrimary.csv" ),
+            CsvSourceData( "submission", "ReconciliationPrimary.csv" ),
+            CsvSourceData( "risk", "ReconciliationPrimary.csv" ),
+            CsvSourceData( "organisation", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_block", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_business_type", "PrimaryTestData.csv" ),
+            CsvSourceData( "lookup_profit_centre", "PrimaryTestData.csv" ),
+            CsvSourceData( "underwriting_block", "PrimaryTestData.csv" )
+          ),
+          "policy",
+          "Policy/RecordCount.hql",
+          "Policy/RecordCount.hql"
         )
       )
     )

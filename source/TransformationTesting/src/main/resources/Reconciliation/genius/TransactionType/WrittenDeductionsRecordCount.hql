@@ -1,0 +1,3 @@
+SELECT
+    COUNT(IADDCD) AS recordcount
+FROM ICDCREP

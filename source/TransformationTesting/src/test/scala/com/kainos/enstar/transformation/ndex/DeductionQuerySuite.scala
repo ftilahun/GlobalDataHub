@@ -28,68 +28,37 @@ class DeductionQuerySuite extends QuerySuite {
           CsvSourceData( "deduction", "PrimaryTestData.csv" )
         ),
         QueryTest(
-          "Calculating CalculatedDeductionAmount for policy with single ndex.deduction",
-          Set(
-            CsvSourceData( "line", "SingleDeductionCalculatedDeductionAmount.csv" ),
-            CsvSourceData( "layer", "SingleDeductionCalculatedDeductionAmount.csv" ),
-            CsvSourceData( "layer_deduction", "SingleDeductionCalculatedDeductionAmount.csv" )
-          ),
-          CsvSourceData( "deduction", "SingleDeductionCalculatedDeductionAmount.csv" )
-        ),
-        QueryTest(
-          "Multiple deductions on a line, monotonic sequence no",
-          Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "MultipleDeductionMonotonicSeq.csv" )
-          ),
-          CsvSourceData( "deduction", "MultipleDeductionMonotonicSeq.csv" )
-        ),
-        QueryTest(
           "Multiple lines each with multiple deductions",
           Set(
             CsvSourceData( "line", "MultipleLines.csv" ),
             CsvSourceData( "layer", "MultipleLines.csv" ),
-            CsvSourceData( "layer_deduction", "MultipleDeductionMonotonicSeqMultipleLines.csv" )
+            CsvSourceData( "layer_deduction", "MultipleDeductionMonotonicSeqMultipleLinesWithContingents.csv" )
           ),
           CsvSourceData( "deduction", "MultipleDeductionMonotonicSeqMultipleLines.csv" )
-        ),
-        QueryTest(
-          "Multiple deductions all with the same sequence",
+        )
+      ),
+      Set(
+        ReconciliationTest(
+          "Reconciliation over test data",
           Set(
             CsvSourceData( "line", "PrimaryTestData.csv" ),
             CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "MultipleDeductionAllSameSeqNo.csv" )
+            CsvSourceData( "layer_deduction", "PrimaryTestData.csv" )
           ),
-          CsvSourceData( "deduction", "MultipleDeductionAllSameSeqNo.csv" )
+          "deduction",
+          "Deduction/RecordCount.hql",
+          "Deduction/RecordCount.hql"
         ),
-        QueryTest(
-          "Multiple deductions on a line not monotonic sequence",
+        ReconciliationTest(
+          "Reconciliation over test data with multiple lines",
           Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "MultipleDeductionNonMonotonicSeq.csv" )
+            CsvSourceData( "line", "MultipleLines.csv" ),
+            CsvSourceData( "layer", "MultipleLines.csv" ),
+            CsvSourceData( "layer_deduction", "MultipleDeductionMonotonicSeqMultipleLinesWithContingents.csv" )
           ),
-          CsvSourceData( "deduction", "MultipleDeductionNonMonotonicSeq.csv" )
-        ),
-        QueryTest(
-          "Multiple ndex.deduction on a line not monotonic sequence and out of order",
-          Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "MultipleDeductionNonMonotonicSeqOutOfOrder.csv" )
-          ),
-          CsvSourceData( "deduction", "MultipleDeductionNonMonotonicSeqOutOfOrder.csv" ),
-          order = List( "deductionsequence" )
-        ),
-        QueryTest(
-          "Multiple deductions on a line not monotonic sequence with multiple of same sequence no",
-          Set(
-            CsvSourceData( "line", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer", "PrimaryTestData.csv" ),
-            CsvSourceData( "layer_deduction", "MultipleDeductionNonMonotonicMultipleofSameSeq.csv" )
-          ),
-          CsvSourceData( "deduction", "MultipleDeductionNonMonotonicMultipleofSameSeq.csv" )
+          "deduction",
+          "Deduction/RecordCount.hql",
+          "Deduction/RecordCount.hql"
         )
       )
     )

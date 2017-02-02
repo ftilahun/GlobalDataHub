@@ -1,0 +1,35 @@
+{
+    "namespace": "enstar.datahub.ecm",
+ 	"type": "record",
+ 	"name": "policystatus",
+    "doc": "Defines the status of the policy.  Could be ''In Force'', ''Bound'', ''Cancelled'' etc",
+ 	"fields": [
+        {
+            "name": "begineffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective from. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff" 
+        },
+        {
+            "name": "endeffectivedate", 
+            "type": [ "null", "string" ],
+            "default" : "null",
+            "doc":  "Metadata to identify the date and time that this record was effective to. This should formatted as a JDBC-compliant java.sql.Timestamp:YYYY-MM-DD HH:MM:SS.fffffffff"  
+        }, 
+    	{
+    		"name": "policystatuscode", 
+    		"type": "string",
+    		"doc": "The code associated with the Policy Status, such as 'CAN' for cancelled"
+    	},
+    	{
+    		"name": "sourcesystemcode",  
+    		"type": "string",
+    		"doc": "The source system code associated with the policy status record loaded from source"
+    	},
+    	{
+    		"name": "policystatusdescription", 
+            "type": [ "null", "string" ],
+    		"doc": "The description associated with the Policy Status, such as 'Cancelled'"
+    	}
+ 	]
+}

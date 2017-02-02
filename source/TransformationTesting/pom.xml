@@ -34,6 +34,7 @@
         <maven.assembly.plugin.version>2.5.5</maven.assembly.plugin.version>
         <hadoop.client.version>2.6.0-mr1-cdh5.7.4</hadoop.client.version>
         <snappy.version>1.1.2.6</snappy.version>
+        <cloudera.avro-tools.version>1.7.6-cdh5.7.4</cloudera.avro-tools.version>
         <avro.version>1.7.7</avro.version>
         <spark.avro.version>2.0.1</spark.avro.version>
         <mockito.version>1.10.19</mockito.version>
@@ -94,6 +95,12 @@
             <version>${snappy.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+		    <groupId>org.apache.avro</groupId>
+		    <artifactId>avro-tools</artifactId>
+    		<version>${cloudera.avro-tools.version}</version>
+    		<scope>compile</scope>
+		</dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>

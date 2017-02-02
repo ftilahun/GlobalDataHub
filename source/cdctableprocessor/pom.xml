@@ -40,7 +40,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.databricks</groupId>
+            <groupId>com.github.KainosSoftwareLtd</groupId>
             <artifactId>spark-avro_${scala.major.version}</artifactId>
             <version>${spark.avro.version}</version>
             <scope>compile</scope>
@@ -64,6 +64,13 @@
             <artifactId>propertyparsers</artifactId>
             <version>0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.scala-incubator.io</groupId>
+            <artifactId>scala-io-file_2.10</artifactId>
+            <version>${scala.io.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 

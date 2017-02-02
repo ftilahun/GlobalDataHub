@@ -25,6 +25,17 @@ class TrustFundQuerySuite extends QuerySuite {
           ),
           CsvSourceData( "trustfund", "PrimaryTestData.csv" )
         )
+      ),
+      Set(
+        ReconciliationTest(
+          "Primary",
+          Set(
+            CsvSourceData( "lookup_trust_fund", "PrimaryTestData.csv" )
+          ),
+          "trustfund",
+          "TrustFund/RecordCount.hql",
+          "TrustFund/RecordCount.hql"
+        )
       )
     )
   )
