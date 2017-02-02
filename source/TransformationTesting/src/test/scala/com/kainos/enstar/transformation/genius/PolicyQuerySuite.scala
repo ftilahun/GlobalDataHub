@@ -44,10 +44,10 @@ class PolicyQuerySuite extends QuerySuite {
         QueryTest(
           "test broken join from ZUMA to ZUCO",
           Set(
-            CsvSourceData( "ZUMADF00", "BrokenJoinZUMAToZUCO.csv" ),
-            CsvSourceData( "ZUCODF00", "BrokenJoinZUMAToZUCO.csv" ),
-            CsvSourceData( "ZUSFDF00", "BrokenJoinZUMAToZUCO.csv" ),
-            CsvSourceData( "ZUSKDF00", "BrokenJoinZUMAToZUCO.csv" ),
+            CsvSourceData( "ZUMADF00", "BrokenJoinZUMAtoZUCO.csv" ),
+            CsvSourceData( "ZUCODF00", "BrokenJoinZUMAtoZUCO.csv" ),
+            CsvSourceData( "ZUSFDF00", "BrokenJoinZUMAtoZUCO.csv" ),
+            CsvSourceData( "ZUSKDF00", "BrokenJoinZUMAtoZUCO.csv" ),
             CsvSourceData( "ZNNADF00", "PrimaryTestData.csv" ),
             CsvSourceData( "ZHDPDF00", "PrimaryTestData.csv" ),
             CsvSourceData( "ZURIDF00", "PrimaryTestData.csv" ),
@@ -62,7 +62,7 @@ class PolicyQuerySuite extends QuerySuite {
             CsvSourceData( "ZHAADF00", "PrimaryTestData.csv" ),
             CsvSourceData( "ZNNZDF00", "PrimaryTestData.csv" )
           ),
-          CsvSourceData( "policy", "BrokenJoinZUMAToZUCO.csv" )
+          CsvSourceData( "policy", "BrokenJoinZUMAtoZUCO.csv" )
         ),
         QueryTest(
           "testing left join to branch",
@@ -319,7 +319,7 @@ class PolicyQuerySuite extends QuerySuite {
           ),
           "policy",
           "policy/RecordCount.hql",
-          "policy/RecordCount.hql"
+          "Policy/RecordCount.hql"
         )
       )
     )
