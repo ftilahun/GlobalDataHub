@@ -27,11 +27,12 @@ class AvroDataFrameReader extends Logging with DataFrameReader {
     import com.kainos.spark.avro._
     val data = sqlContext.read.
       avro(new Path(path).toString)
-    if (storageLevel.isDefined) {
-      logInfo(
-        s"Persisting DataFrame at storage level ${storageLevel.toString}")
-      data.persist(storageLevel.get)
+    storageLevel match {
+      case Some(level) =>
+        logInfo(
+          s"Persisting DataFrame at storage level ${storageLevel.toString}")
+        data.persist(storageLevel.get)
+      case None => data
     }
-    data
   }
 }
