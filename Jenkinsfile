@@ -1,4 +1,5 @@
-def masterNodeHost = '10.14.0.151'
+def masterNodeHost = 'lsgnpdhmn02.nonprod.local'
+def keyFile = '~/.ssh/jenkins_lsgnpdhmn'
 
 node{
     checkout scm
@@ -19,9 +20,7 @@ node{
             echo env.BRANCH_NAME
             def matches = (env.BRANCH_NAME =~ /feature\/mapping\/(\w+)/)[0]
             echo "Source: $matches"
-            sshAgent(credentials: ['jenkins_lsgnpdhmn']) {
-                sh "ssh $masterNodeHost touch /data/jenkins/test"
-            }
+            sh "ssh -i $keyFile $masterNodeHost touch /data/jenkins/test"
         }
         stage('Reconcile') {
             echo 'Running reconciliation on cluster'
