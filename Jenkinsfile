@@ -23,7 +23,7 @@ node{
             echo "Source: $sourceSystem"
             def jarFiles = findFiles(glob: 'target/*-jar-with-dependencies.jar')
             assert jarFiles.length == 1
-            def jarFileName = jarFile[0].getName()
+            def jarFileName = jarFiles[0].getName()
             def jarRandomPath = '/data/jenkins/' + UUID.randomUUID().toString() + '.jar'
             echo "Copying build artifect $jarFileName to $masterNodeHost:$jarRandomPath"
             sh "scp -i $keyFile target/$jarFileName $masterNodeHost:$jarRandomPath"
