@@ -69,7 +69,7 @@ class CDCTableProcessorSpec extends FlatSpec
     /**
      * READ CURRENT ACTIVE RECORDS
      */
-    Given("An existing active partition with 3 records")
+    Given("an existing active partition with 3 records")
     val baseRecords = reader.read(TestContexts.sqlContext,
       activeInput,
       Some(StorageLevel.MEMORY_ONLY)
@@ -97,8 +97,8 @@ class CDCTableProcessorSpec extends FlatSpec
     /**
      * READ CHANGE RECORDS
      */
-    And("A change partition with 7 changes")
-    And("The changes include 2 inserts, 2 updates and a delete operation")
+    And("a change partition with 7 changes")
+    And("the changes include 2 inserts, 2 updates and a delete operation")
     val changeRecords = reader.read(TestContexts.sqlContext,
       changeInput,
       Some(StorageLevel.MEMORY_ONLY)
@@ -186,7 +186,7 @@ class CDCTableProcessorSpec extends FlatSpec
     /**
      * Run the Table processor
      */
-    When("The table processor is run")
+    When("the table processor is run")
     tblProcessor.process(TestContexts.sqlContext, properties, reader, writer, userFunctions)
 
     /**
@@ -194,7 +194,7 @@ class CDCTableProcessorSpec extends FlatSpec
      */
 
     Then("an unprocessed partition should be written")
-    And("The three immature records should not be processed")
+    And("the three immature records should not be processed")
     And("each of the unprocessed records should have a valid from less than the cutoff")
     val unprocessed = reader.read(TestContexts.sqlContext, properties.immatureChangesOutput, None)
     unprocessed.count() should be (3)
@@ -206,8 +206,8 @@ class CDCTableProcessorSpec extends FlatSpec
     /**
      * Validate history
      */
-    Then("A history partition should be written")
-    And("Three records should exist in the history")
+    Then("a history partition should be written")
+    And("three records should exist in the history")
     val history = reader.read(TestContexts.sqlContext, properties.historyOutput, None)
     history.count() should be (3)
     history.collect.zipWithIndex.foreach{ rowWithInt =>
@@ -232,7 +232,7 @@ class CDCTableProcessorSpec extends FlatSpec
           row.getString(2) should be("2017-01-20 10:10:10.100")
           row.getString(3) should be("2017-01-20 10:10:10.100")
           row.getBoolean(4) should be (false)
-          And("Delete records should open and close at the same instant")
+          And("deleted records should open and close at the same instant")
           row.getString(2) should equal(row.getString(3))
       }
     }
@@ -240,10 +240,10 @@ class CDCTableProcessorSpec extends FlatSpec
     /**
      * Validate active
      */
-    Then("An active partition should be written")
-    And("Three records should exist in the active area")
-    And("All records should be before the cuttoff")
-    And("All records should be valid to the end of time!")
+    Then("an active partition should be written")
+    And("three records should exist in the active area")
+    And("all records should be before the cuttoff")
+    And("all records should be valid to the end of time!")
     val active = reader.read(TestContexts.sqlContext, properties.activeOutput, None)
     active.collect.zipWithIndex.foreach{ rowWithInt =>
       val row = rowWithInt._1
@@ -278,7 +278,7 @@ class CDCTableProcessorSpec extends FlatSpec
     /**
      * Validate metrics
      */
-    Then("A metrics record should be written")
+    Then("a metrics record should be written")
     val metrics = reader.read(TestContexts.sqlContext, properties.metricsOutputDir.get, None)
     metrics.collect.foreach{ row =>
       println(row)
@@ -305,7 +305,7 @@ class CDCTableProcessorSpec extends FlatSpec
   }
 
   def deleteDir(pathString: String) = {
-    println(s"Deleting prior test path: $pathString")
+    println(s"deleting prior test path: $pathString")
     val path: Path = Path.fromString(pathString)
     Try(path.deleteRecursively(continueOnFailure = false))
   }
