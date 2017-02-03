@@ -20,7 +20,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_NoNulls.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplit/CheckForNullRiskReference.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Validation/ndex/AnalysisCodeSplit/CheckForNullRiskReference.hql" )
 
     // Act //
     line.registerTempTable( "line" )
@@ -41,7 +41,7 @@ class ValidationTests extends FunSuite with DataFrameSuiteBase {
     val line = utils.populateDataFrameFromCsvWithHeader( testDataInputPath + "line_NullRiskReference.csv" )
 
     // Load the hql statement under test
-    val statement = utils.loadHQLStatementFromResource( "Validation/AnalysisCodeSplit/CheckForNullRiskReference.hql" )
+    val statement = utils.loadHQLStatementFromResource( "Validation/ndex/AnalysisCodeSplit/CheckForNullRiskReference.hql" )
 
     // Act //
     line.registerTempTable( "line" )

@@ -1,0 +1,6 @@
+policylineid[int],policylineref[string?],policyid[int],producingteam[string?],synd[string?],linestatus[string?],signedorder[decimal(10:7)?],signedline[decimal(10:7)?],writtenline[decimal(20:7)?],writtenorder[decimal(10:7)?],estsigningdown[decimal(10:7)?],wholepartorder[string?]
+1,L16A1020B004,1,L,1301,Signed,10.00,10.00,10.00,100.00,100.00,O
+1,L16A1020B004,1,L,1301,Signed,10.00,10.00,10.00,100.00,100.00,W
+1,L16A1020B004,1,L,1301,Written,50.00,100.00,50.00,100.00,100.00,O
+1,L16A1020B004,1,L,1301,Written,100.00,100.00,100.00,100.00,100.00,W
+1,L16A1020B004,1,L,1301,In Progress,10.00,10.00,200.00,100.00,100.00,W

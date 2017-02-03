@@ -1,0 +1,3 @@
+orgid[int],domicilecountry[string?],addrtype[string?]
+-1,GB United Kingdom,Head Office
+4,GB United,Head Office

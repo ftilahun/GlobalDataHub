@@ -1,8 +1,8 @@
 package com.kainos.enstar.transformation
 
 import com.holdenkarau.spark.testing.DataFrameSuiteBase
-import com.kainos.enstar.TransformationUnitTesting.{ NetAsPctOfGross, TransformationUnitTestingUtils }
-import org.apache.spark.sql.{ DataFrame, SQLContext }
+import com.kainos.enstar.TransformationUnitTesting.TransformationUnitTestingUtils
+import org.apache.spark.sql.DataFrame
 import org.reflections.Reflections
 import org.scalatest.{ BeforeAndAfterAll, FunSuite }
 import com.kainos.enstar.transformation.tags._

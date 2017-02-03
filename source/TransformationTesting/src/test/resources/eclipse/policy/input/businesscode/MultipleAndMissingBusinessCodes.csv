@@ -1,0 +1,9 @@
+businesscodeid[int],value[string],dsc[string?],parentcodeid[int?],
+123,L,London,456
+123,L,London-East,789
+456,ProducingTeam,Producing Team,0
+789,ProducingTeam,Producing Team,0
+66,AVTN,Aviation,77
+7171,MajorClass,Major Class,0
+1,L,Lines Slips,2
+2,PlacingBasis,Treaty Type,0

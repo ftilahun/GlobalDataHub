@@ -1,3 +1,3 @@
 SELECT
-    COUNT(policynumber)
+    COUNT(policynumber) AS recordcount
 FROM policy

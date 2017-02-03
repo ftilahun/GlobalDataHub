@@ -1,5 +1,5 @@
 SELECT
-    COUNT(maporf)
+    COUNT(maporf) AS recordcount
 FROM zumadf00
 INNER JOIN zuskdf00
     ON zumadf00.mamanu = zuskdf00.skmanu

@@ -1,0 +1,2 @@
+orgid[int],domicilecountry[string?],addrtype[string?]
+-1,[NULL],Head Office

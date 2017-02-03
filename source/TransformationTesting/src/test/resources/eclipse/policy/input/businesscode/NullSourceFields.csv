@@ -1,0 +1,9 @@
+businesscodeid[int],value[string],dsc[string?],parentcodeid[int?],
+123,L,[NULL],456
+456,ProducingTeam,Producing Team,0
+66,AVTN,Aviation,77
+77,ClassType,Class Type,0
+6161,AVWR,Aviation War,7171
+7171,MajorClass,Major Class,0
+1,L,[NULL],2
+2,PlacingBasis,Treaty Type,0

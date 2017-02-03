@@ -1,3 +1,3 @@
 SELECT
-    COUNT(line.risk_reference)
+    COUNT(line.risk_reference) AS recordcount
 FROM line

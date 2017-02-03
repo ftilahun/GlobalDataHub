@@ -1,0 +1,9 @@
+parentid[int],parenttable[string?],codename[string],codevalue[string?]
+1,Policy,Class1,AVWR
+1,Policy,Class4,AVTN
+1,Policy,RiskCode,11
+1,Policy,TrustFundCode,22
+11,Policy,Class1,AVWR
+11,Policy,Class4,AVTN
+11,Policy,RiskCode,11
+11,Policy,TrustFundCode,22

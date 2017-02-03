@@ -1,0 +1,5 @@
+policyid[int],outwardpolicyind[string],canceldate[string?],expirydate[string?],inceptiondate[string?],filcode[string?],placingtype[string?],uniquemarketref[string?],yoa[int?],parentpolicyid[int]
+1,N,2017-01-07 00:00:00,2017-11-07 00:00:00,2016-11-08 00:00:00,AA01,L,VHVFKWN97483,2016,3
+4,Y,2017-01-07 00:00:00,2017-11-07 00:00:00,2016-11-08 00:00:00,AA01,L,VHVFKWN97483,2016,111
+2,N,2017-01-07 00:00:00,2017-11-07 00:00:00,2016-11-08 00:00:00,AA01,L,VHVFKWN97483,2016,111
+3,N,2017-01-07 00:00:00,2017-11-07 00:00:00,2016-11-08 00:00:00,AA01,L,VHVFKWN97483,2016,111
