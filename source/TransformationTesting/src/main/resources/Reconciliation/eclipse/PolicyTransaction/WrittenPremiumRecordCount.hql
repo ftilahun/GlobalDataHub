@@ -3,8 +3,8 @@ SELECT
                   CAST(policyprem.policyid AS STRING),
                   "WrittenPremiumOurShare",
                   CAST(policyprem.policypremid AS STRING),
-                  IF(objcode1.codevalue IS NOT NULL, objcode1.codevalue, "MISSING"),
-                  IF(objcode2.codevalue IS NOT NULL, objcode2.codevalue, "MISSING")) ) AS recordcount
+                  IF(rc.codevalue IS NOT NULL, rc.codevalue, "MISSING"),
+                  IF(tf.codevalue IS NOT NULL, tf.codevalue, "MISSING")) ) AS recordcount
 FROM
 policyprem
     INNER JOIN policyline ON policyprem.policyid = policyline.policyid
