@@ -1,5 +1,10 @@
 SELECT
-    COUNT(policyline.policylineref) AS recordcount
+    COUNT(CONCAT(
+                  CAST(policyprem.policyid AS STRING),
+                  "WrittenPremiumOurShare",
+                  CAST(policyprem.policypremid AS STRING),
+                  IF(objcode1.codevalue IS NOT NULL, objcode1.codevalue, "MISSING"),
+                  IF(objcode2.codevalue IS NOT NULL, objcode2.codevalue, "MISSING")) ) AS recordcount
 FROM
 policyprem
     INNER JOIN policyline ON policyprem.policyid = policyline.policyid
