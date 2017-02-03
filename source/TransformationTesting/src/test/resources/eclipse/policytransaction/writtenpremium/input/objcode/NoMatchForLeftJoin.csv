@@ -1,0 +1,3 @@
+parentid[int],parenttable[string?],codename[string],codevalue[string?],premsplit[decimal(10:7)?]
+1,Policy,TreatyType,Direct,1
+2,Policy,TreatyType,Direct,1
