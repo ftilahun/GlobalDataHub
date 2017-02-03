@@ -1,0 +1,5 @@
+policyid[int],filcode[string?],outwardpolicyind[string],inceptiondate[string?]
+11,AA01,N,1998-01-01
+12,AAbv,N,2009-01-01
+13,[NULL],N,[NULL]
+13,AAbv,Y,2010-01-01
