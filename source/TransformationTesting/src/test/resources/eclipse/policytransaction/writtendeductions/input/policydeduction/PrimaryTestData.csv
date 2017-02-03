@@ -1,0 +1,4 @@
+policydeductionid[int],policyid[int],deductionind[string?],origccyiso[string?],fintranscategoryid[int?],deductionlevel[int],deductionvalue[decimal(19:5)?],applicablepct[decimal(12:7)?]
+1,11,P,ABC,45,1,20,10
+2,12,A,DEF,48,1,20,[NULL]
+3,13,A,GHI,50,1,20,[NULL]

@@ -40,13 +40,11 @@ class CDCTableProcessor extends TableProcessor with Logging {
    * @param writer a DataFrame Writer
    */
   def saveJobMetrics(metrics: JobMetrics,
-                     sqlContext: SQLContext,
                      properties: CDCProperties,
-                     writer: DataFrameWriter): Unit = {
+                     writer: DataFrameWriter)(implicit sqlContext: SQLContext): Unit = {
     val metricsDF = sqlContext.createDataFrame(
       sqlContext.sparkContext.parallelize(List(metrics)))
-    writer.write(sqlContext,
-      properties.metricsOutputDir.get,
+    writer.write(properties.metricsOutputDir.get,
       metricsDF,
       Some(StorageLevel.MEMORY_AND_DISK))
   }
@@ -61,17 +59,15 @@ class CDCTableProcessor extends TableProcessor with Logging {
    * @param userFunctions a UDFs object
    * @return a DataFrame of the source table
    */
-  override def process(sqlContext: SQLContext,
-                       properties: CDCProperties,
+  override def process(properties: CDCProperties,
                        reader: DataFrameReader,
                        writer: DataFrameWriter,
-                       userFunctions: UserFunctions): Unit = {
+                       userFunctions: UserFunctions)(implicit sqlContext: SQLContext): Unit = {
 
     val startTime = userFunctions.getCurrentTime(properties.attunityDateFormat)
 
     logInfo("Reading change data")
-    val changeData = reader.read(sqlContext,
-      properties.changeInputDir,
+    val changeData = reader.read(properties.changeInputDir,
       Some(StorageLevel.MEMORY_AND_DISK_SER))
     userFunctions.persistForMetrics(changeData,
       StorageLevel.MEMORY_ONLY,
@@ -95,8 +91,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
       properties)
 
     logInfo("Reading history data")
-    val history = reader.read(sqlContext,
-      properties.activeInput,
+    val history = reader.read(properties.activeInput,
       Some(StorageLevel.MEMORY_AND_DISK_SER))
     userFunctions.persistForMetrics(history,
       StorageLevel.MEMORY_ONLY,
@@ -211,21 +206,21 @@ class CDCTableProcessor extends TableProcessor with Logging {
         tempTimeStampColumnName)
 
     logInfo("Persisting young data to disk")
-    userFunctions.countAndSave(sqlContext,
+    userFunctions.countAndSave(
       properties.immatureChangesOutput,
       writer,
       immatureChanges,
       StorageLevel.MEMORY_AND_DISK_SER)
 
     logInfo("Saving inactive records")
-    userFunctions.countAndSave(sqlContext,
+    userFunctions.countAndSave(
       properties.historyOutput,
       writer,
       newHistoryWithoutTimestamp,
       StorageLevel.MEMORY_AND_DISK_SER)
 
     logInfo("Saving active records")
-    userFunctions.countAndSave(sqlContext,
+    userFunctions.countAndSave(
       properties.activeOutput,
       writer,
       activeRecordsWithoutTimestamp,
@@ -248,7 +243,7 @@ class CDCTableProcessor extends TableProcessor with Logging {
         newHistory = userFunctions.getCount(newHistory)
       )
       logInfo(metrics.toString)
-      saveJobMetrics(metrics, sqlContext, properties, writer)
+      saveJobMetrics(metrics, properties, writer)
     }
   }
 

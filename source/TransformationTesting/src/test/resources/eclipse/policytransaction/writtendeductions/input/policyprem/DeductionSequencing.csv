@@ -1,0 +1,2 @@
+policyid[int],premccyiso[string?],premsettccyiso[string?],policypremincome[decimal(19:2)?],premccyroe[decimal(15:7)?],premsettccyroe[decimal(15:7)?]
+11,XYZ,JSN,15115.01,1.6600,1.00

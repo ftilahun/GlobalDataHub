@@ -75,7 +75,8 @@ class CDCUserFunctions extends UserFunctions with Logging {
    */
   def dropAttunityColumns(df: DataFrame,
                           properties: CDCProperties): DataFrame = {
-    logDebug(s"Dropping columns with prefix ${properties.attunityColumnPrefix}")
+    logDebug(
+      s"Dropping columns with prefix ${properties.attunityColumnPrefix}")
     logDebug(s"pre: ${df.columns.mkString(",")}")
     val result = df.select(
       df.columns
@@ -140,12 +141,14 @@ class CDCUserFunctions extends UserFunctions with Logging {
     val setValidTo = udf((isDeleted: Boolean, validTo: String,
       transactionTimeStamp: String) =>
       updateClosedRecord(isDeleted, validTo, transactionTimeStamp, properties))
-    val orderCols: Seq[String] = properties.idColumnName.split(",").toList :+ properties.validFromColumnName
+    val orderCols: Seq[String] = properties.idColumnName
+      .split(",")
+      .toList :+ properties.validFromColumnName
 
     dataFrame
       .withColumnRenamed(properties.validToColumnName,
-        properties.validToColumnName + "old").
-        orderBy(orderCols.map(dataFrame(_)): _*)
+        properties.validToColumnName + "old")
+      .orderBy(orderCols.map(dataFrame(_)): _*)
       .withColumn(properties.validToColumnName,
         setValidTo(
           col(deleteFlagColumnName),
@@ -323,14 +326,14 @@ class CDCUserFunctions extends UserFunctions with Logging {
    * @param dataFrame the DataFrame to save
    * @param storageLevel the storage level to persist at
    */
-  def countAndSave(sqlContext: SQLContext,
-                   path: String,
-                   writer: DataFrameWriter,
-                   dataFrame: DataFrame,
-                   storageLevel: StorageLevel): Unit = {
+  def countAndSave(
+    path: String,
+    writer: DataFrameWriter,
+    dataFrame: DataFrame,
+    storageLevel: StorageLevel)(implicit sqlContext: SQLContext): Unit = {
     dataFrame.persist(storageLevel)
     if (dataFrame.count() > 0) {
-      writer.write(sqlContext, path, dataFrame, Some(storageLevel))
+      writer.write(path, dataFrame, Some(storageLevel))
     }
   }
 }

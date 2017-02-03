@@ -1,0 +1,4 @@
+policyid[int],effectivedate[string],policyendorsmntid[int],
+11,2007-01-01,101
+12,,102
+14,2008-01-01,103

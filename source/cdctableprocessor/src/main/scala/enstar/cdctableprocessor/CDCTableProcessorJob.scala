@@ -22,13 +22,13 @@ object CDCTableProcessorJob extends Logging {
     val sparkConf = new SparkConf()
     val sparkContext = new SparkContext(sparkConf)
     //hive context required for Window functions
-    val sqlContext = new HiveContext(sparkContext)
+    implicit val sqlContext = new HiveContext(sparkContext)
 
     val tableProcessor = CDCProcessorModule.tableProcessor
 
     logInfo("Processing table")
     tableProcessor
-      .process(sqlContext, properties, reader, writer, userFunctions)
+      .process(properties, reader, writer, userFunctions)
     logInfo("Done!")
   }
 }
